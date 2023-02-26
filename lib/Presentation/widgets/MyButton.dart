@@ -29,7 +29,7 @@ class MyButton extends StatelessWidget {
         elevation: 0,
         backgroundColor: btnColor ?? Constants.primaryAppColor,
       ),
-      onPressed: onPressedHandler,
+      onPressed: onPressedHandler ?? () {},
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +38,7 @@ class MyButton extends StatelessWidget {
             Container(
               margin: EdgeInsets.all(3),
               child: Text(
-                '$txt',
+                txt ?? "button",
                 style: TextStyle(
                     fontWeight:
                         isBold == true ? FontWeight.bold : FontWeight.normal,
