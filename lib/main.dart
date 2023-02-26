@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:nasooh/Data/cubit/authentication/login_cubit/login_cubit.dart';
+import 'package:nasooh/Presentation/screens/Advisor/AdvisorScreen.dart';
 import 'package:nasooh/Presentation/screens/Home/Home.dart';
 import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -134,7 +135,7 @@ class _MyAppState extends State<MyApp> {
               colorHex:
                   0xFF0085A5), // todo change color to use default app color
         ),
-        home: Home(),
+        home: AdvisorScreen(),
       ),
     );
   }

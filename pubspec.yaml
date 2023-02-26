@@ -55,6 +55,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   pinput: ^2.2.21
   email_validator: ^2.1.16
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:

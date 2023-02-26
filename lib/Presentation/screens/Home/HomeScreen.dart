@@ -4,10 +4,12 @@ import 'package:badges/badges.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_svg/svg.dart';
+import 'package:nasooh/Presentation/screens/Advisor/AdvisorScreen.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/loginscreen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/AdvisorCard.dart';
 import 'package:nasooh/Presentation/screens/Home/controller/HomeController.dart';
 import 'package:nasooh/Presentation/screens/OnBoardong/OnBoarding.dart';
+import 'package:nasooh/Presentation/screens/UserProfileScreens/userProfileScreen.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
@@ -313,7 +315,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       // shrinkWrap: true,
                       // physics: BouncingScrollPhysics(),
                       itemCount: 6,
-                      itemBuilder: (context, index) => AdvisorCard(),
+                      itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            MyApplication.navigateTo(context, AdvisorScreen());
+                          },
+                          child: AdvisorCard()),
                     ),
                   ),
                 ],
