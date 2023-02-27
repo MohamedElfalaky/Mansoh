@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter/material.dart';
+import 'package:nasooh/Data/models/user_model.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/shared.dart';
 import 'package:nasooh/Presentation/screens/ConfirmAdviseScreen/Components/OutlinedAdvisorCard.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
@@ -93,6 +94,8 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
       }, // hide keyboard on tap anywhere
 
       child: Scaffold(
+
+          // resizeToAvoidBottomInset: true,
           backgroundColor: Constants.whiteAppColor,
           body: Container(
               color: Constants.whiteAppColor,
@@ -113,112 +116,121 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 12,
+                  ),
                   Expanded(
                     child: Stack(
                       alignment: AlignmentDirectional.bottomCenter,
                       children: [
-                        ListView(
-                          children: [
-                            const OutlinedAdvisorCard(),
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 8, top: 8),
-                              child: Text(
-                                "عنوان الطلب",
-                                style: Constants.secondaryTitleRegularFont,
+                        SingleChildScrollView(
+                          reverse: true,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const OutlinedAdvisorCard(),
+                              const Padding(
+                                padding: EdgeInsets.only(bottom: 8, top: 8),
+                                child: Text(
+                                  "عنوان الطلب",
+                                  style: Constants.secondaryTitleRegularFont,
+                                ),
                               ),
-                            ),
-                            TextFormField(
-                              decoration: Constants.setTextInputDecoration(
-                                  prefixIcon: MyPrefixWidget(),
-                                  hintText: "ادخل عنوان الطلب..."),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                              child: Text(
-                                "مثال: تشققات في الجدران .. أفضل وجهات في العلا",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: Constants.mainFont,
-                                    color: Constants.primaryAppColor),
+                              TextFormField(
+                                decoration: Constants.setTextInputDecoration(
+                                    prefixIcon: MyPrefixWidget(),
+                                    hintText: "ادخل عنوان الطلب..."),
                               ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(
-                                bottom: 8,
-                              ),
-                              child: Text(
-                                "كم مستعد تدفع مقابل النصيحة؟",
-                                style: Constants.secondaryTitleRegularFont,
-                              ),
-                            ),
-                            TextFormField(
-                              decoration: Constants.setTextInputDecoration(
-                                  prefixIcon: MyPrefixWidget(),
-                                  hintText: "0.00",
-                                  suffixIcon: const Text(
-                                    "ريال سعودي",
-                                    style: Constants.secondaryTitleRegularFont,
-                                  )),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 8),
-                              child: Text(
-                                  "يحق للناصح رفض الطلب في حال كان المبلغ لا يتناسب مع قيمةالنصيحة حسب تقديره",
+                              const Padding(
+                                padding: EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  "مثال: تشققات في الجدران .. أفضل وجهات في العلا",
                                   style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: Constants.mainFont,
-                                      color: Constants.primaryAppColor)),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 8),
-                              child: Text(
-                                "تفاصيل الطلب",
-                                style: Constants.secondaryTitleRegularFont,
+                                      color: Constants.primaryAppColor),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 16),
-                              child: TextFormField(
-                                maxLength: 700,
-                                maxLines: 6,
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: 8,
+                                ),
+                                child: Text(
+                                  "كم مستعد تدفع مقابل النصيحة؟",
+                                  style: Constants.secondaryTitleRegularFont,
+                                ),
+                              ),
+                              TextFormField(
                                 decoration: Constants.setTextInputDecoration(
-                                  isParagraphTextField: true,
-                                  fillColor: Color(0XFFF5F4F5),
-                                  hintText:
-                                      "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافيةللحصول على إجابة وافية ...",
+                                    prefixIcon: MyPrefixWidget(),
+                                    hintText: "0.00",
+                                    suffixIcon: const Text(
+                                      "ريال سعودي",
+                                      style:
+                                          Constants.secondaryTitleRegularFont,
+                                    )),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(bottom: 8),
+                                child: Text(
+                                    "يحق للناصح رفض الطلب في حال كان المبلغ لا يتناسب مع قيمةالنصيحة حسب تقديره",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: Constants.mainFont,
+                                        color: Constants.primaryAppColor)),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(bottom: 8),
+                                child: Text(
+                                  "تفاصيل الطلب",
+                                  style: Constants.secondaryTitleRegularFont,
                                 ),
                               ),
-                            ),
-                            DottedBorder(
-                              dashPattern: [10, 6],
-                              borderType: BorderType.RRect,
-                              radius: Radius.circular(8),
-                              color: Color(0XFF80848866),
-                              child: Container(
-                                height: 56,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.upload,
-                                      color: Color(0xFF0076FF),
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      "رفع الملفات الخاصة بالطلب",
-                                      style: Constants.subtitleFont,
-                                    )
-                                  ],
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: TextFormField(
+                                  maxLength: 700,
+                                  maxLines: 5,
+                                  decoration: Constants.setTextInputDecoration(
+                                    isParagraphTextField: true,
+                                    fillColor: const Color(0XFFF5F4F5),
+                                    hintText:
+                                        "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافيةللحصول على إجابة وافية ...",
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 80,
-                            )
-                          ],
+                              DottedBorder(
+                                dashPattern: const [10, 6],
+                                borderType: BorderType.RRect,
+                                radius: const Radius.circular(8),
+                                color: const Color(0XFF80848866),
+                                child: SizedBox(
+                                  height: 56,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: const [
+                                      Icon(
+                                        Icons.upload,
+                                        color: Color(0xFF0076FF),
+                                      ),
+                                      SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        "رفع الملفات الخاصة بالطلب",
+                                        style: Constants.subtitleFont,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 80,
+                              ),
+                            ],
+                          ),
                         ),
                         Container(
                             margin: const EdgeInsets.only(bottom: 15),
