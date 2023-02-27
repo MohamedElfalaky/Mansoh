@@ -87,38 +87,71 @@ class Constants {
       Color? suffixColor,
       Color? borderColor,
       Color? fillColor,
-      String? hintText}) {
-    return InputDecoration(
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(4),
-          child: prefixIcon,
-        ),
-        prefixIconColor: prefixColor,
-        suffixIconColor: suffixColor,
-        suffixIcon: Padding(
-          padding: const EdgeInsets.all(4),
-          child: suffixIcon,
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        border: const OutlineInputBorder(
-          gapPadding: 0,
-          borderSide: BorderSide(
-            color: Color(0xff808488),
-          ),
-          borderRadius: BorderRadius.all(
-            Radius.circular(8),
-          ),
-        ),
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          fontFamily: mainFont,
-          fontSize: 12,
-          color: fontHintColor,
-        ));
+      String? hintText,
+      bool? isPrefexed,
+      bool? isFilled,
+      bool? isParagraphTextField}) {
+    return isParagraphTextField == true
+        ? InputDecoration(
+            fillColor: fillColor,
+            filled: true,
+
+            // prefixIconColor: prefixColor,
+            // suffixIconColor: suffixColor,
+            suffixIcon: Padding(
+              padding: const EdgeInsets.all(8),
+              child: suffixIcon,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            border: const OutlineInputBorder(
+              gapPadding: 0,
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+            hintText: hintText,
+            hintStyle: const TextStyle(
+              fontFamily: mainFont,
+              fontSize: 12,
+              color: Color(0xFF5C5E6B),
+            ))
+        : InputDecoration(
+            fillColor: fillColor,
+            filled: isFilled,
+            prefixIcon: isPrefexed == false
+                ? null
+                : Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: prefixIcon,
+                  ),
+            prefixIconColor: prefixColor,
+            suffixIconColor: suffixColor,
+            suffixIcon: Padding(
+              padding: const EdgeInsets.all(8),
+              child: suffixIcon,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            border: const OutlineInputBorder(
+              gapPadding: 0,
+              borderSide: BorderSide(
+                color: Color(0xff808488),
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+            hintText: hintText,
+            hintStyle: const TextStyle(
+              fontFamily: mainFont,
+              fontSize: 12,
+              color: fontHintColor,
+            ));
   }
 
   /// strings
 
   /// integers
-
 }

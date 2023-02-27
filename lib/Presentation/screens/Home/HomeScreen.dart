@@ -1,22 +1,17 @@
 import 'dart:async';
 
-import 'package:badges/badges.dart';
+// import 'package:badges/badges.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/Presentation/screens/Advisor/AdvisorScreen.dart';
-import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/loginscreen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/AdvisorCard.dart';
 import 'package:nasooh/Presentation/screens/Home/controller/HomeController.dart';
-import 'package:nasooh/Presentation/screens/OnBoardong/OnBoarding.dart';
-import 'package:nasooh/Presentation/screens/UserProfileScreens/userProfileScreen.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../../app/global.dart';
 import '../../../app/utils/lang/language_constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -126,22 +121,24 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Constants.whiteAppColor,
               width: double.infinity,
               height: MediaQuery.of(context).size.height,
-              margin: const EdgeInsets.only(left: 16, right: 16, top: 16),
+              margin: const EdgeInsets.only(left: 16, right: 16, top: 35),
               child: Column(
                 children: [
                   Row(
                     children: [
                       Badge(
-                        badgeColor: Constants.primaryAppColor,
+                        backgroundColor: Constants.primaryAppColor,
                         // borderSide: const BorderSide(color: Colors.white),
-                        position: BadgePosition.topStart(top: -7, start: 0),
-                        badgeContent: const Text(
-                          "9+",
-                          style: TextStyle(
-                              fontSize: 8, color: Constants.whiteAppColor),
-                          // context.watch<CartItemsCubit>().cartLength ?? "",
-                          // style: const TextStyle(color: Colors.white),
-                        ),
+                        alignment: AlignmentDirectional(0, -7),
+                        label: Text("2"),
+                        // position: BadgePosition.topStart(top: -7, start: 0),
+                        // badgeContent: const Text(
+                        //   "9+",
+                        //   style: TextStyle(
+                        //       fontSize: 8, color: Constants.whiteAppColor),
+                        //   // context.watch<CartItemsCubit>().cartLength ?? "",
+                        //   // style: const TextStyle(color: Colors.white),
+                        // ),
                         child: Card(
                           child: SizedBox(
                             height: 40,

@@ -1,24 +1,20 @@
 import 'dart:async';
 
-import 'package:badges/badges.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart' hide Badge;
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nasooh/Presentation/screens/Advisor/Components/AdvisorCard.dart';
-import 'package:nasooh/Presentation/screens/Advisor/controller/AdvisorController.dart';
-import 'package:nasooh/Presentation/screens/UserProfileScreens/userProfileScreen.dart';
+
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:readmore/readmore.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../app/utils/lang/language_constants.dart';
 
 class AdvisorScreen extends StatefulWidget {
-  const AdvisorScreen();
+  const AdvisorScreen({super.key});
 
   @override
   State<AdvisorScreen> createState() => _AdvisorScreenState();
@@ -304,7 +300,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Card(
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             vertical: 16, horizontal: 8),
                                         child: Column(
                                           crossAxisAlignment:
@@ -316,22 +312,22 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                   tempPic,
                                                   height: 30,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 8,
                                                 ),
-                                                Text(
+                                                const Text(
                                                   "سنوات الخبرة",
                                                   style: Constants
                                                       .secondaryTitleFont,
                                                 ),
-                                                Spacer(),
-                                                Text(
+                                                const Spacer(),
+                                                const Text(
                                                   "7 سنوات",
                                                   style: Constants.subtitleFont,
                                                 )
                                               ],
                                             ),
-                                            Center(
+                                            const Center(
                                               child: SizedBox(
                                                 width: 150,
                                                 child: Divider(
@@ -346,10 +342,10 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                   tempPic,
                                                   height: 30,
                                                 ),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 8,
                                                 ),
-                                                Text(
+                                                const Text(
                                                   "الشهادات والإنجازات",
                                                   style: Constants
                                                       .secondaryTitleFont,
@@ -360,8 +356,9 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                               children: List.generate(
                                                   8,
                                                   (index) => Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 12),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 12),
                                                       child: Container(
                                                         padding:
                                                             const EdgeInsets
@@ -372,13 +369,13 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                                 .symmetric(
                                                             horizontal: 4),
                                                         decoration: BoxDecoration(
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0XFFEEEEEE),
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
                                                                         2)),
-                                                        child: Text(
+                                                        child: const Text(
                                                           "محامي عام",
                                                           style: TextStyle(
                                                               fontFamily:
@@ -398,15 +395,15 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 60,
                             )
                           ],
                         ),
                         Container(
-                            margin: EdgeInsets.only(bottom: 15),
+                            margin: const EdgeInsets.only(bottom: 15),
                             height: 50,
-                            child: MyButton(
+                            child: const MyButton(
                               txt: "اطلب نصيحة",
                               isBold: true,
                             ))

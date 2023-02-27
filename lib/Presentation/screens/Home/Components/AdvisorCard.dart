@@ -10,8 +10,8 @@ class AdvisorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      padding: EdgeInsets.only(top: 16, bottom: 6, right: 16, left: 16),
-      height: 170,
+      padding: const EdgeInsets.only(top: 16, bottom: 6, right: 16, left: 16),
+      // height: 170,
       width: double.infinity,
       decoration: BoxDecoration(
           color: Constants.whiteAppColor,
@@ -20,11 +20,11 @@ class AdvisorCard extends StatelessWidget {
               Border.all(color: Constants.primaryAppColor.withOpacity(0.26)),
           boxShadow: [
             BoxShadow(
-                offset: Offset(2, 6),
+                offset: const Offset(2, 6),
                 blurRadius: 10,
                 spreadRadius: -5,
                 blurStyle: BlurStyle.normal,
-                color: Color(0xFF5C5E6B1A).withOpacity(0)),
+                color: const Color(0xFF5C5E6B1A).withOpacity(.2)),
           ]),
       child: Column(
         children: [
@@ -38,21 +38,21 @@ class AdvisorCard extends StatelessWidget {
                   // height: ,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "محمد عبدالعزيز الحميد كامل",
                     style: Constants.secondaryTitleFont,
                   ),
-                  Text(
+                  const Text(
                     "استشاري متخصص بالمحماة",
                     style: Constants.subtitleFont,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   ////////////// tags
@@ -63,13 +63,13 @@ class AdvisorCard extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(2),
-                        margin: EdgeInsets.only(left: 8),
+                        padding: const EdgeInsets.all(2),
+                        margin: const EdgeInsets.only(left: 8),
                         height: 24,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
-                            color: Color(0XFFEEEEEE)),
-                        child: Text(
+                            color: const Color(0XFFEEEEEE)),
+                        child: const Text(
                           "استشاري",
                           style: TextStyle(
                               fontSize: 10,
@@ -79,13 +79,13 @@ class AdvisorCard extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(2),
-                        margin: EdgeInsets.only(left: 8),
+                        padding: const EdgeInsets.all(2),
+                        margin: const EdgeInsets.only(left: 8),
                         height: 24,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
-                            color: Color(0XFFEEEEEE)),
-                        child: Text(
+                            color: const Color(0XFFEEEEEE)),
+                        child: const Text(
                           "هندسي",
                           style: TextStyle(
                               fontSize: 10,
@@ -95,13 +95,13 @@ class AdvisorCard extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(2),
-                        margin: EdgeInsets.only(left: 8),
+                        padding: const EdgeInsets.all(2),
+                        margin: const EdgeInsets.only(left: 8),
                         height: 24,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
-                            color: Color(0XFFEEEEEE)),
-                        child: Text(
+                            color: const Color(0XFFEEEEEE)),
+                        child: const Text(
                           "تسويق رقمي",
                           style: TextStyle(
                               fontSize: 10,
@@ -112,14 +112,14 @@ class AdvisorCard extends StatelessWidget {
                       ),
                       ///////// remaining tags
                       Container(
-                        padding: EdgeInsets.all(2),
-                        margin: EdgeInsets.only(left: 8),
+                        padding: const EdgeInsets.all(2),
+                        margin: const EdgeInsets.only(left: 8),
                         height: 24,
                         width: 24,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
-                            color: Color(0XFFD9D9D9)),
-                        child: Text(
+                            color: const Color(0XFFD9D9D9)),
+                        child: const Text(
                           "+3",
                           style: TextStyle(
                               fontSize: 10,
@@ -132,14 +132,14 @@ class AdvisorCard extends StatelessWidget {
                   )
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Row(
                 children: [
-                  Text(
+                  const Text(
                     "4.8",
                     style: Constants.secondaryTitleFont,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 4,
                   ),
                   SvgPicture.asset(
@@ -150,15 +150,15 @@ class AdvisorCard extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Expanded(
-            child: Text(
-              "ويُستخدم في صناعات المطابع ودور النشر كان لوريم إيبسوم ولايزالالمعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت....",
-              style: Constants.subtitleFont,
-              textAlign: TextAlign.start,
-            ),
+          const Text(
+            "ويُستخدم في صناعات المطابع ودور النشر كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت قامت قامت....",
+            style: Constants.subtitleFont,
+            textAlign: TextAlign.start,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           )
         ],
       ),

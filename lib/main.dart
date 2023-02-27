@@ -6,15 +6,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:nasooh/Data/cubit/authentication/login_cubit/login_cubit.dart';
 import 'package:nasooh/Presentation/screens/Advisor/AdvisorScreen.dart';
+import 'package:nasooh/Presentation/screens/ConfirmAdviseScreen/ConfirmAdviseScreen.dart';
 import 'package:nasooh/Presentation/screens/Home/Home.dart';
-import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
-
-import 'Presentation/screens/UserProfileScreens/userProfileScreen.dart';
 import 'app/global.dart';
 import 'app/keys.dart';
-import 'app/utils/BlocProviders.dart';
 import 'app/utils/lang/demo_localization.dart';
 import 'app/utils/lang/language_constants.dart';
 import 'app/utils/sharedPreferenceClass.dart';
@@ -135,7 +132,7 @@ class _MyAppState extends State<MyApp> {
               colorHex:
                   0xFF0085A5), // todo change color to use default app color
         ),
-        home: AdvisorScreen(),
+        home: ConfirmAdviseScreen(),
       ),
     );
   }

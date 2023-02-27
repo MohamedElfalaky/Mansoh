@@ -51,11 +51,11 @@ class MyPrefixWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Container(
-        width: 60,
-        height: 60,
+        width: 40,
+        height: 40,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+          borderRadius: BorderRadius.all(Radius.circular(4)),
           // shape: BoxShape.rectangle,
           color: Color(0xffEEEEEE),
         ),
