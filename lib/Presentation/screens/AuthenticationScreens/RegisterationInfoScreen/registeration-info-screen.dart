@@ -6,7 +6,7 @@ import '../../../../app/Style/Icons.dart';
 import '../../../../app/constants.dart';
 import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
-import '../shared.dart';
+import '../../../widgets/shared.dart';
 
 class RegistrationInfoScreen extends StatefulWidget {
   const RegistrationInfoScreen({Key? key}) : super(key: key);

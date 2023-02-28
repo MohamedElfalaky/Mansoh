@@ -5,7 +5,7 @@ import 'package:pinput/pinput.dart';
 import '../../../../app/constants.dart';
 import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
-import '../shared.dart';
+import '../../../widgets/shared.dart';
 
 class RegistrationPinCodeConfirm extends StatefulWidget {
   const RegistrationPinCodeConfirm({super.key});

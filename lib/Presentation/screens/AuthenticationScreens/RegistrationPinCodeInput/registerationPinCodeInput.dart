@@ -4,7 +4,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../../app/constants.dart';
 import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
-import '../shared.dart';
+import '../../../widgets/shared.dart';
 
 class RegistrationPinCodeInput extends StatefulWidget {
   const RegistrationPinCodeInput({super.key});
