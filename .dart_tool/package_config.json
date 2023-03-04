@@ -104,6 +104,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dotted_line",
+      "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/dotted_line-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dropdown_textfield",
       "rootUri": "file:///Users/apple/.pub-cache/hosted/pub.dev/dropdown_textfield-1.0.8",
       "packageUri": "lib/",
@@ -530,7 +536,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-02-27T10:39:06.121568Z",
+  "generated": "2023-02-28T10:14:54.154289Z",
   "generator": "pub",
   "generatorVersion": "2.19.2"
 }

@@ -12,6 +12,7 @@ const String bckgound = "assets/images/SVGs/bckgound.svg";
 const String appBarLogo = "assets/images/SVGs/FINAL Nasoh LOGO (1) 1.svg";
 const String notifcation = "assets/images/SVGs/66744-notification 1.svg";
 const String tempPic = "assets/images/SVGs/illustration.svg";
+const String wlt = "assets/images/SVGs/wlt.svg";
 
 ///////////////////// Jsons////////
 ///

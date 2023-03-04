@@ -2,13 +2,17 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/CompleteAdvisorCard.dart';
+import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/PaymentCard.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
-import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/OutlinedAdvisorCard.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
+import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../app/utils/lang/language_constants.dart';
+import '';
 
 class CompleteAdviseScreen extends StatefulWidget {
   const CompleteAdviseScreen({super.key});
@@ -135,105 +139,18 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const OutlinedAdvisorCard(),
+                    const CompleteAdvisorCard(),
                     const Padding(
-                      padding: EdgeInsets.only(bottom: 8, top: 8),
+                      padding: EdgeInsets.only(bottom: 8, top: 4),
                       child: Text(
-                        "عنوان الطلب",
-                        style: Constants.secondaryTitleRegularFont,
+                        "اختر وسيلة الدفع",
+                        style: Constants.headerNavigationFont,
                       ),
                     ),
-                    TextFormField(
-                      decoration: Constants.setTextInputDecoration(
-                          prefixIcon: MyPrefixWidget(),
-                          hintText: "ادخل عنوان الطلب..."),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        "مثال: تشققات في الجدران .. أفضل وجهات في العلا",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: Constants.mainFont,
-                            color: Constants.primaryAppColor),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(
-                        bottom: 8,
-                      ),
-                      child: Text(
-                        "كم مستعد تدفع مقابل النصيحة؟",
-                        style: Constants.secondaryTitleRegularFont,
-                      ),
-                    ),
-                    TextFormField(
-                      decoration: Constants.setTextInputDecoration(
-                          prefixIcon: MyPrefixWidget(),
-                          hintText: "0.00",
-                          suffixIcon: const Text(
-                            "ريال سعودي",
-                            style: Constants.secondaryTitleRegularFont,
-                          )),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 8),
-                      child: Text(
-                          "يحق للناصح رفض الطلب في حال كان المبلغ لا يتناسب مع قيمةالنصيحة حسب تقديره",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: Constants.mainFont,
-                              color: Constants.primaryAppColor)),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 8),
-                      child: Text(
-                        "تفاصيل الطلب",
-                        style: Constants.secondaryTitleRegularFont,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: TextFormField(
-                        maxLength: 700,
-                        maxLines: 5,
-                        decoration: Constants.setTextInputDecoration(
-                          isParagraphTextField: true,
-                          fillColor: const Color(0XFFF5F4F5),
-                          hintText:
-                              "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافيةللحصول على إجابة وافية ...",
-                        ),
-                      ),
-                    ),
-                    DottedBorder(
-                      dashPattern: const [10, 6],
-                      borderType: BorderType.RRect,
-                      radius: const Radius.circular(8),
-                      color: const Color(0XFF80848866),
-                      child: SizedBox(
-                        height: 56,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Icon(
-                              Icons.upload,
-                              color: Color(0xFF0076FF),
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Text(
-                              "رفع الملفات الخاصة بالطلب",
-                              style: Constants.subtitleFont,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 80,
-                    ),
+                    PaymentCard(),
+                    PaymentCard(),
+                    PaymentCard(),
+                    PaymentCard(),
                   ],
                 ),
               ))),
