@@ -5,7 +5,17 @@ import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 
 class CompleteAdvisorCard extends StatelessWidget {
-  const CompleteAdvisorCard({super.key});
+  const CompleteAdvisorCard(
+      {super.key,
+      required this.name,
+      required this.imagePhoto,
+      required this.moneyPut,
+      required this.taxVal});
+
+  final String name;
+  final String imagePhoto;
+  final String moneyPut;
+  final String taxVal;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +42,8 @@ class CompleteAdvisorCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 22,
-                child: SvgPicture.asset(
-                  tempPic,
-                  // height: ,
+                backgroundImage: NetworkImage(
+                  imagePhoto,
                 ),
               ),
               const SizedBox(
@@ -43,8 +52,8 @@ class CompleteAdvisorCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "محمد عبدالعزيز الحميد كامل",
+                  Text(
+                    name,
                     style: Constants.secondaryTitleFont,
                   ),
                   const Text(
@@ -142,7 +151,7 @@ class CompleteAdvisorCard extends StatelessWidget {
                     width: 4,
                   ),
                   SvgPicture.asset(
-                    tempPic,
+                    rateIcon,
                     height: 20,
                   )
                 ],
@@ -178,9 +187,9 @@ class CompleteAdvisorCard extends StatelessWidget {
                   style: Constants.subtitleRegularFont,
                 ),
                 RichText(
-                    text: const TextSpan(children: [
-                  TextSpan(text: "75", style: Constants.subtitleFontBold),
-                  TextSpan(
+                    text: TextSpan(children: [
+                  TextSpan(text: moneyPut, style: Constants.subtitleFontBold),
+                  const TextSpan(
                     text: " ريال سعودي",
                     style: Constants.subtitleRegularFont,
                   ),
@@ -198,9 +207,9 @@ class CompleteAdvisorCard extends StatelessWidget {
                   style: Constants.subtitleRegularFont,
                 ),
                 RichText(
-                    text: const TextSpan(children: [
-                  TextSpan(text: "9", style: Constants.subtitleFontBold),
-                  TextSpan(
+                    text: TextSpan(children: [
+                  TextSpan(text: taxVal, style: Constants.subtitleFontBold),
+                  const TextSpan(
                     text: " ريال سعودي",
                     style: Constants.subtitleRegularFont,
                   ),
@@ -215,19 +224,19 @@ class CompleteAdvisorCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "المبلغ الإجمالي",
+                  "الاجمالي",
                   style: Constants.subtitleRegularFont,
                 ),
                 RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                         style: Constants.subtitleRegularFont,
                         children: [
                       TextSpan(
-                          text: "84",
-                          style: TextStyle(
+                          text: moneyPut,
+                          style: const TextStyle(
                               color: Constants.primaryAppColor,
                               fontWeight: FontWeight.bold)),
-                      TextSpan(
+                      const TextSpan(
                         text: " ريال سعودي",
                         style: TextStyle(
                           color: Constants.primaryAppColor,

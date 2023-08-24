@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/loginscreen.dart';
+import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
 import 'package:nasooh/Presentation/screens/OnBoardong/OnBoarding.dart';
+import 'package:nasooh/Presentation/screens/UserProfileScreens/userProfileSettings/userProfileScreen.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
+
+import '../../../app/utils/lang/language_constants.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -19,7 +22,7 @@ class _HomeState extends State<Home> {
   final screens = [
     const HomeScreen(),
     OnBoarding(),
-    const LoginScreen(),
+    const UserProfileScreen(),
   ];
 
   @override
@@ -28,7 +31,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Constants.whiteAppColor,
       body: IndexedStack(index: currentIndex, children: screens),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           boxShadow: [
@@ -36,14 +39,15 @@ class _HomeState extends State<Home> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(30.0),
             topRight: Radius.circular(30.0),
           ),
           child: BottomNavigationBar(
             // backgroundColor: Colors.red,
-            selectedLabelStyle: TextStyle(fontFamily: Constants.mainFont),
-            unselectedLabelStyle: TextStyle(fontFamily: Constants.mainFont),
+            selectedLabelStyle: const TextStyle(fontFamily: Constants.mainFont),
+            unselectedLabelStyle:
+                const TextStyle(fontFamily: Constants.mainFont),
             type: BottomNavigationBarType.fixed,
             // backgroundColor: Theme.of(context).colorScheme.secondary,
             currentIndex: currentIndex,
@@ -52,19 +56,20 @@ class _HomeState extends State<Home> {
                 currentIndex = index;
               });
             },
-            items: const [
+            items: [
+              BottomNavigationBarItem(
+                // activeIcon: SvgPicture.asset(tempPic),
+                icon: const Icon(Icons.home),
+                label: getTranslated(context, "Home")!,
+              ),
               BottomNavigationBarItem(
                   // activeIcon: SvgPicture.asset(tempPic),
-                  icon: Icon(Icons.home),
-                  label: "الرئيسية"),
+                  icon: const Icon(Icons.shopping_bag),
+                  label: getTranslated(context, "My Orders")!),
               BottomNavigationBarItem(
                   // activeIcon: SvgPicture.asset(tempPic),
-                  icon: Icon(Icons.shopping_bag),
-                  label: "طلباتي"),
-              BottomNavigationBarItem(
-                  // activeIcon: SvgPicture.asset(tempPic),
-                  icon: Icon(Icons.person),
-                  label: "ملفاتي"),
+                  icon: const Icon(Icons.person),
+                  label: getTranslated(context, "My Account")!),
             ],
           ),
         ),

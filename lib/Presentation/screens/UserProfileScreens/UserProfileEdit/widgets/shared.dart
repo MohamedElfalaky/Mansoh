@@ -36,12 +36,13 @@ class MySeparator extends StatelessWidget {
   }
 }
 
-Widget buildSaveButton(String label) => SizedBox(
+Widget buildSaveButton({required String label, void Function()? onPressed}) =>
+    SizedBox(
       width: MediaQuery.of(Keys.navigatorKey.currentState!.context).size.width *
           0.8,
       child: FloatingActionButton.extended(
         backgroundColor: Constants.primaryAppColor,
-        onPressed: (() {}),
+        onPressed: onPressed??(){},
         label:
             Text(getTranslated(Keys.navigatorKey.currentState!.context, label)!,
                 style: Constants.secondaryTitleFont.copyWith(

@@ -59,7 +59,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 const SizedBox(
                                   width: 16,
                                 ),
-                                const goBack(),
+                                const GoBack(),
                               ],
                             ),
                             const SizedBox(

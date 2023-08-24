@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nasooh/app/utils/sharedPreferenceClass.dart';
 
 import '../../../../../app/constants.dart';
+import '../../UserProfileEdit/user_profile_edit.dart';
 
 class UserInfoCard extends StatelessWidget {
   const UserInfoCard({super.key});
@@ -16,18 +18,36 @@ class UserInfoCard extends StatelessWidget {
             height: 60,
             width: 60,
             color: Colors.white,
-            child: const CircleAvatar(
+            child: CircleAvatar(
               radius: 30,
               backgroundColor: Colors.transparent,
-              child: CircleAvatar(
-                radius: 28,
-                backgroundColor: Colors.black12,
-                child: Icon(
-                  Icons.person,
-                  size: 40,
-                  color: Colors.black54,
-                ),
-              ),
+              child: sharedPrefs.getUserPhoto() == ""
+                  ? const CircleAvatar(
+                      radius: 28,
+                      backgroundColor: Colors.black12,
+                      child: Icon(
+                        Icons.person,
+                        size: 40,
+                        color: Colors.black54,
+                      ),
+                    )
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(35),
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        color: Colors.white,
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.transparent,
+                          child: Image.network(
+                            sharedPrefs.getUserPhoto(),
+                            width: 60,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
             ),
           ),
           SvgPicture.asset(
@@ -35,22 +55,22 @@ class UserInfoCard extends StatelessWidget {
             color: Colors.black54,
             width: 60,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 50, right: 22),
-            child: CircleAvatar(
-              radius: 8,
-              backgroundColor: Colors.black87,
-              child: SvgPicture.asset(
-                "assets/images/SVGs/pen.svg",
-                color: Colors.white,
-                width: 8,
-              ),
-            ),
-          )
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 50, right: 22),
+          //   child: CircleAvatar(
+          //     radius: 8,
+          //     backgroundColor: Colors.black87,
+          //     child: SvgPicture.asset(
+          //       "assets/images/SVGs/pen.svg",
+          //       color: Colors.white,
+          //       width: 8,
+          //     ),
+          //   ),
+          // )
         ],
       ),
-      title: const Text(
-        "عبد الرحمن محمد كامل",
+      title: Text(
+        sharedPrefs.getUserName(),
         style: Constants.mainTitleFont,
       ),
       subtitle: const Text(
@@ -59,13 +79,22 @@ class UserInfoCard extends StatelessWidget {
       ),
       trailing: Padding(
           padding: const EdgeInsets.only(top: 20),
-          child: CircleAvatar(
-            radius: 16,
-            backgroundColor: const Color(0xff0085A5).withOpacity(0.2),
-            child: SvgPicture.asset(
-              "assets/images/SVGs/pen.svg",
-              color: const Color(0xff0085A5),
-              width: 12,
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const UserProfileEdit(),
+                ),
+              );
+            },
+            child: CircleAvatar(
+              radius: 16,
+              backgroundColor: Constants.primaryAppColor,
+              child: SvgPicture.asset(
+                "assets/images/SVGs/pen.svg",
+                color: Colors.white,
+                width: 12,
+              ),
             ),
           )),
     );

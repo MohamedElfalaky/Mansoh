@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 
 /// vars with fixed values
 class Constants {
@@ -14,6 +15,7 @@ class Constants {
   static const Color prefixContainerColor = Color(0xFFEEEEEE);
 
   static const Color whiteAppColor = Color(0xFFFFFFFF);
+  static const Color outLineColor = Color(0xFFBDBDBD);
 
   // fonts
   static const String mainFont = 'Cairo';
@@ -154,4 +156,107 @@ class Constants {
   /// strings
 
   /// integers
+  static final defaultPinTheme = PinTheme(
+    width: 70,
+    height: 70,
+    textStyle: const TextStyle(
+        fontSize: 20,
+        color: Color.fromRGBO(30, 60, 87, 1),
+        fontWeight: FontWeight.w600),
+    decoration: BoxDecoration(
+      border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
+      borderRadius: BorderRadius.circular(20),
+    ),
+  );
+
+  static final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+    border: Border.all(color: const Color(0xFF0085A5)),
+    borderRadius: BorderRadius.circular(20),
+  );
+
+  static final submittedPinTheme = defaultPinTheme.copyWith(
+    decoration: defaultPinTheme.decoration!.copyWith(
+      color: const Color.fromRGBO(234, 239, 243, 1),
+    ),
+  );
+
+  static final errorPinTheme = defaultPinTheme.copyWith(
+    decoration: defaultPinTheme.decoration!.copyWith(
+      border: Border.all(color: Colors.red),
+    ),
+  );
+
+  static InputDecoration setRegistrationTextInputDecoration(
+      {Widget? prefixIcon,
+      Widget? suffixIcon,
+      Color? prefixColor,
+      Color? suffixColor,
+      Color? borderColor,
+      Color? fillColor,
+      bool? isParagraph,
+      String? hintText}) {
+    return InputDecoration(
+        errorStyle: Constants.subtitleFont1.copyWith(
+          color: Colors.red,
+        ),
+        prefixIcon: isParagraph == true
+            ? SizedBox(
+                height: 140,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                          start: 12, end: 6, top: 10, bottom: 10),
+                      child: Container(
+                        width: 30,
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                left: BorderSide(
+                                    width: 1, color: Color(0xFFBDBDBD)))),
+                        margin: const EdgeInsetsDirectional.only(end: 8),
+                        padding: const EdgeInsetsDirectional.only(end: 8),
+                        child: prefixIcon,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsetsDirectional.only(
+                    start: 12, end: 6, top: 10, bottom: 10),
+                child: Container(
+                  width: 30,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          left:
+                              BorderSide(width: 1, color: Color(0xFFBDBDBD)))),
+                  margin: const EdgeInsetsDirectional.only(end: 8),
+                  padding: const EdgeInsetsDirectional.only(end: 8),
+                  child: prefixIcon,
+                ),
+              ),
+        prefixIconColor: prefixColor,
+        suffixIconColor: suffixColor,
+        suffixIcon: Padding(
+          padding: const EdgeInsets.all(4),
+          child: suffixIcon,
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        border: const OutlineInputBorder(
+          gapPadding: 0,
+          borderSide: BorderSide(
+            color: Color(0xff808488),
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(5),
+          ),
+        ),
+        hintText: hintText,
+        hintStyle: const TextStyle(
+          fontFamily: mainFont,
+          fontSize: 12,
+          color: fontHintColor,
+        ));
+  }
 }

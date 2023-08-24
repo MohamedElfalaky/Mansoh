@@ -4,13 +4,15 @@ import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 
 class PaymentCard extends StatelessWidget {
-  const PaymentCard({super.key});
+  const PaymentCard({super.key, required this.payMethod, required this.walletVal});
+  final String payMethod;
+  final String walletVal;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 48,
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: const Color(0xFFF5F4F5),
@@ -25,19 +27,19 @@ class PaymentCard extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-          const Text(
-            "المحفظة",
+           Text(
+             payMethod,
             style: Constants.secondaryTitleRegularFont,
           ),
           const Spacer(),
           RichText(
-            text: const TextSpan(
+            text:  TextSpan(
                 style: Constants.secondaryTitleRegularFont,
                 children: [
                   TextSpan(
-                      text: "120 ",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: "ريال سعودي")
+                      text: walletVal,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  const TextSpan(text: " ريال سعودي")
                 ]),
           )
         ],

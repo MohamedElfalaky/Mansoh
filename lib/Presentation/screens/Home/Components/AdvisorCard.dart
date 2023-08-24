@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/app/Style/Icons.dart';
+import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
 
 class AdvisorCard extends StatelessWidget {
-  const AdvisorCard({super.key});
+  const AdvisorCard(
+      {super.key,
+      required this.image,
+      // required this.thirdCategory,
+      required this.secondCategory,
+      required this.firstCategory,
+      required this.info,
+      required this.name,
+      required this.rate,
+      required this.description});
+
+  final String image;
+  final String info;
+  final String name;
+  final String rate;
+  final String description;
+  // final String thirdCategory;
+  final String firstCategory;
+  final String secondCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +52,12 @@ class AdvisorCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 22,
-                child: SvgPicture.asset(
-                  tempPic,
-                  // height: ,
-                ),
+                backgroundImage: NetworkImage(image, scale: 0.2),
+                // child: Image.network(
+                //
+                //   fit: BoxFit.cover,
+                //   // height: ,
+                // ),
               ),
               const SizedBox(
                 width: 8,
@@ -44,12 +65,15 @@ class AdvisorCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "محمد عبدالعزيز الحميد كامل",
-                    style: Constants.secondaryTitleFont,
+                  SizedBox(
+                    width: width(context) * 0.6,
+                    child: Text(
+                      name,
+                      style: Constants.secondaryTitleFont,
+                    ),
                   ),
-                  const Text(
-                    "استشاري متخصص بالمحماة",
+                  Text(
+                    info,
                     style: Constants.subtitleFont,
                   ),
                   const SizedBox(
@@ -69,8 +93,8 @@ class AdvisorCard extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: const Color(0XFFEEEEEE)),
-                        child: const Text(
-                          "استشاري",
+                        child: Text(
+                          firstCategory,
                           style: TextStyle(
                               fontSize: 10,
                               fontFamily: Constants.mainFont,
@@ -85,8 +109,8 @@ class AdvisorCard extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: const Color(0XFFEEEEEE)),
-                        child: const Text(
-                          "هندسي",
+                        child: Text(
+                          secondCategory,
                           style: TextStyle(
                               fontSize: 10,
                               fontFamily: Constants.mainFont,
@@ -101,8 +125,8 @@ class AdvisorCard extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: const Color(0XFFEEEEEE)),
-                        child: const Text(
-                          "تسويق رقمي",
+                        child: Text("متخصص",
+                          // thirdCategory,
                           style: TextStyle(
                               fontSize: 10,
                               fontFamily: Constants.mainFont,
@@ -135,15 +159,15 @@ class AdvisorCard extends StatelessWidget {
               const Spacer(),
               Row(
                 children: [
-                  const Text(
-                    "4.8",
+                  Text(
+                    rate,
                     style: Constants.secondaryTitleFont,
                   ),
                   const SizedBox(
                     width: 4,
                   ),
                   SvgPicture.asset(
-                    tempPic,
+                    rateIcon,
                     height: 20,
                   )
                 ],
@@ -153,8 +177,8 @@ class AdvisorCard extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const Text(
-            "ويُستخدم في صناعات المطابع ودور النشر كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت قامت قامت....",
+          Text(
+            description,
             style: Constants.subtitleFont,
             textAlign: TextAlign.start,
             maxLines: 2,

@@ -24,7 +24,7 @@ class _UserSettingsState extends State<UserSettings> {
         },
         child: SafeArea(
           child: Scaffold(
-            floatingActionButton: buildSaveButton("save"),
+            floatingActionButton: buildSaveButton(label: "save"),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             resizeToAvoidBottomInset: false,

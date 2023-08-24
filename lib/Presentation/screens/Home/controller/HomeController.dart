@@ -33,7 +33,7 @@ class HomeController {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  Widget pageViewItem() {
+  Widget pageViewItem(String imageNeeded) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(top: 20, right: 8),
@@ -71,9 +71,10 @@ class HomeController {
               child: Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: Center(
-              child: SvgPicture.asset(
-                tempPic,
-                height: 100,
+              child: Image.network(
+                // imageNeeded,
+                "https://www.vhv.rs/dpng/d/18-187042_futbol-messi-png-2019-transparent-png.png",
+                height: 100,fit: BoxFit.cover,
               ),
             ),
           )),

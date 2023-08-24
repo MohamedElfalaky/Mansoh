@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nasooh/Data/repositories/authentication/authentication.dart';
-
+import '../../../../Presentation/screens/Home/HomeScreen.dart';
+import '../../../../app/utils/myApplication.dart';
+import '../../../repositories/authentication/authentication.dart';
 import 'login_state.dart';
-
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
@@ -24,6 +24,7 @@ class LoginCubit extends Cubit<LoginState> {
           .then((value) {
         if (value != null) {
           emit(LoginLoaded(value));
+          MyApplication.navigateTo(context!, const HomeScreen());
         } else {
           emit(LoginError());
         }

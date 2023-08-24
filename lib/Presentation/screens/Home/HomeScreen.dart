@@ -3,7 +3,9 @@ import 'dart:async';
 // import 'package:badges/badges.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nasooh/Data/cubit/home/advisor_state.dart';
 import 'package:nasooh/Presentation/screens/Advisor/AdvisorScreen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/AdvisorCard.dart';
 import 'package:nasooh/Presentation/screens/Home/controller/HomeController.dart';
@@ -12,6 +14,9 @@ import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../../Data/cubit/home/advisor_list_cubit.dart';
+import '../../../Data/cubit/home/home_slider_cubit.dart';
+import '../../../Data/cubit/home/home_state.dart';
 import '../../../app/utils/lang/language_constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -82,6 +87,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ///
       }
     });
+    context.read<HomeSliderCubit>().getDataHomeSlider();
+    // context.read<HomeSliderCubit>().getAdvisorList();
+    context.read<AdvisorListCubit>().getAdvisorList();
   }
 
   @override
@@ -111,216 +119,269 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return GestureDetector(
-      onTap: () {
-        MyApplication.dismissKeyboard(context);
-      }, // hide keyboard on tap anywhere
+        onTap: () {
+          MyApplication.dismissKeyboard(context);
+        }, // hide keyboard on tap anywhere
 
-      child: Scaffold(
+        child: Scaffold(
           backgroundColor: Constants.whiteAppColor,
-          body: Container(
-              color: Constants.whiteAppColor,
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height,
-              margin: const EdgeInsets.only(left: 16, right: 16, top: 35),
-              child: Column(
-                children: [
-                  Row(
+          body: BlocBuilder<HomeSliderCubit, HomeState>(
+              builder: (context, homeState) {
+            if (homeState is HomeSliderLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (homeState is HomeSliderLoaded) {
+              return Container(
+                  color: Constants.whiteAppColor,
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height,
+                  margin: const EdgeInsets.only(left: 16, right: 16, top: 35),
+                  child: Column(
                     children: [
-                      Badge(
-                        backgroundColor: Constants.primaryAppColor,
-                        // borderSide: const BorderSide(color: Colors.white),
-                        alignment: AlignmentDirectional(0, -7),
-                        label: Text("2"),
-                        // position: BadgePosition.topStart(top: -7, start: 0),
-                        // badgeContent: const Text(
-                        //   "9+",
-                        //   style: TextStyle(
-                        //       fontSize: 8, color: Constants.whiteAppColor),
-                        //   // context.watch<CartItemsCubit>().cartLength ?? "",
-                        //   // style: const TextStyle(color: Colors.white),
-                        // ),
-                        child: Card(
-                          child: SizedBox(
-                            height: 40,
-                            width: 40,
-                            child: Center(
-                              child: SvgPicture.asset(
-                                tempPic,
-                                height: 25,
+                      Row(
+                        children: [
+                          Badge(
+                            backgroundColor: Constants.primaryAppColor,
+                            // borderSide: const BorderSide(color: Colors.white),
+                            alignment: const AlignmentDirectional(0, -7),
+                            label: const Text("2"),
+                            // position: BadgePosition.topStart(top: -7, start: 0),
+                            // badgeContent: const Text(
+                            //   "9+",
+                            //   style: TextStyle(
+                            //       fontSize: 8, color: Constants.whiteAppColor),
+                            //   // context.watch<CartItemsCubit>().cartLength ?? "",
+                            //   // style: const TextStyle(color: Colors.white),
+                            // ),
+                            child: Card(
+                              child: SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: Center(
+                                  child: SvgPicture.asset(
+                                    tempPic,
+                                    height: 25,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      const Spacer(),
-                      SvgPicture.asset(
-                        tempPic,
-                        height: 50,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextField(
-                    decoration: Constants.setTextInputDecoration(
-                        prefixIcon: SvgPicture.asset(
-                          tempPic,
-                          height: 20,
-                        ),
-                        hintText: "ابحث باسم الناصح أو التخصص ...."),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-
-                  ///
-                  ///
-                  ///
-                  //////////////////// Slider
-                  ///
-                  ///
-                  ///
-                  Container(
-                    height: 140,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        gradient: const LinearGradient(colors: [
-                          Constants.primaryAppColor,
-                          Constants.whiteAppColor,
-                        ], stops: [
-                          0,
-                          0.6
-                        ]),
-                        boxShadow: [
-                          BoxShadow(
-                              offset: Offset(0, 6),
-                              blurRadius: 10,
-                              spreadRadius: -5,
-                              blurStyle: BlurStyle.normal,
-                              color: Color(0XFF5C5E6B1A).withOpacity(0.1)),
+                          const Spacer(),
+                          SvgPicture.asset(
+                            tempPic,
+                            height: 50,
+                          ),
                         ],
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        PageView(
-                          controller: controller,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      TextField(
+                        decoration: Constants.setTextInputDecoration(
+                            prefixIcon: SvgPicture.asset(
+                              tempPic,
+                              height: 20,
+                            ),
+                            hintText: "ابحث باسم الناصح أو التخصص ...."),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+
+                      ///
+                      ///
+                      ///
+                      //////////////////// Slider
+                      ///
+                      ///
+                      ///
+                      Container(
+                        height: 140,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            gradient: const LinearGradient(colors: [
+                              Constants.primaryAppColor,
+                              Constants.whiteAppColor,
+                            ], stops: [
+                              0,
+                              0.6
+                            ]),
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: const Offset(0, 6),
+                                  blurRadius: 10,
+                                  spreadRadius: -5,
+                                  blurStyle: BlurStyle.normal,
+                                  color: const Color(0XFF5C5E6B1A).withOpacity(0.1)),
+                            ],
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
                           children: [
-                            homeController.pageViewItem(),
-                            homeController.pageViewItem(),
-                            homeController.pageViewItem()
+                            PageView(
+                                controller: controller,
+                                children: homeState.response!.data!
+                                    .map((e) =>
+                                        homeController.pageViewItem(e.image!))
+                                    .toList()
+                                ),
+                            Container(
+                              height: 20,
+                              width: 70,
+                              child: Center(
+                                child: SmoothPageIndicator(
+                                  onDotClicked: (index) {
+                                    if (_currentPage < 2) {
+                                      _currentPage++;
+                                    } else {
+                                      _currentPage = 0;
+                                    }
+
+                                    controller.animateToPage(
+                                      _currentPage,
+                                      duration:
+                                          const Duration(milliseconds: 350),
+                                      curve: Curves.easeIn,
+                                    );
+                                  },
+                                  controller: controller,
+                                  count: homeState.response!.data!.length,
+                                  effect: ExpandingDotsEffect(
+                                      activeDotColor: Constants.primaryAppColor,
+                                      dotColor: Constants.primaryAppColor
+                                          .withOpacity(0.2),
+                                      spacing: 5,
+                                      dotWidth: 8,
+                                      dotHeight: 4),
+                                ),
+                              ),
+                            )
                           ],
                         ),
-                        Container(
-                          height: 20,
-                          width: 70,
-                          child: Center(
-                            child: SmoothPageIndicator(
-                              onDotClicked: (index) {
-                                if (_currentPage < 2) {
-                                  _currentPage++;
-                                } else {
-                                  _currentPage = 0;
-                                }
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
 
-                                controller.animateToPage(
-                                  _currentPage,
-                                  duration: const Duration(milliseconds: 350),
-                                  curve: Curves.easeIn,
-                                );
-                              },
-                              controller: controller,
-                              count: 3,
-                              effect: ExpandingDotsEffect(
-                                  activeDotColor: Constants.primaryAppColor,
-                                  dotColor: Constants.primaryAppColor
-                                      .withOpacity(0.2),
-                                  spacing: 5,
-                                  dotWidth: 8,
-                                  dotHeight: 4),
+                      ///
+                      ///
+                      ///
+                      ///
+                      ///////////////////// Filter bar
+                      ///
+                      ///
+                      ///
+                      ///
+                      Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(top: 8),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                                // scrollDirection: Axis.horizontal,
+                                children: homeController.categories
+                                    .map(
+                                      (e) => InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            homeController.categories
+                                                .forEach((element) {
+                                              element["isSelected"] = false;
+                                            });
+                                            e["isSelected"] = true;
+                                          });
+                                        },
+                                        child: Container(
+                                            margin:
+                                                const EdgeInsets.only(left: 16),
+                                            child: Text(
+                                              e["name"],
+                                              style: e["isSelected"] == true
+                                                  ? const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontFamily:
+                                                          Constants.mainFont,
+                                                      fontSize: 16)
+                                                  : const TextStyle(
+                                                      fontFamily:
+                                                          Constants.mainFont),
+                                            )),
+                                      ),
+                                    )
+                                    .toList()),
+                          )),
+
+                      ///
+                      ///
+                      ///
+                      /////////////////////////////// Advisor Card
+                      ///
+                      ///
+                      ///
+
+                      // SizedBox(
+                      //   height: 8,
+                      // ),
+                      BlocBuilder<AdvisorListCubit, AdvisorState>(
+                          builder: (context, advisorState) {
+                        if (advisorState is AdvisorListLoading) {
+                          return  Center(
+                            child: Column(
+                              children: const [
+                                SizedBox(height: 120,),
+                                CircularProgressIndicator(),
+                              ],
                             ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-
-                  ///
-                  ///
-                  ///
-                  ///
-                  ///////////////////// Filter bar
-                  ///
-                  ///
-                  ///
-                  ///
-                  Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(top: 8),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                            // scrollDirection: Axis.horizontal,
-                            children: homeController.categories
-                                .map(
-                                  (e) => InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        homeController.categories
-                                            .forEach((element) {
-                                          element["isSelected"] = false;
-                                        });
-                                        e["isSelected"] = true;
-                                      });
-                                    },
-                                    child: Container(
-                                        margin: const EdgeInsets.only(left: 16),
-                                        child: Text(
-                                          e["name"],
-                                          style: e["isSelected"] == true
-                                              ? const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontFamily:
-                                                      Constants.mainFont,
-                                                  fontSize: 16)
-                                              : const TextStyle(
-                                                  fontFamily:
-                                                      Constants.mainFont),
-                                        )),
-                                  ),
-                                )
-                                .toList()),
-                      )),
-
-                  ///
-                  ///
-                  ///
-                  /////////////////////////////// Advisor Card
-                  ///
-                  ///
-                  ///
-
-                  // SizedBox(
-                  //   height: 8,
-                  // ),
-                  Expanded(
-                    child: ListView.builder(
-                      // shrinkWrap: true,
-                      // physics: BouncingScrollPhysics(),
-                      itemCount: 6,
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            MyApplication.navigateTo(context, AdvisorScreen());
-                          },
-                          child: AdvisorCard()),
-                    ),
-                  ),
-                ],
-              ))),
-    );
+                          );
+                        } else if (advisorState is AdvisorListLoaded) {
+                          return Expanded(
+                            child: ListView.builder(
+                              // shrinkWrap: true,
+                              // physics: BouncingScrollPhysics(),
+                              itemCount:
+                                  advisorState.adListResponse?.data?.length ??
+                                      0,
+                              itemBuilder: (context, index) => InkWell(
+                                  onTap: () {
+                                    MyApplication.navigateTo(
+                                        context,
+                                        AdvisorScreen(
+                                            id: advisorState.adListResponse!
+                                                .data![index].id!));
+                                  },
+                                  child: AdvisorCard(
+                                    description: advisorState.adListResponse!
+                                        .data![index].description!,
+                                    info: advisorState
+                                        .adListResponse!.data![index].info!,
+                                    image: advisorState
+                                        .adListResponse!.data![index].avatar!,
+                                    name: advisorState
+                                        .adListResponse!.data![index].fullName!,
+                                    firstCategory: advisorState.adListResponse!
+                                        .data![index].category![0].id!
+                                        .toString(),
+                                    // secondCategory: advisorState.adListResponse!.data![index].category![1].name! ,
+                                    secondCategory: "هندسي",
+                                    // thirdCategory: advisorState.adListResponse!.data![index].category![2].name! ,
+                                    rate: "3",
+                                  )),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      })
+                    ],
+                  ));
+            } else if (homeState is HomeSliderError) {
+              return const SizedBox();
+            } else {
+              return const SizedBox();
+            }
+          }),
+        ));
   }
 }

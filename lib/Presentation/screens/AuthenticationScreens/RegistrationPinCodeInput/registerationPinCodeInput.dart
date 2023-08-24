@@ -51,7 +51,7 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                             const SizedBox(
                               width: 16,
                             ),
-                            const goBack()
+                            const GoBack()
                           ],
                         ),
                         const SizedBox(

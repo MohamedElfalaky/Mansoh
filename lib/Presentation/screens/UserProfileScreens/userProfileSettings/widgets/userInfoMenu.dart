@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nasooh/app/Style/Icons.dart';
 
 import '../../../../../app/constants.dart';
 import '../../../../../app/keys.dart';
@@ -23,18 +24,18 @@ class SettingsMenuItem {
 class SettingsMenuItems {
   static SettingsMenuItem myOrders = SettingsMenuItem(
     title: getTranslated(Keys.navigatorKey.currentState!.context, "my_orders")!,
-    svg: SvgPicture.asset('assets/images/SVGs/order.svg', width: 24),
+    svg: SvgPicture.asset(ordersIcon, width: 24),
   );
   static SettingsMenuItem wallet = SettingsMenuItem(
     title: getTranslated(Keys.navigatorKey.currentState!.context, "my_wallet")!,
     svg: SvgPicture.asset(
-      'assets/images/SVGs/wallet.svg',
+      walletIcon,
     ),
   );
   static SettingsMenuItem settings = SettingsMenuItem(
     title: getTranslated(Keys.navigatorKey.currentState!.context, "settings")!,
     svg: SvgPicture.asset(
-      'assets/images/SVGs/settings.svg',
+      settingIcon,
     ),
   );
 
@@ -42,21 +43,21 @@ class SettingsMenuItems {
     title: getTranslated(
         Keys.navigatorKey.currentState!.context, "terms_conditions")!,
     svg: SvgPicture.asset(
-      'assets/images/SVGs/book.svg',
+      termsIcon,
     ),
   );
 
   static SettingsMenuItem support = SettingsMenuItem(
     title: getTranslated(Keys.navigatorKey.currentState!.context, "support")!,
     svg: SvgPicture.asset(
-      'assets/images/SVGs/help.svg',
+      techIcon,
     ),
   );
   static SettingsMenuItem nasouh = SettingsMenuItem(
     title:
         getTranslated(Keys.navigatorKey.currentState!.context, "know_nasouh")!,
     svg: SvgPicture.asset(
-      'assets/images/SVGs/ask.svg',
+      knowAboutIcon,
     ),
   );
   static final all = <SettingsMenuItem>[

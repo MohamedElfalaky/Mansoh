@@ -1,6 +1,4 @@
-
-
-import '../../../models/user_model.dart';
+import '../../../models/Auth_models/login_model.dart';
 
 abstract class LoginState {}
 
@@ -9,7 +7,7 @@ class LoginInitial extends LoginState {}
 class LoginLoading extends LoginState {}
 
 class LoginLoaded extends LoginState {
-  UserModel? response;
+  LoginModel? response;
 
   LoginLoaded(this.response);
 }

@@ -25,7 +25,7 @@ class _UserWalletState extends State<UserWallet> {
         },
         child: SafeArea(
           child: Scaffold(
-            floatingActionButton: buildSaveButton("recharge_wallet"),
+            floatingActionButton: buildSaveButton(label: "recharge_wallet"),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
             resizeToAvoidBottomInset: false,
