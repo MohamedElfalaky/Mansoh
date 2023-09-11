@@ -155,7 +155,7 @@ class SharedPrefs {
     return sharedPrefs!.getString(keyUserPhoto) ?? "";
   }
 
-  String get fcmtoken => sharedPrefs!.getString(fcmkey) ?? "";
+  // String get fcmtoken => sharedPrefs!.getString(fcmkey) ?? "";
 
   setIsUnBoarded(bool value) {
     sharedPrefs!.setBool(keyUnBoarded, value);
@@ -219,6 +219,10 @@ class SharedPrefs {
 
   void removeToken() {
     sharedPrefs!.remove(keyToken);
+  }
+
+  void removeFCM() {
+    sharedPrefs!.remove(fCMToken);
   }
 
   void removeAmount() {

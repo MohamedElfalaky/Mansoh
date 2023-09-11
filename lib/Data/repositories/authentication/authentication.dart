@@ -18,7 +18,7 @@ class Auth {
           body: {
             'phone': '$phone',
             'password': '$pass',
-            'device_token': sharedPrefs.fcmtoken
+            'device': sharedPrefs.fCMToken,
           });
       Map<String, dynamic> responsemap = json.decode(response.body);
       if (response.statusCode == 200 && responsemap["success"] == true) {

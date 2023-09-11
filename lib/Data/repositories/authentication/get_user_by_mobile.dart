@@ -19,6 +19,7 @@ class GetUserByMobile{
           headers:headers,
           body: {
             'mobile': '$mobile',
+            'device': sharedPrefs.fCMToken,
           });
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
