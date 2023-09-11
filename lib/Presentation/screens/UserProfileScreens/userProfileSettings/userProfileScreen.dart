@@ -27,8 +27,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: customAppBar(
-            context: context,
+          appBar: customABarNoIcon(
             txt: getTranslated(context, "personal_profile")!,
           ),
           body: Padding(

@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:http/http.dart' as http;
 import '../../../../app/utils/myApplication.dart';
+import '../../../app/global.dart';
+import '../../../app/utils/sharedPreferenceClass.dart';
 import '../../models/home_models/home_slider_model.dart';
 
 class HomeSliderRepo {
@@ -12,6 +14,11 @@ class HomeSliderRepo {
     try {
       http.Response response = await http.get(
         Uri.parse('${Keys.baseUrl}/client/setting/home_slider/list'),
+        headers: {
+          'Accept': 'application/json',
+          'lang': selectedLang!,
+          'Authorization': 'Bearer ${sharedPrefs.getToken()}',
+        },
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {

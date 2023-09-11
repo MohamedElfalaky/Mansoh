@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
+import 'package:nasooh/app/Style/sizes.dart';
 
 import '../../../../app/utils/myApplication.dart';
+import '../../../app/Style/Icons.dart';
 import '../../../app/constants.dart';
+import '../../../app/global.dart';
+import '../../../app/utils/lang/language_constants.dart';
+import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../main.dart';
+import '../Home/Home.dart';
 import '../UserProfileScreens/UserProfileEdit/widgets/shared.dart';
+import '../UserProfileScreens/userProfileSettings/userProfileScreen.dart';
 
 class UserSettings extends StatefulWidget {
   const UserSettings({super.key});
@@ -14,6 +22,8 @@ class UserSettings extends StatefulWidget {
 }
 
 class _UserSettingsState extends State<UserSettings> {
+  int groupValue = 1;
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -24,6 +34,8 @@ class _UserSettingsState extends State<UserSettings> {
         },
         child: SafeArea(
           child: Scaffold(
+            appBar: customAppBar(
+                context: context, txt: getTranslated(context, "settings")!),
             floatingActionButton: buildSaveButton(label: "save"),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
@@ -36,71 +48,94 @@ class _UserSettingsState extends State<UserSettings> {
                 ),
                 child: Column(
                   children: [
-                    const SizedBox(height: 40),
-                    Back(header: "wallet"),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              "assets/images/SVGs/translate.svg",
-                              height: 20,
-                              width: 20,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Text("تغيير اللغة ",
-                                style: Constants.mainTitleFont),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Row(
-                              children: [
-                                Radio(
-                                  activeColor: Constants.primaryAppColor,
-                                  value: 1,
-                                  groupValue: 1,
-                                  onChanged: (value) {},
-                                ),
-                                const Text("العربية",
-                                    style: Constants.mainTitleFont),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Radio(
-                                  activeColor: Constants.primaryAppColor,
-                                  value: 2,
-                                  groupValue: 1,
-                                  onChanged: (value) {},
-                                ),
-                                const Text("English",
-                                    style: Constants.mainTitleFont),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
                     const SizedBox(
                       height: 20,
                     ),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          languageIcon,
+                          height: 20,
+                          width: 20,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Text("تغيير اللغة ",
+                            style: Constants.mainTitleFont),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Radio(
+                              activeColor: Constants.primaryAppColor,
+                              value: 'ar',
+                              onChanged: (val) async {
+                                print("selected lang is ${selectedLang}");
+                                Locale _locale = await setLocale("ar");
+                                // oldLang = "en";
+                                sharedPrefs.setLanguage("ar");
+                                print(sharedPrefs.getLanguage());
+                                setState(() {
+                                  headers = {
+                                    'Accept': 'application/json',
+                                    'lang': "ar"
+                                  };
+                                  selectedLang = "ar";
+                                  MyApp.setLocale(context, _locale);
+                                });
+                              },
+                              groupValue: selectedLang,
+                            ),
+                            const Text("العربية",
+                                style: Constants.mainTitleFont),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Radio(
+                                activeColor: Constants.primaryAppColor,
+                                value: 'en',
+                                groupValue: selectedLang,
+                                onChanged: (val) async {
+                                  print("selected lang is ${selectedLang}");
+                                  Locale _locale = await setLocale("en");
+                                  sharedPrefs.setLanguage("en");
+                                  print(sharedPrefs.getLanguage());
+                                  setState(() {
+                                    headers = {
+                                      'Accept': 'application/json',
+                                      'lang': "en"
+                                    };
+                                    selectedLang = "en";
+
+                                    MyApp.setLocale(context, _locale);
+                                  });
+                                }),
+                            const Text("English",
+                                style: Constants.mainTitleFont),
+                          ],
+                        )
+                      ],
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Divider(),
+                    ),
                     ListTile(
+                      contentPadding: EdgeInsets.zero,
                       visualDensity: const VisualDensity(
                         horizontal: -4,
                         vertical: -4,
                       ),
                       leading: SvgPicture.asset(
-                        "assets/images/SVGs/bill.svg",
+                        notificationIcon,
                         height: 20,
                         width: 20,
                       ),
@@ -115,23 +150,22 @@ class _UserSettingsState extends State<UserSettings> {
                         onChanged: (value) {},
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Divider(),
                     ),
                     ListTile(
+                      contentPadding: EdgeInsets.zero,
                       visualDensity: const VisualDensity(
                         horizontal: -4,
                         vertical: -4,
                       ),
-                      leading: const Icon(
-                        Icons.supervised_user_circle,
-                        color: Constants.primaryAppColor,
-                      ),
+                      leading: SvgPicture.asset(deleteUser),
                       title: Text("حذف الحساب ",
                           style: Constants.mainTitleFont.copyWith(
-                            letterSpacing: 0,
-                            wordSpacing: 0,
-                          )),
+                              letterSpacing: 0,
+                              wordSpacing: 0,
+                              color: Colors.red)),
                     ),
                   ],
                 ),

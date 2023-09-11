@@ -1,3 +1,4 @@
+import '../../models/advice_screen_models/show_advice_model.dart';
 import '../../models/send_advise_model.dart';
 
 abstract class SendAdviseState {}
@@ -7,7 +8,7 @@ class SendAdviseInitial extends SendAdviseState {}
 class SendAdviseLoading extends SendAdviseState {}
 
 class SendAdviseLoaded extends SendAdviseState {
-  SendAdviseModel? response;
+  ShowAdviceModel? response;
 
   SendAdviseLoaded(this.response);
 }

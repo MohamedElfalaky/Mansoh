@@ -14,7 +14,7 @@ class CheckCodeRepo {
     try {
       http.Response response = await http.post(
           Uri.parse('${Keys.baseUrl}/client/check_mobile/code'),
-          headers: GlobalVars().headers,
+          headers: headers,
           body: {
             'mobile': '$mobile',
             'code': '$code',

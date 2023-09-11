@@ -14,7 +14,7 @@ class Auth {
   Future<LoginModel?> login({String? phone, String? pass}) async {
     try {
       var response = await http.post(Uri.parse('${Keys.baseUrl}/login'),
-          headers: GlobalVars().headers,
+          headers: headers,
           body: {
             'phone': '$phone',
             'password': '$pass',

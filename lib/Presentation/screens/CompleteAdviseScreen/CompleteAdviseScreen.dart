@@ -130,23 +130,20 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                   //     );
                 }
               },
-
-
               builder: (context, state) => state is PayAdviceLoading
                   ? const CircularProgressIndicator()
-                  :
-              Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              height: 50,
-              child: MyButton(
-                onPressedHandler: () {
-                  context.read<PayAdviceCubit>().getPay(
-                     paymentId: 1,adviceId: widget.adviceId
-                      );
-                },
-                txt: "إتمام الطلب",
-                isBold: true,
-              ))),
+                  : Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      height: 50,
+                      child: MyButton(
+                        onPressedHandler: () {
+                          context
+                              .read<PayAdviceCubit>()
+                              .getPay(paymentId: 2, adviceId: widget.adviceId);
+                        },
+                        txt: "إتمام الطلب",
+                        isBold: true,
+                      ))),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           resizeToAvoidBottomInset: false,
@@ -181,16 +178,15 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                 return CompleteAdvisorCard(
                                   imagePhoto: showAdviceState
                                           .response?.data?.adviser?.avatar ??
-                                      "",
+                                      "https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt02cede9c4cd5d47e/639f5ff3c4c05667aeedad22/GettyImages-1450108664.jpg",
                                   name: showAdviceState
                                           .response?.data?.adviser?.fullName ??
                                       "",
                                   moneyPut:
-                                      showAdviceState.response?.data?.price ??
-                                          "",
-                                  taxVal: showAdviceState.response?.data?.tax
-                                          ?.toStringAsFixed(2) ??
-                                      "",
+                                      showAdviceState.response!.data!.price.toString() ??
+                                          "0",
+                                  taxVal:
+                                      showAdviceState.response?.data?.tax?.toStringAsFixed(2) ?? "",
                                 );
                               } else {
                                 return const SizedBox();
@@ -205,19 +201,30 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                             ),
                             BlocBuilder<GetByTokenCubit, GetByTokenState>(
                                 builder: (context, getByTokenState) {
-                              // if (showAdviceState is ShowAdviceLoading) {
-                              //   return const Center(
-                              //     child: CircularProgressIndicator(),
-                              //   );
-                              // } else
-                                if (getByTokenState is GetByTokenLoaded) {
-                                print(
-                                    ".response?.data? is ${getByTokenState.response?.data?.wallet}");
-                                return PaymentCard(
-                                  payMethod:
-                                      state.response?.data?[0].name ?? "",
-                                  walletVal: getByTokenState.response?.data?.wallet??"",
+                              if (getByTokenState is GetByTokenLoading) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
                                 );
+                              } else
+                              if (getByTokenState is GetByTokenLoaded) {
+                                print(
+                                    ".response?.data? is ${getByTokenState.response?.data.toString()}");
+                                return Expanded(
+                                  child: ListView.builder(
+                                      itemCount: state.response?.data?.length??0,
+                                      itemBuilder: (context , int index) =>
+
+                                      PaymentCard(
+                                        payMethod:
+                                        state.response?.data?[index].name ?? "",
+                                        walletVal:
+                                        getByTokenState.response?.data?.wallet ??
+                                            "",
+                                      )),
+                                )
+
+
+                                ;
                               } else {
                                 return const SizedBox();
                               }

@@ -1,65 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:nasooh/Presentation/screens/UserSettingsScreen/UserSettings.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 
 import '../../../../../app/constants.dart';
 import '../../../../../app/keys.dart';
 import '../../../../../app/utils/lang/language_constants.dart';
+import '../../../TermsConditionsScreen/TermsConditionsScreen.dart';
 
 class SettingsMenuItem {
   final String title;
   final SvgPicture svg;
+  final void Function() onTap;
   final SvgPicture? trailingSvg = SvgPicture.asset(
     'assets/images/SVGs/arrow.svg',
     // width: 24,
   );
   bool? hasTrailingSvg = true;
 
-  SettingsMenuItem({
-    required this.title,
-    required this.svg,
-  });
+  SettingsMenuItem(
+      {required this.title, required this.svg, required this.onTap});
 }
 
 class SettingsMenuItems {
   static SettingsMenuItem myOrders = SettingsMenuItem(
-    title: getTranslated(Keys.navigatorKey.currentState!.context, "my_orders")!,
-    svg: SvgPicture.asset(ordersIcon, width: 24),
-  );
+      title:
+          getTranslated(Keys.navigatorKey.currentState!.context, "my_orders")!,
+      svg: SvgPicture.asset(ordersIcon, width: 24),
+      onTap: () {});
   static SettingsMenuItem wallet = SettingsMenuItem(
-    title: getTranslated(Keys.navigatorKey.currentState!.context, "my_wallet")!,
-    svg: SvgPicture.asset(
-      walletIcon,
-    ),
-  );
+      title:
+          getTranslated(Keys.navigatorKey.currentState!.context, "my_wallet")!,
+      svg: SvgPicture.asset(
+        walletIcData,
+      ),
+      onTap: () {});
   static SettingsMenuItem settings = SettingsMenuItem(
-    title: getTranslated(Keys.navigatorKey.currentState!.context, "settings")!,
-    svg: SvgPicture.asset(
-      settingIcon,
-    ),
-  );
+      title:
+          getTranslated(Keys.navigatorKey.currentState!.context, "settings")!,
+      svg: SvgPicture.asset(
+        settingIcon,
+      ),
+      onTap: () {
+        Get.to(() => const UserSettings());
+      });
 
   static SettingsMenuItem terms = SettingsMenuItem(
-    title: getTranslated(
-        Keys.navigatorKey.currentState!.context, "terms_conditions")!,
-    svg: SvgPicture.asset(
-      termsIcon,
-    ),
-  );
+      title: getTranslated(
+          Keys.navigatorKey.currentState!.context, "terms_conditions")!,
+      svg: SvgPicture.asset(
+        termsIcon,
+      ),
+      onTap: () {
+        Get.to(() => const TermsConditionsScreen());
+      });
 
   static SettingsMenuItem support = SettingsMenuItem(
-    title: getTranslated(Keys.navigatorKey.currentState!.context, "support")!,
-    svg: SvgPicture.asset(
-      techIcon,
-    ),
-  );
+      title: getTranslated(Keys.navigatorKey.currentState!.context, "support")!,
+      svg: SvgPicture.asset(
+        techIcon,
+      ),
+      onTap: () {});
   static SettingsMenuItem nasouh = SettingsMenuItem(
-    title:
-        getTranslated(Keys.navigatorKey.currentState!.context, "know_nasouh")!,
-    svg: SvgPicture.asset(
-      knowAboutIcon,
-    ),
-  );
+      title: getTranslated(
+          Keys.navigatorKey.currentState!.context, "know_nasouh")!,
+      svg: SvgPicture.asset(
+        knowAboutIcon,
+      ),
+      onTap: () {});
   static final all = <SettingsMenuItem>[
     SettingsMenuItems.myOrders,
     SettingsMenuItems.wallet,
@@ -83,7 +92,7 @@ Widget buildMenuItem(SettingsMenuItem menuItem) => ListTileTheme(
         leading: menuItem.svg,
         trailing: menuItem.trailingSvg,
         onTap: () {
-          // onSelectedItem(menuItem);
+          menuItem.onTap();
         },
       ),
     );

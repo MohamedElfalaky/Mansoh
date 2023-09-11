@@ -16,7 +16,7 @@ class GetUserByMobile{
     try {
       http.Response response = await http.post(
           Uri.parse('${Keys.baseUrl}/client/auth/getUserByMobile'),
-          headers: GlobalVars().headers,
+          headers:headers,
           body: {
             'mobile': '$mobile',
           });

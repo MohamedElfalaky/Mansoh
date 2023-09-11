@@ -30,7 +30,7 @@ Locale _locale(String languageCode) {
       return const Locale(ARABIC, "SA");
 
     default:
-      return const Locale(ENGLISH, 'US');
+      return const Locale(ARABIC, 'SA');
   }
 }
 

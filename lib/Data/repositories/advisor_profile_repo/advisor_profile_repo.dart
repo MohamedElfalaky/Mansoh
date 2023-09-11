@@ -15,7 +15,7 @@ class AdvisorProfileRepo {
     try {
       http.Response response = await http.get(
         Uri.parse('${Keys.baseUrl}/client/adviser/profile/$id'),
-        headers: GlobalVars().headers,
+        headers: headers,
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {

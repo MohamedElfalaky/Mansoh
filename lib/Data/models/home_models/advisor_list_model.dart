@@ -43,6 +43,7 @@ class Datum {
   String? info;
   String? description;
   List<Category>? category;
+  String? rate;
 
   Datum({
     this.id,
@@ -51,6 +52,7 @@ class Datum {
     this.info,
     this.description,
     this.category,
+    this.rate,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -60,6 +62,7 @@ class Datum {
     info: json["info"],
     description: json["description"],
     category: json["category"] == null ? [] : List<Category>.from(json["category"]!.map((x) => Category.fromJson(x))),
+    rate: json["rate"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -69,33 +72,26 @@ class Datum {
     "info": info,
     "description": description,
     "category": category == null ? [] : List<dynamic>.from(category!.map((x) => x.toJson())),
+    "rate": rate,
   };
 }
 
 class Category {
   int? id;
   String? name;
-  List<Category>? children;
-  int? parentId;
 
   Category({
     this.id,
     this.name,
-    this.children,
-    this.parentId,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
     id: json["id"],
     name: json["name"],
-    children: json["children"] == null ? [] : List<Category>.from(json["children"]!.map((x) => Category.fromJson(x))),
-    parentId: json["parent_id"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
-    "children": children == null ? [] : List<dynamic>.from(children!.map((x) => x.toJson())),
-    "parent_id": parentId,
   };
 }

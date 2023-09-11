@@ -13,7 +13,7 @@ class MobRepo {
     try {
       http.Response response = await http.post(
           Uri.parse('${Keys.baseUrl}/client/check_mobile/cheek'),
-          headers: GlobalVars().headers,
+          headers: headers,
           body: {
             'mobile': '$phone',
           });

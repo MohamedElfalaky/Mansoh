@@ -25,6 +25,7 @@ class GetByTokenRepo {
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         print("get profile data ${response.body}" );
         final userdata = getByTokenModelFromJson(responseMap);
+        sharedPrefs.setToken(userdata.data!.token!);
         return userdata;
       } else {
         MyApplication.showToastView(message: responseMap["message"]);
@@ -39,9 +40,10 @@ class GetByTokenRepo {
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e) {
+    } on Error catch (e,st) {
       if (kDebugMode) {
         print(e);
+        print(st);
         MyApplication.showToastView(message: e.toString());
       }
     }

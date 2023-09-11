@@ -4,7 +4,25 @@ import '../../../../../app/constants.dart';
 import '../../UserProfileEdit/widgets/shared.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key});
+  const OrderCard(
+      {super.key,
+      required this.networkImage,
+      required this.adviceName,
+      required this.dateText,
+      required this.price,
+      required this.info,
+      required this.adviserName,
+      required this.id,
+      required this.rateData});
+
+  final String networkImage;
+  final String adviceName;
+  final String dateText;
+  final String id;
+  final String price;
+  final String adviserName;
+  final String info;
+  final String rateData;
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +54,13 @@ class OrderCard extends StatelessWidget {
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
-                                "طلب نصيحة حول اختيار الجامعة المناسبة\n طلب نصيحة حول اختيار...",
+                                adviceName,
                                 style: Constants.secondaryTitleFont,
                               ),
                               Text(
-                                "12/2/2022 - 10:46 ص",
+                                dateText,
                                 style: Constants.subtitleRegularFont,
                               ),
                             ],
@@ -55,7 +73,7 @@ class OrderCard extends StatelessWidget {
                             height: 55,
                           ),
                           Text(
-                            "#738477202",
+                           id,
                             style: Constants.subtitleRegularFont
                                 .copyWith(letterSpacing: 0, wordSpacing: 0),
                           )
@@ -75,7 +93,7 @@ class OrderCard extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      "75",
+                      price,
                       style: Constants.secondaryTitleFont.copyWith(
                         color: Constants.primaryAppColor,
                       ),
@@ -103,29 +121,31 @@ class OrderCard extends StatelessWidget {
                     visualDensity:
                         const VisualDensity(horizontal: -4, vertical: 0),
                     dense: true,
-                    leading: const CircleAvatar(
+                    leading: CircleAvatar(
                       radius: 25,
                       backgroundColor: Colors.black87,
                       foregroundColor: Colors.black87,
                       child: CircleAvatar(
                         radius: 24,
-                        backgroundImage: NetworkImage(
-                            "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"),
+                        backgroundImage: networkImage == ""
+                            ? NetworkImage(
+                                "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png")
+                            : NetworkImage(networkImage),
                       ),
                     ),
-                    title: const Text(
-                      "محمد العربي",
+                    title: Text(
+                      adviserName,
                       style: Constants.secondaryTitleFont,
                     ),
-                    subtitle: const Text(
-                      "مستشار تخصصي",
+                    subtitle:  Text(
+                     info,
                       style: Constants.subtitleRegularFont,
                     ),
                     trailing: FittedBox(
                       child: Row(
-                        children: const [
+                        children: [
                           Text(
-                            "4.5",
+                            rateData,
                             style: Constants.secondaryTitleFont,
                           ),
                           SizedBox(

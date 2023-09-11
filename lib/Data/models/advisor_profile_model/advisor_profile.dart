@@ -48,6 +48,8 @@ class Data {
   String? avatar;
   String? description;
   String? fullName;
+  String? rate;
+  int? adviceCount;
   String? info;
   String? experienceYear;
   List<Category>? category;
@@ -58,6 +60,8 @@ class Data {
     this.avatar,
     this.description,
     this.fullName,
+    this.rate,
+    this.adviceCount,
     this.info,
     this.experienceYear,
     this.category,
@@ -70,6 +74,8 @@ class Data {
         description: json["description"],
         fullName: json["full_name"],
         info: json["info"],
+        rate: json["rate"],
+        adviceCount: json["advice_count"],
         experienceYear: json["experience_year"],
         category: json["category"] == null
             ? []

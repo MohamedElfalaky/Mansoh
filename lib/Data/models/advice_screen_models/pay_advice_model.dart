@@ -39,11 +39,11 @@ class PayAdviceModel {
 class Data {
   int? id;
   Adviser? adviser;
-  String? price;
+  int? price;
   double? tax;
   double? total;
   Status? status;
-  List<dynamic>? documents;
+  List<Chat>? chat;
 
   Data({
     this.id,
@@ -52,7 +52,7 @@ class Data {
     this.tax,
     this.total,
     this.status,
-    this.documents,
+    this.chat,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -62,7 +62,7 @@ class Data {
     tax: json["tax"]?.toDouble(),
     total: json["total"]?.toDouble(),
     status: json["status"] == null ? null : Status.fromJson(json["status"]),
-    documents: json["documents"] == null ? [] : List<dynamic>.from(json["documents"]!.map((x) => x)),
+    chat: json["chat"] == null ? [] : List<Chat>.from(json["chat"]!.map((x) => Chat.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -72,7 +72,7 @@ class Data {
     "tax": tax,
     "total": total,
     "status": status?.toJson(),
-    "documents": documents == null ? [] : List<dynamic>.from(documents!.map((x) => x)),
+    "chat": chat == null ? [] : List<dynamic>.from(chat!.map((x) => x.toJson())),
   };
 }
 
@@ -133,5 +133,85 @@ class Status {
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
+  };
+}
+
+class Chat {
+  int? id;
+  dynamic adviser;
+  Client? client;
+  String? message;
+  String? mediaType;
+  List<Document>? document;
+
+  Chat({
+    this.id,
+    this.adviser,
+    this.client,
+    this.message,
+    this.mediaType,
+    this.document,
+  });
+
+  factory Chat.fromJson(Map<String, dynamic> json) => Chat(
+    id: json["id"],
+    adviser: json["adviser"],
+    client: json["client"] == null ? null : Client.fromJson(json["client"]),
+    message: json["message"],
+    mediaType: json["media_type"],
+    document: json["document"] == null ? [] : List<Document>.from(json["document"]!.map((x) => Document.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "adviser": adviser,
+    "client": client?.toJson(),
+    "message": message,
+    "media_type": mediaType,
+    "document": document == null ? [] : List<dynamic>.from(document!.map((x) => x.toJson())),
+  };
+}
+
+class Client {
+  int? id;
+  String? avatar;
+  String? fullName;
+
+  Client({
+    this.id,
+    this.avatar,
+    this.fullName,
+  });
+
+  factory Client.fromJson(Map<String, dynamic> json) => Client(
+    id: json["id"],
+    avatar: json["avatar"],
+    fullName: json["full_name"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "avatar": avatar,
+    "full_name": fullName,
+  };
+}
+
+class Document {
+  int? id;
+  String? file;
+
+  Document({
+    this.id,
+    this.file,
+  });
+
+  factory Document.fromJson(Map<String, dynamic> json) => Document(
+    id: json["id"],
+    file: json["file"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "file": file,
   };
 }

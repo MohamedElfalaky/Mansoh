@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "952220104497",
+    "project_id": "clientnase7",
+    "storage_bucket": "clientnase7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952220104497:android:91bfe3d2d6da1d5f42a210",
+        "android_client_info": {
+          "package_name": "com.lundev.nasooh.nasooh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALJBRda-LU8LtN5Fg30ywPOE-nkdQ0ZCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

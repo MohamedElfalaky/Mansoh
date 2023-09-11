@@ -72,9 +72,12 @@ class AdvisorCard extends StatelessWidget {
                       style: Constants.secondaryTitleFont,
                     ),
                   ),
-                  Text(
-                    info,
-                    style: Constants.subtitleFont,
+                  SizedBox(
+                    width: width(context) * 0.6,
+                    child: Text(
+                      info,
+                      style: Constants.subtitleFont,
+                    ),
                   ),
                   const SizedBox(
                     height: 8,
@@ -95,7 +98,7 @@ class AdvisorCard extends StatelessWidget {
                             color: const Color(0XFFEEEEEE)),
                         child: Text(
                           firstCategory,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 10,
                               fontFamily: Constants.mainFont,
                               color: Color(0XFF444444)),
@@ -111,7 +114,7 @@ class AdvisorCard extends StatelessWidget {
                             color: const Color(0XFFEEEEEE)),
                         child: Text(
                           secondCategory,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 10,
                               fontFamily: Constants.mainFont,
                               color: Color(0XFF444444)),
@@ -125,7 +128,7 @@ class AdvisorCard extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: const Color(0XFFEEEEEE)),
-                        child: Text("متخصص",
+                        child: const Text("متخصص",
                           // thirdCategory,
                           style: TextStyle(
                               fontSize: 10,

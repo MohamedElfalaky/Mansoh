@@ -209,7 +209,7 @@ class SharedPrefs {
     sharedPrefs!.remove(cartamount);
   }
 
-  setfcmtoken(String value) {
+  setFCM(String value) {
     sharedPrefs!.setString(fcmkey, value);
   }
 

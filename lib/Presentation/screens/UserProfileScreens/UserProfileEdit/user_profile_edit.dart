@@ -67,7 +67,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
     Navigator.pop(context);
   }
 
-
   late AnimationController _animationController;
   late AnimationController _fadeController;
   final TextEditingController _phoneController = TextEditingController();
@@ -206,24 +205,24 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                             padding: const EdgeInsets.all(6),
                                             child: CircleAvatar(
                                               radius: width(context) * 0.19,
-                                              backgroundColor: Colors.transparent,
+                                              backgroundColor:
+                                                  Colors.transparent,
                                               backgroundImage:
-                                                  // sharedPrefs
-                                                  //             .getUserPhoto() !=
-                                                  //         "https://nasoh.app/Admin/public/images/test1.png"
-                                                  //     ?
-                                                  // NetworkImage(
-                                                  //   oldImage,
-                                                  // )
-                                                  // const AssetImage(
-                                                  //         'assets/images/PNG/no_profile_photo.png')
-                                                  //     :
+
+                                                  sharedPrefs.getUserPhoto() ==
+                                                          "" && regImage == null
+                                                      ? const AssetImage(
+                                                          'assets/images/PNG/no_profile_photo.png')
+                                                      :
                                                   regImage == null
-                                                      ? NetworkImage(sharedPrefs
-                                                              .getUserPhoto())
-                                                      : FileImage(
-                                                          File(regImage!.path),
-                                                        ) as ImageProvider,
+                                                          ? NetworkImage(
+                                                              sharedPrefs
+                                                                  .getUserPhoto())
+                                                          :
+                                                  FileImage(
+                                                              File(regImage!
+                                                                  .path),
+                                                            ) as ImageProvider,
                                             ))),
                                   ),
                                   Align(
@@ -232,32 +231,26 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                       onTap: () {
                                         showModalBottomSheet(
                                           context: context,
-                                          shape:
-                                          const RoundedRectangleBorder(
+                                          shape: const RoundedRectangleBorder(
                                             // <-- SEE HERE
-                                            borderRadius:
-                                            BorderRadius.vertical(
-                                              top:
-                                              Radius.circular(25.0),
+                                            borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(25.0),
                                             ),
                                           ),
                                           builder: (ctx) {
                                             return Container(
                                                 padding:
-                                                const EdgeInsets
-                                                    .all(18),
+                                                    const EdgeInsets.all(18),
                                                 // height: 100,
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
+                                                      CrossAxisAlignment.start,
                                                   mainAxisSize:
-                                                  MainAxisSize.min,
+                                                      MainAxisSize.min,
                                                   children: [
                                                     RowModalSheet(
                                                         txt: "كاميرا",
-                                                        imageIcon:
-                                                        cameraIcon,
+                                                        imageIcon: cameraIcon,
                                                         onPressed: () {
                                                           pickImage(
                                                               ImageSource
@@ -276,12 +269,10 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                                     Divider(),
                                                     RowModalSheet(
                                                       txt: "الاستديو",
-                                                      imageIcon:
-                                                      galleryIcon,
+                                                      imageIcon: galleryIcon,
                                                       onPressed: () {
                                                         pickImage(
-                                                            ImageSource
-                                                                .gallery,
+                                                            ImageSource.gallery,
                                                             ctx,
                                                             setState);
                                                         // inputImageName =
@@ -297,11 +288,9 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                                     Divider(),
                                                     RowModalSheet(
                                                       txt: "الغاء",
-                                                      imageIcon:
-                                                      closeIcon,
+                                                      imageIcon: closeIcon,
                                                       onPressed: () {
-                                                        Navigator.pop(
-                                                            context);
+                                                        Navigator.pop(context);
                                                       },
                                                     )
                                                   ],

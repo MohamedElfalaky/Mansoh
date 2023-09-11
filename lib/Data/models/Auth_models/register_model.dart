@@ -70,7 +70,7 @@ class Data {
     avatar: json["avatar"],
     email: json["email"],
     lang: json["lang"],
-    token: json["token"],
+    token: json["token"]??"",
     fullName: json["full_name"],
     mobile: json["mobile"],
     gender: json["gender"],

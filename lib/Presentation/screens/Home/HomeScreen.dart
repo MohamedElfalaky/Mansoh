@@ -14,6 +14,8 @@ import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../../Data/cubit/authentication/category_cubit/category_cubit.dart';
+import '../../../Data/cubit/authentication/category_cubit/category_state.dart';
 import '../../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../../Data/cubit/home/home_slider_cubit.dart';
 import '../../../Data/cubit/home/home_state.dart';
@@ -33,6 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final controller = PageController(initialPage: 0);
   int _currentPage = 0;
   Timer? _timer;
+
+// bool select = false ;
+
+  Future<void> getDataFromApi() async {
+    await context.read<CategoryCubit>().getCategories();
+    var profileCubit = CategoryCubit.get(context);
+    // select = profileCubit.categoryModel?.data?[0].selected??true;
+  }
 
   @override
   void initState() {
@@ -88,8 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
     context.read<HomeSliderCubit>().getDataHomeSlider();
-    // context.read<HomeSliderCubit>().getAdvisorList();
     context.read<AdvisorListCubit>().getAdvisorList();
+    getDataFromApi();
   }
 
   @override
@@ -160,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 40,
                                 child: Center(
                                   child: SvgPicture.asset(
-                                    tempPic,
+                                    notificationIcon,
                                     height: 25,
                                   ),
                                 ),
@@ -168,9 +178,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const Spacer(),
-                          SvgPicture.asset(
-                            tempPic,
-                            height: 50,
+                          Image.asset(
+                            logo,
+                            height: 55,
+                            width: 55,
+                            fit: BoxFit.cover,
                           ),
                         ],
                       ),
@@ -179,9 +191,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       TextField(
                         decoration: Constants.setTextInputDecoration(
-                            prefixIcon: SvgPicture.asset(
-                              tempPic,
-                              height: 20,
+                            prefixIcon: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: SvgPicture.asset(
+                                searchIcon,
+                              ),
                             ),
                             hintText: "ابحث باسم الناصح أو التخصص ...."),
                       ),
@@ -213,7 +228,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   blurRadius: 10,
                                   spreadRadius: -5,
                                   blurStyle: BlurStyle.normal,
-                                  color: const Color(0XFF5C5E6B1A).withOpacity(0.1)),
+                                  color: const Color(0XFF5C5E6B1A)
+                                      .withOpacity(0.1)),
                             ],
                             borderRadius: BorderRadius.circular(5)),
                         child: Stack(
@@ -224,9 +240,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: homeState.response!.data!
                                     .map((e) =>
                                         homeController.pageViewItem(e.image!))
-                                    .toList()
-                                ),
-                            Container(
+                                    .toList()),
+                            SizedBox(
                               height: 20,
                               width: 70,
                               child: Center(
@@ -269,49 +284,58 @@ class _HomeScreenState extends State<HomeScreen> {
                       ///
                       ///
                       ///////////////////// Filter bar
-                      ///
-                      ///
-                      ///
-                      ///
-                      Container(
-                          width: double.infinity,
-                          margin: const EdgeInsets.only(top: 8),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                                // scrollDirection: Axis.horizontal,
-                                children: homeController.categories
-                                    .map(
-                                      (e) => InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            homeController.categories
-                                                .forEach((element) {
-                                              element["isSelected"] = false;
-                                            });
-                                            e["isSelected"] = true;
-                                          });
-                                        },
-                                        child: Container(
-                                            margin:
-                                                const EdgeInsets.only(left: 16),
-                                            child: Text(
-                                              e["name"],
-                                              style: e["isSelected"] == true
-                                                  ? const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontFamily:
-                                                          Constants.mainFont,
-                                                      fontSize: 16)
-                                                  : const TextStyle(
-                                                      fontFamily:
-                                                          Constants.mainFont),
-                                            )),
-                                      ),
-                                    )
-                                    .toList()),
-                          )),
+                      BlocBuilder<CategoryCubit, CategoryState>(
+                          builder: (context, categoryState) {
+                        if (categoryState is CategoryLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (categoryState is CategoryLoaded) {
+                          final catList = categoryState.response?.data ?? [];
+                          return Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.only(top: 8),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                    // scrollDirection: Axis.horizontal,
+                                    children: catList
+                                        .map(
+                                          (e) => InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                catList.forEach((element) {
+                                                  element.selected = false;
+                                                });
+                                                e.selected = true;
+                                              });
+                                            },
+                                            child: Container(
+                                                margin: const EdgeInsets.only(
+                                                    left: 16),
+                                                child: Text(
+                                                  e.name ?? '',
+                                                  style: e.selected == true
+                                                      ? const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontFamily: Constants
+                                                              .mainFont,
+                                                          fontSize: 16)
+                                                      : const TextStyle(
+                                                          fontFamily: Constants
+                                                              .mainFont),
+                                                )),
+                                          ),
+                                        )
+                                        .toList()),
+                              ));
+                        } else if (categoryState is CategoryError) {
+                          return const SizedBox();
+                        } else {
+                          return const SizedBox();
+                        }
+                      }),
 
                       ///
                       ///
@@ -327,10 +351,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       BlocBuilder<AdvisorListCubit, AdvisorState>(
                           builder: (context, advisorState) {
                         if (advisorState is AdvisorListLoading) {
-                          return  Center(
+                          return Center(
                             child: Column(
                               children: const [
-                                SizedBox(height: 120,),
+                                SizedBox(
+                                  height: 120,
+                                ),
                                 CircularProgressIndicator(),
                               ],
                             ),

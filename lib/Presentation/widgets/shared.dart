@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nasooh/app/Style/sizes.dart';
 
 import '../../app/constants.dart';
 import '../../app/utils/lang/language_constants.dart';
@@ -89,10 +90,10 @@ class Back extends StatelessWidget {
 }
 
 customAppBar({
-  BuildContext? context,
+  required BuildContext context,
   required String txt,
-  bool endIcon =false ,
-  List<Widget>? actions
+  bool endIcon = false,
+  List<Widget>? actions,
 }) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(60.0),
@@ -104,7 +105,9 @@ customAppBar({
           ),
           Row(
             children: [
-              const SizedBox(width: 16,),
+              const SizedBox(
+                width: 16,
+              ),
               Container(
                 // margin: EdgeInsets.symmetric(horizontal: 10),
                 height: 40,
@@ -122,7 +125,7 @@ customAppBar({
                 ),
                 child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context!);
+                    Navigator.pop(context);
                   },
                   icon: SvgPicture.asset(
                     'assets/images/SVGs/back.svg',
@@ -150,7 +153,32 @@ customAppBar({
           ),
         ],
       ),
-      actions: endIcon ?actions  : [],
+      actions: endIcon ? actions : [],
+    ),
+  );
+}
+
+customABarNoIcon({
+  required String txt,
+}) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(60.0),
+    child: AppBar(
+      title: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+               const SizedBox(
+                width: 50,
+              ),
+              Text(txt),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }

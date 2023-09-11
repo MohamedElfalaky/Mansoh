@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nasooh/Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
+import '../../Data/cubit/authentication/category_cubit/category_cubit.dart';
 import '../../Data/cubit/authentication/check_code/check_code_cubit.dart';
 import '../../Data/cubit/authentication/city_cubit/city_cubit.dart';
 import '../../Data/cubit/authentication/country_cubit/country_cubit.dart';
@@ -13,9 +14,12 @@ import '../../Data/cubit/authentication/new_mob/mob_cubit.dart';
 import '../../Data/cubit/authentication/register_cubit/register_cubit.dart';
 import '../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../Data/cubit/home/home_slider_cubit.dart';
+import '../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_cubit.dart';
+import '../../Data/cubit/orders_cubit/orders_status_cubit/orders_status_cubit.dart';
 import '../../Data/cubit/profile/profile_cubit/profile_cubit.dart';
 import '../../Data/cubit/profile/update_profile_cubit/update_profile_cubit.dart';
 import '../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
+import '../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/pay_advice_cubit/pay_advice_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cubit.dart';
 
@@ -42,4 +46,8 @@ List<SingleChildWidget> providers = [
   BlocProvider<GetByTokenCubit>(create: (context) => GetByTokenCubit()),
   BlocProvider<ShowAdviceCubit>(create: (context) => ShowAdviceCubit()),
   BlocProvider<PayAdviceCubit>(create: (context) => PayAdviceCubit()),
+  BlocProvider<OrdersStatusCubit>(create: (context) => OrdersStatusCubit()),
+  BlocProvider<OrdersFiltersCubit>(create: (context) => OrdersFiltersCubit()),
+  BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
+  BlocProvider<PrivacyCubit>(create: (context) => PrivacyCubit()),
 ];

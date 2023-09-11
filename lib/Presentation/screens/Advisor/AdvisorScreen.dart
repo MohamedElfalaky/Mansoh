@@ -239,10 +239,10 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                     Constants.primaryAppColor,
                                                 borderRadius:
                                                     BorderRadius.circular(2)),
-                                            child: const Center(
+                                            child: Center(
                                                 child: Text(
-                                              "محامي عام",
-                                              style: TextStyle(
+                                                  allData.category?[index].name??"",
+                                              style: const TextStyle(
                                                   fontFamily:
                                                       Constants.mainFont,
                                                   color:
@@ -250,7 +250,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                   fontSize: 10),
                                             )),
                                           ),
-                                          itemCount: 30,
+                                          itemCount: allData.category?.length??0,
                                         ),
                                       ),
                                       Padding(
@@ -297,14 +297,14 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                         height: 20,
                                                       )),
                                                   RichText(
-                                                    text: const TextSpan(
+                                                    text:  TextSpan(
                                                         children: [
                                                           TextSpan(
-                                                            text: "338",
+                                                            text: allData.adviceCount.toString(),
                                                             style: Constants
                                                                 .subtitleFontBold,
                                                           ),
-                                                          TextSpan(
+                                                          const TextSpan(
                                                             text: " نصيحة",
                                                             style: Constants
                                                                 .subtitleFont,
@@ -329,14 +329,14 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                         height: 20,
                                                       )),
                                                   RichText(
-                                                    text: const TextSpan(
+                                                    text:  TextSpan(
                                                         children: [
                                                           TextSpan(
-                                                            text: "(4.8)",
+                                                            text: allData.rate,
                                                             style: Constants
                                                                 .subtitleFontBold,
                                                           ),
-                                                          TextSpan(
+                                                          const TextSpan(
                                                             text: " تقييم",
                                                             style: Constants
                                                                 .subtitleFont,
@@ -376,7 +376,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                     ),
                                                     const Spacer(),
                                                     Text(
-                                                      allData.experienceYear!,
+                                                      "${allData.experienceYear!} سنوات ",
                                                       style: Constants
                                                           .subtitleFont,
                                                     )
@@ -435,10 +435,9 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             2)),
-                                                            child: const Text(
-                                                              "محامي عام",
-                                                              // allData.document![index].file!,
-                                                              style: TextStyle(
+                                                            child:  Text(
+                                                              allData.document![index].file!,
+                                                              style: const TextStyle(
                                                                   fontFamily:
                                                                       Constants
                                                                           .mainFont,

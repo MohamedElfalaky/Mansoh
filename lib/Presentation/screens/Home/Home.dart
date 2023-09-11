@@ -8,6 +8,7 @@ import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 
 import '../../../app/utils/lang/language_constants.dart';
+import '../UserProfileScreens/UserOrders/UserOrders.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -21,7 +22,7 @@ class _HomeState extends State<Home> {
 
   final screens = [
     const HomeScreen(),
-    OnBoarding(),
+    const UserOrders(),
     const UserProfileScreen(),
   ];
 

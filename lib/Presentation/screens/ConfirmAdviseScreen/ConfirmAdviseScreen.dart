@@ -6,10 +6,13 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/Presentation/screens/ConfirmAdviseScreen/Components/OutlinedAdvisorCard.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
+import 'package:nasooh/app/Style/Icons.dart';
+import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
@@ -318,36 +321,96 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         ),
                       ),
                       // SizedBox(height: 20,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (pickedFile != null)
-                            pickedFile!.path.endsWith('.pdf')
-                                ? Container(
-                                    height: 100,
-                                    width: 100,
-                                    child: SfPdfViewer.file(
-                                      pickedFile!,
+                      if (pickedFile != null)
+                        pickedFile!.path.endsWith('.pdf')
+                            ? Container(
+                                padding: const EdgeInsets.all(5),
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                height: 50,
+                                width: width(context),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.shade300,
+                                        offset: const Offset(
+                                          5.0,
+                                          5.0,
+                                        ),
+                                        blurRadius: 10.0,
+                                        spreadRadius: 2.0,
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Row(
+                                  children: [
+                                    const Spacer(),
+                                    Text(pickedFile!.path
+                                        .replaceRange(0, 56, "")),
+                                    const SizedBox(
+                                      width: 10,
                                     ),
-                                  )
-                                : Container(
-                                    height: 100,
-                                    width: 100,
-                                    child: Image.file(pickedFile!)),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          if (pickedFile != null)
-                            IconButton(
-                              icon: Icon(Icons.close),
-                              onPressed: () {
-                                setState(() {
-                                  pickedFile = null;
-                                });
-                              },
-                            ),
-                        ],
+                                    SvgPicture.asset(
+                                      filePdf,
+                                      width: 20,
+                                      height: 20,
+                                    ),
+                                  ],
+                                )
+
+                                // SfPdfViewer.file(
+                                //   pickedFile!,
+                                // ),
+                                )
+                            : Container(
+                                padding: const EdgeInsets.all(5),
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                height: 50,
+                                width: width(context),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.shade300,
+                                        offset: const Offset(
+                                          5.0,
+                                          5.0,
+                                        ),
+                                        blurRadius: 10.0,
+                                        spreadRadius: 2.0,
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Row(
+                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                        child: Text(pickedFile!.path
+                                            .replaceRange(0, 56, ""))),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    SvgPicture.asset(
+                                      fileImage,
+                                      width: 20,
+                                      height: 20,
+                                    ),
+                                  ],
+                                )),
+                      const SizedBox(
+                        width: 20,
                       ),
+                      if (pickedFile != null)
+                        IconButton(
+                          icon: const Icon(Icons.close),
+                          onPressed: () {
+                            setState(() {
+                              pickedFile = null;
+                            });
+                          },
+                        ),
 
                       const SizedBox(
                         height: 80,

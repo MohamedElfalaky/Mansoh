@@ -9,8 +9,10 @@ import '../../../app/utils/myApplication.dart';
 import '../../../app/utils/sharedPreferenceClass.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/advice_screen_models/show_advice_model.dart';
+
 class SendAdvise {
-  Future<SendAdviseModel?> sendAdvise({
+  Future<ShowAdviceModel?> sendAdvise({
     String? name,
     String? description,
     String? price,
@@ -34,7 +36,7 @@ class SendAdvise {
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         print(response.body);
-        final userdata = sendAdviseModelFromJson(responseMap);
+        final userdata = showAdviceModelFromJson(responseMap);
         MyApplication.showToastView(message: responseMap["message"]);
         return userdata;
       } else {

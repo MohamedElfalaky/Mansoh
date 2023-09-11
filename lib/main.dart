@@ -258,15 +258,21 @@
 // }
 
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/Home.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
+import 'Data/repositories/notification/fcm.dart';
+import 'Data/repositories/notification/firebase_notification.dart';
+import 'Data/repositories/notification/local_notification.dart';
 import 'Presentation/screens/welcome_screen/welcome.dart';
 import 'app/global.dart';
 import 'app/keys.dart';
@@ -275,12 +281,43 @@ import 'app/utils/lang/demo_localization.dart';
 import 'app/utils/lang/language_constants.dart';
 import 'app/utils/sharedPreferenceClass.dart';
 
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   // ignore: deprecated_member_use
+//   FlutterNativeSplash.removeAfter(initialization);
+//   await SharedPrefs().init();
+//   ////
+//   runApp(const MyApp());
+// }
+
+
+// @pragma('vm:entry-point')
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   // await Firebase.initializeApp();
+//   FCMNotification().showNotification(message);
+//   // if(Platform.isIOS){
+//   //
+//   //   AudioPlayer().play(AssetSource('sounds/synth.mp3'));
+//   // }
+// }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // ignore: deprecated_member_use
   FlutterNativeSplash.removeAfter(initialization);
+  await Firebase.initializeApp(
+     );
+  FirebaseCustomNotification.initializeFirebaseCustomNotification();
+
+  await CustomLocalNotification.setupFlutterNotifications();
+
+  FirebaseMessaging.onBackgroundMessage(
+      FirebaseCustomNotification.firebaseMessagingBackgroundHandler);
+
+  // await Firebase.initializeApp();
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await SharedPrefs().init();
-  ////
+
   runApp(const MyApp());
 }
 
@@ -298,6 +335,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
+  // FCMNotification fcmNotification = FCMNotification();
 
   void setAppLocale(Locale locale) {
     setState(() {
@@ -308,10 +346,9 @@ class _MyAppState extends State<MyApp> {
 //   // to change language
   void changeLanguage() async {
     Locale newLocale = await setLocale("ar");
-    GlobalVars().oldLang = "en";
     sharedPrefs.setLanguage("ar");
     setState(() {
-      GlobalVars().headers = {'Accept': 'application/json', 'lang': "ar"};
+      headers = {'Accept': 'application/json', 'lang': "ar"};
       selectedLang = "ar";
 
       MyApp.setLocale(context, newLocale);
@@ -319,9 +356,25 @@ class _MyAppState extends State<MyApp> {
   }
 
 // }
+
+
   @override
   void initState() {
+    selectedLang ?? (selectedLang ="ar");
     super.initState();
+    // FirebaseMessaging.onBackgroundMessage(
+    //     FirebaseCustomNotification.firebaseMessagingBackgroundHandler);
+
+    FirebaseMessaging.onMessage
+        .listen(CustomLocalNotification.showFlutterNotification);
+    FirebaseMessaging.onMessageOpenedApp
+        .listen((CustomLocalNotification.showFlutterNotification));
+
+    // Firebase.initializeApp().then((value) {
+    //   fcmNotification.registerNotification();
+    //   fcmNotification.configLocalNotification();
+    // });
+        super.initState();
   }
 
   @override
@@ -330,7 +383,6 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         _locale = locale;
         selectedLang = _locale!.languageCode;
-        GlobalVars().oldLang = _locale!.languageCode;
       });
     });
 
@@ -342,7 +394,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: providers,
-      child: MaterialApp(
+      child: GetMaterialApp(
         navigatorKey: Keys.navigatorKey,
         builder: (context2, widget) => ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),
@@ -397,7 +449,8 @@ class _MyAppState extends State<MyApp> {
               titleTextStyle: Constants.mainTitleFont,
             ),
             scaffoldBackgroundColor: Constants.whiteAppColor),
-        home: sharedPrefs.getToken() != "" ? Home() : const WelcomeScreen(),
+        home:
+        sharedPrefs.getToken() != "" ? Home() : const WelcomeScreen(),
       ),
     );
   }

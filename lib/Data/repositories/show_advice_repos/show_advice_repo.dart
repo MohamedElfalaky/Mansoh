@@ -39,9 +39,10 @@ class ShowAdviceRepo {
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e) {
+    } on Error catch (e,st) {
       if (kDebugMode) {
         print(e);
+        print(st);
         MyApplication.showToastView(message: e.toString());
       }
     }
