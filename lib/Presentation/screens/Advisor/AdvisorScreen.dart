@@ -183,7 +183,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                           allData.avatar!,
                                           height: 130,
                                           width: 130,
-                                          fit: BoxFit.fill,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
@@ -219,7 +219,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                         ],
                                       ),
                                       Text(
-                                        allData.info!,
+                                        allData.description!,
                                         style: Constants.subtitleFont,
                                       ),
                                       Container(
@@ -241,7 +241,8 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                     BorderRadius.circular(2)),
                                             child: Center(
                                                 child: Text(
-                                                  allData.category?[index].name??"",
+                                                  "محامي عام",
+                                                  // allData.category?[index].name??"",
                                               style: const TextStyle(
                                                   fontFamily:
                                                       Constants.mainFont,
@@ -257,18 +258,18 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 16),
                                         child: ReadMoreText(
-                                          allData.description!,
+                                          allData.info!,
                                           style: Constants.subtitleFont1,
                                           trimLines: 2,
                                           trimMode: TrimMode.Line,
                                           trimCollapsedText: 'المزيد',
                                           trimExpandedText: 'أقل',
                                           moreStyle: const TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 13,
                                               fontWeight: FontWeight.bold,
                                               color: Constants.primaryAppColor),
                                           lessStyle: const TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 13,
                                               fontWeight: FontWeight.bold,
                                               color: Constants.primaryAppColor),
                                         ),

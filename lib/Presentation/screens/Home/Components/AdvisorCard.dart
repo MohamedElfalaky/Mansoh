@@ -72,12 +72,12 @@ class AdvisorCard extends StatelessWidget {
                       style: Constants.secondaryTitleFont,
                     ),
                   ),
-                  SizedBox(
-                    width: width(context) * 0.6,
-                    child: Text(
-                      info,
-                      style: Constants.subtitleFont,
-                    ),
+                  Text(
+                    description,
+                    style: Constants.subtitleFont,
+                    textAlign: TextAlign.start,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(
                     height: 8,
@@ -180,13 +180,19 @@ class AdvisorCard extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          Text(
-            description,
-            style: Constants.subtitleFont,
-            textAlign: TextAlign.start,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          )
+
+
+          SizedBox(
+            // width: width(context) * 0.6,
+            child: Text(
+              info,
+              style: Constants.subtitleFont,
+              textAlign: TextAlign.start,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+
         ],
       ),
     );
