@@ -34,6 +34,7 @@ class Register {
             'nationality_id': '$nationalityId',
             'avatar[0][type]': 'png',
             'avatar[0][file]': '$avatar',
+            'device': sharedPrefs.fCMToken,
           });
       // print(
       //     " 'email': email,'full_name': '$fullName','mobile': '$mobile','country_id': '$countryId','city_id': '$cityId','gender': '$gender','nationality_id': '$nationalityId','avatar[0][type]': 'png','avatar[0][file]': '$avatar',");

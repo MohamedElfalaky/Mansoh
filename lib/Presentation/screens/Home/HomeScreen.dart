@@ -386,9 +386,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .adListResponse!.data![index].avatar!,
                                     name: advisorState
                                         .adListResponse!.data![index].fullName!,
-                                    firstCategory: advisorState.adListResponse!
-                                        .data![index].category![0].id!
-                                        .toString(),
+                                    firstCategory: "",
+                                    // advisorState.adListResponse!
+                                    //     .data![index].category![0].id!
+                                    //     .toString(),
                                     // secondCategory: advisorState.adListResponse!.data![index].category![1].name! ,
                                     secondCategory: "هندسي",
                                     // thirdCategory: advisorState.adListResponse!.data![index].category![2].name! ,

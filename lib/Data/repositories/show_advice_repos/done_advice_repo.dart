@@ -9,15 +9,12 @@ import '../../../app/global.dart';
 import '../../../app/utils/sharedPreferenceClass.dart';
 import '../../models/advice_screen_models/show_advice_model.dart';
 
-class PayAdviceRepo {
-  Future<ShowAdviceModel?> payAdvice(
-      {required int adviceId, required int paymentId}) async {
+class DoneAdviceRepo {
+  Future<ShowAdviceModel?> doneAdvice(
+      {required int adviceId}) async {
     try {
       http.Response response = await http.post(
-        Uri.parse('${Keys.baseUrl}/client/advice/pay/$adviceId'),
-        body: {
-          'payment_id': '$paymentId',
-        },
+        Uri.parse('${Keys.baseUrl}/client/advice/done/$adviceId'),
         headers: {
           'Accept': 'application/json',
           'lang': selectedLang!,

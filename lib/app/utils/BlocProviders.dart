@@ -20,6 +20,7 @@ import '../../Data/cubit/profile/profile_cubit/profile_cubit.dart';
 import '../../Data/cubit/profile/update_profile_cubit/update_profile_cubit.dart';
 import '../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
 import '../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
+import '../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/pay_advice_cubit/pay_advice_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cubit.dart';
 
@@ -50,4 +51,5 @@ List<SingleChildWidget> providers = [
   BlocProvider<OrdersFiltersCubit>(create: (context) => OrdersFiltersCubit()),
   BlocProvider<CategoryCubit>(create: (context) => CategoryCubit()),
   BlocProvider<PrivacyCubit>(create: (context) => PrivacyCubit()),
+  BlocProvider<DoneAdviceCubit>(create: (context) => DoneAdviceCubit()),
 ];
