@@ -305,6 +305,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // ignore: deprecated_member_use
   FlutterNativeSplash.removeAfter(initialization);
+  await SharedPrefs().init();
   await Firebase.initializeApp(
      );
   FirebaseCustomNotification.initializeFirebaseCustomNotification();
@@ -316,7 +317,7 @@ void main() async {
 
   // await Firebase.initializeApp();
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await SharedPrefs().init();
+
 
   runApp(const MyApp());
 }

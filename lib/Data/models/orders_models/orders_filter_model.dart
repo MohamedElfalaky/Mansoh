@@ -39,7 +39,7 @@ class OrdersFiltersModel {
 class Datum {
   int? id;
   String? name;
-  String? price;
+  int? price;
   String? date;
   Status? status;
   Adviser? adviser;

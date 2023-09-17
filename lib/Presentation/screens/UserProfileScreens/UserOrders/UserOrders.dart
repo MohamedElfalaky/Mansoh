@@ -299,7 +299,7 @@ class _UserOrdersState extends State<UserOrders> {
                                                         ?.avatar ??
                                                     "",
                                                 price: ordersFilters.response
-                                                        ?.data?[index].price ??
+                                                        ?.data?[index].price.toString() ??
                                                     "",
                                                 rateData:
                                                     filtersList?[index].adviser?.rate ?? "");

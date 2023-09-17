@@ -17,7 +17,7 @@ class OrdersFiltersRepo {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'lang': selectedLang!,
+          'lang': "ar",
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );
