@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
@@ -14,22 +15,16 @@ import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_state.dart';
+import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../../../app/Style/Icons.dart';
-import '../../../app/utils/lang/language_constants.dart';
 import '../Advisor/AdvisorScreen.dart';
 import '../CompleteAdviseScreen/CompleteAdviseScreen.dart';
 import '../ConfirmAdviseScreen/Components/OutlinedAdvisorCard.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen(
-      {super.key,
-      required this.id,
-      required this.name,
-      required this.imagePhoto});
+  const ChatScreen({super.key, required this.adviserProfileData});
 
-  final int id;
-  final String name;
-  final String imagePhoto;
+  final AdviserProfileData adviserProfileData;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -60,8 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ///
         ///
       } else {
-        MyApplication.showToastView(
-            message: '${getTranslated(context, 'noInternet')}');
+        MyApplication.showToastView(message: '${'noInternet'.tr}');
       }
     });
 
@@ -108,8 +102,7 @@ class _ChatScreenState extends State<ChatScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(
-          message: '${getTranslated(context, 'noInternet')}');
+      MyApplication.showToastView(message: '${'noInternet'.tr}');
       return NoInternetWidget(size: sizee);
     }
 
@@ -135,7 +128,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           width: 22,
                           height: 22,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 25,
                         )
                       ],
@@ -153,22 +146,22 @@ class _ChatScreenState extends State<ChatScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: OutlinedAdvisorCard(
-                          isClickable: true,
-                          name: widget.name,
-                          imagePhoto: widget.imagePhoto),
+                        adviserProfileData: widget.adviserProfileData,
+                        isClickable: true,
+                      ),
                     ),
                     Expanded(
                         child: ListView.builder(
                       itemCount: 5,
                       itemBuilder: (context, index) => Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
-                        padding: EdgeInsets.all(8),
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        padding: const EdgeInsets.all(8),
                         // constraints: BoxConstraints(mi),
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 185, 184, 180)
+                            color: const Color.fromARGB(255, 185, 184, 180)
                                 .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(20)),
-                        child: Text(
+                        child: const Text(
                           "تفاصيل النصيحة هناك حقيقة مثبتة منذ زمن ط ويل وهي أن المقروء لصفحة ما  سيلهي القارئ عن التركيز على الشكل الخارجهناك حقيقة مثبتة منذ زمن ط ويل وهي أن المحتوىالمقروء لصفحة ما  سيلهي القارئ عن التركيز على الشكل الخارج  ",
                           style: Constants.subtitleFont,
                         ),
@@ -183,15 +176,16 @@ class _ChatScreenState extends State<ChatScreen> {
                               controller: _textController,
                               focusNode: _focusNode,
                               decoration: Constants.setTextInputDecoration(
+                                isSuffix: true,
                                 suffixIcon: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     SvgPicture.asset(attachFiles),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 8,
                                     ),
                                     SvgPicture.asset(micee),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 8,
                                     )
                                   ],
@@ -199,7 +193,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 hintText: "آكتب رسالتك...",
                               ).copyWith(
                                 hintStyle: Constants.subtitleRegularFontHint
-                                    .copyWith(color: Color(0XFF5C5E6B)),
+                                    .copyWith(color: const Color(0XFF5C5E6B)),
                                 enabledBorder: const OutlineInputBorder(
                                   gapPadding: 0,
                                   borderSide: BorderSide.none,
@@ -213,13 +207,13 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                           ),
                           Container(
-                              margin: EdgeInsetsDirectional.only(start: 8),
-                              padding: EdgeInsets.all(10),
+                              margin: const EdgeInsetsDirectional.only(start: 8),
+                              padding: const EdgeInsets.all(10),
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  color: Color(0XFF273043)),
+                                  color: const Color(0XFF273043)),
                               child: SvgPicture.asset(
                                 sendChat,
                               ))

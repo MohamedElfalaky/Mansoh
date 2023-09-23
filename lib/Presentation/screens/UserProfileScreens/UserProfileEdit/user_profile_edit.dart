@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nasooh/Data/cubit/profile/profile_cubit/profile_cubit.dart';
 import 'package:nasooh/app/utils/sharedPreferenceClass.dart';
@@ -19,9 +20,7 @@ import '../../../../Data/cubit/profile/update_profile_cubit/update_profile_state
 import '../../../../app/Style/Icons.dart';
 import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
-import '../../../widgets/PhoneTextField.dart';
 import '../../../widgets/row_modal_sheet.dart';
 import '../../../widgets/shared.dart';
 import '../../AuthenticationScreens/RegisterationPinCodeConfirm/my_drop_list_column.dart';
@@ -317,18 +316,17 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                 vertical: 16,
                               ),
                               child: Text(
-                                  getTranslated(
-                                      context, "Personal Information")!,
+                                   "Personal Information".tr,
                                   textAlign: TextAlign.end,
                                   style: Constants.subtitleFontBold
                                       .copyWith(fontSize: 16))),
                           const SizedBox(height: 8),
                           TitleTxt(
-                            txt: getTranslated(context, "Name")!,
+                            txt:  "Name".tr,
                           ),
                           InputTextField(
                             keyboardType: TextInputType.text,
-                            hintTxt: getTranslated(context, "Name")!,
+                            hintTxt:  "Name".tr,
                             imageTxt: "assets/images/SVGs/name_icon.svg",
                             controller: _nameController,
                             onChanged: (val) {
@@ -338,7 +336,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
 
                           ///===============
                           // TitleTxt(
-                          //   txt: getTranslated(context, "phone_number")!,
+                          //   txt:  "phone_number".tr,
                           // ),
                           // FadeTransition(
                           //   opacity: _fadeController,
@@ -378,7 +376,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                           //         phoneNumber = phone.completeNumber;
                           //       },
                           //       invalidNumberMessage:
-                          //           getTranslated(context, "invalid_number")!,
+                          //            "invalid_number".tr,
                           //     ),
                           //   ),
                           // ),
@@ -386,7 +384,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                           /// =======================
 
                           TitleTxt(
-                            txt: getTranslated(context, "email")!,
+                            txt:  "email".tr,
                           ),
                           InputTextField(
                             keyboardType: TextInputType.emailAddress,
@@ -406,8 +404,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                 vertical: 10,
                               ),
                               child: Text(
-                                  getTranslated(
-                                      context, "Additional Information")!,
+                                   "Additional Information".tr,
                                   textAlign: TextAlign.end,
                                   style: Constants.subtitleFontBold
                                       .copyWith(fontSize: 16))),
@@ -416,7 +413,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                           ),
                           TitleTxt(
                             txt:
-                                getTranslated(context, "nationality_optional")!,
+                                 "nationality_optional".tr,
                           ),
                           BlocBuilder<CountryCubit, CountryState>(
                               builder: (context, newState) {
@@ -447,8 +444,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                             height: 24,
                                           ))),
                                   TitleTxt(
-                                    txt: getTranslated(
-                                        context, "resident_country")!,
+                                    txt:  "resident_country".tr,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -493,8 +489,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TitleTxt(
-                                    txt: getTranslated(
-                                        context, "resident_city")!,
+                                    txt:  "resident_city".tr,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -529,14 +524,14 @@ class _UserProfileEditState extends State<UserProfileEdit>
                             }
                           }),
                           TitleTxt(
-                            txt: getTranslated(context, "gender")!,
+                            txt:  "gender".tr,
                           ),
                           // StatefulBuilder(
                           //     builder: (context, StateSetter setState) =>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(getTranslated(context, "female")!,
+                              Text( "female".tr,
                                   style: Constants.secondaryTitleRegularFont),
                               Radio(
                                   value: "0",
@@ -551,7 +546,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                 width: 48,
                               ),
                               Text(
-                                getTranslated(context, "male")!,
+                                 "male".tr,
                                 style: Constants.secondaryTitleRegularFont,
                               ),
                               Radio(

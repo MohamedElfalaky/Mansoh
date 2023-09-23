@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/CompleteAdvisorCard.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/PaymentCard.dart';
 import 'package:nasooh/Presentation/screens/Home/Home.dart';
@@ -21,7 +22,6 @@ import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cu
 import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_state.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_state.dart';
-import '../../../app/utils/lang/language_constants.dart';
 
 class CompleteAdviseScreen extends StatefulWidget {
   const CompleteAdviseScreen({
@@ -54,7 +54,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
         ///
       } else {
         MyApplication.showToastView(
-            message: '${getTranslated(context, 'noInternet')}');
+            message: '${ 'noInternet'.tr}');
       }
     });
 
@@ -104,7 +104,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
       });
     } else if (!isConnected!) {
       MyApplication.showToastView(
-          message: '${getTranslated(context, 'noInternet')}');
+          message: '${ 'noInternet'.tr}');
       return NoInternetWidget(size: sizee);
     }
 
@@ -183,8 +183,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                           .response?.data?.adviser?.fullName ??
                                       "",
                                   moneyPut:
-                                      showAdviceState.response!.data!.price.toString() ??
-                                          "0",
+                                      showAdviceState.response!.data!.price.toString() ,
                                   taxVal:
                                       showAdviceState.response?.data?.tax?.toStringAsFixed(2) ?? "",
                                 );

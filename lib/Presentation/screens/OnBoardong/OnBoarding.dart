@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/lang/language_constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
-
-import '../../../app/global.dart';
 
 class OnBoarding extends StatelessWidget {
   OnBoarding();
@@ -69,8 +67,8 @@ class OnBoarding extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 25),
                         child: Text(
-                          getTranslated(context,
-                              "تبغى نصيحة ممتازة من شخص فاهم بمجاله بسعر أنت تحدده ويرد عليك بسرعة؟")!,
+
+                              "تبغى نصيحة ممتازة من شخص فاهم بمجاله بسعر أنت تحدده ويرد عليك بسرعة؟".tr,
                           style: Constants.headerNavigationFont,
                           textAlign: TextAlign.center,
                         ),
@@ -81,8 +79,8 @@ class OnBoarding extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 25),
                         child: Text(
-                          getTranslated(context,
-                              "تطبيق نصوح يساعدك في الحصول على إجابة وافية لكل سؤال")!,
+
+                              "تطبيق نصوح يساعدك في الحصول على إجابة وافية لكل سؤال".tr,
                           style: Constants.subtitleFont1,
                           textAlign: TextAlign.center,
                         ),

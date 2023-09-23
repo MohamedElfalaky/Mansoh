@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/app/Style/sizes.dart';
@@ -14,7 +15,6 @@ import '../../../../Data/cubit/authentication/register_cubit/register_cubit.dart
 import '../../../../Data/cubit/authentication/register_cubit/register_state.dart';
 import '../../../../app/Style/Icons.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../../app/utils/validations.dart';
 import '../../../widgets/row_modal_sheet.dart';
@@ -99,8 +99,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
-                                          getTranslated(
-                                              context, "create_new_account")!,
+                                          "create_new_account".tr,
                                           textAlign: TextAlign.right,
                                           style:
                                               Constants.headerNavigationFont),
@@ -246,28 +245,25 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                         vertical: 16,
                                       ),
                                       child: Text(
-                                          getTranslated(
-                                              context, "Personal Information")!,
+                                          "Personal Information".tr,
                                           textAlign: TextAlign.end,
                                           style: Constants.subtitleFontBold
                                               .copyWith(fontSize: 16))),
                                   TitleTxt(
-                                    txt: getTranslated(context, "Name")!,
+                                    txt: "Name".tr,
                                   ),
                                   InputTextField(
                                     keyboardType: TextInputType.text,
-                                    hintTxt: getTranslated(context, "Name")!,
+                                    hintTxt: "Name".tr,
                                     imageTxt:
                                         "assets/images/SVGs/name_icon.svg",
                                     controller: _nameController,
                                     validator: (val) {
                                       if (val!.isEmpty) {
-                                        return getTranslated(
-                                            context, "name Required")!;
+                                        return  "name Required".tr;
                                       } else if (val.length > 33 ||
                                           val.length < 2) {
-                                        return getTranslated(
-                                            context, "name length")!;
+                                        return  "name length".tr;
                                       }
                                       return null;
                                     },
@@ -278,15 +274,14 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                     },
                                   ),
                                   TitleTxt(
-                                    txt: getTranslated(context, "email")!,
+                                    txt: "email".tr,
                                   ),
                                   InputTextField(
                                     validator: (val) {
                                       if (val!.isEmpty ||
                                           !RegExp(Validations.validationEmail)
                                               .hasMatch(val)) {
-                                        return getTranslated(
-                                            context, "email_required")!;
+                                        return  "email_required".tr;
                                       }
                                       return null;
                                     },
@@ -305,8 +300,8 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                         vertical: 16,
                                       ),
                                       child: Text(
-                                          getTranslated(context,
-                                              "Additional Information")!,
+
+                                              "Additional Information".tr,
                                           textAlign: TextAlign.end,
                                           style: Constants.subtitleFontBold
                                               .copyWith(fontSize: 16))),
@@ -314,14 +309,14 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                   const SizedBox(
                                     height: 16,
                                   ),
-                                  Text(getTranslated(context, "gender")!,
+                                  Text( "gender".tr,
                                       textAlign: TextAlign.right,
                                       style:
                                           Constants.secondaryTitleRegularFont),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Text(getTranslated(context, "female")!,
+                                      Text( "female".tr,
                                           style: Constants
                                               .secondaryTitleRegularFont),
                                       Radio(
@@ -336,7 +331,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                         width: 48,
                                       ),
                                       Text(
-                                        getTranslated(context, "male")!,
+                                        "male".tr,
                                         style:
                                             Constants.secondaryTitleRegularFont,
                                       ),
@@ -389,8 +384,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                     );
                                               }
                                             },
-                                            txt: getTranslated(
-                                                context, "register")!,
+                                            txt:  "register".tr,
                                             isBold: true,
                                           ),
                                         ),

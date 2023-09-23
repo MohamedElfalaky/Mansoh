@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
-import 'lang/language_constants.dart';
 
 
 class Validations {
@@ -10,9 +10,9 @@ class Validations {
     Pattern pattern = r'[a-zA-zء-ي]{2,}[\s]{1,}[a-zA-Zء-ي]{2,}$';
     RegExp regex = RegExp(pattern.toString());
     if (name!.trim().isEmpty) {
-      validateString = "${getTranslated(context, 'pleaseentername')}";
+      validateString = "${ 'pleaseentername'.tr}";
     } else if (!regex.hasMatch(name.trim()) && name.trim().length <= 15) {
-      validateString = "${getTranslated(context, 'invaliddata')}";
+      validateString = "${ 'invaliddata'.tr}";
     } else {
       validateString = null;
     }
@@ -27,7 +27,7 @@ class Validations {
     if (name!.trim().isEmpty) {
       validateString = null;
     } else if (!regex.hasMatch(name.trim()) && name.trim().length <= 15) {
-      validateString = "${getTranslated(context, 'invaliddata')}";
+      validateString = "${ 'invaliddata'.tr}";
     } else {
       validateString = null;
     }
@@ -42,7 +42,7 @@ class Validations {
     if (email == null || email.trim().isEmpty) {
       validateString = null;
     } else if (!regex.hasMatch(email.trim())) {
-      validateString = "${getTranslated(context, 'invaliddata')}";
+      validateString = "${ 'invaliddata'.tr}";
     } else {
       validateString = null;
     }
@@ -53,11 +53,11 @@ class Validations {
     String? validateString = '';
 
     if (phone.trim().isEmpty) {
-      validateString = "${getTranslated(context, 'emptyfield')}";
+      validateString = "${ 'emptyfield'.tr}";
     } else if (phone.trim().length != 9) {
-      validateString = "${getTranslated(context, 'invaliddata')}";
+      validateString = "${ 'invaliddata'.tr}";
     } else if (!phone.startsWith("5", 0)) {
-      validateString = getTranslated(context, "invaliddata");
+      validateString =  "invaliddata".tr;
     } else {
       validateString = null;
     }
@@ -68,7 +68,7 @@ class Validations {
     String? validateString = '';
 
     if (password.trim().isEmpty) {
-      validateString = "${getTranslated(context, 'emptyfield')}";
+      validateString = "${ 'emptyfield'.tr}";
     }
     // else if (password.length < 6) {
     //   validateString = "invalid password";
@@ -84,9 +84,9 @@ class Validations {
     String? validateString = '';
 
     if (conpass.trim().isEmpty) {
-      validateString = "${getTranslated(context, 'emptyfield')}";
+      validateString = "${ 'emptyfield'.tr}";
     } else if (password.toString() != conpass.toString()) {
-      validateString = "${getTranslated(context, 'DifferentPasswords')}";
+      validateString = "${ 'DifferentPasswords'.tr}";
     } else {
       validateString = null;
     }
@@ -96,7 +96,7 @@ class Validations {
   static String? validateField(String value, BuildContext context) {
     String? validateString = '';
     if (value.trim().isEmpty) {
-      validateString = "${getTranslated(context, 'emptyfield')}";
+      validateString = "${ 'emptyfield'.tr}";
     } else {
       validateString = null;
     }

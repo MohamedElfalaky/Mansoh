@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/Presentation/screens/ConfirmAdviseScreen/Components/OutlinedAdvisorCard.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
@@ -17,21 +18,18 @@ import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_state.dart';
-import '../../../app/utils/lang/language_constants.dart';
+import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../Advisor/AdvisorScreen.dart';
 import '../CompleteAdviseScreen/CompleteAdviseScreen.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class ConfirmAdviseScreen extends StatefulWidget {
-  const ConfirmAdviseScreen(
-      {super.key,
-      required this.id,
-      required this.name,
-      required this.imagePhoto});
+  const ConfirmAdviseScreen({
+    super.key,
+    required this.adviserProfileData,
+  });
 
-  final int id;
-  final String name;
-  final String imagePhoto;
+  final AdviserProfileData adviserProfileData;
 
   @override
   State<ConfirmAdviseScreen> createState() => _ConfirmAdviseScreenState();
@@ -62,8 +60,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
         ///
         ///
       } else {
-        MyApplication.showToastView(
-            message: '${getTranslated(context, 'noInternet')}');
+        MyApplication.showToastView(message: '${'noInternet'.tr}');
       }
     });
 
@@ -108,8 +105,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(
-          message: '${getTranslated(context, 'noInternet')}');
+      MyApplication.showToastView(message: '${'noInternet'.tr}');
       return NoInternetWidget(size: sizee);
     }
 
@@ -144,7 +140,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                           if (_formKey.currentState!.validate()) {
                             context.read<SendAdviseCubit>().sendAdviseMethod(
                                 context: context,
-                                adviserId: widget.id,
+                                adviserId: widget.adviserProfileData.id,
                                 name: requestTitle.text,
                                 description: descriptionController.text,
                                 price: priceController.text,
@@ -176,29 +172,31 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                     children: [
                       // SizedBox(height: 15,),
                       OutlinedAdvisorCard(
-                          isClickable: false,
-                          name: widget.name,
-                          imagePhoto: widget.imagePhoto),
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 8, top: 8),
+                        adviserProfileData: widget.adviserProfileData,
+                        isClickable: false,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8, top: 8),
                         child: Text(
-                          "عنوان الطلب",
+                          "Advice Title".tr,
                           style: Constants.secondaryTitleRegularFont,
                         ),
                       ),
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "يجب ادخال عنوان الطلب";
-                          } else if (value.length < 5) {
-                            return "عنوان الطلب يجب الا يقل عن 5 أحرف";
+                            return "Enter Advice Title".tr;
+                          } else if (value.length < 17) {
+                            return "Advice tilte should be more than 17 character"
+                                .tr;
                           }
                           return null;
                         },
                         controller: requestTitle,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: MyPrefixWidget(),
-                            hintText: "ادخل عنوان الطلب..."),
+                            // isSuffix: false ,
+                            hintText: "Enter Advice Title...".tr),
                       ),
                       const Padding(
                         padding: EdgeInsets.only(bottom: 8.0),
@@ -210,19 +208,19 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                               color: Constants.primaryAppColor),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(
+                      Padding(
+                        padding: const EdgeInsets.only(
                           bottom: 8,
                         ),
                         child: Text(
-                          "كم مستعد تدفع مقابل النصيحة؟",
+                          "How Much can you afford for advice".tr,
                           style: Constants.secondaryTitleRegularFont,
                         ),
                       ),
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "المبلغ مطلوب";
+                            return "Price Needed".tr;
                           }
                           return null;
                         },
@@ -230,25 +228,25 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         keyboardType: TextInputType.number,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: MyPrefixWidget(),
+                             isSuffix: true,
                             hintText: "0.00",
                             suffixIcon: const Text(
                               "ريال سعودي",
                               style: Constants.secondaryTitleRegularFont,
                             )),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                            "يحق للناصح رفض الطلب في حال كان المبلغ لا يتناسب مع قيمة النصيحة حسب تقديره",
-                            style: TextStyle(
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Text("advice reject".tr,
+                            style: const TextStyle(
                                 fontSize: 12,
                                 fontFamily: Constants.mainFont,
                                 color: Constants.primaryAppColor)),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 8),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
                         child: Text(
-                          "تفاصيل الطلب",
+                          "Advice Details".tr,
                           style: Constants.secondaryTitleRegularFont,
                         ),
                       ),
@@ -257,9 +255,10 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         child: TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return "يجب ادخال تفاصيل الطلب";
+                              return "Enter Advice details".tr;
                             } else if (value.length < 5) {
-                              return "تفاصيل الطلب يجب الا تقل عن 5 أحرف";
+                              return "Advice details should be more than 5 character"
+                                  .tr;
                             }
                             return null;
                           },
@@ -269,8 +268,9 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                           decoration: Constants.setTextInputDecoration(
                             isParagraphTextField: true,
                             fillColor: const Color(0XFFF5F4F5),
-                            hintText:
-                                "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافيةللحصول على إجابة وافية ...",
+                            hintText: "Explain".tr
+                              ,
+                              // isSuffix: false
                           ),
                         ),
                       ),
@@ -303,16 +303,16 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Icon(
+                              children: [
+                                const Icon(
                                   Icons.upload,
                                   color: Color(0xFF0076FF),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 4,
                                 ),
                                 Text(
-                                  "رفع الملفات الخاصة بالطلب",
+                                  "Upload Advice Files".tr,
                                   style: Constants.subtitleFont,
                                 )
                               ],

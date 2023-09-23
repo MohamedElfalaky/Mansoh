@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/authentication/country_cubit/country_state.dart';
 import '../../../../Data/cubit/authentication/city_cubit/city_cubit.dart';
 import '../../../../Data/cubit/authentication/city_cubit/city_state.dart';
 import '../../../../Data/cubit/authentication/country_cubit/country_cubit.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 
 String? inputCountry;
 String? inputCity;
@@ -96,7 +96,7 @@ class _MyColumnDataState extends State<MyColumnData> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         TitleTxt(
-          txt: getTranslated(context, "nationality_optional")!,
+          txt: "nationality_optional".tr,
         ),
         BlocBuilder<CountryCubit, CountryState>(builder: (context, newState) {
           if (newState is NationalityLoaded) {
@@ -125,7 +125,7 @@ class _MyColumnDataState extends State<MyColumnData> {
                           height: 24,
                         ))),
                 TitleTxt(
-                  txt: getTranslated(context, "resident_country")!,
+                  txt: "resident_country".tr,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 24),
@@ -158,7 +158,7 @@ class _MyColumnDataState extends State<MyColumnData> {
           }
         }),
         TitleTxt(
-          txt: getTranslated(context, "resident_city")!,
+          txt: "resident_city".tr,
         ),
         BlocBuilder<CityCubit, CityState>(builder: (context, cityState) {
           if (cityState is CityLoading) {

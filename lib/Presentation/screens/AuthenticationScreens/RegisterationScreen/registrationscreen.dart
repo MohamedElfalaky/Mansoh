@@ -1,11 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:password_text_field/password_text_field.dart';
-
 import '../../../../app/Style/Icons.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/shared.dart';
 
@@ -61,7 +60,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           height: 16,
                         ),
                         Text(
-                          getTranslated(context, "nickname")!,
+                         "nickname".tr,
                           textAlign: TextAlign.right,
                           style: Constants.secondaryTitleRegularFont,
                         ),
@@ -72,7 +71,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             textDirection: TextDirection.rtl,
                             child: TextFormField(
                               decoration: Constants.setTextInputDecoration(
-                                  hintText: getTranslated(context, "user_hint"),
+                                  hintText:"user_hint".tr,
                                   prefixIcon: Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: Container(
@@ -105,7 +104,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           height: 16,
                         ),
                         Text(
-                          getTranslated(context, "email")!,
+                         "email".tr,
                           textAlign: TextAlign.right,
                           style: Constants.secondaryTitleRegularFont,
                         ),
@@ -119,19 +118,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   AutovalidateMode.onUserInteraction,
                               style: Constants.secondaryTitleRegularFont,
                               decoration: Constants.setTextInputDecoration(
-                                hintText: getTranslated(context, "email_hint"),
+                                hintText:"email_hint".tr,
                                 prefixIcon: MyPrefixWidget(
                                   svgString: 'assets/images/SVGs/email.svg',
                                 ),
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return getTranslated(
-                                      context, "email_required");
+                                  return  "email_required".tr;
                                 }
                                 if (!EmailValidator.validate(value)) {
-                                  return getTranslated(
-                                      context, "invalid_email");
+                                  return  "invalid_email".tr;
                                 }
                                 return null;
                               },
@@ -140,7 +137,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           height: 16,
                         ),
                         Text(
-                          getTranslated(context, "password")!,
+                         "password".tr,
                           textAlign: TextAlign.right,
                           style: Constants.secondaryTitleRegularFont,
                         ),
@@ -155,12 +152,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return getTranslated(
-                                    context, "password_required");
+                                return  "password_required".tr;
                               }
                               if (value.length < 6) {
-                                return getTranslated(
-                                    context, "password_length");
+                                return  "password_length".tr;
                               }
                               return null;
                             },
@@ -180,7 +175,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           child: ElevatedButton(
                             onPressed: () {},
                             child: Text(
-                              getTranslated(context, "register")!,
+                             "register".tr,
                               style: Constants.secondaryTitleFont.copyWith(
                                 color: Colors.white,
                               ),

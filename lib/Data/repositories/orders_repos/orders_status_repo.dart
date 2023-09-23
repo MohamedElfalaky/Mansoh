@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:http/http.dart' as http;
 import '../../../../app/utils/myApplication.dart';
@@ -17,7 +18,7 @@ class OrdersStatusRepo {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'lang': "ar",
+          'lang': Get.locale!.languageCode ,
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

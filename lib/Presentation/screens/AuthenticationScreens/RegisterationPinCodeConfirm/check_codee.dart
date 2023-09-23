@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
 
@@ -10,7 +11,6 @@ import '../../../../Data/cubit/authentication/check_code/check_code_cubit.dart';
 import '../../../../Data/cubit/authentication/check_code/check_code_state.dart';
 import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/MyButton.dart';
 import '../../../widgets/shared.dart';
@@ -54,7 +54,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
           resizeToAvoidBottomInset: false,
           // appBar: AppBar(
           //     // leadingWidth: 70,
-          //     title: Text(getTranslated(context, "enter_pin")!),
+          //     title: Text(getTranslated(context, "enter_pin".tr),
           //     leading: const GoBack()),
           body: SingleChildScrollView(
             keyboardDismissBehavior:
@@ -72,8 +72,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                       width: 16,
                     ),
                     Text(
-                        getTranslated(
-                            context,  "enter_pin")!,
+                       "enter_pin".tr,
                         textAlign: TextAlign.right,
                         style:
                         Constants.headerNavigationFont),
@@ -99,12 +98,12 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                 ),
                                 // Lottie.asset("assets/images/Jsons/4.json", height: 160),
                                 Text(
-                                  getTranslated(context, "pin_from_phone")!,
+                                  "pin_from_phone".tr,
                                   style: const TextStyle(
                                       fontFamily: Constants.mainFont, fontSize: 24),
                                 ),
                                 Text(
-                                  getTranslated(context, "pin_sent")!,
+                                  "pin_sent".tr,
                                   style: Constants.subtitleFont1,
                                 ),
                                 Text(
@@ -154,7 +153,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                         height: 48,
                                         child: MyButton(
                                           isBold: true,
-                                          txt: getTranslated(context, "login"),
+                                          txt: "login".tr,
                                           onPressedHandler: () {
                                             if (_formKey.currentState!.validate()) {
                                               context
@@ -204,7 +203,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      getTranslated(context, "will_be_resent")!,
+                                      "will_be_resent".tr,
                                       style: Constants.subtitleRegularFont,
                                     ),
                                     CountdownTimer(
@@ -233,11 +232,11 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                   padding:
                                       EdgeInsets.only(top: height(context) * 0.12),
                                   child: Text(
-                                      getTranslated(context, "didnt_receive")!,
+                                      "didnt_receive".tr,
                                       style: Constants.subtitleFont1),
                                 ),
                                 Text(
-                                  getTranslated(context, "resend_code")!,
+                                  "resend_code".tr,
                                   style: Constants.mainTitleFont,
                                 ),
                               ],

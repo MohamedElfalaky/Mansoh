@@ -9,7 +9,7 @@ AdvisorListModel advisorListModelFromJson(dynamic str) => AdvisorListModel.fromJ
 String advisorListModelToJson(AdvisorListModel data) => json.encode(data.toJson());
 
 class AdvisorListModel {
-  List<Datum>? data;
+  List<AdviserData>? data;
   int? status;
   String? message;
   List<dynamic>? pagination;
@@ -22,7 +22,7 @@ class AdvisorListModel {
   });
 
   factory AdvisorListModel.fromJson(Map<String, dynamic> json) => AdvisorListModel(
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null ? [] : List<AdviserData>.from(json["data"]!.map((x) => AdviserData.fromJson(x))),
     status: json["status"],
     message: json["message"],
     pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
@@ -36,7 +36,7 @@ class AdvisorListModel {
   };
 }
 
-class Datum {
+class AdviserData {
   int? id;
   String? avatar;
   String? fullName;
@@ -45,7 +45,7 @@ class Datum {
   List<Category>? category;
   String? rate;
 
-  Datum({
+  AdviserData({
     this.id,
     this.avatar,
     this.fullName,
@@ -55,7 +55,7 @@ class Datum {
     this.rate,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory AdviserData.fromJson(Map<String, dynamic> json) => AdviserData(
     id: json["id"],
     avatar: json["avatar"],
     fullName: json["full_name"],

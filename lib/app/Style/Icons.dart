@@ -44,7 +44,10 @@ const String filePdf = "assets/images/SVGs/file_pdf.svg";
 const String walletIcData = "assets/images/SVGs/wallet_icons.svg";
 const String searchIcon = "assets/images/SVGs/search_icon.svg";
 const String checkIcon = "assets/images/SVGs/check_icon.svg";
-
+const String backArIcon = "assets/images/SVGs/back.svg";
+const String filterIcon = "assets/images/SVGs/filter_icon.svg";
+const String recycleIcon = "assets/images/SVGs/recycle.svg";
+const String categoriesIcon = "assets/images/SVGs/categories_icon.svg";
 ///////////////////// Jsons////////
 ///
 

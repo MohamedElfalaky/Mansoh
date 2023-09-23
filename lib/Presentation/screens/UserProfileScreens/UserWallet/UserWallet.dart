@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../UserProfileEdit/widgets/shared.dart';
 import 'widgets/WalletCard.dart';
@@ -43,7 +43,7 @@ class _UserWalletState extends State<UserWallet> {
                       height: 40,
                     ),
                     Text(
-                      getTranslated(context, "total_balance")!,
+                       "total_balance".tr,
                       style: Constants.secondaryTitleRegularFont,
                     ),
                     const SizedBox(

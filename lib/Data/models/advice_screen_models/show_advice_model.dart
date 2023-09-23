@@ -58,7 +58,7 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["id"],
     adviser: json["adviser"] == null ? null : Adviser.fromJson(json["adviser"]),
-    price: json["price"],
+    price: json["price"]??0,
     tax: json["tax"]?.toDouble(),
     total: json["total"]?.toDouble(),
     status: json["status"] == null ? null : Status.fromJson(json["status"]),

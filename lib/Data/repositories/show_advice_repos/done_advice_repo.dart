@@ -17,7 +17,7 @@ class DoneAdviceRepo {
         Uri.parse('${Keys.baseUrl}/client/advice/done/$adviceId'),
         headers: {
           'Accept': 'application/json',
-          'lang': selectedLang!,
+          'lang': selectedLang,
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

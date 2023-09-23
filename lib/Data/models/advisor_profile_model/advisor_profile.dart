@@ -11,7 +11,7 @@ String advisorProfileModelToJson(AdvisorProfileModel data) =>
     json.encode(data.toJson());
 
 class AdvisorProfileModel {
-  Data? data;
+  AdviserProfileData? data;
   int? status;
   String? message;
   List<dynamic>? pagination;
@@ -25,7 +25,7 @@ class AdvisorProfileModel {
 
   factory AdvisorProfileModel.fromJson(Map<String, dynamic> json) =>
       AdvisorProfileModel(
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        data: json["data"] == null ? null : AdviserProfileData.fromJson(json["data"]),
         status: json["status"],
         message: json["message"],
         pagination: json["pagination"] == null
@@ -43,7 +43,7 @@ class AdvisorProfileModel {
       };
 }
 
-class Data {
+class AdviserProfileData {
   int? id;
   String? avatar;
   String? description;
@@ -55,7 +55,7 @@ class Data {
   List<Category>? category;
   List<Document>? document;
 
-  Data({
+  AdviserProfileData({
     this.id,
     this.avatar,
     this.description,
@@ -68,7 +68,7 @@ class Data {
     this.document,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory AdviserProfileData.fromJson(Map<String, dynamic> json) => AdviserProfileData(
         id: json["id"],
         avatar: json["avatar"],
         description: json["description"],

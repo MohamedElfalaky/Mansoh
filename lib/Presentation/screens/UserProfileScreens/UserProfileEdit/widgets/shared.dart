@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../app/constants.dart';
 import '../../../../../app/keys.dart';
-import '../../../../../app/utils/lang/language_constants.dart';
 
 class MySeparator extends StatelessWidget {
   const MySeparator({Key? key, this.height = 1, this.color = Colors.black})
@@ -44,7 +44,7 @@ Widget buildSaveButton({required String label, void Function()? onPressed}) =>
         backgroundColor: Constants.primaryAppColor,
         onPressed: onPressed??(){},
         label:
-            Text(getTranslated(Keys.navigatorKey.currentState!.context, label)!,
+            Text( label.tr,
                 style: Constants.secondaryTitleFont.copyWith(
                   color: Colors.white,
                 )),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:password_text_field/password_text_field.dart';
-
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/shared.dart';
 
@@ -53,7 +52,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(getTranslated(context, "change_password")!,
+                                Text("change_password".tr,
                                     textAlign: TextAlign.right,
                                     style: Constants.headerNavigationFont),
                                 const SizedBox(
@@ -66,7 +65,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               height: 64,
                             ),
                             Text(
-                              getTranslated(context, "enter_new_password")!,
+                               "enter_new_password".tr,
                               textAlign: TextAlign.end,
                               style: Constants.mainTitleRegularFont
                                   .copyWith(fontSize: 24),
@@ -75,7 +74,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               height: 64,
                             ),
                             Text(
-                              getTranslated(context, "password")!,
+                              "password".tr,
                               textAlign: TextAlign.end,
                               style: Constants.mainTitleRegularFont,
                             ),
@@ -91,12 +90,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return getTranslated(
-                                          context, "password_required");
+                                      return  "password_required".tr;
                                     }
                                     if (value.length < 6) {
-                                      return getTranslated(
-                                          context, "password_length");
+                                      return  "password_length".tr;
                                     }
                                     return null;
                                   },
@@ -110,7 +107,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               height: 16,
                             ),
                             Text(
-                              getTranslated(context, 'password_confirm')!,
+                              'password_confirm'.tr,
                               textAlign: TextAlign.end,
                               style: Constants.mainTitleRegularFont,
                             ),
@@ -123,16 +120,13 @@ class _ChangePasswordState extends State<ChangePassword> {
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return getTranslated(
-                                          context, "password_required");
+                                      return  "password_required".tr;
                                     }
                                     if (value.length < 6) {
-                                      return getTranslated(
-                                          context, "password_length");
+                                      return  "password_length".tr;
                                     }
                                     if (value != _passwordController.text) {
-                                      return getTranslated(
-                                          context, "password_not_match");
+                                      return  "password_not_match".tr;
                                     }
                                     return null;
                                   },
@@ -157,7 +151,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                   // );
                                 },
                                 child: Text(
-                                  getTranslated(context, "save")!,
+                                   "save".tr,
                                   style: Constants.mainTitleFont.copyWith(
                                       fontSize: 14, color: Colors.white),
                                 ),

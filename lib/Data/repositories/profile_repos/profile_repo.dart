@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Data/models/profile_models/profile_model.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
@@ -16,7 +17,7 @@ class GetProfileRepo {
         Uri.parse('${Keys.baseUrl}/client/profile/${sharedPrefs.getId()}'),
         headers: {
           'Accept': 'application/json',
-          'lang': selectedLang!,
+          'lang':  Get.locale?.languageCode ??"ar",
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

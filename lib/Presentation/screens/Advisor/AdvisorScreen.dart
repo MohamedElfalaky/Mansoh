@@ -1,11 +1,9 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
-
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
@@ -13,10 +11,8 @@ import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:readmore/readmore.dart';
-
 import '../../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_state.dart';
-import '../../../app/utils/lang/language_constants.dart';
 import '../ConfirmAdviseScreen/ConfirmAdviseScreen.dart';
 import '../Home/Home.dart';
 
@@ -47,8 +43,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
         ///
         ///
       } else {
-        MyApplication.showToastView(
-            message: '${getTranslated(context, 'noInternet')}');
+        MyApplication.showToastView(message: '${'noInternet'.tr}');
       }
     });
 
@@ -84,9 +79,6 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
     _subscription.cancel();
   }
 
-  String name = "";
-  String imagePhoto = "";
-
   @override
   Widget build(BuildContext context) {
     // todo if not connected display nointernet widget else continue to the rest build code
@@ -98,8 +90,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(
-          message: '${getTranslated(context, 'noInternet')}');
+      MyApplication.showToastView(message: '${'noInternet'.tr}');
       return NoInternetWidget(size: sizee);
     }
 
@@ -119,7 +110,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                   children: [
                     const SizedBox(height: 10),
                     Row(
-                      children:const [
+                      children: const [
                         Icon(
                           Icons.share_outlined,
                           size: 22,
@@ -154,8 +145,6 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                       );
                     } else if (advisorState is AdvisorProfileLoaded) {
                       final allData = advisorState.response!.data!;
-                      name = advisorState.response!.data!.fullName!;
-                      imagePhoto = advisorState.response!.data!.avatar!;
                       return Expanded(
                         child: Stack(
                           alignment: AlignmentDirectional.bottomCenter,
@@ -179,12 +168,19 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        child: Image.network(
-                                          allData.avatar!,
-                                          height: 130,
-                                          width: 130,
-                                          fit: BoxFit.cover,
-                                        ),
+                                        child: allData.avatar == ""
+                                            ? Image.asset(
+                                                'assets/images/PNG/no_profile_photo.png',
+                                                height: 130,
+                                                width: 130,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : Image.network(
+                                                allData.avatar!,
+                                                height: 130,
+                                                width: 130,
+                                                fit: BoxFit.cover,
+                                              ),
                                       ),
                                     ),
                                   ),
@@ -241,8 +237,8 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                     BorderRadius.circular(2)),
                                             child: Center(
                                                 child: Text(
-                                                  "محامي عام",
-                                                  // allData.category?[index].name??"",
+                                              "محامي عام",
+                                              // allData.category?[index].name??"",
                                               style: const TextStyle(
                                                   fontFamily:
                                                       Constants.mainFont,
@@ -251,7 +247,8 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                   fontSize: 10),
                                             )),
                                           ),
-                                          itemCount: allData.category?.length??0,
+                                          itemCount:
+                                              allData.category?.length ?? 0,
                                         ),
                                       ),
                                       Padding(
@@ -298,19 +295,20 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                         height: 20,
                                                       )),
                                                   RichText(
-                                                    text:  TextSpan(
-                                                        children: [
-                                                          TextSpan(
-                                                            text: allData.adviceCount.toString(),
-                                                            style: Constants
-                                                                .subtitleFontBold,
-                                                          ),
-                                                          const TextSpan(
-                                                            text: " نصيحة",
-                                                            style: Constants
-                                                                .subtitleFont,
-                                                          )
-                                                        ]),
+                                                    text: TextSpan(children: [
+                                                      TextSpan(
+                                                        text: allData
+                                                            .adviceCount
+                                                            .toString(),
+                                                        style: Constants
+                                                            .subtitleFontBold,
+                                                      ),
+                                                      const TextSpan(
+                                                        text: " نصيحة",
+                                                        style: Constants
+                                                            .subtitleFont,
+                                                      )
+                                                    ]),
                                                   )
                                                 ],
                                               ),
@@ -330,19 +328,18 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                         height: 20,
                                                       )),
                                                   RichText(
-                                                    text:  TextSpan(
-                                                        children: [
-                                                          TextSpan(
-                                                            text: allData.rate,
-                                                            style: Constants
-                                                                .subtitleFontBold,
-                                                          ),
-                                                          const TextSpan(
-                                                            text: " تقييم",
-                                                            style: Constants
-                                                                .subtitleFont,
-                                                          )
-                                                        ]),
+                                                    text: TextSpan(children: [
+                                                      TextSpan(
+                                                        text: allData.rate,
+                                                        style: Constants
+                                                            .subtitleFontBold,
+                                                      ),
+                                                      const TextSpan(
+                                                        text: " تقييم",
+                                                        style: Constants
+                                                            .subtitleFont,
+                                                      )
+                                                    ]),
                                                   )
                                                 ],
                                               ),
@@ -436,8 +433,11 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             2)),
-                                                            child:  Text(
-                                                              allData.document![index].file!,
+                                                            child: Text(
+                                                              allData
+                                                                  .document![
+                                                                      index]
+                                                                  .file!,
                                                               style: const TextStyle(
                                                                   fontFamily:
                                                                       Constants
@@ -469,9 +469,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                     MyApplication.navigateTo(
                                         context,
                                         ConfirmAdviseScreen(
-                                            id: widget.id,
-                                            name: name,
-                                            imagePhoto: imagePhoto));
+                                            adviserProfileData: allData));
                                   },
                                   txt: "طلب نصيحة",
                                   isBold: true,

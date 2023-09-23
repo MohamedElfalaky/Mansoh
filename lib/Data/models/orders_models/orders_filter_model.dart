@@ -9,7 +9,7 @@ OrdersFiltersModel ordersFiltersModelFromJson(dynamic str) => OrdersFiltersModel
 String ordersFiltersModelToJson(OrdersFiltersModel data) => json.encode(data.toJson());
 
 class OrdersFiltersModel {
-  List<Datum>? data;
+  List<OrderFilterData>? data;
   int? status;
   String? message;
   List<dynamic>? pagination;
@@ -22,7 +22,7 @@ class OrdersFiltersModel {
   });
 
   factory OrdersFiltersModel.fromJson(Map<String, dynamic> json) => OrdersFiltersModel(
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null ? [] : List<OrderFilterData>.from(json["data"]!.map((x) => OrderFilterData.fromJson(x))),
     status: json["status"],
     message: json["message"],
     pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
@@ -36,7 +36,7 @@ class OrdersFiltersModel {
   };
 }
 
-class Datum {
+class OrderFilterData {
   int? id;
   String? name;
   int? price;
@@ -44,7 +44,7 @@ class Datum {
   Status? status;
   Adviser? adviser;
 
-  Datum({
+  OrderFilterData({
     this.id,
     this.name,
     this.price,
@@ -53,11 +53,11 @@ class Datum {
     this.adviser,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    id: json["id"],
-    name: json["name"],
-    price: json["price"],
-    date: json["date"],
+  factory OrderFilterData.fromJson(Map<String, dynamic> json) => OrderFilterData(
+    id: json["id"]??0,
+    name: json["name"]??"",
+    price: json["price"]??0,
+    date: json["date"]??"",
     status: json["status"] == null ? null : Status.fromJson(json["status"]),
     adviser: json["adviser"] == null ? null : Adviser.fromJson(json["adviser"]),
   );

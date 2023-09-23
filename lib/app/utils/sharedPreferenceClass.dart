@@ -228,7 +228,6 @@ class SharedPrefs {
   void removeAmount() {
     sharedPrefs!.remove(cartAmount);
   }
-
   String getLanguage() {
     return sharedPrefs!.getString(langCode) ?? '';
   }
@@ -236,6 +235,7 @@ class SharedPrefs {
   setLanguage(String value) {
     sharedPrefs!.setString(langCode, value);
   }
+
 
   setIsCurrentAddress(bool value) {
     sharedPrefs!.setBool(currentAddress, value);
@@ -262,6 +262,5 @@ String currentAddress = 'currentAddress';
 String receiveMethodKey = 'receive_method_key';
 String cartamount = "amountcart";
 String currentAddredd = 'currentAddress';
-const String LAGUAGE_CODE = 'languageCode';
 String fcmkey = "Fcm_key";
 String idKey = "idKey";

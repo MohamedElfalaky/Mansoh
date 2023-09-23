@@ -13,10 +13,8 @@ class Constants {
   static const Color fontWarningColor = Color(0xFFFFAB00);
   static const Color secondaryFontColor = Color(0xFF444444);
   static const Color prefixContainerColor = Color(0xFFEEEEEE);
-
   static const Color whiteAppColor = Color(0xFFFFFFFF);
   static const Color outLineColor = Color(0xFFBDBDBD);
-
   // fonts
   static const String mainFont = 'Cairo';
 
@@ -91,6 +89,7 @@ class Constants {
       Color? fillColor,
       String? hintText,
       bool? isPrefexed,
+      bool? isSuffix,
       bool? isFilled,
       bool? isParagraphTextField}) {
     return isParagraphTextField == true
@@ -100,12 +99,12 @@ class Constants {
 
             // prefixIconColor: prefixColor,
             // suffixIconColor: suffixColor,
-            suffixIcon: Padding(
+            suffixIcon:isSuffix==true?  Padding(
               padding: const EdgeInsets.all(8),
               child: suffixIcon,
-            ),
+            ): null,
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             border: const OutlineInputBorder(
               gapPadding: 0,
               borderSide: BorderSide.none,
@@ -130,12 +129,12 @@ class Constants {
                   ),
             prefixIconColor: prefixColor,
             suffixIconColor: suffixColor,
-            suffixIcon: Padding(
-              padding: const EdgeInsets.all(8),
+            suffixIcon: isSuffix ==true ?  Padding(
+              padding: const EdgeInsets.all(3),
               child: suffixIcon,
-            ),
+            ): null,
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             border: const OutlineInputBorder(
               gapPadding: 0,
               borderSide: BorderSide(

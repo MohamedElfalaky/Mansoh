@@ -4,13 +4,13 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
 import '../../../Data/cubit/settings_cubits/privacy_cubit/privacy_state.dart';
 import '../../../app/Style/Icons.dart';
-import '../../../app/utils/lang/language_constants.dart';
 import '../../widgets/shared.dart';
 
 class TermsConditionsScreen extends StatefulWidget {
@@ -42,7 +42,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
         ///
       } else {
         MyApplication.showToastView(
-            message: '${getTranslated(context, 'noInternet')}');
+            message: '${ 'noInternet'.tr}');
       }
     });
 
@@ -89,7 +89,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
       });
     } else if (!isConnected!) {
       MyApplication.showToastView(
-          message: '${getTranslated(context, 'noInternet')}');
+          message: '${ 'noInternet'.tr}');
       return NoInternetWidget(size: sizee);
     }
 
@@ -102,7 +102,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
         resizeToAvoidBottomInset: false,
         backgroundColor: Constants.whiteAppColor,
         appBar: customAppBar(
-            context: context, txt: getTranslated(context, "terms_conditions")!),
+            context: context, txt:  "terms_conditions".tr),
         body: BlocBuilder<PrivacyCubit, PrivacyState>(
             builder: (context, privacyState) {
           if (privacyState is PrivacyLoading) {

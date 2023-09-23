@@ -20,7 +20,7 @@ class PayAdviceRepo {
         },
         headers: {
           'Accept': 'application/json',
-          'lang': selectedLang!,
+          'lang': selectedLang,
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

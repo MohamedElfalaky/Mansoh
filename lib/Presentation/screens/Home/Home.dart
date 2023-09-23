@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
 import 'package:nasooh/Presentation/screens/OnBoardong/OnBoarding.dart';
@@ -7,7 +8,6 @@ import 'package:nasooh/Presentation/screens/UserProfileScreens/userProfileSettin
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 
-import '../../../app/utils/lang/language_constants.dart';
 import '../UserProfileScreens/UserOrders/UserOrders.dart';
 
 class Home extends StatefulWidget {
@@ -61,16 +61,16 @@ class _HomeState extends State<Home> {
               BottomNavigationBarItem(
                 // activeIcon: SvgPicture.asset(tempPic),
                 icon: const Icon(Icons.home),
-                label: getTranslated(context, "Home")!,
+                label:  "Home".tr,
               ),
               BottomNavigationBarItem(
                   // activeIcon: SvgPicture.asset(tempPic),
                   icon: const Icon(Icons.shopping_bag),
-                  label: getTranslated(context, "My Orders")!),
+                  label:  "My Orders".tr),
               BottomNavigationBarItem(
                   // activeIcon: SvgPicture.asset(tempPic),
                   icon: const Icon(Icons.person),
-                  label: getTranslated(context, "My Account")!),
+                  label:  "My Account".tr),
             ],
           ),
         ),

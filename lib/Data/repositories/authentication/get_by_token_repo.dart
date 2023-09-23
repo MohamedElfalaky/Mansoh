@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 import '../../../app/utils/myApplication.dart';
@@ -17,7 +18,7 @@ class GetByTokenRepo {
         Uri.parse('${Keys.baseUrl}/client/auth/get_user'),
         headers: {
           'Accept': 'application/json',
-          'lang': selectedLang!,
+          'lang':  Get.locale?.languageCode ??"ar",
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
 

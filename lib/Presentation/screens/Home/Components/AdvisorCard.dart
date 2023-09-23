@@ -4,26 +4,15 @@ import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
 
+import '../../../../Data/models/home_models/advisor_list_model.dart';
+
 class AdvisorCard extends StatelessWidget {
   const AdvisorCard(
       {super.key,
-      required this.image,
-      // required this.thirdCategory,
-      required this.secondCategory,
-      required this.firstCategory,
-      required this.info,
-      required this.name,
-      required this.rate,
-      required this.description});
+      required this.adviserData,
+    n});
 
-  final String image;
-  final String info;
-  final String name;
-  final String rate;
-  final String description;
-  // final String thirdCategory;
-  final String firstCategory;
-  final String secondCategory;
+  final AdviserData adviserData;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +41,7 @@ class AdvisorCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundImage: NetworkImage(image, scale: 0.2),
+                backgroundImage: NetworkImage(adviserData.avatar??"", scale: 0.2),
                 // child: Image.network(
                 //
                 //   fit: BoxFit.cover,
@@ -68,12 +57,12 @@ class AdvisorCard extends StatelessWidget {
                   SizedBox(
                     width: width(context) * 0.6,
                     child: Text(
-                      name,
+                      adviserData.fullName??"",
                       style: Constants.secondaryTitleFont,
                     ),
                   ),
                   Text(
-                    description,
+                    adviserData.description??"",
                     style: Constants.subtitleFont,
                     textAlign: TextAlign.start,
                     maxLines: 2,
@@ -96,8 +85,8 @@ class AdvisorCard extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: const Color(0XFFEEEEEE)),
-                        child: Text(
-                          firstCategory,
+                        child: Text( "هندسي" ,
+                          // "adviserData.category?[0].name??""",
                           style: const TextStyle(
                               fontSize: 10,
                               fontFamily: Constants.mainFont,
@@ -112,8 +101,8 @@ class AdvisorCard extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
                             color: const Color(0XFFEEEEEE)),
-                        child: Text(
-                          secondCategory,
+                        child: Text( "هندسي",
+    // adviserData.category?[1].name??"",
                           style: const TextStyle(
                               fontSize: 10,
                               fontFamily: Constants.mainFont,
@@ -163,7 +152,7 @@ class AdvisorCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    rate,
+                    adviserData.rate??"",
                     style: Constants.secondaryTitleFont,
                   ),
                   const SizedBox(
@@ -185,7 +174,7 @@ class AdvisorCard extends StatelessWidget {
           SizedBox(
             // width: width(context) * 0.6,
             child: Text(
-              info,
+              adviserData.info??"",
               style: Constants.subtitleFont,
               textAlign: TextAlign.start,
               maxLines: 2,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nasooh/app/Style/sizes.dart';
-
+import 'package:get/get.dart';
+import '../../app/Style/Icons.dart';
 import '../../app/constants.dart';
-import '../../app/utils/lang/language_constants.dart';
 
 class GoBack extends StatelessWidget {
   const GoBack({
@@ -82,7 +81,7 @@ class Back extends StatelessWidget {
         const SizedBox(
           width: 16,
         ),
-        Text(getTranslated(context, header ?? "")!,
+        Text((header ?? "").tr,
             textAlign: TextAlign.right, style: Constants.headerNavigationFont),
       ],
     );
@@ -127,11 +126,16 @@ customAppBar({
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: SvgPicture.asset(
-                    'assets/images/SVGs/back.svg',
-                    width: 14,
-                    height: 14,
-                  ),
+                  icon: Get.locale!.languageCode == "ar"
+                      ? SvgPicture.asset(
+                          backArIcon,
+                          width: 14,
+                          height: 14,
+                        )
+                      : const Icon(
+                          Icons.arrow_back,
+                          color: Colors.black54,
+                        ),
                 ),
               ),
             ],
@@ -171,7 +175,7 @@ customABarNoIcon({
           ),
           Row(
             children: [
-               const SizedBox(
+              const SizedBox(
                 width: 50,
               ),
               Text(txt),

@@ -16,7 +16,7 @@ class LogOutRepo {
       http.Response response = await http
           .post(Uri.parse('${Keys.baseUrl}/client/auth/logout'), headers: {
         'Accept': 'application/json',
-        'lang': selectedLang!,
+        'lang': "ar",
         'Authorization': 'Bearer ${sharedPrefs.getToken()}',
       }, body: {
         'device': sharedPrefs.fCMToken,

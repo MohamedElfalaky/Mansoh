@@ -5,6 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/home/advisor_state.dart';
 import 'package:nasooh/Presentation/screens/Advisor/AdvisorScreen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/AdvisorCard.dart';
@@ -19,7 +20,7 @@ import '../../../Data/cubit/authentication/category_cubit/category_state.dart';
 import '../../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../../Data/cubit/home/home_slider_cubit.dart';
 import '../../../Data/cubit/home/home_state.dart';
-import '../../../app/utils/lang/language_constants.dart';
+import '../FilterScreen/FilterScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen();
@@ -70,8 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ///
         ///
       } else {
-        MyApplication.showToastView(
-            message: '${getTranslated(context, 'noInternet')}');
+        MyApplication.showToastView(message: '${'noInternet'.tr}');
       }
     });
 
@@ -123,8 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(
-          message: '${getTranslated(context, 'noInternet')}');
+      MyApplication.showToastView(message: '${'noInternet'.tr}');
       return NoInternetWidget(size: sizee);
     }
 
@@ -196,6 +195,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: SvgPicture.asset(
                                 searchIcon,
+                              ),
+                            ),
+                            isSuffix: true,
+                            suffixIcon: InkWell(
+                             onTap: (){
+                               MyApplication.navigateTo(context, FilterScreen());
+                             }, child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                // margin: const EdgeInsets.all(2.0),
+                                color: Constants.primaryAppColor.withOpacity(0.2),
+                                child: SvgPicture.asset(
+                                  filterIcon,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                             hintText: "ابحث باسم الناصح أو التخصص ...."),
@@ -378,22 +391,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 .data![index].id!));
                                   },
                                   child: AdvisorCard(
-                                    description: advisorState.adListResponse!
-                                        .data![index].description!,
-                                    info: advisorState
-                                        .adListResponse!.data![index].info!,
-                                    image: advisorState
-                                        .adListResponse!.data![index].avatar!,
-                                    name: advisorState
-                                        .adListResponse!.data![index].fullName!,
-                                    firstCategory: "",
-                                    // advisorState.adListResponse!
-                                    //     .data![index].category![0].id!
-                                    //     .toString(),
-                                    // secondCategory: advisorState.adListResponse!.data![index].category![1].name! ,
-                                    secondCategory: "هندسي",
-                                    // thirdCategory: advisorState.adListResponse!.data![index].category![2].name! ,
-                                    rate: "3",
+                                    adviserData: advisorState
+                                        .adListResponse!.data![index],
                                   )),
                             ),
                           );

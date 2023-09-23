@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/shared.dart';
 
@@ -45,7 +45,7 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text(getTranslated(context, "create_new_account")!,
+                            Text("create_new_account".tr,
                                 textAlign: TextAlign.right,
                                 style: Constants.headerNavigationFont),
                             const SizedBox(
@@ -58,7 +58,7 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                           height: 64,
                         ),
                         Text(
-                          "${getTranslated(context, "confirm_account_pin")!}\n${getTranslated(context, "verification_code")!}",
+                          "${"confirm_account_pin".tr}\n${"verification_code".tr}",
                           textAlign: TextAlign.right,
                           style: Constants.mainTitleRegularFont
                               .copyWith(height: 1.5),
@@ -77,7 +77,7 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                           height: 32,
                         ),
                         Text(
-                          getTranslated(context, "phone_number")!,
+                          "phone_number".tr,
                           textAlign: TextAlign.right,
                           style: Constants.mainTitleRegularFont,
                         ),
@@ -114,14 +114,14 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                             TextButton(
                               onPressed: () {},
                               child: Text(
-                                getTranslated(context, "terms_conditions")!,
+                                "terms_conditions".tr,
                                 textAlign: TextAlign.right,
                                 style: Constants.mainTitleRegularFont
                                     .copyWith(color: Constants.primaryAppColor),
                               ),
                             ),
                             Text(
-                              getTranslated(context, "agree_to")!,
+                              "agree_to".tr,
                               textAlign: TextAlign.right,
                               style: Constants.mainTitleRegularFont,
                             ),
@@ -147,7 +147,7 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: Text(getTranslated(context, "next")!,
+                            child: Text("next".tr,
                                 style: Constants.mainTitleRegularFont.copyWith(
                                     color: Constants.whiteAppColor,
                                     fontSize: 16)),
@@ -161,7 +161,7 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                getTranslated(context, "have_account")!,
+                                "have_account".tr,
                                 textAlign: TextAlign.right,
                                 style: Constants.subtitleRegularFontHint,
                               ),
@@ -175,7 +175,7 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                                   // );
                                 },
                                 child: Text(
-                                  getTranslated(context, "login")!,
+                                  "login".tr,
                                   textAlign: TextAlign.right,
                                   style: Constants.mainTitleRegularFont
                                       .copyWith(

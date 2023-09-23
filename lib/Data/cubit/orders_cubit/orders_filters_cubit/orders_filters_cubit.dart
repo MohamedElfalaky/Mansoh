@@ -6,7 +6,7 @@ class OrdersFiltersCubit extends Cubit<OrdersFiltersState> {
   OrdersFiltersCubit() : super(OrdersFiltersInitial());
   OrdersFiltersRepo ordersStatus = OrdersFiltersRepo();
 
-  getOrdersFilters(int id) async {
+  getOrdersFilters(String id) async {
     try {
       emit(OrdersFiltersLoading());
       final mList = await ordersStatus.getStatus( id);

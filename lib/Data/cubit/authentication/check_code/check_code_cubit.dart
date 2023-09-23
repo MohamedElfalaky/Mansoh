@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/RegisterationInfoScreen/registeration-info-screen.dart';
-import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
-import 'package:nasooh/app/utils/lang/language_constants.dart';
 import '../../../../Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../repositories/authentication/check_code_repo.dart';
@@ -51,13 +50,13 @@ Future<void> _showAlertDialog(BuildContext context) async {
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text(getTranslated(context, "dialog tile")!),
+                      Text( "dialog tile".tr),
                     ],
                   ),
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: Text(getTranslated(context, "No")!),
+                    child: Text( "No".tr),
                     onPressed: () {
                       MyApplication.navigateTo(context, const CheckMobScreen());
                     },
@@ -65,7 +64,7 @@ Future<void> _showAlertDialog(BuildContext context) async {
                   state is GetUserLoading
                       ? const Center(child: CircularProgressIndicator())
                       : TextButton(
-                          child: Text(getTranslated(context, "Yes")!),
+                          child: Text( "Yes".tr),
                           onPressed: () {
                             context.read<GetUserCubit>().getMobMethod(
                                   context: context,

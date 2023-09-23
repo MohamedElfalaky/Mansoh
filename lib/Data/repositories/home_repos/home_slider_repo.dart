@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:http/http.dart' as http;
 import '../../../../app/utils/myApplication.dart';
@@ -16,7 +17,7 @@ class HomeSliderRepo {
         Uri.parse('${Keys.baseUrl}/client/setting/home_slider/list'),
         headers: {
           'Accept': 'application/json',
-          'lang': selectedLang!,
+          'lang': Get.locale?.languageCode ??"ar",
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

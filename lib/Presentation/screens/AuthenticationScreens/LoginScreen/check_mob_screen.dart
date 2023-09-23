@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import '../../../../Data/cubit/authentication/new_mob/mob_cubit.dart';
 import '../../../../Data/cubit/authentication/new_mob/mob_state.dart';
 import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/lang/language_constants.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/PhoneTextField.dart';
 
@@ -109,7 +109,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 
                           SizedBox(height: height(context) * 0.08),
                           Text(
-                            getTranslated(context, "phone_number")!,
+                            "phone_number".tr,
                             textAlign: TextAlign.right,
                             style: Constants.mainTitleRegularFont,
                           ),
@@ -152,7 +152,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                                   sendPhone = phone.completeNumber;
                                 },
                                 invalidNumberMessage:
-                                    getTranslated(context, "invalid_number")!,
+                                    "invalid_number".tr,
                               ),
                             ),
                           ),
@@ -222,7 +222,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                                 height: 48,
                                 child: MyButton(
                                   isBold: true,
-                                  txt: getTranslated(context, "login_guest"),
+                                  txt: "login_guest".tr,
                                   onPressedHandler: () {},
                                 ),
                               ),
@@ -236,7 +236,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                           //       onPressed: () {},
                           //       child: Center(
                           //         child: Text(
-                          //           getTranslated(context, "login_guest")!,
+                          //           "login_guest")!,
                           //           style: Constants.secondaryTitleRegularFont.copyWith(
                           //             color: Colors.white,
                           //           ),
@@ -308,7 +308,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //                       //   height: 24,
 //                       // ),
 //                       Text(
-//                         getTranslated(context, "phone_number")!,
+//                         "phone_number")!,
 //                         textAlign: TextAlign.right,
 //                         style: Constants.mainTitleRegularFont,
 //                       ),
@@ -337,13 +337,13 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //                           print(phone.completeNumber);
 //                         },
 //                         invalidNumberMessage:
-//                             getTranslated(context, "invalid_number")!,
+//                             "invalid_number")!,
 //                       ),
 //                       const SizedBox(
 //                         height: 16,
 //                       ),
 //                       Text(
-//                         getTranslated(context, "password")!,
+//                         "password")!,
 //                         textAlign: TextAlign.right,
 //                         style: Constants.mainTitleRegularFont,
 //                       ),
@@ -358,7 +358,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //                                   context, "password_required")!;
 //                             }
 //                             if (value.length < 6) {
-//                               return getTranslated(context, "password_length")!;
+//                               return "password_length")!;
 //                             }
 //                             return null;
 //                           },
@@ -384,7 +384,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //                         child: ElevatedButton(
 //                           onPressed: () {},
 //                           child: Text(
-//                             getTranslated(context, "login")!,
+//                             "login")!,
 //                             style: Constants.secondaryTitleFont.copyWith(
 //                               color: Colors.white,
 //                             ),
@@ -395,7 +395,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //                         height: 16,
 //                       ),
 //                       Center(
-//                         child: Text(getTranslated(context, "forgot_password")!,
+//                         child: Text("forgot_password")!,
 //                             textAlign: TextAlign.center,
 //                             style: Constants.subtitleFont),
 //                       ),
@@ -404,7 +404,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //                       ),
 //                       SizedBox(
 //                           width: double.infinity,
-//                           child: Text(getTranslated(context, "no_account")!,
+//                           child: Text("no_account")!,
 //                               textAlign: TextAlign.center,
 //                               style: Constants.subtitleRegularFontHint)),
 //                       SizedBox(
@@ -412,7 +412,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //                         child: TextButton(
 //                             onPressed: (() {}),
 //                             child: Text(
-//                               getTranslated(context, "create_new_account")!,
+//                               "create_new_account")!,
 //                               style: Constants.mainTitleFont,
 //                             )),
 //                       ),
@@ -426,7 +426,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //                             onPressed: () {},
 //                             child: Center(
 //                               child: Text(
-//                                 getTranslated(context, "login_guest")!,
+//                                 "login_guest")!,
 //                                 style: Constants.secondaryTitleRegularFont
 //                                     .copyWith(
 //                                   color: Colors.white,

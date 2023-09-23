@@ -1,12 +1,14 @@
+import 'package:get/get.dart';
+
 /// vars with changeable values
 
   Map<String, String>? headers = {
     'Accept': 'application/json',
-    'lang': selectedLang!
+    'lang': selectedLang
     // 'lang': "ar"
   };
   // String? oldLang;
 
   String? androidRelease;
 
-String? selectedLang;
+String selectedLang =  Get.locale!.languageCode ;

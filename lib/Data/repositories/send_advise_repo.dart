@@ -23,7 +23,7 @@ class SendAdvise {
       http.Response response = await http
           .post(Uri.parse('${Keys.baseUrl}/client/advice/store'), headers: {
         'Accept': 'application/json',
-        'lang': selectedLang!,
+        'lang': selectedLang,
         "Authorization": "Bearer ${sharedPrefs.getToken()}"
       }, body: {
         'name': name,

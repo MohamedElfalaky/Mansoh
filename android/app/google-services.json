@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "952220104497",
-    "project_id": "clientnase7",
-    "storage_bucket": "clientnase7.appspot.com"
+    "project_number": "526947997667",
+    "project_id": "nasooh-fcdd1",
+    "storage_bucket": "nasooh-fcdd1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:952220104497:android:91bfe3d2d6da1d5f42a210",
+        "mobilesdk_app_id": "1:526947997667:android:e46993709ece93afd9b2d6",
+        "android_client_info": {
+          "package_name": "com.lundev.nasooh.NASE7"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsz6PN51RKAyP6ILW2P5lAbJj_L47NSTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526947997667:android:820da9bc4ca98bead9b2d6",
         "android_client_info": {
           "package_name": "com.lundev.nasooh.nasooh"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyALJBRda-LU8LtN5Fg30ywPOE-nkdQ0ZCQ"
+          "current_key": "AIzaSyCsz6PN51RKAyP6ILW2P5lAbJj_L47NSTg"
         }
       ],
       "services": {

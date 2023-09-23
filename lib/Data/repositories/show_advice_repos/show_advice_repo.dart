@@ -16,7 +16,7 @@ class ShowAdviceRepo {
         Uri.parse('${Keys.baseUrl}/client/advice/show/$adviceId'),
         headers: {
           'Accept': 'application/json',
-          'lang': selectedLang!,
+          'lang': selectedLang,
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

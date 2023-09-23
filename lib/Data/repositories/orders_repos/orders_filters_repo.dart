@@ -10,7 +10,7 @@ import '../../../app/utils/sharedPreferenceClass.dart';
 import '../../models/orders_models/orders_filter_model.dart';
 
 class OrdersFiltersRepo {
-  Future<OrdersFiltersModel?> getStatus(int id) async {
+  Future<OrdersFiltersModel?> getStatus(String id) async {
     try {
       http.Response response = await http.get(
         Uri.parse('${Keys.baseUrl}/client/advice/list?status_id=$id'),

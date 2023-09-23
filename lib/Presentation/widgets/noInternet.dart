@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/app/constants.dart';
-
-import '../../app/utils/lang/language_constants.dart';
 
 class NoInternetWidget extends StatelessWidget {
   const NoInternetWidget({
@@ -29,7 +28,7 @@ class NoInternetWidget extends StatelessWidget {
               height: size.height * 0.015,
             ),
             Text(
-              getTranslated(context, 'noInternet')!,
+               'noInternet'.tr,
               style: const TextStyle(color: Colors.black45, fontSize: 20.0),
             ),
             const Spacer(),
