@@ -146,8 +146,8 @@ class Document {
   });
 
   factory Document.fromJson(Map<String, dynamic> json) => Document(
-        id: json["id"],
-        file: json["file"],
+        id: json["id"]??0,
+        file: json["file"]??"",
       );
 
   Map<String, dynamic> toJson() => {

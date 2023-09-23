@@ -15,6 +15,7 @@ import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_state.dart';
+import '../../../Data/models/advice_screen_models/show_advice_model.dart';
 import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../../../app/Style/Icons.dart';
 import '../Advisor/AdvisorScreen.dart';
@@ -22,9 +23,9 @@ import '../CompleteAdviseScreen/CompleteAdviseScreen.dart';
 import '../ConfirmAdviseScreen/Components/OutlinedAdvisorCard.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key, required this.adviserProfileData});
+  const ChatScreen({super.key, required this.showAdviceData});
 
-  final AdviserProfileData adviserProfileData;
+  final ShowAdviceData showAdviceData;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -146,7 +147,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: OutlinedAdvisorCard(
-                        adviserProfileData: widget.adviserProfileData,
+                        adviserProfileData: widget.showAdviceData.adviser!,
                         isClickable: true,
                       ),
                     ),

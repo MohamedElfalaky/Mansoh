@@ -4,12 +4,14 @@
 
 import 'dart:convert';
 
+import '../advisor_profile_model/advisor_profile.dart';
+
 ShowAdviceModel showAdviceModelFromJson(dynamic str) => ShowAdviceModel.fromJson(str);
 
 String showAdviceModelToJson(ShowAdviceModel data) => json.encode(data.toJson());
 
 class ShowAdviceModel {
-  Data? data;
+  ShowAdviceData? data;
   int? status;
   String? message;
   List<dynamic>? pagination;
@@ -22,7 +24,7 @@ class ShowAdviceModel {
   });
 
   factory ShowAdviceModel.fromJson(Map<String, dynamic> json) => ShowAdviceModel(
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    data: json["data"] == null ? null : ShowAdviceData.fromJson(json["data"]),
     status: json["status"],
     message: json["message"],
     pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
@@ -36,16 +38,16 @@ class ShowAdviceModel {
   };
 }
 
-class Data {
+class ShowAdviceData {
   int? id;
-  Adviser? adviser;
+  AdviserProfileData? adviser;
   int? price;
   double? tax;
   double? total;
   Status? status;
   List<Chat>? chat;
 
-  Data({
+  ShowAdviceData({
     this.id,
     this.adviser,
     this.price,
@@ -55,9 +57,9 @@ class Data {
     this.chat,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory ShowAdviceData.fromJson(Map<String, dynamic> json) => ShowAdviceData(
     id: json["id"],
-    adviser: json["adviser"] == null ? null : Adviser.fromJson(json["adviser"]),
+    adviser: json["adviser"] == null ? null : AdviserProfileData.fromJson(json["adviser"]),
     price: json["price"]??0,
     tax: json["tax"]?.toDouble(),
     total: json["total"]?.toDouble(),
@@ -76,45 +78,7 @@ class Data {
   };
 }
 
-class Adviser {
-  int? id;
-  String? avatar;
-  String? fullName;
-  String? info;
-  String? description;
-  List<Status>? category;
-  String? rate;
 
-  Adviser({
-    this.id,
-    this.avatar,
-    this.fullName,
-    this.info,
-    this.description,
-    this.category,
-    this.rate,
-  });
-
-  factory Adviser.fromJson(Map<String, dynamic> json) => Adviser(
-    id: json["id"],
-    avatar: json["avatar"],
-    fullName: json["full_name"],
-    info: json["info"],
-    description: json["description"],
-    category: json["category"] == null ? [] : List<Status>.from(json["category"]!.map((x) => Status.fromJson(x))),
-    rate: json["rate"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "avatar": avatar,
-    "full_name": fullName,
-    "info": info,
-    "description": description,
-    "category": category == null ? [] : List<dynamic>.from(category!.map((x) => x.toJson())),
-    "rate": rate,
-  };
-}
 
 class Status {
   int? id;

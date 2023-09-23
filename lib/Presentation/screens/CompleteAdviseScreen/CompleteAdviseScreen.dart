@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:nasooh/Data/models/advice_screen_models/show_advice_model.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/CompleteAdvisorCard.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/PaymentCard.dart';
 import 'package:nasooh/Presentation/screens/Home/Home.dart';
+import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
@@ -117,17 +119,18 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
           floatingActionButton: BlocConsumer<PayAdviceCubit, PayAdviceState>(
               listener: (context, state) {
                 if (state is PayAdviceLoaded) {
-                  // MyApplication.navigateTo(
-                  //     context,
-                  //     CompleteAdviseScreen(
-                  //       adviceId: state.response!.data!.id.toString(),
-                  //       // imagePhoto: widget.imagePhoto,
-                  //       // name: widget.name,
-                  //       // id: widget.id,
-                  //     ));
-                  // MyApplication.showToastView(
-                  //     message: state.response?.data?.status?.name??""
-                  //     );
+                  MyApplication.navigateTo(
+                      context,
+                      ChatScreen(
+                        showAdviceData: state.response!.data! ,
+                        // adviceId: state.response!.data!.id!,
+                        // imagePhoto: widget.imagePhoto,
+                        // name: widget.name,
+                        // id: widget.id,
+                      ));
+                  MyApplication.showToastView(
+                      message: state.response?.data?.status?.name??""
+                      );
                 }
               },
               builder: (context, state) => state is PayAdviceLoading

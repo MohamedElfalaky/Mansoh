@@ -437,7 +437,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                               allData
                                                                   .document![
                                                                       index]
-                                                                  .file!,
+                                                                  .file??"",
                                                               style: const TextStyle(
                                                                   fontFamily:
                                                                       Constants
