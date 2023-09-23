@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/orders_cubit/orders_status_cubit/orders_status_cubit.dart';
 import 'package:nasooh/Data/cubit/orders_cubit/orders_status_cubit/orders_status_state.dart';
+import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
 import '../../../../../app/utils/myApplication.dart';
 import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_cubit.dart';
 import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_state.dart';
@@ -199,14 +200,15 @@ class _UserOrdersState extends State<UserOrders> {
                                                     context
                                                         .read<
                                                             OrdersFiltersCubit>()
-                                                        .getOrdersFilters(
-                                                            "");
+                                                        .getOrdersFilters("");
                                                   } else {
                                                     context
                                                         .read<
                                                             OrdersFiltersCubit>()
                                                         .getOrdersFilters(
-                                                            list[index].id.toString());
+                                                            list[index]
+                                                                .id
+                                                                .toString());
                                                     print(
                                                         "list[index].id! is ${list[index].id!}");
                                                   }
@@ -274,9 +276,16 @@ class _UserOrdersState extends State<UserOrders> {
                                   child: ListView.builder(
                                       itemCount: filtersList?.length ?? 0,
                                       itemBuilder: (context, index) {
-                                        return OrderCard(
-                                            orderFilterData:
-                                                filtersList![index]);
+                                        return InkWell(
+                                          onTap: () => MyApplication.navigateTo(
+                                              context,
+                                              ChatScreen(
+                                                  showAdviceData:
+                                                      filtersList[index])),
+                                          child: OrderCard(
+                                              orderFilterData:
+                                                  filtersList![index]),
+                                        );
                                       }),
                                 ),
                               );

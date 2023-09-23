@@ -6,11 +6,16 @@ class ShowAdviceCubit extends Cubit<ShowAdviceState> {
   ShowAdviceCubit() : super(ShowAdviceInitial());
   ShowAdviceRepo showAdviceRepo = ShowAdviceRepo();
 
-  getPay({required int adviceId}) async {
+  Future getAdviceFunction({required int adviceId}) async {
     try {
-      emit(ShowAdviceLoading());
-      final mList = await showAdviceRepo.getAdvice(adviceId: adviceId);
-      emit(ShowAdviceLoaded(mList));
+      // emit(ShowAdviceLoading());
+      showAdviceRepo.getAdvice(adviceId: adviceId).then((value) {
+        if (value != null) {
+          emit(ShowAdviceLoaded(value));
+        } else {
+          emit(ShowAdviceError());
+        }
+      });
     } catch (e) {
       emit(ShowAdviceError());
     }

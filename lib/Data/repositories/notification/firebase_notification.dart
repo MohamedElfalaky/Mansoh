@@ -17,6 +17,7 @@ class FirebaseCustomNotification {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (kDebugMode) {
         print('Notification foreground message: ${message.messageId}');
+
         print('Notification foreground data: ${message.data}');
         print('token $token');
       }
@@ -28,13 +29,18 @@ class FirebaseCustomNotification {
       if (kDebugMode) {
         print('Notification foreground message: ${message.messageId}');
         print('Notification foreground data: ${message.data}');
+        print('hellloooooooooo: ${message.notification.toString()}');
+
         print('token $token');
       }
     });
   }
 
- static Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    print("Notification background message: ${message.notification?.title??""}");
+  static Future<void> firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
+    print(
+        "Notification background message: ${message.notification?.title ?? ""}");
+    print('hellloooooooooo: ${message.notification.toString()}');
   }
 
   static Future<void> _initializeSettings() async {
@@ -52,6 +58,6 @@ class FirebaseCustomNotification {
   static Future<void> _initializeToken() async {
     token = await FirebaseMessaging.instance.getToken();
     sharedPrefs.setFCM(token!);
-    print( "token $token ");
+    print("token $token ");
   }
 }

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nasooh/Data/models/advice_screen_models/show_advice_model.dart';
 
 import '../../../../../Data/models/orders_models/orders_filter_model.dart';
 import '../../../../../app/constants.dart';
 import '../../UserProfileEdit/widgets/shared.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard(
-      {super.key,
-      required this.orderFilterData,
-      });
+  const OrderCard({
+    super.key,
+    required this.orderFilterData,
+  });
 
-  final OrderFilterData orderFilterData;
+  final ShowAdviceData orderFilterData;
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +46,11 @@ class OrderCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                orderFilterData.name ??"",
+                                "temp",
                                 style: Constants.secondaryTitleFont,
                               ),
                               Text(
-                                orderFilterData.date??"",
+                                "temp",
                                 style: Constants.subtitleRegularFont,
                               ),
                             ],
@@ -82,7 +83,7 @@ class OrderCard extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      orderFilterData. price.toString(),
+                      orderFilterData.price.toString(),
                       style: Constants.secondaryTitleFont.copyWith(
                         color: Constants.primaryAppColor,
                       ),
@@ -116,25 +117,25 @@ class OrderCard extends StatelessWidget {
                       foregroundColor: Colors.black87,
                       child: CircleAvatar(
                         radius: 24,
-                        backgroundImage:   orderFilterData.adviser!.avatar == ""
+                        backgroundImage: orderFilterData.adviser!.avatar == ""
                             ? const NetworkImage(
                                 "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png")
-                            : NetworkImage(  orderFilterData.adviser!.avatar!),
+                            : NetworkImage(orderFilterData.adviser!.avatar!),
                       ),
                     ),
                     title: Text(
-                      orderFilterData.adviser?.fullName??"",
+                      orderFilterData.adviser?.fullName ?? "",
                       style: Constants.secondaryTitleFont,
                     ),
-                    subtitle:  Text(
-                      orderFilterData.adviser?.info??"",
+                    subtitle: Text(
+                      orderFilterData.adviser?.info ?? "",
                       style: Constants.subtitleRegularFont,
                     ),
                     trailing: FittedBox(
                       child: Row(
                         children: [
                           Text(
-                            orderFilterData.adviser?.rate??"",
+                            orderFilterData.adviser?.rate ?? "",
                             style: Constants.secondaryTitleFont,
                           ),
                           const SizedBox(
@@ -154,8 +155,8 @@ class OrderCard extends StatelessWidget {
           ),
           Positioned(
             top: 40,
-            left:  Get.locale!.languageCode =="ar" ?5 : null,
-            right:  Get.locale!.languageCode =="ar" ?null: 5,
+            left: Get.locale!.languageCode == "ar" ? 5 : null,
+            right: Get.locale!.languageCode == "ar" ? null : 5,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               // width: 60,
@@ -166,8 +167,8 @@ class OrderCard extends StatelessWidget {
                     bottomRight: Radius.circular(5),
                     topRight: Radius.circular(5),
                   )),
-              child:  Center(
-                child: Text(  orderFilterData.status?.name??"",
+              child: Center(
+                child: Text(orderFilterData.status?.name ?? "",
                     textAlign: TextAlign.center,
                     style: Constants.subtitleRegularFont),
               ),

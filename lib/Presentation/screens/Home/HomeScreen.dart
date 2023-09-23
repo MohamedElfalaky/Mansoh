@@ -65,7 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
     MyApplication.checkConnection().then((value) {
       if (value) {
         //////
-        // todo recall data
+        context.read<HomeSliderCubit>().getDataHomeSlider();
+        context.read<AdvisorListCubit>().getAdvisorList();
+        getDataFromApi();
+
         ///
         ///
         ///
@@ -92,14 +95,15 @@ class _HomeScreenState extends State<HomeScreen> {
         /// call your apis
         // todo recall data
         ///
-        ///
-        ///
-        ///
+
+        context.read<HomeSliderCubit>().getDataHomeSlider();
+        context.read<AdvisorListCubit>().getAdvisorList();
+        getDataFromApi();
       }
     });
-    context.read<HomeSliderCubit>().getDataHomeSlider();
-    context.read<AdvisorListCubit>().getAdvisorList();
-    getDataFromApi();
+    // context.read<HomeSliderCubit>().getDataHomeSlider();
+    // context.read<AdvisorListCubit>().getAdvisorList();
+    // getDataFromApi();
   }
 
   @override
@@ -199,12 +203,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             isSuffix: true,
                             suffixIcon: InkWell(
-                             onTap: (){
-                               MyApplication.navigateTo(context, FilterScreen());
-                             }, child: Container(
+                              onTap: () {
+                                MyApplication.navigateTo(
+                                    context, FilterScreen());
+                              },
+                              child: Container(
                                 padding: const EdgeInsets.all(8.0),
                                 // margin: const EdgeInsets.all(2.0),
-                                color: Constants.primaryAppColor.withOpacity(0.2),
+                                color:
+                                    Constants.primaryAppColor.withOpacity(0.2),
                                 child: SvgPicture.asset(
                                   filterIcon,
                                   fit: BoxFit.fill,

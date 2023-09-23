@@ -55,8 +55,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
         ///
         ///
       } else {
-        MyApplication.showToastView(
-            message: '${ 'noInternet'.tr}');
+        MyApplication.showToastView(message: '${'noInternet'.tr}');
       }
     });
 
@@ -82,7 +81,9 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
         ///
       }
     });
-    context.read<ShowAdviceCubit>().getPay(adviceId: widget.adviceId);
+    context
+        .read<ShowAdviceCubit>()
+        .getAdviceFunction(adviceId: widget.adviceId);
     print("widget.adviceId is ${widget.adviceId}");
     context.read<PaymentListCubit>().getPay();
     context.read<GetByTokenCubit>().getDataGetByToken();
@@ -105,8 +106,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(
-          message: '${ 'noInternet'.tr}');
+      MyApplication.showToastView(message: '${'noInternet'.tr}');
       return NoInternetWidget(size: sizee);
     }
 
@@ -122,15 +122,14 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                   MyApplication.navigateTo(
                       context,
                       ChatScreen(
-                        showAdviceData: state.response!.data! ,
+                        showAdviceData: state.response!.data!,
                         // adviceId: state.response!.data!.id!,
                         // imagePhoto: widget.imagePhoto,
                         // name: widget.name,
                         // id: widget.id,
                       ));
                   MyApplication.showToastView(
-                      message: state.response?.data?.status?.name??""
-                      );
+                      message: state.response?.data?.status?.name ?? "");
                 }
               },
               builder: (context, state) => state is PayAdviceLoading
@@ -185,10 +184,12 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                   name: showAdviceState
                                           .response?.data?.adviser?.fullName ??
                                       "",
-                                  moneyPut:
-                                      showAdviceState.response!.data!.price.toString() ,
-                                  taxVal:
-                                      showAdviceState.response?.data?.tax?.toStringAsFixed(2) ?? "",
+                                  moneyPut: showAdviceState
+                                      .response!.data!.price
+                                      .toString(),
+                                  taxVal: showAdviceState.response?.data?.tax
+                                          ?.toStringAsFixed(2) ??
+                                      "",
                                 );
                               } else {
                                 return const SizedBox();
@@ -207,26 +208,23 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
-                              } else
-                              if (getByTokenState is GetByTokenLoaded) {
+                              } else if (getByTokenState is GetByTokenLoaded) {
                                 print(
                                     ".response?.data? is ${getByTokenState.response?.data.toString()}");
                                 return Expanded(
                                   child: ListView.builder(
-                                      itemCount: state.response?.data?.length??0,
-                                      itemBuilder: (context , int index) =>
-
-                                      PaymentCard(
-                                        payMethod:
-                                        state.response?.data?[index].name ?? "",
-                                        walletVal:
-                                        getByTokenState.response?.data?.wallet ??
-                                            "",
-                                      )),
-                                )
-
-
-                                ;
+                                      itemCount:
+                                          state.response?.data?.length ?? 0,
+                                      itemBuilder: (context, int index) =>
+                                          PaymentCard(
+                                            payMethod: state.response
+                                                    ?.data?[index].name ??
+                                                "",
+                                            walletVal: getByTokenState
+                                                    .response?.data?.wallet ??
+                                                "",
+                                          )),
+                                );
                               } else {
                                 return const SizedBox();
                               }

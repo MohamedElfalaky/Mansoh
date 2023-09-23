@@ -44,7 +44,7 @@ dependencies:
   fluttertoast: ^8.1.2
   connectivity_plus: ^3.0.2
   responsive_framework: ^0.2.0
-  intl: ^0.17.0
+  intl: ^0.18.1
   flutter_spinkit: ^5.1.0
   intl_phone_field: ^3.1.0
   password_text_field: ^1.1.0
@@ -62,14 +62,13 @@ dependencies:
   image_picker:
   flutter_launcher_icons: ^0.13.1
   file_picker: ^5.2.4
-#  flutter_pdfview: ^1.0.2
+  #  flutter_pdfview: ^1.0.2
   syncfusion_flutter_pdfviewer:
   get: ^4.6.5
   firebase_messaging: ^14.6.7
   flutter_local_notifications: ^15.1.1
   firebase_core: ^2.15.1
   url_launcher:
-
 
 dev_dependencies:
   flutter_test:
