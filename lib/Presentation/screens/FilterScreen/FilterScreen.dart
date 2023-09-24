@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/FilterScreen/Components/CompleteAdvisorCard.dart';
 import 'package:nasooh/Presentation/screens/FilterScreen/Components/PaymentCard.dart';
+import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
@@ -21,7 +22,8 @@ import '../../../app/Style/sizes.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
+  const FilterScreen({super.key,  this.searchTxt});
+  final String ?searchTxt ;
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
@@ -98,7 +100,14 @@ class _FilterScreenState extends State<FilterScreen> {
             height: 50,
             child: MyButton(
               onPressedHandler: () {
-                print(selectedItems.map((e) => e.id).toList());
+                List<String?> idList = selectedItems.map((category) => category.id.toString()).toList();
+                String idString = idList.join(', ');
+                print(idString);
+                print(initialRate);
+                print(widget.searchTxt);
+                MyApplication.navigateTo(context, HomeScreen(catVal:idString ,
+                searchTxt: widget.searchTxt,
+                rateVal: initialRate,));
               },
               txt: "تصفية",
               isBold: true,

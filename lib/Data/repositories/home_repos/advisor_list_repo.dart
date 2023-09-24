@@ -10,10 +10,11 @@ import '../../../app/utils/sharedPreferenceClass.dart';
 import '../../models/home_models/advisor_list_model.dart';
 
 class AdvisorListRepo {
-  Future<AdvisorListModel?> getAdList() async {
+  Future<AdvisorListModel?> getAdList(
+      {String? catVal, String ?searchTxt, double? rateVal}) async {
     try {
       http.Response response = await http.get(
-        Uri.parse('${Keys.baseUrl}/client/adviser/list'),
+        Uri.parse('${Keys.baseUrl}/client/adviser/list?category=$catVal&name=$searchTxt&rate=$rateVal'),
         headers: {
           'Accept': 'application/json',
           // 'lang': selectedLang!,

@@ -23,7 +23,11 @@ import '../../../Data/cubit/home/home_state.dart';
 import '../FilterScreen/FilterScreen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen();
+  const HomeScreen({super.key, this.catVal, this.searchTxt, this.rateVal});
+
+  final String? catVal;
+  final String? searchTxt;
+  final double? rateVal;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,6 +35,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeController homeController = HomeController();
+  final TextEditingController searchController =TextEditingController();
   late StreamSubscription<ConnectivityResult> subscription;
   bool? isConnected;
   final controller = PageController(initialPage: 0);
@@ -66,7 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
       if (value) {
         //////
         context.read<HomeSliderCubit>().getDataHomeSlider();
-        context.read<AdvisorListCubit>().getAdvisorList();
+        context.read<AdvisorListCubit>().getAdvisorList(
+            catVal: widget.catVal ?? "",
+            searchTxt: widget.searchTxt ?? "",
+            rateVal: widget.rateVal);
         getDataFromApi();
 
         ///
@@ -97,7 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ///
 
         context.read<HomeSliderCubit>().getDataHomeSlider();
-        context.read<AdvisorListCubit>().getAdvisorList();
+        context.read<AdvisorListCubit>().getAdvisorList(
+            catVal: widget.catVal ?? "",
+            searchTxt: widget.searchTxt ?? "",
+            rateVal: widget.rateVal);
         getDataFromApi();
       }
     });
@@ -192,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 16,
                       ),
-                      TextField(
+                      TextField(controller: searchController,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: Padding(
                               padding:
@@ -205,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             suffixIcon: InkWell(
                               onTap: () {
                                 MyApplication.navigateTo(
-                                    context, FilterScreen());
+                                    context, FilterScreen(searchTxt: searchController.text ));
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
