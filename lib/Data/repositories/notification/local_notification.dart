@@ -50,21 +50,24 @@ class CustomLocalNotification {
   }
 
   static void showFlutterNotification(RemoteMessage message) async {
-    var msg = jsonDecode(message.notification!.body!);
+    // var msg = jsonDecode(message.notification!.body!);
+    // var msg = jsonDecode(message.data["advice_id"]);
+    // var msg = jsonDecode(message.data["is_chat"]);
 
-    print('notification response: ${msg["body"]}');
-    print('notification response: ${msg["advice_id"]}');
-    print('notification response: ${msg["is_chat"]}');
+    // print('notification response: ${msg["body"]}');
+    print('notification response: ${message.data}');
+    print('notification response: ${message.data["advice_id"]}');
+    print('notification response: ${message.data["is_chat"]}');
     print('notification Contxt: ${Keys.navigatorKey.currentContext}');
     print(
         'notification secon contxt: ${Keys.navigatorKey.currentState!.context}');
     print('notification response: ${message.notification!.body!}');
 
-    if (Keys.navigatorKey.currentState!.context != null &&
-        msg["is_chat"] == 1) {
+    if (message.data["is_chat"] == "1") {
+      print("render chat");
       Keys.navigatorKey.currentState!.context
           .read<ShowAdviceCubit>()
-          .getAdviceFunction(adviceId: msg["advice_id"])
+          .getAdviceFunction(adviceId: int.parse(message.data["advice_id"]))
           .then((value) => print("hello $value"));
     }
 
@@ -74,7 +77,7 @@ class CustomLocalNotification {
       flutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
-        msg["body"],
+        notification.body,
         NotificationDetails(
           android: AndroidNotificationDetails(
             channel.id,

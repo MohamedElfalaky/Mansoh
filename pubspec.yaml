@@ -44,7 +44,7 @@ dependencies:
   fluttertoast: ^8.1.2
   connectivity_plus: ^3.0.2
   responsive_framework: ^0.2.0
-  intl: ^0.17.0
+  intl: ^0.18.1
   flutter_spinkit: ^5.1.0
   intl_phone_field: ^3.1.0
   password_text_field: ^1.1.0
@@ -70,6 +70,7 @@ dependencies:
   firebase_core: ^2.15.1
   url_launcher:
   flutter_rating_bar: ^4.0.1
+  audioplayers: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -102,6 +103,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/
     - assets/images/
     - assets/images/SVGs/
     # - assets/images/Jsons/
