@@ -280,8 +280,11 @@ class _UserOrdersState extends State<UserOrders> {
                                           onTap: () => MyApplication.navigateTo(
                                               context,
                                               ChatScreen(
-                                                  showAdviceData:
-                                                      filtersList[index])),
+                                                adviceId:
+                                                    filtersList[index].id!,
+                                                adviserProfileData:
+                                                    filtersList[index].adviser,
+                                              )),
                                           child: OrderCard(
                                               orderFilterData:
                                                   filtersList![index]),

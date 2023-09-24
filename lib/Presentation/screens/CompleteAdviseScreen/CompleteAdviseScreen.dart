@@ -122,7 +122,8 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                   MyApplication.navigateTo(
                       context,
                       ChatScreen(
-                        showAdviceData: state.response!.data!,
+                        adviceId: state.response!.data!.id!,
+                        adviserProfileData:  state.response!.data!.adviser,
                         // adviceId: state.response!.data!.id!,
                         // imagePhoto: widget.imagePhoto,
                         // name: widget.name,

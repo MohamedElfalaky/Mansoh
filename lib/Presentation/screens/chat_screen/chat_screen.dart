@@ -15,13 +15,16 @@ import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 
 import '../../../Data/models/advice_screen_models/show_advice_model.dart';
+import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../../../app/Style/Icons.dart';
 import '../ConfirmAdviseScreen/Components/OutlinedAdvisorCard.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key, required this.showAdviceData});
+  const ChatScreen(
+      {super.key, this.adviserProfileData, required this.adviceId});
 
-  final ShowAdviceData showAdviceData;
+  final AdviserProfileData? adviserProfileData;
+  final int adviceId;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -47,7 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
       if (value) {
         context
             .read<ShowAdviceCubit>()
-            .getAdviceFunction(adviceId: widget.showAdviceData.id!);
+            .getAdviceFunction(adviceId: widget.adviceId);
         //////
         // todo recall data
         ///
@@ -75,7 +78,7 @@ class _ChatScreenState extends State<ChatScreen> {
       if (result != ConnectivityResult.none) {
         context
             .read<ShowAdviceCubit>()
-            .getAdviceFunction(adviceId: widget.showAdviceData.id!);
+            .getAdviceFunction(adviceId: widget.adviceId);
 
         /// call your apis
         // todo recall data
@@ -124,7 +127,7 @@ class _ChatScreenState extends State<ChatScreen> {
               if (state is SendChatLoaded) {
                 context
                     .read<ShowAdviceCubit>()
-                    .getAdviceFunction(adviceId: widget.showAdviceData.id!);
+                    .getAdviceFunction(adviceId: widget.adviceId);
               }
             },
           ),
@@ -171,7 +174,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: OutlinedAdvisorCard(
-                          adviserProfileData: widget.showAdviceData.adviser!,
+                          adviserProfileData: widget.adviserProfileData!,
                           isClickable: true,
                         ),
                       ),
@@ -285,8 +288,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 .read<SendChatCubit>()
                                                 .sendChatFunction(
                                                     msg: _textController.text,
-                                                    adviceId: widget
-                                                        .showAdviceData.id
+                                                    adviceId: widget.adviceId
                                                         .toString());
                                           }
                                         } else {
