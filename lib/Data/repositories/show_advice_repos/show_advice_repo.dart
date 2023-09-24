@@ -23,11 +23,11 @@ class ShowAdviceRepo {
 
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        debugPrint("responseMap.toString() is ${responseMap.toString()}" );
+        debugPrint("responseMap.toString() is ${responseMap.toString()}");
         final adviceShowResult = showAdviceModelFromJson(responseMap);
         return adviceShowResult;
       } else {
-        MyApplication.showToastView(message: responseMap["message"]);
+        // MyApplication.showToastView(message: responseMap["message"]);
       }
     } on TimeoutException catch (e) {
       MyApplication.showToastView(message: e.toString());
@@ -39,7 +39,7 @@ class ShowAdviceRepo {
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e,st) {
+    } on Error catch (e, st) {
       if (kDebugMode) {
         print(e);
         print(st);

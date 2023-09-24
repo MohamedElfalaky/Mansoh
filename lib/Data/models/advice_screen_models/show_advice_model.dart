@@ -6,9 +6,11 @@ import 'dart:convert';
 
 import '../advisor_profile_model/advisor_profile.dart';
 
-ShowAdviceModel showAdviceModelFromJson(dynamic str) => ShowAdviceModel.fromJson(str);
+ShowAdviceModel showAdviceModelFromJson(dynamic str) =>
+    ShowAdviceModel.fromJson(str);
 
-String showAdviceModelToJson(ShowAdviceModel data) => json.encode(data.toJson());
+String showAdviceModelToJson(ShowAdviceModel data) =>
+    json.encode(data.toJson());
 
 class ShowAdviceModel {
   ShowAdviceData? data;
@@ -23,19 +25,25 @@ class ShowAdviceModel {
     this.pagination,
   });
 
-  factory ShowAdviceModel.fromJson(Map<String, dynamic> json) => ShowAdviceModel(
-    data: json["data"] == null ? null : ShowAdviceData.fromJson(json["data"]),
-    status: json["status"],
-    message: json["message"],
-    pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
-  );
+  factory ShowAdviceModel.fromJson(Map<String, dynamic> json) =>
+      ShowAdviceModel(
+        data:
+            json["data"] == null ? null : ShowAdviceData.fromJson(json["data"]),
+        status: json["status"],
+        message: json["message"],
+        pagination: json["pagination"] == null
+            ? []
+            : List<dynamic>.from(json["pagination"]!.map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data?.toJson(),
-    "status": status,
-    "message": message,
-    "pagination": pagination == null ? [] : List<dynamic>.from(pagination!.map((x) => x)),
-  };
+        "data": data?.toJson(),
+        "status": status,
+        "message": message,
+        "pagination": pagination == null
+            ? []
+            : List<dynamic>.from(pagination!.map((x) => x)),
+      };
 }
 
 class ShowAdviceData {
@@ -58,27 +66,31 @@ class ShowAdviceData {
   });
 
   factory ShowAdviceData.fromJson(Map<String, dynamic> json) => ShowAdviceData(
-    id: json["id"],
-    adviser: json["adviser"] == null ? null : AdviserProfileData.fromJson(json["adviser"]),
-    price: json["price"]??0,
-    tax: json["tax"]?.toDouble(),
-    total: json["total"]?.toDouble(),
-    status: json["status"] == null ? null : Status.fromJson(json["status"]),
-    chat: json["chat"] == null ? [] : List<Chat>.from(json["chat"]!.map((x) => Chat.fromJson(x))),
-  );
+        id: json["id"],
+        adviser: json["adviser"] == null
+            ? null
+            : AdviserProfileData.fromJson(json["adviser"]),
+        price: json["price"] ?? 0,
+        tax: json["tax"]?.toDouble(),
+        total: json["total"]?.toDouble(),
+        status: json["status"] == null ? null : Status.fromJson(json["status"]),
+        chat: json["chat"] == null
+            ? []
+            : List<Chat>.from(json["chat"]!.map((x) => Chat.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "adviser": adviser?.toJson(),
-    "price": price,
-    "tax": tax,
-    "total": total,
-    "status": status?.toJson(),
-    "chat": chat == null ? [] : List<dynamic>.from(chat!.map((x) => x.toJson())),
-  };
+        "id": id,
+        "adviser": adviser?.toJson(),
+        "price": price,
+        "tax": tax,
+        "total": total,
+        "status": status?.toJson(),
+        "chat": chat == null
+            ? []
+            : List<dynamic>.from(chat!.map((x) => x.toJson())),
+      };
 }
-
-
 
 class Status {
   int? id;
@@ -90,14 +102,14 @@ class Status {
   });
 
   factory Status.fromJson(Map<String, dynamic> json) => Status(
-    id: json["id"],
-    name: json["name"],
-  );
+        id: json["id"],
+        name: json["name"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-  };
+        "id": id,
+        "name": name,
+      };
 }
 
 class Chat {
@@ -118,22 +130,27 @@ class Chat {
   });
 
   factory Chat.fromJson(Map<String, dynamic> json) => Chat(
-    id: json["id"],
-    adviser: json["adviser"],
-    client: json["client"] == null ? null : Client.fromJson(json["client"]),
-    message: json["message"],
-    mediaType: json["media_type"],
-    document: json["document"] == null ? [] : List<Document>.from(json["document"]!.map((x) => Document.fromJson(x))),
-  );
+        id: json["id"],
+        adviser: json["adviser"],
+        client: json["client"] == null ? null : Client.fromJson(json["client"]),
+        message: json["message"],
+        mediaType: json["media_type"],
+        document: json["document"] == null
+            ? []
+            : List<Document>.from(
+                json["document"]!.map((x) => Document.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "adviser": adviser,
-    "client": client?.toJson(),
-    "message": message,
-    "media_type": mediaType,
-    "document": document == null ? [] : List<dynamic>.from(document!.map((x) => x.toJson())),
-  };
+        "id": id,
+        "adviser": adviser,
+        "client": client?.toJson(),
+        "message": message,
+        "media_type": mediaType,
+        "document": document == null
+            ? []
+            : List<dynamic>.from(document!.map((x) => x.toJson())),
+      };
 }
 
 class Client {
@@ -148,16 +165,16 @@ class Client {
   });
 
   factory Client.fromJson(Map<String, dynamic> json) => Client(
-    id: json["id"],
-    avatar: json["avatar"],
-    fullName: json["full_name"],
-  );
+        id: json["id"],
+        avatar: json["avatar"],
+        fullName: json["full_name"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "avatar": avatar,
-    "full_name": fullName,
-  };
+        "id": id,
+        "avatar": avatar,
+        "full_name": fullName,
+      };
 }
 
 class Document {
@@ -170,12 +187,12 @@ class Document {
   });
 
   factory Document.fromJson(Map<String, dynamic> json) => Document(
-    id: json["id"],
-    file: json["file"],
-  );
+        id: json["id"],
+        file: json["file"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "file": file,
-  };
+        "id": id,
+        "file": file,
+      };
 }
