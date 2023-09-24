@@ -69,6 +69,7 @@ dependencies:
   flutter_local_notifications: ^15.1.1
   firebase_core: ^2.15.1
   url_launcher:
+  flutter_rating_bar: ^4.0.1
 
 
 dev_dependencies:

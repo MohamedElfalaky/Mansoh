@@ -18,6 +18,7 @@ import '../../../Data/cubit/authentication/category_cubit/category_state.dart';
 import '../../../Data/models/Auth_models/category_model.dart';
 import '../../../app/Style/Icons.dart';
 import '../../../app/Style/sizes.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -31,6 +32,8 @@ class _FilterScreenState extends State<FilterScreen> {
   late StreamSubscription<ConnectivityResult> _subscription;
   bool? isConnected;
   List<CategoryData> selectedItems = [];
+  bool pressed = false;
+  double initialRate = 0.0;
 
   @override
   void initState() {
@@ -38,12 +41,7 @@ class _FilterScreenState extends State<FilterScreen> {
 
     MyApplication.checkConnection().then((value) {
       if (value) {
-        //////
-        // todo recall data
-        ///
-        ///
-        ///
-        ///
+        context.read<CategoryCubit>().getCategories();
       } else {
         MyApplication.showToastView(message: '${'noInternet'.tr}');
       }
@@ -63,15 +61,9 @@ class _FilterScreenState extends State<FilterScreen> {
 
       /// if internet comes back
       if (result != ConnectivityResult.none) {
-        /// call your apis
-        // todo recall data
-        ///
-        ///
-        ///
-        ///
+        context.read<CategoryCubit>().getCategories();
       }
     });
-    context.read<CategoryCubit>().getCategories();
   }
 
   @override
@@ -104,9 +96,10 @@ class _FilterScreenState extends State<FilterScreen> {
         floatingActionButton: Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
             height: 50,
-            child:  MyButton(onPressedHandler: (){
-              print(selectedItems.map((e) => e.id).toList());
-            },
+            child: MyButton(
+              onPressedHandler: () {
+                print(selectedItems.map((e) => e.id).toList());
+              },
               txt: "تصفية",
               isBold: true,
             )),
@@ -191,34 +184,11 @@ class _FilterScreenState extends State<FilterScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              scrollable: true,
-                              content: SizedBox(
-                                height: 300,
-                                width: MediaQuery.of(context).size.width,
-                                child: ListView.separated(
-                                  separatorBuilder: (context, int index) =>
-                                      const Divider(),
-                                  itemBuilder: (context, int index) => InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          selectedItems
-                                              .add(catList[index]);
-                                          // catList.remove(catList[index]);
-                                        });
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Center(
-                                          child: Text(catList[index].name!))),
-                                  itemCount: catList.length,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                        onTap: () {
+                          setState(() {
+                            pressed = !pressed;
+                          });
+                        },
                         child: TextField(
                           enabled: false,
                           decoration: Constants.setTextInputDecoration(
@@ -231,12 +201,145 @@ class _FilterScreenState extends State<FilterScreen> {
                               hintText: "اختر المجال أو التخصص..."),
                         ),
                       ),
+                      pressed
+                          ? Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border:
+                                      Border.all(color: Colors.grey.shade200)),
+                              height: 300,
+                              width: MediaQuery.of(context).size.width,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: ListView.separated(
+                                separatorBuilder: (context, int index) =>
+                                    const Divider(),
+                                itemCount: catList.length,
+                                itemBuilder: (context, int index) => ExpansionTile(
+                                    tilePadding: const EdgeInsets.all(0),
+                                    // leading: SizedBox(
+                                    //     height: 24,
+                                    //     width: 24,
+                                    //     child: Checkbox(value: false, onChanged: (s) {})),
+                                    title: Row(
+                                      children: [
+                                        SizedBox(
+                                            height: 24,
+                                            width: 24,
+                                            child: Checkbox(
+                                                side: MaterialStateBorderSide
+                                                    .resolveWith(
+                                                  (states) => const BorderSide(
+                                                    width: 1.0,
+                                                    color: Constants
+                                                        .primaryAppColor,
+                                                  ),
+                                                ),
+                                                value: catList[index].selected,
+                                                onChanged: (bool? s) {
+                                                  setState(() {
+                                                    catList[index].selected = s;
+                                                    if (catList[index]
+                                                            .selected ==
+                                                        true) {
+                                                      selectedItems
+                                                          .add(catList[index]);
+                                                    } else {
+                                                      selectedItems.remove(
+                                                          catList[index]);
+                                                    }
+                                                  });
+
+                                                  // print(selectedItems
+                                                  //     .toSet()
+                                                  //     .length);
+                                                  // print(selectedItems
+                                                  //     .toSet()
+                                                  //     .toList());
+                                                })),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            catList[index].name!,
+                                            style: Constants.secondaryTitleFont,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    children: catList[index]
+                                        .children!
+                                        .map(
+                                          (e) => Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                    .only(
+                                                start: 12,
+                                                end: 4,
+                                                top: 4,
+                                                bottom: 4),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                    height: 24,
+                                                    width: 24,
+                                                    child: Checkbox(
+                                                        value: e.selected,
+                                                        side:
+                                                            MaterialStateBorderSide
+                                                                .resolveWith(
+                                                          (states) =>
+                                                              const BorderSide(
+                                                            width: 1.0,
+                                                            color: Constants
+                                                                .primaryAppColor,
+                                                          ),
+                                                        ),
+                                                        onChanged: (s) {
+                                                          setState(() {
+                                                            e.selected = s;
+                                                            if (e.selected ==
+                                                                true) {
+                                                              selectedItems
+                                                                  .add(e);
+                                                            } else {
+                                                              selectedItems
+                                                                  .remove(e);
+                                                            }
+                                                          });
+                                                          print(selectedItems
+                                                              .toSet()
+                                                              .length);
+                                                          print(selectedItems
+                                                              .toSet()
+                                                              .toList());
+                                                          for (var ids
+                                                              in selectedItems) {
+                                                            print(ids.id);
+                                                          }
+                                                        })),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Text(
+                                                  e.name!,
+                                                  style: Constants
+                                                      .secondaryTitleRegularFont,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                        .toList()),
+                              ),
+                            )
+                          : const SizedBox(),
                       SizedBox(
-                          height: height(context) * 0.4,
                           width: width(context),
                           child: Wrap(
                             direction: Axis.horizontal,
                             children: selectedItems
+                                .toSet()
                                 .map((e) => Container(
                                           margin:
                                               const EdgeInsetsDirectional.only(
@@ -295,18 +398,44 @@ class _FilterScreenState extends State<FilterScreen> {
                                     )
                                 .toList(),
                           )
-
-                          // ListView.builder(
-                          //   itemCount: selectedItems.length,
-                          //   itemBuilder: (context, index) {
-                          //     return Container(height: 20,
-                          //       child: ListTile(
-                          //         title: Text(selectedItems[index].toString()),
-                          //       ),
-                          //     );
-                          //   },
-                          // ),
+                          //
+                          //     // ListView.builder(
+                          //     //   itemCount: selectedItems.length,
+                          //     //   itemBuilder: (context, index) {
+                          //     //     return Container(height: 20,
+                          //     //       child: ListTile(
+                          //     //         title: Text(selectedItems[index].toString()),
+                          //     //       ),
+                          //     //     );
+                          //     //   },
+                          //     // ),
                           ),
+                      selectedItems.toSet().length > 1
+                          ? Divider(
+                              thickness: 1,
+                            )
+                          : SizedBox(),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      const Text(
+                        "التقييم",
+                        style: Constants.mainTitleFont,
+                      ),
+                      RatingBar.builder(
+                        initialRating: initialRate,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemSize: 40.0,
+                        itemBuilder: (context, _) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          initialRate = rating;
+                          // print(initialRate);
+                        },
+                      ),
                     ],
                   ),
                 ));
