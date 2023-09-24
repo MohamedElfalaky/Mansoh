@@ -138,7 +138,7 @@ class _ChatScreenState extends State<ChatScreen> {
               if (state is ShowAdviceLoaded) {
                 // _textController.clear();
 
-                AudioPlayer().play(AssetSource("assets/click.wav"));
+                AudioPlayer().play(AssetSource("click.wav"));
               }
             },
           ),
@@ -283,34 +283,33 @@ class _ChatScreenState extends State<ChatScreen> {
                                   builder: (context, state3) {
                                     return InkWell(
                                       onTap: () {
+                                        if (state2 is ShowAdviceLoading ||
+                                            state3 is SendChatLoading) {
+                                          return;
+                                        }
+
                                         MyApplication.dismissKeyboard(context);
 
-                                        if (state2 is ShowAdviceLoaded &&
-                                            state3 is SendChatLoaded) {
-                                          MyApplication.checkConnection()
-                                              .then((value) {
-                                            if (value) {
-                                              if (_textController
-                                                  .text.isEmpty) {
-                                                MyApplication.showToastView(
-                                                    message:
-                                                        "لا يمكن ارسال رسالة فارغة!");
-                                              } else {
-                                                context
-                                                    .read<SendChatCubit>()
-                                                    .sendChatFunction(
-                                                        msg: _textController
-                                                            .text,
-                                                        adviceId: widget
-                                                            .adviceId
-                                                            .toString());
-                                              }
-                                            } else {
+                                        MyApplication.checkConnection()
+                                            .then((value) {
+                                          if (value) {
+                                            if (_textController.text.isEmpty) {
                                               MyApplication.showToastView(
-                                                  message: "لا يوجد اتصال");
+                                                  message:
+                                                      "لا يمكن ارسال رسالة فارغة!");
+                                            } else {
+                                              context
+                                                  .read<SendChatCubit>()
+                                                  .sendChatFunction(
+                                                      msg: _textController.text,
+                                                      adviceId: widget.adviceId
+                                                          .toString());
                                             }
-                                          });
-                                        } else {}
+                                          } else {
+                                            MyApplication.showToastView(
+                                                message: "لا يوجد اتصال");
+                                          }
+                                        });
                                       },
                                       child:
                                           //  state is ShowAdviceLoading
