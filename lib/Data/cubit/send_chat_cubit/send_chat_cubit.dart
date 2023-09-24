@@ -21,7 +21,7 @@ class SendChatCubit extends Cubit<SendChatState> {
         if (value == true) {
           emit(SendChatLoaded());
 
-          MyApplication.showToastView(message: "new msg sent succecflly");
+          // MyApplication.showToastView(message: "new msg sent succecflly");
         } else {
           emit(SendChatError());
         }

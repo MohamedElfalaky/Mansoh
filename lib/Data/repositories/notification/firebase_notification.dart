@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
+import 'package:nasooh/Data/repositories/notification/local_notification.dart';
 import 'package:nasooh/app/utils/sharedPreferenceClass.dart';
 
 class FirebaseCustomNotification {
@@ -41,6 +42,8 @@ class FirebaseCustomNotification {
     print(
         "Notification background message: ${message.notification?.title ?? ""}");
     print('hellloooooooooo: ${message.notification.toString()}');
+
+    // CustomLocalNotification.showFlutterNotification(message);
   }
 
   static Future<void> _initializeSettings() async {

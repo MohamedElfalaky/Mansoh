@@ -8,6 +8,7 @@ import 'package:nasooh/app/utils/sharedPreferenceClass.dart';
 import '../constants.dart';
 
 class MyApplication {
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static double hightClc(BuildContext context, int myHeight) {
     return MediaQuery.of(context).size.height * myHeight / 812;

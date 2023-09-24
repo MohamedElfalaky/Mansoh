@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/Home.dart';
 import 'package:nasooh/app/constants.dart';
+import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'Data/repositories/notification/firebase_notification.dart';
@@ -170,14 +171,11 @@ class _PreHomeState extends State<PreHome> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    FirebaseMessaging.onMessage.listen((remoteMessage) {
-      CustomLocalNotification.showFlutterNotification(
-          message: remoteMessage, context: context);
-    });
-    FirebaseMessaging.onMessageOpenedApp.listen((remoteMessage) {
-      CustomLocalNotification.showFlutterNotification(
-          message: remoteMessage, context: context);
-    });
+
+    FirebaseMessaging.onMessage
+        .listen(CustomLocalNotification.showFlutterNotification);
+    FirebaseMessaging.onMessageOpenedApp
+        .listen((CustomLocalNotification.showFlutterNotification));
   }
 
   @override
