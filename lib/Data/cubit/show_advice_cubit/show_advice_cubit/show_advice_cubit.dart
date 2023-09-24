@@ -8,7 +8,7 @@ class ShowAdviceCubit extends Cubit<ShowAdviceState> {
 
   Future getAdviceFunction({required int adviceId}) async {
     try {
-      // emit(ShowAdviceLoading());
+      emit(ShowAdviceLoading());
       showAdviceRepo.getAdvice(adviceId: adviceId).then((value) {
         if (value != null) {
           emit(ShowAdviceLoaded(value));

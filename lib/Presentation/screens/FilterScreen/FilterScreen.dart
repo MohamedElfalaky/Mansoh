@@ -3,6 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/FilterScreen/Components/CompleteAdvisorCard.dart';
@@ -18,7 +19,6 @@ import '../../../Data/cubit/authentication/category_cubit/category_state.dart';
 import '../../../Data/models/Auth_models/category_model.dart';
 import '../../../app/Style/Icons.dart';
 import '../../../app/Style/sizes.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -273,7 +273,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                         .map(
                                           (e) => Padding(
                                             padding: const EdgeInsetsDirectional
-                                                    .only(
+                                                .only(
                                                 start: 12,
                                                 end: 4,
                                                 top: 4,

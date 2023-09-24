@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -128,13 +129,16 @@ class _ChatScreenState extends State<ChatScreen> {
                 context
                     .read<ShowAdviceCubit>()
                     .getAdviceFunction(adviceId: widget.adviceId);
+                _textController.clear();
               }
             },
           ),
           BlocListener<ShowAdviceCubit, ShowAdviceState>(
             listener: (context, state) {
               if (state is ShowAdviceLoaded) {
-                _textController.clear();
+                // _textController.clear();
+
+                AudioPlayer().play(AssetSource("assets/click.wav"));
               }
             },
           ),
@@ -180,6 +184,9 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                       Expanded(
                           child: BlocBuilder<ShowAdviceCubit, ShowAdviceState>(
+                        buildWhen: (previous, current) {
+                          return current is! ShowAdviceLoading;
+                        },
                         builder: (context, state) {
                           if (state is ShowAdviceLoaded) {
                             return ListView.builder(
@@ -226,9 +233,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               child: Text("Error"),
                             );
                           } else {
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
+                            return Center(child: CircularProgressIndicator());
                           }
                         },
                       )),
@@ -272,57 +277,76 @@ class _ChatScreenState extends State<ChatScreen> {
                               ),
                             ),
                             BlocBuilder<ShowAdviceCubit, ShowAdviceState>(
-                              builder: (context, state) {
-                                return InkWell(
-                                  onTap: () {
-                                    if (state is ShowAdviceLoaded) {
-                                      MyApplication.checkConnection()
-                                          .then((value) {
-                                        if (value) {
-                                          if (_textController.text.isEmpty) {
-                                            MyApplication.showToastView(
-                                                message:
-                                                    "لا يمكن ارسال رسالة فارغة!");
-                                          } else {
-                                            context
-                                                .read<SendChatCubit>()
-                                                .sendChatFunction(
-                                                    msg: _textController.text,
-                                                    adviceId: widget.adviceId
-                                                        .toString());
-                                          }
-                                        } else {
-                                          MyApplication.showToastView(
-                                              message: "لا يوجد اتصال");
-                                        }
-                                      });
-                                    } else {}
+                              builder: (context, state2) {
+                                return BlocBuilder<SendChatCubit,
+                                    SendChatState>(
+                                  builder: (context, state3) {
+                                    return InkWell(
+                                      onTap: () {
+                                        MyApplication.dismissKeyboard(context);
+
+                                        if (state2 is ShowAdviceLoaded &&
+                                            state3 is SendChatLoaded) {
+                                          MyApplication.checkConnection()
+                                              .then((value) {
+                                            if (value) {
+                                              if (_textController
+                                                  .text.isEmpty) {
+                                                MyApplication.showToastView(
+                                                    message:
+                                                        "لا يمكن ارسال رسالة فارغة!");
+                                              } else {
+                                                context
+                                                    .read<SendChatCubit>()
+                                                    .sendChatFunction(
+                                                        msg: _textController
+                                                            .text,
+                                                        adviceId: widget
+                                                            .adviceId
+                                                            .toString());
+                                              }
+                                            } else {
+                                              MyApplication.showToastView(
+                                                  message: "لا يوجد اتصال");
+                                            }
+                                          });
+                                        } else {}
+                                      },
+                                      child:
+                                          //  state is ShowAdviceLoading
+                                          //     ? Center(
+                                          //         child: CircularProgressIndicator(),
+                                          //       )
+                                          //     :
+                                          Container(
+                                              margin:
+                                                  const EdgeInsetsDirectional
+                                                      .only(start: 8),
+                                              padding: const EdgeInsets.all(10),
+                                              height: 40,
+                                              width: 40,
+                                              decoration: state3
+                                                      is SendChatLoading
+                                                  ? BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      color: Colors.grey)
+                                                  : BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15),
+                                                      color: const Color(
+                                                          0XFF273043)),
+                                              child: SvgPicture.asset(
+                                                sendChat,
+                                                color: state3 is SendChatLoading
+                                                    ? const Color.fromARGB(
+                                                        255, 57, 53, 53)
+                                                    : null,
+                                              )),
+                                    );
                                   },
-                                  child: Container(
-                                      margin: const EdgeInsetsDirectional.only(
-                                          start: 8),
-                                      padding: const EdgeInsets.all(10),
-                                      height: 40,
-                                      width: 40,
-                                      decoration:
-                                          //  state is ShowAdviceLoaded
-                                          //     ?
-                                          BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              color: const Color(0XFF273043)),
-                                      // : BoxDecoration(
-                                      //     borderRadius:
-                                      //         BorderRadius.circular(15),
-                                      //     color: Colors.grey),
-                                      child: SvgPicture.asset(
-                                        sendChat,
-                                        // color:
-                                        // state is ShowAdviceLoaded
-                                        //     ? null
-                                        //     : const Color.fromARGB(
-                                        //         255, 57, 53, 53),
-                                      )),
                                 );
                               },
                             )
