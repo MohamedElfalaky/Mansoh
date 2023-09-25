@@ -52,3 +52,4 @@ const String categoriesIcon = "assets/images/SVGs/categories_icon.svg";
 ///
 
 const String handIcon = "assets/images/Jsons/hand.json";
+const String dialogIcon = "assets/images/reject.gif";

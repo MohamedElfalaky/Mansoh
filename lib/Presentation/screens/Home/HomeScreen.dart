@@ -35,7 +35,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeController homeController = HomeController();
-  final TextEditingController searchController =TextEditingController();
+  final TextEditingController searchController = TextEditingController();
   late StreamSubscription<ConnectivityResult> subscription;
   bool? isConnected;
   final controller = PageController(initialPage: 0);
@@ -203,7 +203,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 16,
                       ),
-                      TextField(controller: searchController,
+                      TextField(
+                        controller: searchController,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: Padding(
                               padding:
@@ -216,7 +217,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             suffixIcon: InkWell(
                               onTap: () {
                                 MyApplication.navigateTo(
-                                    context, FilterScreen(searchTxt: searchController.text ));
+                                    context,
+                                    FilterScreen(
+                                        searchTxt: searchController.text));
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
@@ -329,37 +332,81 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
-                                    // scrollDirection: Axis.horizontal,
-                                    children: catList
-                                        .map(
-                                          (e) => InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                catList.forEach((element) {
-                                                  element.selected = false;
-                                                });
-                                                e.selected = true;
-                                              });
-                                            },
-                                            child: Container(
-                                                margin: const EdgeInsets.only(
-                                                    left: 16),
-                                                child: Text(
-                                                  e.name ?? '',
-                                                  style: e.selected == true
-                                                      ? const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontFamily: Constants
-                                                              .mainFont,
-                                                          fontSize: 16)
-                                                      : const TextStyle(
-                                                          fontFamily: Constants
-                                                              .mainFont),
-                                                )),
-                                          ),
-                                        )
-                                        .toList()),
+                                  children: [
+                                    InkWell(
+                                      onTap: () => context
+                                          .read<AdvisorListCubit>()
+                                          .getAdvisorList(
+                                              catVal: "", searchTxt: ""),
+                                      child: Container(
+                                          margin:
+                                              const EdgeInsets.only(left: 16),
+                                          child: const Text(
+                                            "الكل",
+                                            style:
+                                                // e.selected == true
+                                                //     ?
+                                                // TextStyle(
+                                                //     fontWeight:
+                                                //         FontWeight.bold,
+                                                //     fontFamily:
+                                                //         Constants.mainFont,
+                                                //     fontSize: 16)
+                                                // :
+                                                const TextStyle(
+                                                    fontFamily:
+                                                        Constants.mainFont),
+                                          )),
+                                    ),
+                                    Row(
+                                        // scrollDirection: Axis.horizontal,
+                                        children: catList
+                                            .map(
+                                              (e) => InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    catList.forEach((element) {
+                                                      element.selected = false;
+                                                    });
+                                                    e.selected = true;
+                                                    context
+                                                        .read<
+                                                            AdvisorListCubit>()
+                                                        .getAdvisorList(
+                                                            catVal:
+                                                                e.id.toString(),
+                                                            searchTxt: widget
+                                                                    .searchTxt ??
+                                                                "",
+                                                            rateVal:
+                                                                widget.rateVal);
+                                                  });
+                                                },
+                                                child: Container(
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            left: 16),
+                                                    child: Text(
+                                                      e.name ?? '',
+                                                      style: e.selected == true
+                                                          ? const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  Constants
+                                                                      .mainFont,
+                                                              fontSize: 16)
+                                                          : const TextStyle(
+                                                              fontFamily:
+                                                                  Constants
+                                                                      .mainFont),
+                                                    )),
+                                              ),
+                                            )
+                                            .toList()),
+                                  ],
+                                ),
                               ));
                         } else if (categoryState is CategoryError) {
                           return const SizedBox();

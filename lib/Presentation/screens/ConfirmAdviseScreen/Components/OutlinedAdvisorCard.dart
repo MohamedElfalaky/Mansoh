@@ -6,13 +6,16 @@ import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
 
 import '../../../../Data/models/advisor_profile_model/advisor_profile.dart';
+import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/MyButton.dart';
+import '../../rejections/reject_screen.dart';
 
 class OutlinedAdvisorCard extends StatelessWidget {
   const OutlinedAdvisorCard(
-      {super.key, required this.adviserProfileData, required this.isClickable});
+      {super.key, required this.adviserProfileData, required this.isClickable , required this.adviceId});
 
   final AdviserProfileData adviserProfileData;
+  final int adviceId ;
   final bool isClickable;
 
   @override
@@ -213,7 +216,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                   isBold: true,
                                   txt: "اعتراض",
                                   onPressedHandler: () {
-                                    // MyApplication.navigateTo(context, RegectOrder());
+                                    MyApplication.navigateTo(context,  RejectScreen(adviceId:adviceId,));
                                   },
                                 ),
                               ),

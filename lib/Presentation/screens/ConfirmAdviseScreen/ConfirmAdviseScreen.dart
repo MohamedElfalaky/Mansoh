@@ -19,9 +19,7 @@ import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_state.dart';
 import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
-import '../Advisor/AdvisorScreen.dart';
 import '../CompleteAdviseScreen/CompleteAdviseScreen.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class ConfirmAdviseScreen extends StatefulWidget {
   const ConfirmAdviseScreen({
@@ -172,6 +170,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                     children: [
                       // SizedBox(height: 15,),
                       OutlinedAdvisorCard(
+                        adviceId: 1,
                         adviserProfileData: widget.adviserProfileData,
                         isClickable: false,
                       ),

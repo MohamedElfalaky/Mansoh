@@ -178,6 +178,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: OutlinedAdvisorCard(
+                          adviceId: widget.adviceId,
                           adviserProfileData: widget.adviserProfileData!,
                           isClickable: true,
                         ),
