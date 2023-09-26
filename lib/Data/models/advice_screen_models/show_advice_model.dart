@@ -66,7 +66,7 @@ class ShowAdviceData {
   });
 
   factory ShowAdviceData.fromJson(Map<String, dynamic> json) => ShowAdviceData(
-        id: json["id"],
+        id: json["id"]??0,
         adviser: json["adviser"] == null
             ? null
             : AdviserProfileData.fromJson(json["adviser"]),

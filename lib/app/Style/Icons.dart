@@ -48,6 +48,7 @@ const String backArIcon = "assets/images/SVGs/back.svg";
 const String filterIcon = "assets/images/SVGs/filter_icon.svg";
 const String recycleIcon = "assets/images/SVGs/recycle.svg";
 const String categoriesIcon = "assets/images/SVGs/categories_icon.svg";
+const String topRated = "assets/images/SVGs/top-rated 1.svg";
 ///////////////////// Jsons////////
 ///
 

@@ -1,10 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
 
+import '../../../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_cubit.dart';
+import '../../../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_state.dart';
 import '../../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/MyButton.dart';
@@ -12,10 +15,14 @@ import '../../rejections/reject_screen.dart';
 
 class OutlinedAdvisorCard extends StatelessWidget {
   const OutlinedAdvisorCard(
-      {super.key, required this.adviserProfileData, required this.isClickable , required this.adviceId});
+      {super.key,
+      required this.adviserProfileData,
+      required this.isClickable,
+      required this.adviceId});
 
   final AdviserProfileData adviserProfileData;
-  final int adviceId ;
+  final int adviceId;
+
   final bool isClickable;
 
   @override
@@ -66,11 +73,11 @@ class OutlinedAdvisorCard extends StatelessWidget {
                               //       )
                               //     :
                               CircleAvatar(
-                                      radius: 22,
-                                      backgroundImage: NetworkImage(
-                                        adviserProfileData.avatar ?? "",
-                                      ),
-                                    ),
+                                radius: 22,
+                                backgroundImage: NetworkImage(
+                                  adviserProfileData.avatar ?? "",
+                                ),
+                              ),
                               const SizedBox(
                                 width: 8,
                               ),
@@ -198,17 +205,26 @@ class OutlinedAdvisorCard extends StatelessWidget {
                               Flexible(
                                 flex: 3,
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.only(
-                                      end: 10.0),
-                                  child: MyButton(
-                                    isBold: true,
-                                    txt: "استلام",
-                                    onPressedHandler: () {
-                                      // MyApplication.navigateTo(
-                                      //     context, RegistrationStage7());
-                                    },
-                                  ),
-                                ),
+                                    padding: const EdgeInsetsDirectional.only(
+                                        end: 10.0),
+                                    child: BlocBuilder<DoneAdviceCubit,
+                                            DoneAdviceState>(
+                                        builder: (context, doneState) => doneState
+                                                is DoneAdviceLoading
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : MyButton(
+                                                isBold: true,
+                                                txt: "استلام",
+                                                onPressedHandler: () {
+                                                  context
+                                                      .read<DoneAdviceCubit>()
+                                                      .done(
+                                                          context: context,
+                                                          adviceId: adviceId);
+                                                },
+                                              ))),
                               ),
                               Flexible(
                                 flex: 2,
@@ -216,7 +232,11 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                   isBold: true,
                                   txt: "اعتراض",
                                   onPressedHandler: () {
-                                    MyApplication.navigateTo(context,  RejectScreen(adviceId:adviceId,));
+                                    MyApplication.navigateTo(
+                                        context,
+                                        RejectScreen(
+                                          adviceId: adviceId,
+                                        ));
                                   },
                                 ),
                               ),

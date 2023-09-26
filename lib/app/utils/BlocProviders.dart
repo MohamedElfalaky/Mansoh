@@ -3,6 +3,7 @@ import 'package:nasooh/Data/cubit/send_chat_cubit/send_chat_cubit.dart';
 import 'package:nasooh/Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
 import '../../Data/cubit/authentication/category_cubit/category_cubit.dart';
+import '../../Data/cubit/authentication/category_parent_cubit/category_parent_cubit.dart';
 import '../../Data/cubit/authentication/check_code/check_code_cubit.dart';
 import '../../Data/cubit/authentication/city_cubit/city_cubit.dart';
 import '../../Data/cubit/authentication/country_cubit/country_cubit.dart';
@@ -58,4 +59,5 @@ List<SingleChildWidget> providers = [
   BlocProvider<SendChatCubit>(create: (context) => SendChatCubit()),
   BlocProvider<ListRejectionCubit>(create: (context) => ListRejectionCubit()),
   BlocProvider<PostRejectCubit>(create: (context) => PostRejectCubit()),
+  BlocProvider<CategoryParentCubit>(create: (context) => CategoryParentCubit()),
 ];

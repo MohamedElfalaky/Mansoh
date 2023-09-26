@@ -7,11 +7,11 @@ import 'package:nasooh/Data/models/Auth_models/category_model.dart';
 import '../../../../app/keys.dart';
 import '../../../../app/utils/myApplication.dart';
 
-class CategoryRepo {
+class CategoryParentRepo {
   Future<CategoryModel?> getData() async {
     try {
       http.Response response = await http.get(
-        Uri.parse('${Keys.baseUrl}/client/coredata/category/list'),
+        Uri.parse('${Keys.baseUrl}/client/coredata/category/list/parent'),
         // headers: GlobalVars().headers,
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
@@ -44,5 +44,3 @@ class CategoryRepo {
     return null;
   }
 }
-
-

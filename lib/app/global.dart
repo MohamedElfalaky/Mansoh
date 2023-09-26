@@ -11,4 +11,4 @@ import 'package:get/get.dart';
 
   String? androidRelease;
 
-String selectedLang =  Get.locale!.languageCode ;
+String selectedLang =  Get.locale?.languageCode ??"ar" ;

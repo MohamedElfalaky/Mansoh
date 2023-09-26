@@ -191,6 +191,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                           }
                           return null;
                         },
+                        autovalidateMode:AutovalidateMode.onUserInteraction ,
                         controller: requestTitle,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: MyPrefixWidget(),
@@ -229,9 +230,13 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             prefixIcon: MyPrefixWidget(),
                              isSuffix: true,
                             hintText: "0.00",
-                            suffixIcon: const Text(
-                              "ريال سعودي",
-                              style: Constants.secondaryTitleRegularFont,
+                            suffixIcon: Column(mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  "ريال سعودي",
+                                  style: Constants.secondaryTitleRegularFont,
+                                ),
+                              ],
                             )),
                       ),
                       Padding(
@@ -261,7 +266,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             }
                             return null;
                           },
-                          controller: descriptionController,
+                          controller: descriptionController,autovalidateMode: AutovalidateMode.onUserInteraction,
                           maxLength: 700,
                           maxLines: 5,
                           decoration: Constants.setTextInputDecoration(

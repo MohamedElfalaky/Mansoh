@@ -17,6 +17,8 @@ import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../Data/cubit/authentication/category_cubit/category_cubit.dart';
 import '../../../Data/cubit/authentication/category_cubit/category_state.dart';
+import '../../../Data/cubit/authentication/category_parent_cubit/category_parent_cubit.dart';
+import '../../../Data/cubit/authentication/category_parent_cubit/category_parent_state.dart';
 import '../../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../../Data/cubit/home/home_slider_cubit.dart';
 import '../../../Data/cubit/home/home_state.dart';
@@ -45,8 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
 // bool select = false ;
 
   Future<void> getDataFromApi() async {
-    await context.read<CategoryCubit>().getCategories();
-    var profileCubit = CategoryCubit.get(context);
+    await context.read<CategoryParentCubit>().getCategoryParent();
+    // var profileCubit = CategoryParentCubit.get(context);
     // select = profileCubit.categoryModel?.data?[0].selected??true;
   }
 
@@ -318,13 +320,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ///
                       ///
                       ///////////////////// Filter bar
-                      BlocBuilder<CategoryCubit, CategoryState>(
+                      BlocBuilder<CategoryParentCubit, CategoryParentState>(
                           builder: (context, categoryState) {
-                        if (categoryState is CategoryLoading) {
+                        if (categoryState is CategoryParentLoading) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
-                        } else if (categoryState is CategoryLoaded) {
+                        } else if (categoryState is CategoryParentLoaded) {
                           final catList = categoryState.response?.data ?? [];
                           return Container(
                               width: double.infinity,
@@ -333,31 +335,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   children: [
-                                    InkWell(
-                                      onTap: () => context
-                                          .read<AdvisorListCubit>()
-                                          .getAdvisorList(
-                                              catVal: "", searchTxt: ""),
-                                      child: Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 16),
-                                          child: const Text(
-                                            "الكل",
-                                            style:
-                                                // e.selected == true
-                                                //     ?
-                                                // TextStyle(
-                                                //     fontWeight:
-                                                //         FontWeight.bold,
-                                                //     fontFamily:
-                                                //         Constants.mainFont,
-                                                //     fontSize: 16)
-                                                // :
-                                                const TextStyle(
-                                                    fontFamily:
-                                                        Constants.mainFont),
-                                          )),
-                                    ),
                                     Row(
                                         // scrollDirection: Axis.horizontal,
                                         children: catList
@@ -369,17 +346,27 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       element.selected = false;
                                                     });
                                                     e.selected = true;
-                                                    context
-                                                        .read<
-                                                            AdvisorListCubit>()
-                                                        .getAdvisorList(
-                                                            catVal:
-                                                                e.id.toString(),
-                                                            searchTxt: widget
-                                                                    .searchTxt ??
-                                                                "",
-                                                            rateVal:
-                                                                widget.rateVal);
+                                                    if (e.id == 0) {
+                                                      context
+                                                          .read<
+                                                              AdvisorListCubit>()
+                                                          .getAdvisorList(
+                                                            catVal: "",
+                                                            searchTxt: "",
+                                                          );
+                                                    } else {
+                                                      context
+                                                          .read<
+                                                              AdvisorListCubit>()
+                                                          .getAdvisorList(
+                                                              catVal: e.id
+                                                                  .toString(),
+                                                              searchTxt: widget
+                                                                      .searchTxt ??
+                                                                  "",
+                                                              rateVal: widget
+                                                                  .rateVal);
+                                                    }
                                                   });
                                                 },
                                                 child: Container(
@@ -408,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 ),
                               ));
-                        } else if (categoryState is CategoryError) {
+                        } else if (categoryState is CategoryParentError) {
                           return const SizedBox();
                         } else {
                           return const SizedBox();

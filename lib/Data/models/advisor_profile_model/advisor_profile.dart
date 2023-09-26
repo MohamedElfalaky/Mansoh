@@ -69,14 +69,14 @@ class AdviserProfileData {
   });
 
   factory AdviserProfileData.fromJson(Map<String, dynamic> json) => AdviserProfileData(
-        id: json["id"],
-        avatar: json["avatar"],
-        description: json["description"],
-        fullName: json["full_name"],
-        info: json["info"],
-        rate: json["rate"],
-        adviceCount: json["advice_count"],
-        experienceYear: json["experience_year"],
+        id: json["id"]??0,
+        avatar: json["avatar"]??"",
+        description: json["description"]??"",
+        fullName: json["full_name"]??"",
+        info: json["info"]??"",
+        rate: json["rate"]??"",
+        adviceCount: json["advice_count"]??0,
+        experienceYear: json["experience_year"]??"",
         category: json["category"] == null
             ? []
             : List<Category>.from(

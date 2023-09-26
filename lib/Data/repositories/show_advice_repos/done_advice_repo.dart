@@ -10,8 +10,7 @@ import '../../../app/utils/sharedPreferenceClass.dart';
 import '../../models/advice_screen_models/show_advice_model.dart';
 
 class DoneAdviceRepo {
-  Future<ShowAdviceModel?> doneAdvice(
-      {required int adviceId}) async {
+  Future<ShowAdviceModel?> doneAdvice({required int adviceId}) async {
     try {
       http.Response response = await http.post(
         Uri.parse('${Keys.baseUrl}/client/advice/done/$adviceId'),
@@ -23,6 +22,8 @@ class DoneAdviceRepo {
       );
 
       Map<String, dynamic> responseMap = json.decode(response.body);
+      print(responseMap);
+      print(response.statusCode);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         debugPrint("the response of pay  is ${responseMap.toString()}");
         final adviceShowResult = showAdviceModelFromJson(responseMap);
@@ -40,7 +41,7 @@ class DoneAdviceRepo {
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e,st) {
+    } on Error catch (e, st) {
       if (kDebugMode) {
         print(e);
         print(st);
