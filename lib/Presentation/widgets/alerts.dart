@@ -7,17 +7,18 @@ import '../../app/Style/sizes.dart';
 class Alert {
   static Future<void> alert(
       {BuildContext? context,
-        String? titleAction,
-        String? content,
-        void Function()? action}) async {
+      String? titleAction,
+      String? content,
+      void Function()? action}) async {
     showDialog(
       context: context!,
       barrierDismissible: false,
       builder: (context) {
         return Center(
           child: Container(
-            height: 310, // Adjust the height as needed
-            width: 310, // Adjust the width as needed
+            width: 341,
+            height: 350,
+            // Adjust the height as needed, // Adjust the width as needed
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               border: Border.all(
@@ -28,15 +29,19 @@ class Alert {
             child: AlertDialog(
               title: Image.asset(
                 dialogIcon,
-                height: 90,
-                width: 90,
+                height: 130,
+                width: 130,
                 fit: BoxFit.cover,
               ),
               content: Column(
                 children: [
                   Text(
                     content!,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "Cairo",
+                    ),
                   ),
                   SizedBox(height: 10), // Add 10 pixels spacing
                   TextButton(
@@ -44,6 +49,9 @@ class Alert {
                     child: Text(
                       titleAction!,
                       style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "Cairo",
                           color: Constants.primaryAppColor,
                           fontStyle: FontStyle.italic),
                     ),

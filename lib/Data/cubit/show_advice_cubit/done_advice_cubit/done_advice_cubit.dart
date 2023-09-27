@@ -15,7 +15,6 @@ class DoneAdviceCubit extends Cubit<DoneAdviceState> {
       doneAdviceRepo.doneAdvice(adviceId: adviceId).then((value) {
         if (value != null) {
           emit(DoneAdviceLoaded(value));
-          MyApplication.navigateTo(context, const RateScreen());
         } else {
           emit(DoneAdviceError());
         }

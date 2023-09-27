@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nasooh/Presentation/screens/rate_screen/rate_screen.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
@@ -11,6 +12,8 @@ import '../../../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_s
 import '../../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/MyButton.dart';
+import '../../../widgets/alerts.dart';
+import '../../Home/Home.dart';
 import '../../rejections/reject_screen.dart';
 
 class OutlinedAdvisorCard extends StatelessWidget {
@@ -207,8 +210,16 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                 child: Padding(
                                     padding: const EdgeInsetsDirectional.only(
                                         end: 10.0),
-                                    child: BlocBuilder<DoneAdviceCubit,
+                                    child: BlocConsumer<DoneAdviceCubit,
                                             DoneAdviceState>(
+                                        listener: (context, doneState) {
+                                          if (doneState is DoneAdviceLoaded) {
+                                            MyApplication.navigateTo(
+                                                context,
+                                                RateScreen(
+                                                    adviceId: adviceId,));
+                                          }
+                                        },
                                         builder: (context, doneState) => doneState
                                                 is DoneAdviceLoading
                                             ? Center(

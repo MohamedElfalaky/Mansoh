@@ -22,6 +22,7 @@ import '../../Data/cubit/profile/profile_cubit/profile_cubit.dart';
 import '../../Data/cubit/profile/update_profile_cubit/update_profile_cubit.dart';
 import '../../Data/cubit/rejections_cubit/reject_cubit/post_reject_cubit.dart';
 import '../../Data/cubit/rejections_cubit/rejection_list_cubit/rejection_list_cubit.dart';
+import '../../Data/cubit/review_cubit/review_cubit.dart';
 import '../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
 import '../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_cubit.dart';
@@ -60,4 +61,5 @@ List<SingleChildWidget> providers = [
   BlocProvider<ListRejectionCubit>(create: (context) => ListRejectionCubit()),
   BlocProvider<PostRejectCubit>(create: (context) => PostRejectCubit()),
   BlocProvider<CategoryParentCubit>(create: (context) => CategoryParentCubit()),
+  BlocProvider<ReviewCubit>(create: (context) => ReviewCubit()),
 ];

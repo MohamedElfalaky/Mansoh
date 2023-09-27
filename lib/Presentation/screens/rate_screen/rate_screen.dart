@@ -11,19 +11,15 @@ import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
-import '../../../Data/cubit/rejections_cubit/reject_cubit/post_reject_cubit.dart';
-import '../../../Data/cubit/rejections_cubit/reject_cubit/post_reject_state.dart';
-import '../../../Data/cubit/rejections_cubit/rejection_list_cubit/rejection_list_cubit.dart';
-import '../../../Data/cubit/rejections_cubit/rejection_list_cubit/rejection_list_state.dart';
-import '../../widgets/alerts.dart';
-import '../Home/Home.dart';
+import '../../../Data/cubit/review_cubit/review_cubit.dart';
+import '../../../Data/cubit/review_cubit/review_state.dart';
+import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
 
 class RateScreen extends StatefulWidget {
-  const RateScreen({super.key
-      // , required this.adviceId
-      });
+  const RateScreen(
+      {super.key, required this.adviceId});
 
-  // final int adviceId;
+  final int adviceId;
 
   @override
   State<RateScreen> createState() => _RateScreenState();
@@ -44,7 +40,7 @@ class _RateScreenState extends State<RateScreen> {
 
     MyApplication.checkConnection().then((value) {
       if (value) {
-        context.read<ListRejectionCubit>().getDataListRejection();
+        //
       } else {
         MyApplication.showToastView(message: '${'noInternet'.tr}');
       }
@@ -64,7 +60,7 @@ class _RateScreenState extends State<RateScreen> {
 
       /// if internet comes back
       if (result != ConnectivityResult.none) {
-        context.read<ListRejectionCubit>().getDataListRejection();
+//
       }
     });
   }
@@ -97,8 +93,7 @@ class _RateScreenState extends State<RateScreen> {
         }, // hide keyboard on tap anywhere
 
         child: Scaffold(
-            floatingActionButton:
-                // BlocConsumer<PostRejectCubit, PostRejectState>(
+            floatingActionButton: BlocBuilder<ReviewCubit, ReviewState>(
                 //   listener: (context, state) {
                 //     if (state is PostRejectLoaded) {
                 //       Alert.alert(
@@ -110,30 +105,31 @@ class _RateScreenState extends State<RateScreen> {
                 //           titleAction: "الرئيسية");
                 //     }
                 //   },
-                //   builder: (context, state) =>
-                Container(
+                builder: (context, state) => Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     height: 50,
-                    child:
-                        //       state is PostRejectLoading
-                        //           ? const Center(child: CircularProgressIndicator())
-                        //           :
-                        MyButton(
-                      txt: "ارسال التقييم",
-                      isBold: true,
-                      onPressedHandler: () {
-                        if (_formKey.currentState!.validate()) {
-                          // print(widget.adviceId);
+                    child: state is ReviewLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : MyButton(
+                            txt: "ارسال التقييم",
+                            isBold: true,
+                            onPressedHandler: () {
+                              // if (_formKey.currentState!.validate()) {
+                              // print(widget.adviceId);
 
-                          // context.read<PostRejectCubit>().postRejectMethod(
-                          //       adviceId: widget.adviceId.toString(),
-                          //       // adviceId: 1,
-                          //       commentId: idSelected,
-                          //       commentOther: "",
-                          //     );
-                        }
-                      },
-                    )),
+                              context.read<ReviewCubit>().reviewMethod(
+                                    adviceId: widget.adviceId,
+                                    speed: speedRate.toString(),
+                                    context: context,
+                                    adviser: 1,
+                                    app: 1,
+                                    flexibility: flexibleRate.toString(),
+                                    other: opinionController.text,
+                                    quality: qualityRate.toString(),
+                                  );
+                              // }
+                            },
+                          ))),
             // ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,

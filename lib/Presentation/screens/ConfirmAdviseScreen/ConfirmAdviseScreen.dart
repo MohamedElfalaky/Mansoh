@@ -185,7 +185,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Enter Advice Title".tr;
-                          } else if (value.length < 17) {
+                          } else if (value.length <= 17) {
                             return "Advice tilte should be more than 17 character"
                                 .tr;
                           }
