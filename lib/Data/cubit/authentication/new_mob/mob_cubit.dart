@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
 import '../../../../Presentation/screens/AuthenticationScreens/RegisterationPinCodeConfirm/check_codee.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../repositories/authentication/mob_repo.dart';
@@ -23,7 +22,7 @@ class MobCubit extends Cubit<MobState> {
           .then((value) {
         if (value != null) {
           emit(MobLoaded(value));
-          MyApplication.navigateTo(context!,  CheckCodeScreen());
+          MyApplication.navigateTo(context!, const CheckCodeScreen());
         } else {
           emit(MobError());
         }

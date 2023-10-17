@@ -1,20 +1,16 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/screens/FilterScreen/Components/CompleteAdvisorCard.dart';
-import 'package:nasooh/Presentation/screens/FilterScreen/Components/PaymentCard.dart';
 import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
-
 import '../../../Data/cubit/authentication/category_cubit/category_cubit.dart';
 import '../../../Data/cubit/authentication/category_cubit/category_state.dart';
 import '../../../Data/models/Auth_models/category_model.dart';
@@ -35,7 +31,7 @@ class _FilterScreenState extends State<FilterScreen> {
   bool? isConnected;
   List<CategoryData> selectedItems = [];
   bool pressed = false;
-  double initialRate = 0.0;
+  double ?initialRate ;
 
   @override
   void initState() {
@@ -45,7 +41,7 @@ class _FilterScreenState extends State<FilterScreen> {
       if (value) {
         context.read<CategoryCubit>().getCategories();
       } else {
-        MyApplication.showToastView(message: '${'noInternet'.tr}');
+        MyApplication.showToastView(message: 'noInternet'.tr);
       }
     });
 
@@ -85,7 +81,7 @@ class _FilterScreenState extends State<FilterScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(message: '${'noInternet'.tr}');
+      MyApplication.showToastView(message: 'noInternet'.tr);
       return NoInternetWidget(size: sizee);
     }
 
@@ -102,9 +98,9 @@ class _FilterScreenState extends State<FilterScreen> {
               onPressedHandler: () {
                 List<String?> idList = selectedItems.map((category) => category.id.toString()).toList();
                 String idString = idList.join(', ');
-                print(idString);
-                print(initialRate);
-                print(widget.searchTxt);
+                // print(idString);
+                // print(initialRate);
+                // print(widget.searchTxt);
                 MyApplication.navigateTo(context, HomeScreen(catVal:idString ,
                 searchTxt: widget.searchTxt,
                 rateVal: initialRate,));
@@ -316,15 +312,15 @@ class _FilterScreenState extends State<FilterScreen> {
                                                                   .remove(e);
                                                             }
                                                           });
-                                                          print(selectedItems
-                                                              .toSet()
-                                                              .length);
-                                                          print(selectedItems
-                                                              .toSet()
-                                                              .toList());
+                                                          // print(selectedItems
+                                                          //     .toSet()
+                                                          //     .length);
+                                                          // print(selectedItems
+                                                          //     .toSet()
+                                                          //     .toList());
                                                           for (var ids
                                                               in selectedItems) {
-                                                            print(ids.id);
+                                                            // print(ids.id);
                                                           }
                                                         })),
                                                 const SizedBox(
@@ -420,11 +416,11 @@ class _FilterScreenState extends State<FilterScreen> {
                           //     // ),
                           ),
                       selectedItems.toSet().length > 1
-                          ? Divider(
+                          ? const Divider(
                               thickness: 1,
                             )
-                          : SizedBox(),
-                      SizedBox(
+                          : const SizedBox(),
+                      const SizedBox(
                         height: 15,
                       ),
                       const Text(
@@ -432,7 +428,7 @@ class _FilterScreenState extends State<FilterScreen> {
                         style: Constants.mainTitleFont,
                       ),
                       RatingBar.builder(
-                        initialRating: initialRate,
+                        initialRating: 0,
                         allowHalfRating: true,
                         itemCount: 5,
                         itemSize: 40.0,

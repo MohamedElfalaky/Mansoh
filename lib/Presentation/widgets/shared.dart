@@ -69,8 +69,8 @@ class MyPrefixWidget extends StatelessWidget {
 }
 
 class Back extends StatelessWidget {
-  Back({Key? key, this.header}) : super(key: key);
-  String? header;
+  const Back({Key? key, this.header}) : super(key: key);
+  final String? header;
 
   @override
   Widget build(BuildContext context) {

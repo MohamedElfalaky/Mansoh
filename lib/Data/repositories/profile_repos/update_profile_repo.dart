@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 import '../../../app/utils/myApplication.dart';
 import '../../../app/utils/sharedPreferenceClass.dart';
@@ -39,10 +38,10 @@ class UpdateProfile {
       });
       Map<String, dynamic> responseMap = json.decode(response.body);
 
-      print(
-          "'email': email  ,'full_name': '$fullName','mobile': '$mobile','country_id': '$countryId','city_id': '$cityId','gender': '$gender','nationality_id': '$nationalityId','avatar[0][type]': 'png','avatar[0][file]': '$avatar',");
+      // print(
+      //     "'email': email  ,'full_name': '$fullName','mobile': '$mobile','country_id': '$countryId','city_id': '$cityId','gender': '$gender','nationality_id': '$nationalityId','avatar[0][type]': 'png','avatar[0][file]': '$avatar',");
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        print(response.body);
+        // print(response.body);
         final userdata = updateProfileModelFromJson(responseMap);
         // sharedPrefs.setToken(userdata.data!.token!);
         sharedPrefs.setId(userdata.data!.id!);

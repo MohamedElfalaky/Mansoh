@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/app/constants.dart';
 
 class MyButton extends StatelessWidget {
@@ -11,7 +10,7 @@ class MyButton extends StatelessWidget {
   final bool? isBold;
   final Widget? prefixWidget;
   const MyButton(
-      {this.onPressedHandler,
+      {super.key, this.onPressedHandler,
       this.txt,
       this.btnColor,
       this.txtColor,
@@ -34,9 +33,9 @@ class MyButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            prefixWidget ?? SizedBox(),
+            prefixWidget ?? const SizedBox(),
             Container(
-              margin: EdgeInsets.all(3),
+              margin: const EdgeInsets.all(3),
               child: Text(
                 txt ?? "button",
                 style: TextStyle(

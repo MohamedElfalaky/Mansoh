@@ -19,7 +19,7 @@ import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_state.dart';
 import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
-import '../CompleteAdviseScreen/CompleteAdviseScreen.dart';
+import '../CompleteAdviseScreen/complete_advise_screen.dart';
 
 class ConfirmAdviseScreen extends StatefulWidget {
   const ConfirmAdviseScreen({
@@ -58,7 +58,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
         ///
         ///
       } else {
-        MyApplication.showToastView(message: '${'noInternet'.tr}');
+        MyApplication.showToastView(message: 'noInternet'.tr);
       }
     });
 
@@ -103,7 +103,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(message: '${'noInternet'.tr}');
+      MyApplication.showToastView(message: 'noInternet'.tr);
       return NoInternetWidget(size: sizee);
     }
 
@@ -170,6 +170,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                     children: [
                       // SizedBox(height: 15,),
                       OutlinedAdvisorCard(
+                        labelToShow: true,
                         adviceId: 1,
                         adviserProfileData: widget.adviserProfileData,
                         isClickable: false,
@@ -182,6 +183,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         ),
                       ),
                       TextFormField(
+                        maxLength: 35,
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Enter Advice Title".tr;
@@ -230,8 +232,8 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             prefixIcon: MyPrefixWidget(),
                              isSuffix: true,
                             hintText: "0.00",
-                            suffixIcon: Column(mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
+                            suffixIcon: const Column(mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                                 Text(
                                   "ريال سعودي",
                                   style: Constants.secondaryTitleRegularFont,
@@ -261,8 +263,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             if (value!.isEmpty) {
                               return "Enter Advice details".tr;
                             } else if (value.length < 5) {
-                              return "Advice details should be more than 5 character"
-                                  .tr;
+                              return "Advice details should be more than 5 character".tr;
                             }
                             return null;
                           },
@@ -282,17 +283,17 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         onTap: () async {
                           FilePickerResult? result =
                               await FilePicker.platform.pickFiles();
-                          type:
-                          FileType.custom;
-                          allowedExtensions:
-                          ['pdf', 'jpg', 'png', "doc", "docx", "gif"];
+                          // type:
+                          // FileType.custom;
+                          // allowedExtensions:
+                          // ['pdf', 'jpg', 'png', "doc", "docx", "gif"];
                           if (result != null) {
                             setState(() {
                               pickedFile = File(result.files.single.path!);
                             });
                             List<int> imageBytes =
                                 await File(pickedFile!.path).readAsBytesSync();
-                            print(imageBytes);
+                            // print(imageBytes);
                             fileSelected = base64.encode(imageBytes);
                           }
                           return;

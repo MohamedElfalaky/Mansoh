@@ -6,10 +6,10 @@ import '../../../../../app/constants.dart';
 import '../../UserProfileEdit/widgets/shared.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard(
-      {super.key,
-        required this.orderFilterData,
-      });
+  const OrderCard({
+    super.key,
+    required this.orderFilterData,
+  });
 
   final OrderFilterData orderFilterData;
 
@@ -45,11 +45,11 @@ class OrderCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                orderFilterData.name ??"",
+                                orderFilterData.name ?? "",
                                 style: Constants.secondaryTitleFont,
                               ),
                               Text(
-                                orderFilterData.date??"",
+                                orderFilterData.date ?? "",
                                 style: Constants.subtitleRegularFont,
                               ),
                             ],
@@ -82,7 +82,7 @@ class OrderCard extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      orderFilterData. price.toString(),
+                      orderFilterData.price.toString(),
                       style: Constants.secondaryTitleFont.copyWith(
                         color: Constants.primaryAppColor,
                       ),
@@ -108,7 +108,7 @@ class OrderCard extends StatelessWidget {
                   ),
                   ListTile(
                     visualDensity:
-                    const VisualDensity(horizontal: -4, vertical: 0),
+                        const VisualDensity(horizontal: -4, vertical: 0),
                     dense: true,
                     leading: CircleAvatar(
                       radius: 25,
@@ -116,25 +116,25 @@ class OrderCard extends StatelessWidget {
                       foregroundColor: Colors.black87,
                       child: CircleAvatar(
                         radius: 24,
-                        backgroundImage:   orderFilterData.adviser!.avatar == ""
+                        backgroundImage: orderFilterData.adviser!.avatar == ""
                             ? const NetworkImage(
-                            "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png")
-                            : NetworkImage(  orderFilterData.adviser!.avatar!),
+                                "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png")
+                            : NetworkImage(orderFilterData.adviser!.avatar!),
                       ),
                     ),
                     title: Text(
-                      orderFilterData.adviser?.fullName??"",
+                      orderFilterData.adviser?.fullName ?? "",
                       style: Constants.secondaryTitleFont,
                     ),
-                    subtitle:  Text(
-                      orderFilterData.adviser?.info??"",
+                    subtitle: Text(
+                      orderFilterData.adviser?.info ?? "",
                       style: Constants.subtitleRegularFont,
                     ),
                     trailing: FittedBox(
                       child: Row(
                         children: [
                           Text(
-                            orderFilterData.adviser?.rate??"",
+                            orderFilterData.adviser?.rate ?? "",
                             style: Constants.secondaryTitleFont,
                           ),
                           const SizedBox(
@@ -154,8 +154,8 @@ class OrderCard extends StatelessWidget {
           ),
           Positioned(
             top: 40,
-            left:  Get.locale!.languageCode =="ar" ?5 : null,
-            right:  Get.locale!.languageCode =="ar" ?null: 5,
+            left: Get.locale!.languageCode == "ar" ? 4.5 : null,
+            right: Get.locale!.languageCode == "ar" ? null : 4.5,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               // width: 60,
@@ -166,8 +166,8 @@ class OrderCard extends StatelessWidget {
                     bottomRight: Radius.circular(5),
                     topRight: Radius.circular(5),
                   )),
-              child:  Center(
-                child: Text(  orderFilterData.status?.name??"",
+              child: Center(
+                child: Text(orderFilterData.label?.name ?? "",
                     textAlign: TextAlign.center,
                     style: Constants.subtitleRegularFont),
               ),

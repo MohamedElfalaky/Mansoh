@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
-
 import '../../../../Data/cubit/authentication/check_code/check_code_cubit.dart';
 import '../../../../Data/cubit/authentication/check_code/check_code_state.dart';
 import '../../../../app/Style/sizes.dart';
@@ -14,9 +11,7 @@ import '../../../../app/constants.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/MyButton.dart';
 import '../../../widgets/shared.dart';
-import '../../Home/HomeScreen.dart';
 import '../LoginScreen/check_mob_screen.dart';
-import '../RegisterationInfoScreen/registeration-info-screen.dart';
 
 class CheckCodeScreen extends StatefulWidget {
   const CheckCodeScreen({Key? key}) : super(key: key);
@@ -78,7 +73,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                         Constants.headerNavigationFont),
                   ],
                 ),
-                SizedBox(height: 16,),
+                const SizedBox(height: 16,),
                 Form(
                   key: _formKey,
                   child: Container(
@@ -135,8 +130,11 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                             !RegExp(r'^[0-9]+$').hasMatch(value)) {
                                           return "يرجى ادخال رمز تحقق صحيح";
                                         }
+                                        return null;
                                       },
-                                      onCompleted: (pin) => print(pin),
+                                      onCompleted: (pin) {
+                                        // print(pin);
+                                      },
                                     ),
                                   ),
                                 ),

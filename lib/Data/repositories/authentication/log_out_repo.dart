@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../app/utils/myApplication.dart';

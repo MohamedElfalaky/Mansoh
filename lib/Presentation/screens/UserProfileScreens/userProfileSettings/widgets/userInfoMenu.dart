@@ -4,7 +4,7 @@
 // import 'package:url_launcher/url_launcher.dart';
 // import '../../../../../app/Style/Icons.dart';
 // import '../../../../../app/constants.dart';
-// import '../../../TermsConditionsScreen/TermsConditionsScreen.dart';
+// import '../../../TermsConditionsScreen/terms_conditions_screen.dart';
 // import '../../../UserSettingsScreen/UserSettings.dart';
 //
 // class SettingsMenuItem {

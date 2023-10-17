@@ -22,8 +22,8 @@ class DoneAdviceRepo {
       );
 
       Map<String, dynamic> responseMap = json.decode(response.body);
-      print(responseMap);
-      print(response.statusCode);
+      // print(responseMap);
+      // print(response.statusCode);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         debugPrint("the response of pay  is ${responseMap.toString()}");
         final adviceShowResult = showAdviceModelFromJson(responseMap);

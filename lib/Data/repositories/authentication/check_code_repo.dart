@@ -6,7 +6,6 @@ import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 import '../../../app/utils/myApplication.dart';
 import '../../models/Auth_models/check_code_model.dart';
-import '../../models/Auth_models/check_mobile_model.dart';
 import 'package:http/http.dart' as http;
 
 class CheckCodeRepo {
@@ -21,7 +20,7 @@ class CheckCodeRepo {
           });
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        print(response.body);
+        // print(response.body);
         final userdata = checkCodeModelFromJson(responseMap);
         return userdata;
       } else {

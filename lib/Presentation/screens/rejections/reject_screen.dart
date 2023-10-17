@@ -39,7 +39,7 @@ class _RejectScreenState extends State<RejectScreen> {
       if (value) {
         context.read<ListRejectionCubit>().getDataListRejection();
       } else {
-        MyApplication.showToastView(message: '${'noInternet'.tr}');
+        MyApplication.showToastView(message: 'noInternet'.tr);
       }
     });
 
@@ -70,7 +70,7 @@ class _RejectScreenState extends State<RejectScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.adviceId);
+    // print(widget.adviceId);
     // todo if not connected display nointernet widget else continue to the rest build code
     final sizee = MediaQuery.of(context).size;
     if (isConnected == null) {
@@ -80,7 +80,7 @@ class _RejectScreenState extends State<RejectScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(message: '${'noInternet'.tr}');
+      MyApplication.showToastView(message: 'noInternet'.tr);
       return NoInternetWidget(size: sizee);
     }
 
@@ -96,7 +96,8 @@ class _RejectScreenState extends State<RejectScreen> {
                 Alert.alert(
                     context: context,
                     action: () {
-                      MyApplication.navigateTo(context, Home());
+                      MyApplication.navigateToReplaceAllPrevious(
+                          context, const Home());
                     },
                     content: "تم ارسال اعتراضك بنجاح",
                     titleAction: "الرئيسية");
@@ -112,8 +113,8 @@ class _RejectScreenState extends State<RejectScreen> {
                         isBold: true,
                         onPressedHandler: () {
                           if (_formKey.currentState!.validate()) {
-                            print(widget.adviceId);
-                            print(idSelected);
+                            // print(widget.adviceId);
+                            // print(idSelected);
 
                             context.read<PostRejectCubit>().postRejectMethod(
                                   adviceId: widget.adviceId.toString(),

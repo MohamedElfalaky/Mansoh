@@ -69,20 +69,27 @@ Map<String, String> getArabicLanguage() {
     "My Orders": "طلباتي",
     "My Account": "ملفي",
     "share_app": "مشاركة التطبيق",
-    "change Language" :"تغيير اللغة " ,
-    "Notification" :"الأشعارات",
-    "Delete Account" : "حذف الحساب ",
-    "Advice Title" : "عنوان الطلب" ,
-    "Enter Advice Title":"يجب ادخال عنوان الطلب",
-    "Advice tilte should be more than 17 character": "عنوان الطلب يجب الا يقل عن 17 أحرف" ,
-    "Enter Advice Title...":"ادخل عنوان الطلب...",
-    "How Much can you afford for advice":"كم مستعد تدفع مقابل النصيحة؟",
-    "Price Needed":"المبلغ مطلوب" ,
-    "Advice Details": "تفاصيل الطلب" ,
-    "Enter Advice details":"يجب ادخال تفاصيل الطلب" ,
-    "Advice details should be more than 5 character": "Advice details should be more than 5 character",
-    "Upload Advice Files": "رفع الملفات الخاصة بالطلب" ,
-    "advice reject": "يحق للناصح رفض الطلب في حال كان المبلغ لا يتناسب مع قيمة النصيحة حسب تقديره" ,
-    "Explain" :  "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافية للحصول على إجابة وافية ..."
+    "change Language": "تغيير اللغة ",
+    "Notification": "الأشعارات",
+    "Delete Account": "حذف الحساب ",
+    "Advice Title": "عنوان الطلب",
+    "Enter Advice Title": "يجب ادخال عنوان الطلب",
+    "Advice tilte should be more than 17 character":
+        "عنوان الطلب يجب الا يقل عن 17 أحرف",
+    "Enter Advice Title...": "ادخل عنوان الطلب...",
+    "How Much can you afford for advice": "كم مستعد تدفع مقابل النصيحة؟",
+    "Price Needed": "المبلغ مطلوب",
+    "Advice Details": "تفاصيل الطلب",
+    "Enter Advice details": "يجب ادخال تفاصيل الطلب",
+    "Advice details should be more than 5 character":
+        "Advice details should be more than 5 character",
+    "Upload Advice Files": "رفع الملفات الخاصة بالطلب",
+    "advice reject":
+        "يحق للناصح رفض الطلب في حال كان المبلغ لا يتناسب مع قيمة النصيحة حسب تقديره",
+    "Explain":
+        "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافية للحصول على إجابة وافية ...",
+    "total_balance": "اجمالي الرصيد",
+    "My Wallet": "محفظتي",
+    "recharge_wallet": "اشحن محفظتك"
   };
 }

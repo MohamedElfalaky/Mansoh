@@ -44,7 +44,7 @@ class Data {
   String? fullName;
   String? mobile;
   String? token;
-  String? isNotification;
+  int? isNotification;
   String? wallet;
 
   Data({

@@ -23,7 +23,7 @@ class PolicyRepo {
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        print(response.body);
+        // print(response.body);
         final homeStatusData = privacyPolicyModelFromJson(responseMap);
         return homeStatusData;
       } else {

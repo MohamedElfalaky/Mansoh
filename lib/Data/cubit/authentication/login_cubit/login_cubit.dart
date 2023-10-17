@@ -24,7 +24,7 @@ class LoginCubit extends Cubit<LoginState> {
           .then((value) {
         if (value != null) {
           emit(LoginLoaded(value));
-          MyApplication.navigateTo(context!, const HomeScreen());
+          MyApplication.navigateToReplaceAllPrevious(context!, const HomeScreen());
         } else {
           emit(LoginError());
         }

@@ -13,13 +13,13 @@ String? inputCity;
 String? inputNationality;
 
 class CusDropData<T> extends StatelessWidget {
-  dynamic value;
+  final dynamic value;
   final String hintData;
   final List<DropdownMenuItem<String>>? items;
   final void Function(dynamic)? onChanged;
-  Widget? prefixIcon;
+  final Widget? prefixIcon;
 
-  CusDropData({
+  const CusDropData({
     Key? key,
     this.prefixIcon,
     required this.value,
@@ -174,7 +174,7 @@ class _MyColumnDataState extends State<MyColumnData> {
                       cityValue = val;
                       inputCity = cityValue;
                     });
-                    print("${inputCity} is CityChosen");
+                    // print("$inputCity is CityChosen");
                   },
                   items: cityState.response!.data!
                       .map(
@@ -222,7 +222,10 @@ class InputTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 20, top: 10),
         child: TextFormField(
-          validator: validator ?? (val) {},
+          validator: validator ??
+              (val) {
+                return null;
+              },
           controller: controller,
           onChanged: onChanged,
           keyboardType: keyboardType,

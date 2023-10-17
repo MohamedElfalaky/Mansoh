@@ -43,7 +43,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         const SizedBox(
                           height: 16,
                         ),
-                        Back(
+                      const  Back(
                           header: "create_new_account",
                         ),
                         const SizedBox(

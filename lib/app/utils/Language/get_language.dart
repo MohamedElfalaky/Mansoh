@@ -18,7 +18,7 @@ class Messages extends Translations {
 
 
 
-enum SingingCharacter { Arabic, English }
+enum SingingCharacter { arabic, english }
 
 class ChangeLangItem extends StatefulWidget {
   const ChangeLangItem({
@@ -31,8 +31,8 @@ class ChangeLangItem extends StatefulWidget {
 
 class _ChangeLangItemState extends State<ChangeLangItem> {
   SingingCharacter _character = Get.locale!.languageCode == 'en'
-      ? SingingCharacter.English
-      : SingingCharacter.Arabic;
+      ? SingingCharacter.english
+      : SingingCharacter.arabic;
 
   void arabSelection(SingingCharacter value) {
     setState(() {
@@ -66,7 +66,7 @@ class _ChangeLangItemState extends State<ChangeLangItem> {
           children: [
             Radio(
               activeColor: Constants.primaryAppColor,
-              value: SingingCharacter.Arabic,
+              value: SingingCharacter.arabic,
               onChanged: (val) {
                 arabSelection(val as SingingCharacter);
               },
@@ -79,7 +79,7 @@ class _ChangeLangItemState extends State<ChangeLangItem> {
           children: [
             Radio(
               activeColor: Constants.primaryAppColor,
-              value: SingingCharacter.English,
+              value: SingingCharacter.english,
               onChanged: (val) {
                 engSelection(val as SingingCharacter);
               },

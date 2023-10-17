@@ -102,7 +102,7 @@ class _RegistrationPinCodeInputState extends State<RegistrationPinCodeInput> {
                           ),
                           initialCountryCode: 'SA',
                           onChanged: (phone) {
-                            print(phone.completeNumber);
+                            // print(phone.completeNumber);
                           },
                         ),
                         const SizedBox(

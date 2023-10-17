@@ -16,6 +16,7 @@ import '../../Data/cubit/authentication/new_mob/mob_cubit.dart';
 import '../../Data/cubit/authentication/register_cubit/register_cubit.dart';
 import '../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../Data/cubit/home/home_slider_cubit.dart';
+import '../../Data/cubit/notification_cubit/notification_cubit.dart';
 import '../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_cubit.dart';
 import '../../Data/cubit/orders_cubit/orders_status_cubit/orders_status_cubit.dart';
 import '../../Data/cubit/profile/profile_cubit/profile_cubit.dart';
@@ -28,6 +29,7 @@ import '../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/pay_advice_cubit/pay_advice_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cubit.dart';
+import '../../Data/cubit/wallet_cubit/wallet_cubit.dart';
 
 List<SingleChildWidget> providers = [
   BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
@@ -62,4 +64,6 @@ List<SingleChildWidget> providers = [
   BlocProvider<PostRejectCubit>(create: (context) => PostRejectCubit()),
   BlocProvider<CategoryParentCubit>(create: (context) => CategoryParentCubit()),
   BlocProvider<ReviewCubit>(create: (context) => ReviewCubit()),
+  BlocProvider<WalletCubit>(create: (context) => WalletCubit()),
+  BlocProvider<NotificationCubit>(create: (context) => NotificationCubit()),
 ];

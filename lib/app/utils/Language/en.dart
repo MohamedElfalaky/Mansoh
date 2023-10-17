@@ -12,7 +12,8 @@ Map<String, String> getEnglishLanguage() {
     "resident_country": "resident_country",
     "resident_city": "resident_city",
     "alsaudia": "saudia arabia",
-    "confirm_account_pin": "please enter your phone number to confirm your account and receive a ",
+    "confirm_account_pin":
+        "please enter your phone number to confirm your account and receive a ",
     "verification_code": "verification code",
     "phone_number": "phone number",
     "agree_to": "agree to all",
@@ -56,29 +57,38 @@ Map<String, String> getEnglishLanguage() {
     "Additional Information": "Additional Information",
     "Name": "Name",
     "name Required": "name Required",
-    "dialog tile": "this Number Has An old data do you wanna go with the old one or go with another data",
+    "dialog tile":
+        "this Number Has An old data do you wanna go with the old one or go with another data",
     "Yes": "Yes",
     "No": "No",
     "Update Profile": "Update Profile",
-    "name length": "Name length should be more than 2 and less than 33 character" ,
-    "Home" : "Home",
-    "My Orders":  "My Orders",
-    "My Account":  "My Account",
-    "share_app": "Share App" ,
-    "change Language":"Change Language",
-    "Notification":"Notification",
-    "Delete Account":"Delete Account",
+    "name length":
+        "Name length should be more than 2 and less than 33 character",
+    "Home": "Home",
+    "My Orders": "My Orders",
+    "My Account": "My Account",
+    "share_app": "Share App",
+    "change Language": "Change Language",
+    "Notification": "Notification",
+    "Delete Account": "Delete Account",
     "Advice Title": "Advice Title",
     "Enter Advice Title": "Enter Advice Title",
-    "Advice tilte should be more than 17 character":"Advice tilte should be more than 17 character",
+    "Advice tilte should be more than 17 character":
+        "Advice tilte should be more than 17 character",
     "Enter Advice Title...": "Enter Advice Title...",
     "How Much can you afford for advice": "How Much can you afford for advice",
     "Price Needed": "Price Needed",
     "Advice Details": "Advice Details",
     "Enter Advice details": "Enter Advice details",
-    "Advice details should be more than 5 character":"تفاصيل الطلب يجب الا تقل عن 5 أحرف",
+    "Advice details should be more than 5 character":
+        "تفاصيل الطلب يجب الا تقل عن 5 أحرف",
     "Upload Advice Files": "Upload Advice Files",
-    "advice reject":"Adviser has the right to reject the order if the price doesn't match device value from his point of view",
-    "Explain" :"Explain your request clearly and concisely and provide the advisor with sufficient information to obtain a comprehensive answer"
+    "advice reject":
+        "Adviser has the right to reject the order if the price doesn't match device value from his point of view",
+    "Explain":
+        "Explain your request clearly and concisely and provide the advisor with sufficient information to obtain a comprehensive answer",
+    "total_balance": "Total Balance",
+    "My Wallet": "My Wallet",
+    "recharge_wallet": "Recharge Wallet"
   };
 }

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +41,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
         ///
       } else {
         MyApplication.showToastView(
-            message: '${ 'noInternet'.tr}');
+            message: 'noInternet'.tr);
       }
     });
 
@@ -89,7 +88,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
       });
     } else if (!isConnected!) {
       MyApplication.showToastView(
-          message: '${ 'noInternet'.tr}');
+          message: 'noInternet'.tr);
       return NoInternetWidget(size: sizee);
     }
 
@@ -125,9 +124,9 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
                         const SizedBox(
                           width: 12,
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "الشروط والأحكام",
                               style: Constants.mainTitleFont,

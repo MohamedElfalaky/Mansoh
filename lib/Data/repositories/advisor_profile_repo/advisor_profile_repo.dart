@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 import '../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/advisor_profile_model/advisor_profile.dart';
@@ -17,9 +16,10 @@ class AdvisorProfileRepo {
         Uri.parse('${Keys.baseUrl}/client/adviser/profile/$id'),
         headers: headers,
       );
+      debugPrint(response.body);
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        print("get profile data ${response.body}" );
+        // print("get profile data ${response.body}" );
         final userdata = advisorProfileModelFromJson(responseMap);
         return userdata;
       } else {

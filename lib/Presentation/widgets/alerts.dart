@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nasooh/app/constants.dart';
-
 import '../../app/Style/Icons.dart';
-import '../../app/Style/sizes.dart';
 
 class Alert {
   static Future<void> alert(
@@ -43,7 +41,7 @@ class Alert {
                       fontFamily: "Cairo",
                     ),
                   ),
-                  SizedBox(height: 10), // Add 10 pixels spacing
+                  const SizedBox(height: 10), // Add 10 pixels spacing
                   TextButton(
                     onPressed: action,
                     child: Text(

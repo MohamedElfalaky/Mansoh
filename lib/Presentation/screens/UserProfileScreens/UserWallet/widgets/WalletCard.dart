@@ -4,8 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../app/constants.dart';
 
 class WalletCard extends StatelessWidget {
+  final String description;
+  final String oneTraBalance;
   const WalletCard({
-    Key? key,
+    Key? key, required this.description, required this.oneTraBalance,
   }) : super(key: key);
 
   @override
@@ -43,8 +45,8 @@ class WalletCard extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  const Text(
-                    "1000 ريال سعودي",
+                   Text(
+                    "$oneTraBalance  ريال سعودي ",
                     style: Constants.secondaryTitleFont,
                   ),
                 ],
@@ -52,9 +54,9 @@ class WalletCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Center(
+               Center(
                 child: Text(
-                  "عملية استرجاع النقود من طلب رقم #6782867",
+                 description,
                   style: Constants.subtitleRegularFont,
                 ),
               ),

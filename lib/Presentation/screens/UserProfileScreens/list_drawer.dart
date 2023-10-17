@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:get/get_utils/get_utils.dart';
+import 'package:nasooh/Presentation/screens/UserProfileScreens/UserOrders/UserOrders.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../app/Style/Icons.dart';
 import '../../../app/constants.dart';
-import '../TermsConditionsScreen/TermsConditionsScreen.dart';
-import '../UserSettingsScreen/UserSettings.dart';
+import '../TermsConditionsScreen/terms_conditions_screen.dart';
+import '../user_settings_screen/UserSettings.dart';
+import 'UserWallet/UserWallet.dart';
 
 class BuildItem extends StatelessWidget {
   const BuildItem({super.key, required this.drawerModel});
@@ -37,13 +39,17 @@ List<DrawerModel> getDrawer(BuildContext context) => [
       DrawerModel(
           title: "my_orders".tr,
           svg: SvgPicture.asset(ordersIcon, width: 24),
-          onTap: () {}),
+          onTap: () {
+            Get.to(() => const UserOrders());
+          }),
       DrawerModel(
           title: "my_wallet".tr,
           svg: SvgPicture.asset(
             walletIcData,
           ),
-          onTap: () {}),
+          onTap: () {
+            Get.to(() => const UserWallet());
+          }),
       DrawerModel(
           title: "settings".tr,
           svg: SvgPicture.asset(

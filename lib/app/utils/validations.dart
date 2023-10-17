@@ -10,9 +10,9 @@ class Validations {
     Pattern pattern = r'[a-zA-zء-ي]{2,}[\s]{1,}[a-zA-Zء-ي]{2,}$';
     RegExp regex = RegExp(pattern.toString());
     if (name!.trim().isEmpty) {
-      validateString = "${ 'pleaseentername'.tr}";
+      validateString = 'pleaseentername'.tr;
     } else if (!regex.hasMatch(name.trim()) && name.trim().length <= 15) {
-      validateString = "${ 'invaliddata'.tr}";
+      validateString = 'invaliddata'.tr;
     } else {
       validateString = null;
     }
@@ -27,7 +27,7 @@ class Validations {
     if (name!.trim().isEmpty) {
       validateString = null;
     } else if (!regex.hasMatch(name.trim()) && name.trim().length <= 15) {
-      validateString = "${ 'invaliddata'.tr}";
+      validateString = 'invaliddata'.tr;
     } else {
       validateString = null;
     }
@@ -42,7 +42,7 @@ class Validations {
     if (email == null || email.trim().isEmpty) {
       validateString = null;
     } else if (!regex.hasMatch(email.trim())) {
-      validateString = "${ 'invaliddata'.tr}";
+      validateString = 'invaliddata'.tr;
     } else {
       validateString = null;
     }
@@ -53,9 +53,9 @@ class Validations {
     String? validateString = '';
 
     if (phone.trim().isEmpty) {
-      validateString = "${ 'emptyfield'.tr}";
+      validateString = 'emptyfield'.tr;
     } else if (phone.trim().length != 9) {
-      validateString = "${ 'invaliddata'.tr}";
+      validateString = 'invaliddata'.tr;
     } else if (!phone.startsWith("5", 0)) {
       validateString =  "invaliddata".tr;
     } else {
@@ -68,7 +68,7 @@ class Validations {
     String? validateString = '';
 
     if (password.trim().isEmpty) {
-      validateString = "${ 'emptyfield'.tr}";
+      validateString = 'emptyfield'.tr;
     }
     // else if (password.length < 6) {
     //   validateString = "invalid password";
@@ -84,9 +84,9 @@ class Validations {
     String? validateString = '';
 
     if (conpass.trim().isEmpty) {
-      validateString = "${ 'emptyfield'.tr}";
+      validateString = 'emptyfield'.tr;
     } else if (password.toString() != conpass.toString()) {
-      validateString = "${ 'DifferentPasswords'.tr}";
+      validateString = 'DifferentPasswords'.tr;
     } else {
       validateString = null;
     }
@@ -96,7 +96,7 @@ class Validations {
   static String? validateField(String value, BuildContext context) {
     String? validateString = '';
     if (value.trim().isEmpty) {
-      validateString = "${ 'emptyfield'.tr}";
+      validateString = 'emptyfield'.tr;
     } else {
       validateString = null;
     }

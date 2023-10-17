@@ -50,5 +50,6 @@ class Auth {
         print(e);
       }
     }
+    return null;
   }
 }

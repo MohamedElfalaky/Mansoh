@@ -22,8 +22,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   final _formKey = GlobalKey<FormState>();
   late AnimationController _animationController;
   late AnimationController _fadeController;
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -38,8 +36,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
         vsync: this, duration: const Duration(milliseconds: 1500));
     _fadeController.forward();
   }
-
-  String _sendPhone = "";
 
   @override
   void dispose() {

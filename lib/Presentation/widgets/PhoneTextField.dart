@@ -1,14 +1,11 @@
 library intl_phone_field;
-
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/phone_number.dart';
-import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 
 class MyIntlPhoneField extends StatefulWidget {
@@ -370,7 +367,7 @@ class _MyIntlPhoneFieldState extends State<MyIntlPhoneField> {
           return "رجاء ادخال رقم الهاتف";
         } else if (!value.toString().startsWith("5")) {
           return "رقم الهاتف يبدأ ب 5";
-        } else if (!widget.disableLengthCheck && value != null) {
+        } else if (!widget.disableLengthCheck) {
           // print("hahahaahaha $value");
           return value.length >= _selectedCountry.minLength &&
                   value.length <= _selectedCountry.maxLength

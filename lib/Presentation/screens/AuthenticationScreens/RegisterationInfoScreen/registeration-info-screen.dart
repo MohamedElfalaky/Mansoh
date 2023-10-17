@@ -5,7 +5,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nasooh/Presentation/widgets/MyButton.dart';
@@ -48,12 +47,12 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
         regImage = myImage;
       });
       List<int> imageBytes = await File(regImage!.path).readAsBytesSync();
-      print(imageBytes);
+      // print(imageBytes);
       base64Image = base64.encode(imageBytes);
-      print("inputImagePhoto!.path  is ${regImage!.path}");
-      log("base64Image!  is ${base64Image}");
+      // print("inputImagePhoto!.path  is ${regImage!.path}");
+      log("base64Image!  is $base64Image");
     } on PlatformException catch (e) {
-      print("platform exeption : $e");
+      // print("platform exeption : $e");
     }
     Navigator.pop(context);
   }
@@ -98,8 +97,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Text(
-                                          "create_new_account".tr,
+                                      Text("create_new_account".tr,
                                           textAlign: TextAlign.right,
                                           style:
                                               Constants.headerNavigationFont),
@@ -210,7 +208,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                                 //     "Image path is ${inputImagePhoto!.path}");
                                                               },
                                                             ),
-                                                            Divider(),
+                                                            const Divider(),
                                                             RowModalSheet(
                                                               txt: "الغاء",
                                                               imageIcon:
@@ -244,8 +242,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                       padding: const EdgeInsets.symmetric(
                                         vertical: 16,
                                       ),
-                                      child: Text(
-                                          "Personal Information".tr,
+                                      child: Text("Personal Information".tr,
                                           textAlign: TextAlign.end,
                                           style: Constants.subtitleFontBold
                                               .copyWith(fontSize: 16))),
@@ -260,16 +257,16 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                     controller: _nameController,
                                     validator: (val) {
                                       if (val!.isEmpty) {
-                                        return  "name Required".tr;
+                                        return "name Required".tr;
                                       } else if (val.length > 33 ||
                                           val.length < 2) {
-                                        return  "name length".tr;
+                                        return "name length".tr;
                                       }
                                       return null;
                                     },
                                     onChanged: (val) {
                                       // inputBirthday = _nameController.text;
-                                      print(_nameController.toString());
+                                      // print(_nameController.toString());
                                       // print("the birthday is $inputBirthday");
                                     },
                                   ),
@@ -281,7 +278,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                       if (val!.isEmpty ||
                                           !RegExp(Validations.validationEmail)
                                               .hasMatch(val)) {
-                                        return  "email_required".tr;
+                                        return "email_required".tr;
                                       }
                                       return null;
                                     },
@@ -292,16 +289,14 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                     controller: _emailController,
                                     onChanged: (val) {
                                       // inputBirthday = _nameController.text;
-                                      print(_emailController.toString());
+                                      // print(_emailController.toString());
                                     },
                                   ),
                                   Container(
                                       padding: const EdgeInsets.symmetric(
                                         vertical: 16,
                                       ),
-                                      child: Text(
-
-                                              "Additional Information".tr,
+                                      child: Text("Additional Information".tr,
                                           textAlign: TextAlign.end,
                                           style: Constants.subtitleFontBold
                                               .copyWith(fontSize: 16))),
@@ -309,14 +304,14 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                   const SizedBox(
                                     height: 16,
                                   ),
-                                  Text( "gender".tr,
+                                  Text("gender".tr,
                                       textAlign: TextAlign.right,
                                       style:
                                           Constants.secondaryTitleRegularFont),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Text( "female".tr,
+                                      Text("female".tr,
                                           style: Constants
                                               .secondaryTitleRegularFont),
                                       Radio(
@@ -361,7 +356,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                               //           message:
                                               //               "please add image");
                                               // } else
-                                              print("avatar is $base64Image");
+                                              // print("avatar is $base64Image");
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 context
@@ -384,7 +379,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                     );
                                               }
                                             },
-                                            txt:  "register".tr,
+                                            txt: "register".tr,
                                             isBold: true,
                                           ),
                                         ),

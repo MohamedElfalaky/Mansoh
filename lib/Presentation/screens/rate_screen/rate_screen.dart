@@ -13,7 +13,6 @@ import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import '../../../Data/cubit/review_cubit/review_cubit.dart';
 import '../../../Data/cubit/review_cubit/review_state.dart';
-import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
 
 class RateScreen extends StatefulWidget {
   const RateScreen(
@@ -33,6 +32,8 @@ class _RateScreenState extends State<RateScreen> {
   double speedRate = 0.0;
   double qualityRate = 0.0;
   double flexibleRate = 0.0;
+  int groupAdviserValue= 0;
+  int groupApplicationValue= 0;
 
   @override
   void initState() {
@@ -42,7 +43,7 @@ class _RateScreenState extends State<RateScreen> {
       if (value) {
         //
       } else {
-        MyApplication.showToastView(message: '${'noInternet'.tr}');
+        MyApplication.showToastView(message: 'noInternet'.tr);
       }
     });
 
@@ -83,7 +84,7 @@ class _RateScreenState extends State<RateScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(message: '${'noInternet'.tr}');
+      MyApplication.showToastView(message: 'noInternet'.tr);
       return NoInternetWidget(size: sizee);
     }
 
@@ -121,8 +122,8 @@ class _RateScreenState extends State<RateScreen> {
                                     adviceId: widget.adviceId,
                                     speed: speedRate.toString(),
                                     context: context,
-                                    adviser: 1,
-                                    app: 1,
+                                    adviser: groupAdviserValue,
+                                    app: groupApplicationValue,
                                     flexibility: flexibleRate.toString(),
                                     other: opinionController.text,
                                     quality: qualityRate.toString(),
@@ -195,11 +196,12 @@ class _RateScreenState extends State<RateScreen> {
                                           Radio(
                                             activeColor:
                                                 Constants.primaryAppColor,
-                                            value: 1,
+                                            value: 0,
                                             onChanged: (val) {
-                                              // arabSelection(val as SingingCharacter);
+                                              groupAdviserValue=0;
+                                              setState(() {});
                                             },
-                                            groupValue: 1,
+                                            groupValue: groupAdviserValue,
                                           ),
                                           const Text("نعم",
                                               style: Constants
@@ -214,9 +216,12 @@ class _RateScreenState extends State<RateScreen> {
                                           Radio(
                                             activeColor:
                                                 Constants.primaryAppColor,
-                                            value: 2,
-                                            onChanged: (val) {},
-                                            groupValue: 1,
+                                            value: 1,
+                                            onChanged: (val) {
+                                              groupAdviserValue=1;
+                                              setState(() {});
+                                            },
+                                            groupValue: groupAdviserValue,
                                           ),
                                           const Text("لا",
                                               style: Constants
@@ -242,12 +247,14 @@ class _RateScreenState extends State<RateScreen> {
                                         children: [
                                           Radio(
                                             activeColor:
-                                                Constants.primaryAppColor,
-                                            value: 1,
+                                            Constants.primaryAppColor,
+                                            value: 0,
                                             onChanged: (val) {
-                                              // arabSelection(val as SingingCharacter);
+                                              groupApplicationValue=0;
+                                              setState(() {});
+                                              // print(groupApplicationValue);
                                             },
-                                            groupValue: 1,
+                                            groupValue: groupApplicationValue,
                                           ),
                                           const Text("نعم",
                                               style: Constants
@@ -261,10 +268,14 @@ class _RateScreenState extends State<RateScreen> {
                                         children: [
                                           Radio(
                                             activeColor:
-                                                Constants.primaryAppColor,
-                                            value: 2,
-                                            onChanged: (val) {},
-                                            groupValue: 1,
+                                            Constants.primaryAppColor,
+                                            value: 1,
+                                            onChanged: (val) {
+                                              groupApplicationValue=1;
+                                              setState(() {});
+                                              // print(groupApplicationValue);
+                                            },
+                                            groupValue: groupApplicationValue,
                                           ),
                                           const Text("لا",
                                               style: Constants
@@ -276,10 +287,10 @@ class _RateScreenState extends State<RateScreen> {
                                 ],
                               ),
                             ),
-                            Padding(
+                            const Padding(
                               padding:
-                                  const EdgeInsets.symmetric(vertical: 20.0),
-                              child: const Text(
+                                  EdgeInsets.symmetric(vertical: 20.0),
+                              child: Text(
                                   "أخبر الآخرين عن رأيك (اختياري)",
                                   style: Constants.secondaryTitleRegularFont),
                             ),

@@ -29,7 +29,7 @@ class PostRejectRepo {
       Map<String, dynamic> responseMap = json.decode(response.body);
 
        if (response.statusCode == 200 && responseMap["status"] == 1) {
-        print("response.bodyis ${response.body}");
+        // print("response.bodyis ${response.body}");
         final userdata = postRejectModelFromJson(responseMap);
         // sharedPrefs.setToken(userdata.data!.token!);
         // MyApplication.showToastView(message: responseMap["message"]);

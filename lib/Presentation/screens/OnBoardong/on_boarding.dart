@@ -8,7 +8,7 @@ import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 
 class OnBoarding extends StatelessWidget {
-  OnBoarding();
+  const OnBoarding({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +38,15 @@ class OnBoarding extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                   child: ListView(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 80,
                       ),
                       Center(
                         child: SvgPicture.asset(logoo),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 34,
                       ),
                       SizedBox(height: 150, child: Image.asset(onBoardingPNG)),
@@ -56,16 +56,16 @@ class OnBoarding extends StatelessWidget {
                           alignment: AlignmentDirectional.center,
                           children: [
                             Align(
-                                alignment: Alignment(0, -5.5),
+                                alignment: const Alignment(0, -5.5),
                                 child: SvgPicture.asset(curve1)),
                             Align(
-                                alignment: Alignment(0, -3.3),
+                                alignment: const Alignment(0, -3.3),
                                 child: SvgPicture.asset(curve2)),
                           ],
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 25),
+                        margin: const EdgeInsets.symmetric(horizontal: 25),
                         child: Text(
 
                               "تبغى نصيحة ممتازة من شخص فاهم بمجاله بسعر أنت تحدده ويرد عليك بسرعة؟".tr,
@@ -73,11 +73,11 @@ class OnBoarding extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 25),
+                        margin: const EdgeInsets.symmetric(horizontal: 25),
                         child: Text(
 
                               "تطبيق نصوح يساعدك في الحصول على إجابة وافية لكل سؤال".tr,
@@ -85,7 +85,7 @@ class OnBoarding extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 70,
                       ),
                       MyButton(
@@ -93,7 +93,7 @@ class OnBoarding extends StatelessWidget {
                         isBold: true,
                         onPressedHandler: () {
                           MyApplication.navigateToReplace(
-                              context, HomeScreen());
+                              context, const HomeScreen());
                         },
                       )
                     ],

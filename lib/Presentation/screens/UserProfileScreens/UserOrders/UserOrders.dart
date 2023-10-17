@@ -12,6 +12,7 @@ import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_
 import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_state.dart';
 import '../../../../app/constants.dart';
 import '../../../widgets/shared.dart';
+import '../../CompleteAdviseScreen/complete_advise_screen.dart';
 import 'OrderCard/OrderCard.dart';
 
 class UserOrders extends StatefulWidget {
@@ -80,7 +81,7 @@ class _UserOrdersState extends State<UserOrders> {
     MyApplication.checkConnection().then((value) {
       if (value) {
       } else {
-        MyApplication.showToastView(message: '${'noInternet'.tr}');
+        MyApplication.showToastView(message: 'noInternet'.tr);
       }
     });
 
@@ -122,7 +123,7 @@ class _UserOrdersState extends State<UserOrders> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (homeState is OrdersStatusLoaded) {
-                    print("homeData is ${homeState.response!.pagination}");
+                    // print("homeData is ${homeState.response!.pagination}");
                     var list = homeState.response!.data;
                     return SizedBox(
                       width: size.width,
@@ -209,8 +210,8 @@ class _UserOrdersState extends State<UserOrders> {
                                                             list[index]
                                                                 .id
                                                                 .toString());
-                                                    print(
-                                                        "list[index].id! is ${list[index].id!}");
+                                                    // print(
+                                                    //     "list[index].id! is ${list[index].id!}");
                                                   }
                                                 },
                                                 child: Text(
@@ -258,9 +259,9 @@ class _UserOrdersState extends State<UserOrders> {
                           BlocBuilder<OrdersFiltersCubit, OrdersFiltersState>(
                               builder: (context, ordersFilters) {
                             if (ordersFilters is OrdersFiltersLoading) {
-                              return Center(
+                              return const Center(
                                 child: Column(
-                                  children: const [
+                                  children: [
                                     SizedBox(
                                       height: 200,
                                     ),
@@ -277,17 +278,49 @@ class _UserOrdersState extends State<UserOrders> {
                                       itemCount: filtersList?.length ?? 0,
                                       itemBuilder: (context, index) {
                                         return InkWell(
-                                          onTap: () => MyApplication.navigateTo(
-                                              context,
-                                              ChatScreen(
-                                                adviceId:
-                                                    filtersList[index].id!,
-                                                adviserProfileData:
-                                                    filtersList[index].adviser,
-                                              )),
+                                          onTap: filtersList![index]
+                                                      .label!
+                                                      .id ==
+                                                  1
+                                              ? () {
+                                                  MyApplication.navigateTo(
+                                                      context,
+                                                      CompleteAdviseScreen(
+                                                        adviceId:
+                                                            filtersList[index]
+                                                                .id!,
+                                                      ));
+                                                }
+                                              : () => MyApplication.navigateTo(
+                                                  context,
+                                                  ChatScreen(
+                                                    labelToShow:
+                                                        filtersList[index]
+                                                                    .label!
+                                                                    .id ==
+                                                                1 ||
+                                                            filtersList[index]
+                                                                    .label!
+                                                                    .id ==
+                                                                2,
+                                                    openedStatus:
+                                                        // filtersList[index]
+                                                        //             .label!
+                                                        //             .id ==
+                                                        //         1 ||
+                                                        filtersList[index]
+                                                                .label!
+                                                                .id ==
+                                                            2,
+                                                    adviceId:
+                                                        filtersList[index].id!,
+                                                    adviserProfileData:
+                                                        filtersList[index]
+                                                            .adviser,
+                                                  )),
                                           child: OrderCard(
                                               orderFilterData:
-                                                  filtersList![index]),
+                                                  filtersList[index]),
                                         );
                                       }),
                                 ),

@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/home/advisor_state.dart';
-import 'package:nasooh/Presentation/screens/Advisor/AdvisorScreen.dart';
+import 'package:nasooh/Presentation/screens/Advisor/advisor_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/AdvisorCard.dart';
 import 'package:nasooh/Presentation/screens/Home/controller/HomeController.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
@@ -15,14 +15,13 @@ import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../Data/cubit/authentication/category_cubit/category_cubit.dart';
-import '../../../Data/cubit/authentication/category_cubit/category_state.dart';
 import '../../../Data/cubit/authentication/category_parent_cubit/category_parent_cubit.dart';
 import '../../../Data/cubit/authentication/category_parent_cubit/category_parent_state.dart';
 import '../../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../../Data/cubit/home/home_slider_cubit.dart';
 import '../../../Data/cubit/home/home_state.dart';
 import '../FilterScreen/FilterScreen.dart';
+import '../UserProfileScreens/UserNotifications/UserNotifications.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.catVal, this.searchTxt, this.rateVal});
@@ -74,8 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
         //////
         context.read<HomeSliderCubit>().getDataHomeSlider();
         context.read<AdvisorListCubit>().getAdvisorList(
-            catVal: widget.catVal ?? "",
-            searchTxt: widget.searchTxt ?? "",
+            catVal: widget.catVal,
+            searchTxt: widget.searchTxt,
             rateVal: widget.rateVal);
         getDataFromApi();
 
@@ -84,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ///
         ///
       } else {
-        MyApplication.showToastView(message: '${'noInternet'.tr}');
+        MyApplication.showToastView(message: 'noInternet'.tr);
       }
     });
 
@@ -108,8 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
         context.read<HomeSliderCubit>().getDataHomeSlider();
         context.read<AdvisorListCubit>().getAdvisorList(
-            catVal: widget.catVal ?? "",
-            searchTxt: widget.searchTxt ?? "",
+            catVal: widget.catVal,
+            searchTxt: widget.searchTxt,
             rateVal: widget.rateVal);
         getDataFromApi();
       }
@@ -124,9 +123,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
     subscription.cancel();
     _timer!.cancel();
-    homeController.categories.forEach((element) {
+    for (var element in homeController.categories) {
       element["isSelected"] = false;
-    });
+    }
   }
 
   @override
@@ -140,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(message: '${'noInternet'.tr}');
+      MyApplication.showToastView(message: 'noInternet'.tr);
       return NoInternetWidget(size: sizee);
     }
 
@@ -167,27 +166,30 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Row(
                         children: [
-                          Badge(
-                            backgroundColor: Constants.primaryAppColor,
-                            // borderSide: const BorderSide(color: Colors.white),
-                            alignment: const AlignmentDirectional(0, -7),
-                            label: const Text("2"),
-                            // position: BadgePosition.topStart(top: -7, start: 0),
-                            // badgeContent: const Text(
-                            //   "9+",
-                            //   style: TextStyle(
-                            //       fontSize: 8, color: Constants.whiteAppColor),
-                            //   // context.watch<CartItemsCubit>().cartLength ?? "",
-                            //   // style: const TextStyle(color: Colors.white),
-                            // ),
-                            child: Card(
-                              child: SizedBox(
-                                height: 40,
-                                width: 40,
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    notificationIcon,
-                                    height: 25,
+                          InkWell(
+                            onTap: ()=> MyApplication.navigateTo(context,const UserNotifications()),
+                            child: Badge(
+                              backgroundColor: Constants.primaryAppColor,
+                              // borderSide: const BorderSide(color: Colors.white),
+                              alignment: const AlignmentDirectional(0, -7),
+                              label: const Text("2"),
+                              // position: BadgePosition.topStart(top: -7, start: 0),
+                              // badgeContent: const Text(
+                              //   "9+",
+                              //   style: TextStyle(
+                              //       fontSize: 8, color: Constants.whiteAppColor),
+                              //   // context.watch<CartItemsCubit>().cartLength ?? "",
+                              //   // style: const TextStyle(color: Colors.white),
+                              // ),
+                              child: Card(
+                                child: SizedBox(
+                                  height: 40,
+                                  width: 40,
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      notificationIcon,
+                                      height: 25,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -207,6 +209,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       TextField(
                         controller: searchController,
+                        onSubmitted: (val) {
+                          context.read<AdvisorListCubit>().getAdvisorList(
+                              catVal: widget.catVal,
+                              searchTxt: widget.searchTxt,
+                              rateVal: widget.rateVal);
+                        },
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: Padding(
                               padding:
@@ -351,9 +359,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           .read<
                                                               AdvisorListCubit>()
                                                           .getAdvisorList(
-                                                            catVal: "",
-                                                            searchTxt: "",
-                                                          );
+                                                              // catVal: "",
+                                                              // searchTxt: "",
+                                                              );
                                                     } else {
                                                       context
                                                           .read<
@@ -362,8 +370,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               catVal: e.id
                                                                   .toString(),
                                                               searchTxt: widget
-                                                                      .searchTxt ??
-                                                                  "",
+                                                                  .searchTxt,
                                                               rateVal: widget
                                                                   .rateVal);
                                                     }
@@ -416,9 +423,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       BlocBuilder<AdvisorListCubit, AdvisorState>(
                           builder: (context, advisorState) {
                         if (advisorState is AdvisorListLoading) {
-                          return Center(
+                          return const Center(
                             child: Column(
-                              children: const [
+                              children: [
                                 SizedBox(
                                   height: 120,
                                 ),

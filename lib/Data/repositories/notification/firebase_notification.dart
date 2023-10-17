@@ -1,6 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:nasooh/Data/repositories/notification/local_notification.dart';
 import 'package:nasooh/app/utils/sharedPreferenceClass.dart';
 
 class FirebaseCustomNotification {
@@ -39,9 +38,9 @@ class FirebaseCustomNotification {
 
   static Future<void> firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {
-    print(
-        "Notification background message: ${message.notification?.title ?? ""}");
-    print('hellloooooooooo: ${message.notification.toString()}');
+    // print(
+    //     "Notification background message: ${message.notification?.title ?? ""}");
+    // print('hellloooooooooo: ${message.notification.toString()}');
 
     // CustomLocalNotification.showFlutterNotification(message);
   }
@@ -61,6 +60,6 @@ class FirebaseCustomNotification {
   static Future<void> _initializeToken() async {
     token = await FirebaseMessaging.instance.getToken();
     sharedPrefs.setFCM(token!);
-    print("token $token ");
+    // print("token $token ");
   }
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:nasooh/app/global.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:http/http.dart' as http;
 import '../../../../app/utils/myApplication.dart';
@@ -17,8 +17,7 @@ class AdvisorListRepo {
         Uri.parse('${Keys.baseUrl}/client/adviser/list?category=$catVal&name=$searchTxt&rate=$rateVal'),
         headers: {
           'Accept': 'application/json',
-          // 'lang': selectedLang!,
-          'lang': "ar",
+          'lang': Get.locale?.languageCode ??"ar",
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

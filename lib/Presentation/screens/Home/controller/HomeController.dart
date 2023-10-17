@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/constants.dart';
-import 'package:path/path.dart';
 
 class HomeController {
   ///vars
@@ -40,12 +37,12 @@ class HomeController {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Flexible(
+          const Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
+                Text(
                   "ابحث عن ناصح",
                   style: TextStyle(
                       color: Constants.primaryAppColor,
@@ -53,17 +50,14 @@ class HomeController {
                       fontFamily: Constants.mainFont,
                       fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  // margin: const EdgeInsets.symmetric(horizontal: 16),
-                  child: const Text(
-                    textAlign: TextAlign.right,
-                    "هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحةما سيلهي القارئ عن التركيز على الشكل.",
-                    style:
-                        TextStyle(fontSize: 10, fontFamily: Constants.mainFont),
-                  ),
+                SizedBox(height: 10),
+                Text(
+                  textAlign: TextAlign.right,
+                  "هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحةما سيلهي القارئ عن التركيز على الشكل.",
+                  style:
+                      TextStyle(fontSize: 10, fontFamily: Constants.mainFont),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
               ],
             ),
           ),

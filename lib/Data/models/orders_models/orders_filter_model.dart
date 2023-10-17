@@ -45,6 +45,7 @@ class OrderFilterData {
   String? date;
   Status? status;
   AdviserProfileData? adviser;
+  Status ? label ;
 
   OrderFilterData({
     this.id,
@@ -53,6 +54,7 @@ class OrderFilterData {
     this.date,
     this.status,
     this.adviser,
+    this.label
   });
 
   factory OrderFilterData.fromJson(Map<String, dynamic> json) => OrderFilterData(
@@ -61,6 +63,7 @@ class OrderFilterData {
     price: json["price"]??0,
     date: json["date"]??"",
     status: json["status"] == null ? null : Status.fromJson(json["status"]),
+    label: json["label"] == null ? null : Status.fromJson(json["label"]),
     adviser: json["adviser"] == null ? null : AdviserProfileData.fromJson(json["adviser"]),
   );
 

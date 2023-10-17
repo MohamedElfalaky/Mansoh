@@ -3,21 +3,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/Home.dart';
 import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/myApplication.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'Data/repositories/notification/firebase_notification.dart';
 import 'Data/repositories/notification/local_notification.dart';
 import 'Presentation/screens/welcome_screen/welcome.dart';
-import 'app/global.dart';
 import 'app/keys.dart';
 import 'app/utils/BlocProviders.dart';
 import 'app/utils/Language/get_language.dart';
@@ -136,7 +132,7 @@ class _MyAppState extends State<MyApp> {
               titleTextStyle: Constants.mainTitleFont,
             ),
             scaffoldBackgroundColor: Constants.whiteAppColor),
-        home: PreHome(),
+        home: const PreHome(),
       ),
     );
   }
@@ -180,7 +176,7 @@ class _PreHomeState extends State<PreHome> {
 
   @override
   Widget build(BuildContext context) {
-    return sharedPrefs.getToken() != "" ? Home() : const WelcomeScreen();
+    return sharedPrefs.getToken() != "" ? const Home() : const WelcomeScreen();
   }
 }
 

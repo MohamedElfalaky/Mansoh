@@ -38,7 +38,7 @@ class ReviewCubit extends Cubit<ReviewState> {
           Alert.alert(
               context: context,
               action: () {
-                MyApplication.navigateTo(context!, Home());
+                MyApplication.navigateToReplaceAllPrevious(context!, const Home());
               },
               content: "تم ارسال تقييمك بنجاح",
               titleAction: "الرئيسية");

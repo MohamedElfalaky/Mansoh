@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:http/http.dart' as http;
 import '../../../../app/utils/myApplication.dart';
-import '../../../app/global.dart';
 import '../../../app/utils/sharedPreferenceClass.dart';
 import '../../models/home_models/home_slider_model.dart';
 

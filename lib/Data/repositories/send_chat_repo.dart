@@ -2,14 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:nasooh/Data/models/send_advise_model.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 import '../../../app/utils/myApplication.dart';
 import '../../../app/utils/sharedPreferenceClass.dart';
 import 'package:http/http.dart' as http;
-
-import '../models/advice_screen_models/show_advice_model.dart';
 
 class SendChatRepo {
   Future<bool?> sendChat({
@@ -32,7 +29,7 @@ class SendChatRepo {
       });
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        print(response.body);
+        // print(response.body);
         // MyApplication.showToastView(message: responseMap["message"]);
         return true;
       } else {

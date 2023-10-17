@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/app/Style/Icons.dart';
@@ -76,75 +78,60 @@ class AdvisorCard extends StatelessWidget {
                   ///
                   ///
                   ///
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(2),
-                        margin: const EdgeInsets.only(left: 8),
-                        height: 24,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: const Color(0XFFEEEEEE)),
-                        child: Text( "هندسي" ,
-                          // "adviserData.category?[0].name??""",
-                          style: const TextStyle(
-                              fontSize: 10,
-                              fontFamily: Constants.mainFont,
-                              color: Color(0XFF444444)),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(2),
-                        margin: const EdgeInsets.only(left: 8),
-                        height: 24,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: const Color(0XFFEEEEEE)),
-                        child: Text( "هندسي",
-    // adviserData.category?[1].name??"",
-                          style: const TextStyle(
-                              fontSize: 10,
-                              fontFamily: Constants.mainFont,
-                              color: Color(0XFF444444)),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(2),
-                        margin: const EdgeInsets.only(left: 8),
-                        height: 24,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: const Color(0XFFEEEEEE)),
-                        child: const Text("متخصص",
-                          // thirdCategory,
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontFamily: Constants.mainFont,
-                              color: Color(0XFF444444)),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      ///////// remaining tags
-                      Container(
-                        padding: const EdgeInsets.all(2),
-                        margin: const EdgeInsets.only(left: 8),
-                        height: 24,
-                        width: 24,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: const Color(0XFFD9D9D9)),
-                        child: const Text(
-                          "+3",
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontFamily: Constants.mainFont,
-                              color: Color(0XFF444444)),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    height: 26,
+                    width: width(context) * 0.59,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, int index) {
+                        if (index < 3) {
+                          // Display the first three items from adviser.category
+                          return Container(
+                            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                            margin: const EdgeInsets.only(left: 8),
+                            height: 24,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2),
+                              color: const Color(0XFFEEEEEE),
+                            ),
+                            child: Text(
+                              adviserData.category?[index].name ?? "",
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontFamily: Constants.mainFont,
+                                color: Color(0XFF444444),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        } else if (index == 3) {
+                          // Display a fourth item with the count of remaining items
+                          int remainingCount = (adviserData.category?.length ?? 0) - 3;
+                          return Container(
+                            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                            margin: const EdgeInsets.only(left: 8),
+                            height: 24,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2),
+                              color: const Color(0XFFEEEEEE),
+                            ),
+                            child: Text(
+                              '+ $remainingCount',
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontFamily: Constants.mainFont,
+                                color: Color(0XFF444444),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        } else {
+                          // You can return an empty container for indexes greater than 3
+                          return Container();
+                        }
+                      },
+                      itemCount: min(4, adviserData.category?.length ?? 0), // Ensure only 4 items are displayed
+                    ),
                   )
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,14 +7,11 @@ import 'package:nasooh/Presentation/screens/rate_screen/rate_screen.dart';
 import 'package:nasooh/app/Style/Icons.dart';
 import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
-
 import '../../../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_cubit.dart';
 import '../../../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_state.dart';
 import '../../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../widgets/MyButton.dart';
-import '../../../widgets/alerts.dart';
-import '../../Home/Home.dart';
 import '../../rejections/reject_screen.dart';
 
 class OutlinedAdvisorCard extends StatelessWidget {
@@ -21,15 +19,17 @@ class OutlinedAdvisorCard extends StatelessWidget {
       {super.key,
       required this.adviserProfileData,
       required this.isClickable,
+      this.labelToShow,
       required this.adviceId});
 
   final AdviserProfileData adviserProfileData;
   final int adviceId;
-
+  final bool? labelToShow;
   final bool isClickable;
 
   @override
   Widget build(BuildContext context) {
+    // print(adviserProfileData.category.toString());
     return isClickable
         ? SizedBox(
             child: Column(
@@ -56,7 +56,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                   child: DottedBorder(
                     color: Constants.primaryAppColor,
                     strokeWidth: 1,
-                    dashPattern: [10, 6],
+                    dashPattern: const [10, 6],
                     borderType: BorderType.RRect,
                     radius: const Radius.circular(8),
                     child: Padding(
@@ -106,80 +106,185 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                   ///
                                   ///
                                   ///
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.all(2),
-                                        margin: const EdgeInsets.only(left: 8),
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(2),
-                                            color: const Color(0XFFEEEEEE)),
-                                        child: const Text(
-                                          "استشاري",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              fontFamily: Constants.mainFont,
-                                              color: Color(0XFF444444)),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.all(2),
-                                        margin: const EdgeInsets.only(left: 8),
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(2),
-                                            color: const Color(0XFFEEEEEE)),
-                                        child: const Text(
-                                          "هندسي",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              fontFamily: Constants.mainFont,
-                                              color: Color(0XFF444444)),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.all(2),
-                                        margin: const EdgeInsets.only(left: 8),
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(2),
-                                            color: const Color(0XFFEEEEEE)),
-                                        child: const Text(
-                                          "تسويق رقمي",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              fontFamily: Constants.mainFont,
-                                              color: Color(0XFF444444)),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                      ///////// remaining tags
-                                      Container(
-                                        padding: const EdgeInsets.all(2),
-                                        margin: const EdgeInsets.only(left: 8),
-                                        height: 24,
-                                        width: 24,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(2),
-                                            color: const Color(0XFFD9D9D9)),
-                                        child: const Text(
-                                          "+3",
-                                          style: TextStyle(
-                                              fontSize: 10,
-                                              fontFamily: Constants.mainFont,
-                                              color: Color(0XFF444444)),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ],
+                                  SizedBox(
+                                    height: 26,
+                                    width: width(context) * 0.59,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, int index) {
+                                        if (index < 3) {
+                                          // Display the first three items from adviser.category
+                                          return Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 2, horizontal: 4),
+                                            margin:
+                                                const EdgeInsets.only(left: 8),
+                                            height: 24,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(2),
+                                              color: const Color(0XFFEEEEEE),
+                                            ),
+                                            child: Text(
+                                              adviserProfileData
+                                                      .category?[index].name ??
+                                                  "",
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                fontFamily: Constants.mainFont,
+                                                color: Color(0XFF444444),
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          );
+                                        } else if (index == 3) {
+                                          // Display a fourth item with the count of remaining items
+                                          int remainingCount =
+                                              (adviserProfileData
+                                                          .category?.length ??
+                                                      0) -
+                                                  3;
+                                          return Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 2, horizontal: 4),
+                                            margin:
+                                                const EdgeInsets.only(left: 8),
+                                            height: 24,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(2),
+                                              color: const Color(0XFFEEEEEE),
+                                            ),
+                                            child: Text(
+                                              '+ $remainingCount',
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                fontFamily: Constants.mainFont,
+                                                color: Color(0XFF444444),
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          );
+                                        } else {
+                                          // You can return an empty container for indexes greater than 3
+                                          return Container();
+                                        }
+                                      },
+                                      itemCount: min(
+                                          4,
+                                          adviserProfileData.category?.length ??
+                                              0), // Ensure only 4 items are displayed
+                                    ),
                                   )
+                                  // Row(
+                                  //   children: [
+                                  //     adviserProfileData.category!.isNotEmpty
+                                  //         ? Container(
+                                  //             padding:
+                                  //                 const EdgeInsets.symmetric(
+                                  //                     vertical: 2,
+                                  //                     horizontal: 4),
+                                  //             margin: const EdgeInsets.only(
+                                  //                 left: 8),
+                                  //             height: 24,
+                                  //             decoration: BoxDecoration(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(2),
+                                  //                 color:
+                                  //                     const Color(0XFFEEEEEE)),
+                                  //             child: Text(
+                                  //               adviserProfileData
+                                  //                       .category?[0].name ??
+                                  //                   "",
+                                  //               style: const TextStyle(
+                                  //                   fontSize: 10,
+                                  //                   fontFamily:
+                                  //                       Constants.mainFont,
+                                  //                   color: Color(0XFF444444)),
+                                  //               textAlign: TextAlign.center,
+                                  //             ),
+                                  //           )
+                                  //         : const SizedBox(),
+                                  //     adviserProfileData.category!.length > 0
+                                  //         ? Container(
+                                  //             padding:
+                                  //                 const EdgeInsets.symmetric(
+                                  //                     vertical: 2,
+                                  //                     horizontal: 4),
+                                  //             margin: const EdgeInsets.only(
+                                  //                 left: 8),
+                                  //             height: 24,
+                                  //             decoration: BoxDecoration(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(2),
+                                  //                 color:
+                                  //                     const Color(0XFFEEEEEE)),
+                                  //             child: Text(
+                                  //               adviserProfileData
+                                  //                       .category?[1].name ??
+                                  //                   "",
+                                  //               style: const TextStyle(
+                                  //                   fontSize: 10,
+                                  //                   fontFamily:
+                                  //                       Constants.mainFont,
+                                  //                   color: Color(0XFF444444)),
+                                  //               textAlign: TextAlign.center,
+                                  //             ),
+                                  //           )
+                                  //         : const SizedBox(),
+                                  //     adviserProfileData.category!.length > 1
+                                  //         ? Container(
+                                  //             padding:
+                                  //                 const EdgeInsets.symmetric(
+                                  //                     vertical: 2,
+                                  //                     horizontal: 4),
+                                  //             margin: const EdgeInsets.only(
+                                  //                 left: 8),
+                                  //             height: 24,
+                                  //             decoration: BoxDecoration(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(2),
+                                  //                 color:
+                                  //                     const Color(0XFFEEEEEE)),
+                                  //             child: Text(
+                                  //               adviserProfileData
+                                  //                       .category?[2].name ??
+                                  //                   "",
+                                  //               style: const TextStyle(
+                                  //                   fontSize: 10,
+                                  //                   fontFamily:
+                                  //                       Constants.mainFont,
+                                  //                   color: Color(0XFF444444)),
+                                  //               textAlign: TextAlign.center,
+                                  //             ),
+                                  //           )
+                                  //         : const SizedBox(),
+                                  //     ///////// remaining tags
+                                  //     adviserProfileData.category!.length > 2
+                                  //         ? Container(
+                                  //             padding: const EdgeInsets.all(2),
+                                  //             margin: const EdgeInsets.only(
+                                  //                 left: 8),
+                                  //             height: 24,
+                                  //             width: 24,
+                                  //             decoration: BoxDecoration(
+                                  //                 borderRadius:
+                                  //                     BorderRadius.circular(2),
+                                  //                 color:
+                                  //                     const Color(0XFFD9D9D9)),
+                                  //             child: Text(
+                                  //               "${adviserProfileData.category!.length - 3} + ",
+                                  //               style: const TextStyle(
+                                  //                   fontSize: 10,
+                                  //                   fontFamily:
+                                  //                       Constants.mainFont,
+                                  //                   color: Color(0XFF444444)),
+                                  //               textAlign: TextAlign.center,
+                                  //             ),
+                                  //           )
+                                  //         : const SizedBox(),
+                                  //   ],
+                                  // )
                                 ],
                               ),
                               const Spacer(),
@@ -217,12 +322,13 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                             MyApplication.navigateTo(
                                                 context,
                                                 RateScreen(
-                                                    adviceId: adviceId,));
+                                                  adviceId: adviceId,
+                                                ));
                                           }
                                         },
                                         builder: (context, doneState) => doneState
                                                 is DoneAdviceLoading
-                                            ? Center(
+                                            ? const Center(
                                                 child:
                                                     CircularProgressIndicator())
                                             : MyButton(
@@ -242,13 +348,15 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                 child: MyButtonOutlined(
                                   isBold: true,
                                   txt: "اعتراض",
-                                  onPressedHandler: () {
-                                    MyApplication.navigateTo(
-                                        context,
-                                        RejectScreen(
-                                          adviceId: adviceId,
-                                        ));
-                                  },
+                                  onPressedHandler: labelToShow == true
+                                      ? () {}
+                                      : () {
+                                          MyApplication.navigateTo(
+                                              context,
+                                              RejectScreen(
+                                                adviceId: adviceId,
+                                              ));
+                                        },
                                 ),
                               ),
                             ],
@@ -283,7 +391,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
             child: DottedBorder(
               color: Constants.primaryAppColor,
               strokeWidth: 1,
-              dashPattern: [10, 6],
+              dashPattern: const [10, 6],
               borderType: BorderType.RRect,
               radius: const Radius.circular(8),
               child: Padding(
@@ -325,76 +433,162 @@ class OutlinedAdvisorCard extends StatelessWidget {
                             ///
                             ///
                             ///
-                            Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(2),
-                                  margin: const EdgeInsets.only(left: 8),
-                                  height: 24,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      color: const Color(0XFFEEEEEE)),
-                                  child: const Text(
-                                    "استشاري",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontFamily: Constants.mainFont,
-                                        color: Color(0XFF444444)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(2),
-                                  margin: const EdgeInsets.only(left: 8),
-                                  height: 24,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      color: const Color(0XFFEEEEEE)),
-                                  child: const Text(
-                                    "هندسي",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontFamily: Constants.mainFont,
-                                        color: Color(0XFF444444)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(2),
-                                  margin: const EdgeInsets.only(left: 8),
-                                  height: 24,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      color: const Color(0XFFEEEEEE)),
-                                  child: const Text(
-                                    "تسويق رقمي",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontFamily: Constants.mainFont,
-                                        color: Color(0XFF444444)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                ///////// remaining tags
-                                Container(
-                                  padding: const EdgeInsets.all(2),
-                                  margin: const EdgeInsets.only(left: 8),
-                                  height: 24,
-                                  width: 24,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      color: const Color(0XFFD9D9D9)),
-                                  child: const Text(
-                                    "+3",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontFamily: Constants.mainFont,
-                                        color: Color(0XFF444444)),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
+                            SizedBox(
+                              height: 26,
+                              width: width(context) * 0.59,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, int index) {
+                                  if (index < 3) {
+                                    // Display the first three items from adviser.category
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 2, horizontal: 4),
+                                      margin: const EdgeInsets.only(left: 8),
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(2),
+                                        color: const Color(0XFFEEEEEE),
+                                      ),
+                                      child: Text(
+                                        adviserProfileData
+                                                .category?[index].name ??
+                                            "",
+                                        style: const TextStyle(
+                                          fontSize: 10,
+                                          fontFamily: Constants.mainFont,
+                                          color: Color(0XFF444444),
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    );
+                                  } else if (index == 3) {
+                                    // Display a fourth item with the count of remaining items
+                                    int remainingCount =
+                                        (adviserProfileData.category?.length ??
+                                                0) -
+                                            3;
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 2, horizontal: 4),
+                                      margin: const EdgeInsets.only(left: 8),
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(2),
+                                        color: const Color(0XFFEEEEEE),
+                                      ),
+                                      child: Text(
+                                        '+ $remainingCount',
+                                        style: const TextStyle(
+                                          fontSize: 10,
+                                          fontFamily: Constants.mainFont,
+                                          color: Color(0XFF444444),
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    );
+                                  } else {
+                                    // You can return an empty container for indexes greater than 3
+                                    return Container();
+                                  }
+                                },
+                                itemCount: min(
+                                    4,
+                                    adviserProfileData.category?.length ??
+                                        0), // Ensure only 4 items are displayed
+                              ),
                             )
+                            // Row(
+                            //   children: [
+                            //     adviserProfileData.category!.isNotEmpty
+                            //         ? Container(
+                            //             padding: const EdgeInsets.symmetric(
+                            //                 vertical: 2, horizontal: 4),
+                            //             margin: const EdgeInsets.only(left: 8),
+                            //             height: 24,
+                            //             decoration: BoxDecoration(
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(2),
+                            //                 color: const Color(0XFFEEEEEE)),
+                            //             child: Text(
+                            //               adviserProfileData
+                            //                       .category?[0].name ??
+                            //                   "",
+                            //               style: const TextStyle(
+                            //                   fontSize: 10,
+                            //                   fontFamily: Constants.mainFont,
+                            //                   color: Color(0XFF444444)),
+                            //               textAlign: TextAlign.center,
+                            //             ),
+                            //           )
+                            //         : const SizedBox(),
+                            //     adviserProfileData.category!.length > 0
+                            //         ? Container(
+                            //             padding: const EdgeInsets.symmetric(
+                            //                 vertical: 2, horizontal: 4),
+                            //             margin: const EdgeInsets.only(left: 8),
+                            //             height: 24,
+                            //             decoration: BoxDecoration(
+                            //                 borderRadius:
+                            //                     BorderRadius.circular(2),
+                            //                 color: const Color(0XFFEEEEEE)),
+                            //             child: Text(
+                            //               adviserProfileData
+                            //                       .category?[1].name ??
+                            //                   "",
+                            //               style: const TextStyle(
+                            //                   fontSize: 10,
+                            //                   fontFamily: Constants.mainFont,
+                            //                   color: Color(0XFF444444)),
+                            //               textAlign: TextAlign.center,
+                            //             ),
+                            //           )
+                            //         : const SizedBox(),
+                            //     // adviserProfileData.category!.length > 1
+                            //     //     ? Container(
+                            //     //         padding: const EdgeInsets.symmetric(
+                            //     //             vertical: 2, horizontal: 4),
+                            //     //         margin: const EdgeInsets.only(left: 8),
+                            //     //         height: 24,
+                            //     //         decoration: BoxDecoration(
+                            //     //             borderRadius:
+                            //     //                 BorderRadius.circular(2),
+                            //     //             color: const Color(0XFFEEEEEE)),
+                            //     //         child: Text(
+                            //     //           adviserProfileData
+                            //     //                   .category?[2].name ??
+                            //     //               "",
+                            //     //           style: const TextStyle(
+                            //     //               fontSize: 10,
+                            //     //               fontFamily: Constants.mainFont,
+                            //     //               color: Color(0XFF444444)),
+                            //     //           textAlign: TextAlign.center,
+                            //     //         ),
+                            //     //       )
+                            //     //     : const SizedBox(),
+                            //     ///////// remaining tags
+                            //     // adviserProfileData.category!.length > 2
+                            //     //     ? Container(
+                            //     //         padding: const EdgeInsets.all(2),
+                            //     //         margin: const EdgeInsets.only(left: 8),
+                            //     //         height: 24,
+                            //     //         width: 24,
+                            //     //         decoration: BoxDecoration(
+                            //     //             borderRadius:
+                            //     //                 BorderRadius.circular(2),
+                            //     //             color: const Color(0XFFD9D9D9)),
+                            //     //         child: Text(
+                            //     //           "${adviserProfileData.category!.length - 3} + ",
+                            //     //           style: const TextStyle(
+                            //     //               fontSize: 10,
+                            //     //               fontFamily: Constants.mainFont,
+                            //     //               color: Color(0XFF444444)),
+                            //     //           textAlign: TextAlign.center,
+                            //     //         ),
+                            //     //       )
+                            //     //     : const SizedBox(),
+                            //   ],
+                            // )
                           ],
                         ),
                         const Spacer(),

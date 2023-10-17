@@ -152,11 +152,11 @@ class CompleteAdvisorCard extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text(
                   "رقم الطلب",
                   style: Constants.subtitleRegularFont,

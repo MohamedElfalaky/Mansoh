@@ -25,7 +25,9 @@ class AdvisorProfileModel {
 
   factory AdvisorProfileModel.fromJson(Map<String, dynamic> json) =>
       AdvisorProfileModel(
-        data: json["data"] == null ? null : AdviserProfileData.fromJson(json["data"]),
+        data: json["data"] == null
+            ? null
+            : AdviserProfileData.fromJson(json["data"]),
         status: json["status"],
         message: json["message"],
         pagination: json["pagination"] == null
@@ -48,35 +50,34 @@ class AdviserProfileData {
   String? avatar;
   String? description;
   String? fullName;
-  String? rate;
-  int? adviceCount;
   String? info;
   String? experienceYear;
   List<Category>? category;
   List<Document>? document;
+  int? adviceCount;
+  String? rate;
 
   AdviserProfileData({
     this.id,
     this.avatar,
     this.description,
     this.fullName,
-    this.rate,
-    this.adviceCount,
     this.info,
     this.experienceYear,
     this.category,
     this.document,
+    this.adviceCount,
+    this.rate,
   });
 
-  factory AdviserProfileData.fromJson(Map<String, dynamic> json) => AdviserProfileData(
-        id: json["id"]??0,
-        avatar: json["avatar"]??"",
-        description: json["description"]??"",
-        fullName: json["full_name"]??"",
-        info: json["info"]??"",
-        rate: json["rate"]??"",
-        adviceCount: json["advice_count"]??0,
-        experienceYear: json["experience_year"]??"",
+  factory AdviserProfileData.fromJson(Map<String, dynamic> json) =>
+      AdviserProfileData(
+        id: json["id"],
+        avatar: json["avatar"],
+        description: json["description"],
+        fullName: json["full_name"],
+        info: json["info"],
+        experienceYear: json["experience_year"],
         category: json["category"] == null
             ? []
             : List<Category>.from(
@@ -85,6 +86,8 @@ class AdviserProfileData {
             ? []
             : List<Document>.from(
                 json["document"]!.map((x) => Document.fromJson(x))),
+        adviceCount: json["advice_count"],
+        rate: json["rate"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -100,58 +103,47 @@ class AdviserProfileData {
         "document": document == null
             ? []
             : List<dynamic>.from(document!.map((x) => x.toJson())),
+        "advice_count": adviceCount,
+        "rate": rate,
       };
 }
 
 class Category {
   int? id;
   String? name;
-  List<Category>? children;
-  int? parentId;
 
   Category({
     this.id,
     this.name,
-    this.children,
-    this.parentId,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
         name: json["name"],
-        children: json["children"] == null
-            ? []
-            : List<Category>.from(
-                json["children"]!.map((x) => Category.fromJson(x))),
-        parentId: json["parent_id"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "children": children == null
-            ? []
-            : List<dynamic>.from(children!.map((x) => x.toJson())),
-        "parent_id": parentId,
       };
 }
 
 class Document {
   int? id;
-  String? file;
+  String? value;
 
   Document({
     this.id,
-    this.file,
+    this.value,
   });
 
   factory Document.fromJson(Map<String, dynamic> json) => Document(
-        id: json["id"]??0,
-        file: json["file"]??"",
+        id: json["id"],
+        value: json["value"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "file": file,
+        "value": value,
       };
 }

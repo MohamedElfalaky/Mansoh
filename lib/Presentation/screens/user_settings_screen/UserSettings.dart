@@ -5,7 +5,6 @@ import 'package:nasooh/Presentation/widgets/shared.dart';
 import '../../../../app/utils/myApplication.dart';
 import '../../../app/Style/Icons.dart';
 import '../../../app/constants.dart';
-import '../../../app/global.dart';
 import '../../../app/utils/Language/get_language.dart';
 import '../UserProfileScreens/UserProfileEdit/widgets/shared.dart';
 

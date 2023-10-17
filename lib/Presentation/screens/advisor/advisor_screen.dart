@@ -14,7 +14,6 @@ import 'package:readmore/readmore.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_state.dart';
 import '../ConfirmAdviseScreen/ConfirmAdviseScreen.dart';
-import '../Home/Home.dart';
 
 class AdvisorScreen extends StatefulWidget {
   const AdvisorScreen({super.key, required this.id});
@@ -43,7 +42,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
         ///
         ///
       } else {
-        MyApplication.showToastView(message: '${'noInternet'.tr}');
+        MyApplication.showToastView(message: 'noInternet'.tr);
       }
     });
 
@@ -90,7 +89,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(message: '${'noInternet'.tr}');
+      MyApplication.showToastView(message: 'noInternet'.tr);
       return NoInternetWidget(size: sizee);
     }
 
@@ -105,12 +104,12 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
               context: context,
               endIcon: true,
               actions: [
-                Column(
+                const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     Row(
-                      children: const [
+                      children: [
                         Icon(
                           Icons.share_outlined,
                           size: 22,
@@ -135,9 +134,9 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                   BlocBuilder<AdvisorProfileCubit, AdvisorProfileState>(
                       builder: (context, advisorState) {
                     if (advisorState is AdvisorProfileLoading) {
-                      return Center(
+                      return const Center(
                         child: Column(
-                          children: const [
+                          children: [
                             SizedBox(height: 300),
                             CircularProgressIndicator(),
                           ],
@@ -237,8 +236,9 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                     BorderRadius.circular(2)),
                                             child: Center(
                                                 child: Text(
-                                              "محامي عام",
-                                              // allData.category?[index].name??"",
+                                              // "محامي عام",
+                                              allData.category?[index].name ??
+                                                  "",
                                               style: const TextStyle(
                                                   fontFamily:
                                                       Constants.mainFont,
@@ -413,7 +413,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                       (index) => Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   top: 12),
                                                           child: Container(
                                                             padding:
@@ -423,7 +423,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                             ),
                                                             margin:
                                                                 const EdgeInsets
-                                                                        .symmetric(
+                                                                    .symmetric(
                                                                     horizontal:
                                                                         4),
                                                             decoration: BoxDecoration(
@@ -435,9 +435,10 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                                                             2)),
                                                             child: Text(
                                                               allData
-                                                                  .document![
-                                                                      index]
-                                                                  .file??"",
+                                                                      .document![
+                                                                          index]
+                                                                      .value ??
+                                                                  "",
                                                               style: const TextStyle(
                                                                   fontFamily:
                                                                       Constants

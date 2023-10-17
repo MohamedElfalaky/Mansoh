@@ -194,7 +194,7 @@ class SharedPrefs {
   }
 
   int? getReceiveMethod() {
-    return sharedPrefs!.getInt(receiveMethodKey) ?? null;
+    return sharedPrefs!.getInt(receiveMethodKey);
   }
 
   setReceiveMethod(int value) {
@@ -222,7 +222,7 @@ class SharedPrefs {
   }
 
   void removeFCM() {
-    sharedPrefs!.remove(fCMToken);
+    sharedPrefs!.remove(fcmkey);
   }
 
   void removeAmount() {

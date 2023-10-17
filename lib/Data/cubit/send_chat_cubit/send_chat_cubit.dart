@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nasooh/Data/cubit/send_chat_cubit/send_chat_state.dart';
 import 'package:nasooh/Data/repositories/send_chat_repo.dart';
-import 'package:nasooh/app/utils/myApplication.dart';
 
 class SendChatCubit extends Cubit<SendChatState> {
   SendChatCubit() : super(SendChatInitial());

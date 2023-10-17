@@ -26,7 +26,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
   late AnimationController _animationController;
   late AnimationController _fadeController;
   final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -119,7 +119,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                               padding:
                                   const EdgeInsets.only(top: 10, bottom: 10),
                               child: MyIntlPhoneField(
-                                countries: ['SA'],
+                                countries: const ['SA'],
                                 controller: _phoneController,
                                 showDropdownIcon: true,
                                 dropdownIcon: const Icon(
@@ -148,7 +148,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                                 ),
                                 initialCountryCode: 'SA',
                                 onChanged: (phone) {
-                                  print(phone.completeNumber);
+                                  // print(phone.completeNumber);
                                   sendPhone = phone.completeNumber;
                                 },
                                 invalidNumberMessage:

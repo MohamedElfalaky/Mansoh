@@ -10,7 +10,7 @@ class PaymentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 48,
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: const Color(0xFFF5F4F5),

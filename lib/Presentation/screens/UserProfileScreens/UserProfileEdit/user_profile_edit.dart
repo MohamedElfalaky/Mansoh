@@ -56,12 +56,12 @@ class _UserProfileEditState extends State<UserProfileEdit>
         regImage = myImage;
       });
       List<int> imageBytes = await File(regImage!.path).readAsBytesSync();
-      print(imageBytes);
+      // print(imageBytes);
       base64NewImage = base64.encode(imageBytes);
-      print("inputImagePhoto!.path  is ${regImage!.path}");
-      log("base64Image!  is ${base64NewImage}");
+      // print("inputImagePhoto!.path  is ${regImage!.path}");
+      log("base64Image!  is $base64NewImage");
     } on PlatformException catch (e) {
-      print("platform exeption : $e");
+      // print("platform exeption : $e");
     }
     Navigator.pop(context);
   }
@@ -92,7 +92,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
       genderValue = profileCubit.profileModel?.data?.gender ?? "";
     });
 
-    print(profileCubit.profileModel?.data?.gender);
+    // print(profileCubit.profileModel?.data?.gender);
     // }
     // nationalityValue = 1;
     if (profileCubit.profileModel?.data?.nationalityId != null) {
@@ -150,15 +150,15 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                 avatar: base64NewImage,
                                 mobile: phoneNumber ??
                                     "+966${_phoneController.text}");
-                            print(phoneNumber);
-                            print("base64NewImage is $base64NewImage");
-                            print("+966${_phoneController.text}");
-                            print("${_emailController.text}");
-                            print("${_nameController.text}");
-                            print("${cityValue}");
-                            print("${countryValue}");
-                            print("${nationalityValue}");
-                            print(" gender value send ${genderValue}");
+                            // print(phoneNumber);
+                            // print("base64NewImage is $base64NewImage");
+                            // print("+966${_phoneController.text}");
+                            // print("${_emailController.text}");
+                            // print("${_nameController.text}");
+                            // print("$cityValue");
+                            // print("$countryValue");
+                            // print("$nationalityValue");
+                            // print(" gender value send $genderValue");
                           })),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
@@ -183,7 +183,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                         // mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Back(header: "Update Profile"),
+                          const Back(header: "Update Profile"),
                           const SizedBox(
                             height: 15,
                           ),
@@ -265,7 +265,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                                           // print(
                                                           //     "Image PAth is $inputImageName");
                                                         }),
-                                                    Divider(),
+                                                    const Divider(),
                                                     RowModalSheet(
                                                       txt: "الاستديو",
                                                       imageIcon: galleryIcon,
@@ -284,7 +284,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                                         //     "Image path is ${inputImagePhoto!.path}");
                                                       },
                                                     ),
-                                                    Divider(),
+                                                    const Divider(),
                                                     RowModalSheet(
                                                       txt: "الغاء",
                                                       imageIcon: closeIcon,
@@ -330,7 +330,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                             imageTxt: "assets/images/SVGs/name_icon.svg",
                             controller: _nameController,
                             onChanged: (val) {
-                              print(_nameController.toString());
+                              // print(_nameController.toString());
                             },
                           ),
 
@@ -392,7 +392,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                             imageTxt: "assets/images/SVGs/email_icon.svg",
                             controller: _emailController,
                             onChanged: (val) {
-                              print(_emailController.toString());
+                              // print(_emailController.toString());
                             },
                           ),
                           const Padding(
@@ -501,7 +501,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                           setState(() {
                                             cityValue = val;
                                           });
-                                          print("${cityValue} is CityChosen");
+                                          // print("$cityValue is CityChosen");
                                         },
                                         items: cityState.response!.data!
                                             .map(
@@ -540,7 +540,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                     setState(() {
                                       genderValue = s;
                                     });
-                                    print(genderValue);
+                                    // print(genderValue);
                                   }),
                               const SizedBox(
                                 width: 48,
@@ -556,7 +556,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                     setState(() {
                                       genderValue = s;
                                     });
-                                    print(genderValue);
+                                    // print(genderValue);
                                   }),
                             ],
                             // )
