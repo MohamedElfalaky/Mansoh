@@ -125,6 +125,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                     MyApplication.navigateTo(
                         context,
                         ChatScreen(
+                          statusClickable: false,
                           openedStatus:
                               // state.response!.data!.label!.id == 1 ||
                               state.response!.data!.label!.id == 2,

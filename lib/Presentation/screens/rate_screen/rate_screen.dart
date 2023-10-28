@@ -15,8 +15,7 @@ import '../../../Data/cubit/review_cubit/review_cubit.dart';
 import '../../../Data/cubit/review_cubit/review_state.dart';
 
 class RateScreen extends StatefulWidget {
-  const RateScreen(
-      {super.key, required this.adviceId});
+  const RateScreen({super.key, required this.adviceId});
 
   final int adviceId;
 
@@ -32,8 +31,8 @@ class _RateScreenState extends State<RateScreen> {
   double speedRate = 0.0;
   double qualityRate = 0.0;
   double flexibleRate = 0.0;
-  int groupAdviserValue= 0;
-  int groupApplicationValue= 0;
+  int groupAdviserValue = 1;
+  int groupApplicationValue = 1;
 
   @override
   void initState() {
@@ -118,6 +117,20 @@ class _RateScreenState extends State<RateScreen> {
                               // if (_formKey.currentState!.validate()) {
                               // print(widget.adviceId);
 
+                              print(
+                                widget.adviceId,
+                              );
+                              print(
+                                speedRate.toString(),
+                              );
+                              print(
+                                groupAdviserValue,
+                              );
+                              print(groupApplicationValue);
+                              print(flexibleRate.toString());
+                              print(opinionController.text);
+                              print(qualityRate.toString());
+
                               context.read<ReviewCubit>().reviewMethod(
                                     adviceId: widget.adviceId,
                                     speed: speedRate.toString(),
@@ -169,15 +182,44 @@ class _RateScreenState extends State<RateScreen> {
                                       ),
                                     ],
                                   ),
+
                                   _itemRate(
-                                      txt: "سرعة التجاوب".tr,
-                                      rateVal: speedRate),
+                                    txt: "سرعة التجاوب".tr,
+                                    rateVal: speedRate,
+                                    onRatingUpdate: (rating) {
+                                      setState(() {
+                                        speedRate = rating;
+                                      });
+                                    },
+                                  ),
                                   _itemRate(
-                                      txt: "جودة النصيحة".tr,
-                                      rateVal: qualityRate),
+                                    txt: "جودة النصيحة".tr,
+                                    rateVal: qualityRate,
+                                    onRatingUpdate: (rating) {
+                                      setState(() {
+                                        qualityRate = rating;
+                                      });
+                                    },
+                                  ),
                                   _itemRate(
-                                      txt: "مرونة وتعامل الناصح".tr,
-                                      rateVal: flexibleRate),
+                                    txt: "مرونة وتعامل الناصح".tr,
+                                    rateVal: flexibleRate,
+                                    onRatingUpdate: (rating) {
+                                      setState(() {
+                                        flexibleRate = rating;
+                                      });
+                                    },
+                                  ),
+
+                                  // _itemRate(
+                                  //     txt: "سرعة التجاوب".tr,
+                                  //     rateVal: speedRate),
+                                  // _itemRate(
+                                  //     txt: "جودة النصيحة".tr,
+                                  //     rateVal: qualityRate),
+                                  // _itemRate(
+                                  //     txt: "مرونة وتعامل الناصح".tr,
+                                  //     rateVal: flexibleRate),
                                 ],
                               ),
                             ),
@@ -196,9 +238,9 @@ class _RateScreenState extends State<RateScreen> {
                                           Radio(
                                             activeColor:
                                                 Constants.primaryAppColor,
-                                            value: 0,
+                                            value: 1,
                                             onChanged: (val) {
-                                              groupAdviserValue=0;
+                                              groupAdviserValue = 1;
                                               setState(() {});
                                             },
                                             groupValue: groupAdviserValue,
@@ -216,9 +258,9 @@ class _RateScreenState extends State<RateScreen> {
                                           Radio(
                                             activeColor:
                                                 Constants.primaryAppColor,
-                                            value: 1,
+                                            value: 0,
                                             onChanged: (val) {
-                                              groupAdviserValue=1;
+                                              groupAdviserValue = 0;
                                               setState(() {});
                                             },
                                             groupValue: groupAdviserValue,
@@ -247,10 +289,10 @@ class _RateScreenState extends State<RateScreen> {
                                         children: [
                                           Radio(
                                             activeColor:
-                                            Constants.primaryAppColor,
-                                            value: 0,
+                                                Constants.primaryAppColor,
+                                            value: 1,
                                             onChanged: (val) {
-                                              groupApplicationValue=0;
+                                              groupApplicationValue = 1;
                                               setState(() {});
                                               // print(groupApplicationValue);
                                             },
@@ -268,10 +310,10 @@ class _RateScreenState extends State<RateScreen> {
                                         children: [
                                           Radio(
                                             activeColor:
-                                            Constants.primaryAppColor,
-                                            value: 1,
+                                                Constants.primaryAppColor,
+                                            value: 0,
                                             onChanged: (val) {
-                                              groupApplicationValue=1;
+                                              groupApplicationValue = 0;
                                               setState(() {});
                                               // print(groupApplicationValue);
                                             },
@@ -288,10 +330,8 @@ class _RateScreenState extends State<RateScreen> {
                               ),
                             ),
                             const Padding(
-                              padding:
-                                  EdgeInsets.symmetric(vertical: 20.0),
-                              child: Text(
-                                  "أخبر الآخرين عن رأيك (اختياري)",
+                              padding: EdgeInsets.symmetric(vertical: 20.0),
+                              child: Text("أخبر الآخرين عن رأيك (اختياري)",
                                   style: Constants.secondaryTitleRegularFont),
                             ),
                             Padding(
@@ -315,7 +355,8 @@ class _RateScreenState extends State<RateScreen> {
                         ))))));
   }
 
-  Widget _itemRate({String? txt, double? rateVal}) {
+  Widget _itemRate(
+      {String? txt, double? rateVal, void Function(double)? onRatingUpdate}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -327,17 +368,14 @@ class _RateScreenState extends State<RateScreen> {
           ),
           RatingBar.builder(
             initialRating: rateVal ?? 0,
-            allowHalfRating: true,
+            allowHalfRating: false,
             itemCount: 5,
             itemSize: 30.0,
             itemBuilder: (context, _) => const Icon(
               Icons.star,
               color: Colors.amber,
             ),
-            onRatingUpdate: (rating) {
-              rateVal = rating;
-              // print(initialRate);
-            },
+            onRatingUpdate: onRatingUpdate!,
           ),
         ],
       ),

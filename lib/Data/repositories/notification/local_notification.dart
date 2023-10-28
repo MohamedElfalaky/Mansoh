@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -42,18 +44,18 @@ class CustomLocalNotification {
   }
 
   static void showFlutterNotification(RemoteMessage message) async {
-    // var msg = jsonDecode(message.notification!.body!);
+    var msg = jsonDecode(message.notification!.body!);
     // var msg = jsonDecode(message.data["advice_id"]);
     // var msg = jsonDecode(message.data["is_chat"]);
 
-    // print('notification response: ${msg["body"]}');
-    // print('notification response: ${message.data}');
-    // print('notification response: ${message.data["advice_id"]}');
-    // print('notification response: ${message.data["is_chat"]}');
-    // print('notification Contxt: ${Keys.navigatorKey.currentContext}');
-    // print(
-    //     'notification secon contxt: ${Keys.navigatorKey.currentState!.context}');
-    // print('notification response: ${message.notification!.body!}');
+    print('notification response: ${msg["body"]}');
+    print('notification response: ${message.data}');
+    print('notification response: ${message.data["advice_id"]}');
+    print('notification response: ${message.data["is_chat"]}');
+    print('notification Contxt: ${Keys.navigatorKey.currentContext}');
+    print(
+        'notification secon contxt: ${Keys.navigatorKey.currentState!.context}');
+    print('notification response: ${message.notification!.body!}');
 
     if (message.data["is_chat"] == "1") {
       // print("render chat");

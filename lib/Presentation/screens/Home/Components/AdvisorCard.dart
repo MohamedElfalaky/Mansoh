@@ -9,10 +9,7 @@ import 'package:nasooh/app/constants.dart';
 import '../../../../Data/models/home_models/advisor_list_model.dart';
 
 class AdvisorCard extends StatelessWidget {
-  const AdvisorCard(
-      {super.key,
-      required this.adviserData,
-    n});
+  const AdvisorCard({super.key, required this.adviserData, n});
 
   final AdviserData adviserData;
 
@@ -20,7 +17,7 @@ class AdvisorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.only(top: 16, bottom: 6, right: 16, left: 16),
+      padding: const EdgeInsets.only(top: 16, bottom: 6, right: 13, left: 13),
       // height: 170,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -43,7 +40,8 @@ class AdvisorCard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 22,
-                backgroundImage: NetworkImage(adviserData.avatar??"", scale: 0.2),
+                backgroundImage:
+                    NetworkImage(adviserData.avatar ?? "", scale: 0.2),
                 // child: Image.network(
                 //
                 //   fit: BoxFit.cover,
@@ -51,7 +49,7 @@ class AdvisorCard extends StatelessWidget {
                 // ),
               ),
               const SizedBox(
-                width: 8,
+                width: 6,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,12 +57,12 @@ class AdvisorCard extends StatelessWidget {
                   SizedBox(
                     width: width(context) * 0.6,
                     child: Text(
-                      adviserData.fullName??"",
+                      adviserData.fullName ?? "",
                       style: Constants.secondaryTitleFont,
                     ),
                   ),
                   Text(
-                    adviserData.description??"",
+                    adviserData.description ?? "",
                     style: Constants.subtitleFont,
                     textAlign: TextAlign.start,
                     maxLines: 2,
@@ -87,7 +85,8 @@ class AdvisorCard extends StatelessWidget {
                         if (index < 3) {
                           // Display the first three items from adviser.category
                           return Container(
-                            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 4),
                             margin: const EdgeInsets.only(left: 8),
                             height: 24,
                             decoration: BoxDecoration(
@@ -106,9 +105,11 @@ class AdvisorCard extends StatelessWidget {
                           );
                         } else if (index == 3) {
                           // Display a fourth item with the count of remaining items
-                          int remainingCount = (adviserData.category?.length ?? 0) - 3;
+                          int remainingCount =
+                              (adviserData.category?.length ?? 0) - 3;
                           return Container(
-                            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 4),
                             margin: const EdgeInsets.only(left: 8),
                             height: 24,
                             decoration: BoxDecoration(
@@ -130,7 +131,10 @@ class AdvisorCard extends StatelessWidget {
                           return Container();
                         }
                       },
-                      itemCount: min(4, adviserData.category?.length ?? 0), // Ensure only 4 items are displayed
+                      itemCount: min(
+                          4,
+                          adviserData.category?.length ??
+                              0), // Ensure only 4 items are displayed
                     ),
                   )
                 ],
@@ -139,7 +143,7 @@ class AdvisorCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    adviserData.rate??"",
+                    adviserData.rate ?? "",
                     style: Constants.secondaryTitleFont,
                   ),
                   const SizedBox(
@@ -156,19 +160,16 @@ class AdvisorCard extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-
-
           SizedBox(
             // width: width(context) * 0.6,
             child: Text(
-              adviserData.info??"",
+              adviserData.info ?? "",
               style: Constants.subtitleFont,
               textAlign: TextAlign.start,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
           ),
-
         ],
       ),
     );

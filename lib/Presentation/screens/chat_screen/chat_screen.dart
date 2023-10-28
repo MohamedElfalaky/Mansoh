@@ -26,12 +26,14 @@ class ChatScreen extends StatefulWidget {
     required this.adviceId,
     this.openedStatus = false,
     this.labelToShow = false,
+    this.statusClickable = false,
   });
 
   final AdviserProfileData? adviserProfileData;
   final int adviceId;
   final bool labelToShow;
   final bool? openedStatus;
+  final bool statusClickable;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -254,7 +256,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           labelToShow: widget.labelToShow,
                           adviceId: widget.adviceId,
                           adviserProfileData: widget.adviserProfileData!,
-                          isClickable: true,
+                          isClickable: widget.statusClickable,
                         ),
                       ),
                       Expanded(

@@ -127,7 +127,7 @@ class OrderCard extends StatelessWidget {
                       style: Constants.secondaryTitleFont,
                     ),
                     subtitle: Text(
-                      orderFilterData.adviser?.info ?? "",
+                      orderFilterData.adviser?.description ?? "",
                       style: Constants.subtitleRegularFont,
                     ),
                     trailing: FittedBox(

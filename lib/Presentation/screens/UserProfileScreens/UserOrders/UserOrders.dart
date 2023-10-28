@@ -294,6 +294,11 @@ class _UserOrdersState extends State<UserOrders> {
                                               : () => MyApplication.navigateTo(
                                                   context,
                                                   ChatScreen(
+                                                    statusClickable:
+                                                        filtersList[index]
+                                                                .label!
+                                                                .id ==
+                                                            3,
                                                     labelToShow:
                                                         filtersList[index]
                                                                     .label!

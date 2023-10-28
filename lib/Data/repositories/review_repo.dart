@@ -19,6 +19,14 @@ class ReviewRepo {
     int? adviceId,
     int? app,
   }) async {
+    Map<String, dynamic> mapData = {
+      'rate_speed': '$speed',
+      'rate_quality': '$quality',
+      'rate_flexibility': '$flexibility',
+      'rate_adviser': '$adviser',
+      'rate_app': '$app',
+      'rate_other': '$other'
+    };
     try {
       http.Response response = await http.post(
           Uri.parse('${Keys.baseUrl}/client/advice/review/$adviceId'),
@@ -27,14 +35,8 @@ class ReviewRepo {
             'lang': selectedLang,
             "Authorization": "Bearer ${sharedPrefs.getToken()}"
           },
-          body: {
-            'speed': '$speed',
-            'quality': '$quality',
-            'flexibility': '$flexibility',
-            'adviser': '$adviser',
-            'app': '$app',
-            'other': '$other'
-          });
+          body: mapData);
+      print(mapData);
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print(response.body);
