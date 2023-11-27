@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,6 +16,7 @@ import 'package:nasooh/Presentation/screens/Home/Home.dart';
 import 'package:nasooh/Presentation/widgets/noInternet.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/myApplication.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../../../app/Style/Icons.dart';
 import '../../../app/Style/sizes.dart';
@@ -45,6 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
   bool? isConnected;
   final TextEditingController _textController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+  File? pickedFile;
 
   @override
   void initState() {
@@ -296,16 +301,55 @@ class _ChatScreenState extends State<ChatScreen> {
                                                 .withOpacity(0.6),
                                         borderRadius:
                                             BorderRadius.circular(20)),
-                                    child: Text(
-                                      state.response!.data!.chat![index].message
-                                          .toString(),
+                                    child:
+
+                                    state.response!.data!.chat![index]
+                                        .mediaType ==
+                                        "1"
+                                        ? InkWell(
+                                      onTap: () {
+                                        launchUrl(Uri.parse(state
+                                            .response!
+                                            .data!
+                                            .chat![index]
+                                            .document?[0]
+                                            .file ??
+                                            ""));
+                                      },
+                                      child: Text(
+                                        state
+                                            .response!
+                                            .data!
+                                            .chat![index]
+                                            .document?[0]
+                                            .file ??
+                                            "",
+                                        style:
+                                        Constants.subtitleFont,
+                                      ),
+                                    )
+                                        : Text(
+                                      state
+                                          .response!
+                                          .data!
+                                          .chat![index]
+                                          .message ??
+                                          "",
                                       style: Constants.subtitleFont,
-                                      // textAlign: state.response!.data!
-                                      //             .chat![index].adviser ==
-                                      //         null
-                                      //     ? TextAlign.start
-                                      //     : TextAlign.end,
                                     ),
+
+
+
+                                    // Text(
+                                    //   state.response!.data!.chat![index].message
+                                    //       .toString(),
+                                    //   style: Constants.subtitleFont,
+                                    //   // textAlign: state.response!.data!
+                                    //   //             .chat![index].adviser ==
+                                    //   //         null
+                                    //   //     ? TextAlign.start
+                                    //   //     : TextAlign.end,
+                                    // ),
                                   ),
                                 ),
                               );
@@ -336,7 +380,37 @@ class _ChatScreenState extends State<ChatScreen> {
                                         suffixIcon: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            SvgPicture.asset(attachFiles),
+                                            InkWell(
+                                                onTap: () async {
+                                                  FilePickerResult? result =
+                                                  await FilePicker
+                                                      .platform
+                                                      .pickFiles();
+                                                  // type:
+                                                  // FileType.custom;
+                                                  // allowedExtensions:
+                                                  // ['pdf', 'jpg', 'png', "doc", "docx", "gif"];
+                                                  if (result != null) {
+                                                    setState(() {
+                                                      pickedFile = File(result
+                                                          .files
+                                                          .single
+                                                          .path!);
+                                                    });
+                                                    List<int> imageBytes =
+                                                    await File(pickedFile!
+                                                        .path)
+                                                        .readAsBytesSync();
+                                                    // print(imageBytes);
+                                                    fileSelected = base64
+                                                        .encode(imageBytes);
+                                                  }
+                                                  return;
+                                                },
+                                                child: SvgPicture.asset(
+                                                    attachFiles)),
+
+                                            // SvgPicture.asset(attachFiles),
                                             const SizedBox(
                                               width: 8,
                                             ),

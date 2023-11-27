@@ -16,6 +16,12 @@ class SendChatRepo {
     String? type,
   }) async {
     try {
+      Map<String, dynamic> map = {
+        'message': msg,
+        'advice_id': '$adviceId',
+        if (file != null) 'document[0][type]': type,
+        if (file != null) 'document[0][file]': file,
+      };
       http.Response response = await http
           .post(Uri.parse('${Keys.baseUrl}/client/chat/store'), headers: {
         'Accept': 'application/json',

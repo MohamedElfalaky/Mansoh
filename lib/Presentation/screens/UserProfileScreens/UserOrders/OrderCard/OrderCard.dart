@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../Data/models/orders_models/orders_filter_model.dart';
+import '../../../../../app/Style/sizes.dart';
 import '../../../../../app/constants.dart';
 import '../../UserProfileEdit/widgets/shared.dart';
 
@@ -44,9 +45,11 @@ class OrderCard extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                orderFilterData.name ?? "",
-                                style: Constants.secondaryTitleFont,
+                              SizedBox(width: width(context)*0.65,
+                                child: Text(
+                                  orderFilterData.name ?? "",
+                                  style: Constants.secondaryTitleFont,
+                                ),
                               ),
                               Text(
                                 orderFilterData.date ?? "",
