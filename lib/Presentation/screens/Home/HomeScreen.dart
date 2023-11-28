@@ -167,7 +167,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         children: [
                           InkWell(
-                            onTap: ()=> MyApplication.navigateTo(context,const UserNotifications()),
+                            onTap: () => MyApplication.navigateTo(
+                                context, const UserNotifications()),
                             child: Badge(
                               backgroundColor: Constants.primaryAppColor,
                               // borderSide: const BorderSide(color: Colors.white),
@@ -255,70 +256,76 @@ class _HomeScreenState extends State<HomeScreen> {
                       ///
                       ///
                       ///
-                      Container(
-                        height: 140,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            gradient: const LinearGradient(colors: [
-                              Constants.primaryAppColor,
-                              Constants.whiteAppColor,
-                            ], stops: [
-                              0,
-                              0.6
-                            ]),
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: const Offset(0, 6),
-                                  blurRadius: 10,
-                                  spreadRadius: -5,
-                                  blurStyle: BlurStyle.normal,
-                                  color: const Color(0XFF5C5E6B1A)
-                                      .withOpacity(0.1)),
-                            ],
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            PageView(
-                                controller: controller,
-                                children: homeState.response!.data!
-                                    .map((e) =>
-                                        homeController.pageViewItem(e.image!))
-                                    .toList()),
-                            SizedBox(
-                              height: 20,
-                              width: 70,
-                              child: Center(
-                                child: SmoothPageIndicator(
-                                  onDotClicked: (index) {
-                                    if (_currentPage < 2) {
-                                      _currentPage++;
-                                    } else {
-                                      _currentPage = 0;
-                                    }
+                      homeState.response?.data?.isEmpty ?? false
+                          ? const SizedBox()
+                          : Container(
+                              height: 140,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  gradient: const LinearGradient(colors: [
+                                    Constants.primaryAppColor,
+                                    Constants.whiteAppColor,
+                                  ], stops: [
+                                    0,
+                                    0.6
+                                  ]),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        offset: const Offset(0, 6),
+                                        blurRadius: 10,
+                                        spreadRadius: -5,
+                                        blurStyle: BlurStyle.normal,
+                                        color: const Color(0XFF5C5E6B1A)
+                                            .withOpacity(0.1)),
+                                  ],
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Stack(
+                                alignment: Alignment.bottomCenter,
+                                children: [
+                                  PageView(
+                                      controller: controller,
+                                      children: homeState.response!.data!
+                                          .map((e) => homeController.pageViewItem(e
+                                                  .image ??
+                                              "https://w7.pngwing.com/pngs/895/199/png-transparent-spider-man-heroes-download-with-transparent-background-free-thumbnail.png"))
+                                          .toList()),
+                                  SizedBox(
+                                    height: 20,
+                                    width: 70,
+                                    child: Center(
+                                      child: SmoothPageIndicator(
+                                        onDotClicked: (index) {
+                                          if (_currentPage < 2) {
+                                            _currentPage++;
+                                          } else {
+                                            _currentPage = 0;
+                                          }
 
-                                    controller.animateToPage(
-                                      _currentPage,
-                                      duration:
-                                          const Duration(milliseconds: 350),
-                                      curve: Curves.easeIn,
-                                    );
-                                  },
-                                  controller: controller,
-                                  count: homeState.response!.data!.length,
-                                  effect: ExpandingDotsEffect(
-                                      activeDotColor: Constants.primaryAppColor,
-                                      dotColor: Constants.primaryAppColor
-                                          .withOpacity(0.2),
-                                      spacing: 5,
-                                      dotWidth: 8,
-                                      dotHeight: 4),
-                                ),
+                                          controller.animateToPage(
+                                            _currentPage,
+                                            duration: const Duration(
+                                                milliseconds: 350),
+                                            curve: Curves.easeIn,
+                                          );
+                                        },
+                                        controller: controller,
+                                        count:
+                                            homeState.response?.data?.length ??
+                                                0,
+                                        effect: ExpandingDotsEffect(
+                                            activeDotColor:
+                                                Constants.primaryAppColor,
+                                            dotColor: Constants.primaryAppColor
+                                                .withOpacity(0.2),
+                                            spacing: 5,
+                                            dotWidth: 8,
+                                            dotHeight: 4),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
-                            )
-                          ],
-                        ),
-                      ),
+                            ),
                       const SizedBox(
                         height: 8,
                       ),
