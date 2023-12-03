@@ -56,7 +56,7 @@ class CategoryData {
     name: json["name"],
     children: json["children"] == null ? [] : List<CategoryData>.from(json["children"]!.map((x) => CategoryData.fromJson(x))),
     parentId: json["parent_id"],
-    selected: json["selected"],
+    selected: json["selected"]??false,
   );
 
   Map<String, dynamic> toJson() => {

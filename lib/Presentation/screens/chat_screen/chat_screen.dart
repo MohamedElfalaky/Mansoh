@@ -306,28 +306,41 @@ class _ChatScreenState extends State<ChatScreen> {
                                     state.response!.data!.chat![index]
                                         .mediaType ==
                                         "1"
-                                        ? InkWell(
+                                        ? Column(
+                                          children: [
+                                            Text(
+                                              state
+                                                  .response!
+                                                  .data!
+                                                  .chat![index]
+                                                  .message ??
+                                                  "",
+                                              style: Constants.subtitleFont,
+                                            ),
+                                            InkWell(
                                       onTap: () {
-                                        launchUrl(Uri.parse(state
-                                            .response!
-                                            .data!
-                                            .chat![index]
-                                            .document?[0]
-                                            .file ??
-                                            ""));
+                                            launchUrl(Uri.parse(state
+                                                .response!
+                                                .data!
+                                                .chat![index]
+                                                .document?[0]
+                                                .file ??
+                                                ""));
                                       },
                                       child: Text(
-                                        state
-                                            .response!
-                                            .data!
-                                            .chat![index]
-                                            .document?[0]
-                                            .file ??
-                                            "",
-                                        style:
-                                        Constants.subtitleFont,
+                                            state
+                                                .response!
+                                                .data!
+                                                .chat![index]
+                                                .document?[0]
+                                                .file ??
+                                                "",
+                                            style:
+                                            Constants.subtitleFont,
                                       ),
-                                    )
+                                    ),
+                                          ],
+                                        )
                                         : Text(
                                       state
                                           .response!
@@ -453,29 +466,76 @@ class _ChatScreenState extends State<ChatScreen> {
                                               MyApplication.dismissKeyboard(
                                                   context);
 
+
                                               MyApplication.checkConnection()
                                                   .then((value) {
-                                                if (value) {
+                                                if (fileSelected != null) {
+                                                  context
+                                                      .read<SendChatCubit>()
+                                                      .sendChatFunction(
+                                                      filee: fileSelected,
+                                                      msg: _textController.text,
+                                                      typee: pickedFile!
+                                                          .path
+                                                          .split(".")
+                                                          .last,
+                                                      adviceId: widget
+                                                          .adviceId
+                                                          .toString());
+
+                                                  fileSelected = null;
+                                                  print("new");
+                                                  print(fileSelected);
+                                                } else if (value) {
                                                   if (_textController
                                                       .text.isEmpty) {
                                                     MyApplication.showToastView(
                                                         message:
-                                                            "لا يمكن ارسال رسالة فارغة!");
+                                                        "لا يمكن ارسال رسالة فارغة!");
                                                   } else {
                                                     context
                                                         .read<SendChatCubit>()
                                                         .sendChatFunction(
-                                                            msg: _textController
-                                                                .text,
-                                                            adviceId: widget
-                                                                .adviceId
-                                                                .toString());
+                                                        filee:
+                                                        fileSelected,
+                                                        msg:
+                                                        _textController
+                                                            .text,
+                                                        adviceId: widget
+                                                            .adviceId
+                                                            .toString());
                                                   }
                                                 } else {
                                                   MyApplication.showToastView(
-                                                      message: "لا يوجد اتصال");
+                                                      message:
+                                                      "لا يوجد اتصال");
                                                 }
                                               });
+
+
+                                              // MyApplication.checkConnection()
+                                              //     .then((value) {
+                                              //   if (value) {
+                                              //     if (_textController
+                                              //         .text.isEmpty) {
+                                              //       MyApplication.showToastView(
+                                              //           message:
+                                              //               "لا يمكن ارسال رسالة فارغة!");
+                                              //     } else {
+                                              //       context
+                                              //           .read<SendChatCubit>()
+                                              //           .sendChatFunction(
+                                              //               msg: _textController
+                                              //                   .text,
+                                              //               adviceId: widget
+                                              //                   .adviceId
+                                              //                   .toString());
+                                              //     }
+                                              //   } else {
+                                              //     MyApplication.showToastView(
+                                              //         message: "لا يوجد اتصال");
+                                              //   }
+                                              // });
                                             },
                                             child:
                                                 //  state is ShowAdviceLoading

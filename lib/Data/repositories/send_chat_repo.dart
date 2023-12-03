@@ -22,17 +22,16 @@ class SendChatRepo {
         if (file != null) 'document[0][type]': type,
         if (file != null) 'document[0][file]': file,
       };
+
       http.Response response = await http
           .post(Uri.parse('${Keys.baseUrl}/client/chat/store'), headers: {
         'Accept': 'application/json',
         'lang': selectedLang,
         "Authorization": "Bearer ${sharedPrefs.getToken()}"
-      }, body: {
-        'message': msg,
-        'advice_id': '$adviceId',
-        'document[0][type]': '$type',
-        'document[0][file]': '$file',
-      });
+      }, body: map);
+      print(map);
+
+
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print(response.body);
