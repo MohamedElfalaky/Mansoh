@@ -17,8 +17,12 @@ class MobRepo {
           body: {
             'mobile': '$phone',
           });
+      print("response.body");
+      print(response.statusCode);
       Map<String, dynamic> responseMap = json.decode(response.body);
-      if (response.statusCode == 200 && responseMap["status"] == 1) {
+      if (response.statusCode == 201 && responseMap["status"] == 1) {
+        print("response.body");
+
         final userdata = mobModelFromJson(responseMap);
         return userdata;
       } else {
