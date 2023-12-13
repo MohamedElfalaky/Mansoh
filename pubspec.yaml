@@ -71,6 +71,10 @@ dependencies:
   url_launcher:
   flutter_rating_bar: ^4.0.1
   audioplayers:
+  record:
+  permission_handler:
+  path_provider:
+  uuid:
 
 dev_dependencies:
   flutter_test:

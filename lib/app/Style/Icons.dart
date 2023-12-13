@@ -53,6 +53,7 @@ const String pdf = "assets/images/SVGs/pdf.svg";
 const String photo = "assets/images/SVGs/photo.svg";
 const String mp4Icon = "assets/images/SVGs/mp4_icon.svg";
 const String voice = "assets/images/SVGs/voice.svg";
+const String voiceShape = "assets/images/SVGs/voice_shape.svg";
 ///////////////////// Jsons////////
 ///
 
