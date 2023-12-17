@@ -11,6 +11,7 @@ import 'package:nasooh/Presentation/screens/Home/Home.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
+import 'Data/repositories/notification/fcm.dart';
 import 'Data/repositories/notification/firebase_notification.dart';
 import 'Data/repositories/notification/local_notification.dart';
 import 'Presentation/screens/welcome_screen/welcome.dart';
@@ -19,24 +20,60 @@ import 'app/utils/BlocProviders.dart';
 import 'app/utils/Language/get_language.dart';
 import 'app/utils/sharedPreferenceClass.dart';
 
+
+//
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   // ignore: deprecated_member_use
 //   FlutterNativeSplash.removeAfter(initialization);
 //   await SharedPrefs().init();
-//   ////
+//   await Firebase.initializeApp();
+//   FirebaseCustomNotification.initializeFirebaseCustomNotification();
+//
+//   await CustomLocalNotification.setupFlutterNotifications();
+//
+//   FirebaseMessaging.onBackgroundMessage(
+//       FirebaseCustomNotification.firebaseMessagingBackgroundHandler);
+//
+//   // await Firebase.initializeApp();
+//   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+//
 //   runApp(const MyApp());
 // }
-
-// @pragma('vm:entry-point')
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   // await Firebase.initializeApp();
-//   FCMNotification().showNotification(message);
-//   // if(Platform.isIOS){
-//   //
-//   //   AudioPlayer().play(AssetSource('sounds/synth.mp3'));
-//   // }
+//
+// class MyApp extends StatefulWidget {
+//   const MyApp({super.key});
+//
+//   @override
+//   State<MyApp> createState() => _MyAppState();
 // }
+//
+// class _MyAppState extends State<MyApp> {
+//   // FCMNotification fcmNotification = FCMNotification();
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     // FirebaseMessaging.onBackgroundMessage(
+//     //     FirebaseCustomNotification.firebaseMessagingBackgroundHandler);
+//
+//     // Firebase.initializeApp().then((value) {
+//     //   fcmNotification.registerNotification();
+//     //   fcmNotification.configLocalNotification();
+//     // });
+//     super.initState();
+//   }
+//
+//   // This widget is the root of your application.
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // await Firebase.initializeApp();
+  FCMNotification().showNotification(message);
+  // if(Platform.isIOS){
+  //
+  //   AudioPlayer().play(AssetSource('sounds/synth.mp3'));
+  // }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,15 +81,7 @@ void main() async {
   FlutterNativeSplash.removeAfter(initialization);
   await SharedPrefs().init();
   await Firebase.initializeApp();
-  FirebaseCustomNotification.initializeFirebaseCustomNotification();
-
-  await CustomLocalNotification.setupFlutterNotifications();
-
-  FirebaseMessaging.onBackgroundMessage(
-      FirebaseCustomNotification.firebaseMessagingBackgroundHandler);
-
-  // await Firebase.initializeApp();
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(const MyApp());
 }
@@ -65,22 +94,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // FCMNotification fcmNotification = FCMNotification();
+  Locale? _locale;
+  FCMNotification fcmNotification = FCMNotification();
 
+// }
   @override
   void initState() {
-    super.initState();
-    // FirebaseMessaging.onBackgroundMessage(
-    //     FirebaseCustomNotification.firebaseMessagingBackgroundHandler);
-
-    // Firebase.initializeApp().then((value) {
-    //   fcmNotification.registerNotification();
-    //   fcmNotification.configLocalNotification();
-    // });
+    Firebase.initializeApp().then((value) {
+      fcmNotification.registerNotification();
+      fcmNotification.configLocalNotification();
+    });
     super.initState();
   }
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext contextt) {
     return MultiBlocProvider(
