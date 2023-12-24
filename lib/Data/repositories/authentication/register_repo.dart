@@ -40,7 +40,7 @@ class Register {
       // print(
       //     " 'email': email,'full_name': '$fullName','mobile': '$mobile','country_id': '$countryId','city_id': '$cityId','gender': '$gender','nationality_id': '$nationalityId','avatar[0][type]': 'png','avatar[0][file]': '$avatar',");
       Map<String, dynamic> responseMap = json.decode(response.body);
-      if (response.statusCode == 201 && responseMap["status"] == 1) {
+      if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print(response.body);
         final userdata = registerModelFromJson(responseMap);
         sharedPrefs.setToken(userdata.data!.token!);
