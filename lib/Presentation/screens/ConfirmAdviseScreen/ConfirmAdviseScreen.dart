@@ -139,6 +139,11 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             context.read<SendAdviseCubit>().sendAdviseMethod(
                                 context: context,
                                 adviserId: widget.adviserProfileData.id,
+                                type: pickedFile!
+                                    .path
+                                    .split(
+                                    ".")
+                                    .last,
                                 name: requestTitle.text,
                                 description: descriptionController.text,
                                 price: priceController.text,
@@ -282,19 +287,24 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                       InkWell(
                         onTap: () async {
                           FilePickerResult? result =
-                              await FilePicker.platform.pickFiles();
+                          await FilePicker.platform
+                              .pickFiles();
                           // type:
                           // FileType.custom;
                           // allowedExtensions:
                           // ['pdf', 'jpg', 'png', "doc", "docx", "gif"];
                           if (result != null) {
                             setState(() {
-                              pickedFile = File(result.files.single.path!);
+                              pickedFile = File(result
+                                  .files.single.path!);
                             });
                             List<int> imageBytes =
-                                await File(pickedFile!.path).readAsBytesSync();
+                            await File(pickedFile!
+                                .path)
+                                .readAsBytesSync();
                             // print(imageBytes);
-                            fileSelected = base64.encode(imageBytes);
+                            fileSelected = base64
+                                .encode(imageBytes);
                           }
                           return;
                         },

@@ -13,6 +13,7 @@ class SendAdviseCubit extends Cubit<SendAdviseState> {
     String? description,
     String? price,
     String? documentsFile,
+    String? type,
     int? adviserId,
     BuildContext? context,
   }) {
@@ -24,6 +25,7 @@ class SendAdviseCubit extends Cubit<SendAdviseState> {
               price: price,
               name: name,
               adviserId: adviserId,
+              type: type,
               documentsFile: documentsFile)
           .then((value) {
         if (value != null) {

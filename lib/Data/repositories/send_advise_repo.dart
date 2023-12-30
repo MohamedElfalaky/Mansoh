@@ -16,22 +16,29 @@ class SendAdvise {
     String? description,
     String? price,
     String? documentsFile,
+    String? type,
     int? adviserId,
   }) async {
     try {
+
+      Map<String , dynamic> map = {
+        'name': name,
+        'description': '$description',
+        'adviser_id': '$adviserId',
+        'price': '$price',
+        if (documentsFile != null)   'document[0][file]':documentsFile ,
+        if (documentsFile != null)   'document[0][type]':type
+      };
       http.Response response = await http
           .post(Uri.parse('${Keys.baseUrl}/client/advice/store'), headers: {
         'Accept': 'application/json',
         'lang': selectedLang,
         "Authorization": "Bearer ${sharedPrefs.getToken()}"
-      }, body: {
-        'name': name,
-        'description': '$description',
-        'adviser_id': '$adviserId',
-        'price': '$price',
-        'documents[][file]':'$documentsFile' ,
-        'documents[][type]':'png'
-      });
+      }, body: map);
+      if (kDebugMode) {
+        print("map advice Sent You API");
+        print(map);
+      }
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print(response.body);

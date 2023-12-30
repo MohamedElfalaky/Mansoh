@@ -73,7 +73,7 @@ List<DrawerModel> getDrawer(BuildContext context) => [
           ),
           onTap: () async {
             await launchUrl(Uri.parse(
-              "whatsapp://send?phone=0201000869066",
+              "whatsapp://send?phone=00966502374223",
             ));
           }),
       DrawerModel(

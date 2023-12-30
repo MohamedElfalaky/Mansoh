@@ -169,13 +169,10 @@ class _ChatScreenState extends State<ChatScreen> {
     await player.play(UrlSource(url));
   }
 
-
   @override
   Widget build(BuildContext context) {
     // todo if not connected display nointernet widget else continue to the rest build code
-    final sizee = MediaQuery
-        .of(context)
-        .size;
+    final sizee = MediaQuery.of(context).size;
     if (isConnected == null) {
       MyApplication.checkConnection().then((value) {
         setState(() {
@@ -196,7 +193,7 @@ class _ChatScreenState extends State<ChatScreen> {
         onWillPop: () async {
           final shouldPop = await Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => const Home()),
-                  (Route<dynamic> route) => false);
+              (Route<dynamic> route) => false);
           // Navigator.of(context).pu(
           //     MaterialPageRoute(builder: (context) =>  const Home()));
           return shouldPop;
@@ -260,14 +257,14 @@ class _ChatScreenState extends State<ChatScreen> {
                               },
                               icon: Get.locale!.languageCode == "ar"
                                   ? SvgPicture.asset(
-                                backArIcon,
-                                width: 14,
-                                height: 14,
-                              )
+                                      backArIcon,
+                                      width: 14,
+                                      height: 14,
+                                    )
                                   : const Icon(
-                                Icons.arrow_back,
-                                color: Colors.black54,
-                              ),
+                                      Icons.arrow_back,
+                                      color: Colors.black54,
+                                    ),
                             ),
                           ),
                         ],
@@ -314,19 +311,13 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
               ),
               body: SizedBox(
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: [
                       Padding(
                         padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 18),
+                            const EdgeInsets.only(left: 16, right: 16, top: 18),
                         // padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: OutlinedAdvisorCard(
                           labelToShow: widget.labelToShow,
@@ -336,501 +327,511 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       ),
                       Expanded(
-                          child:
-                          BlocBuilder<ShowAdviceCubit, ShowAdviceState>(
-                            buildWhen: (previous, current) {
-                              return current is! ShowAdviceLoading;
-                            },
-                            builder: (context, state) {
-                              if (state is ShowAdviceLoaded) {
-                                return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0),
-                                    child: ListView.builder(
-                                      reverse: true,
-                                      itemCount:
-                                      state.response?.data?.chat?.length,
-                                      itemBuilder: (context, index) => Align(
-                                        alignment: state.response?.data
-                                            ?.chat?[index].adviser ==
+                          child: BlocBuilder<ShowAdviceCubit, ShowAdviceState>(
+                        buildWhen: (previous, current) {
+                          return current is! ShowAdviceLoading;
+                        },
+                        builder: (context, state) {
+                          if (state is ShowAdviceLoaded) {
+                            return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: ListView.builder(
+                                  reverse: true,
+                                  itemCount: state.response?.data?.chat?.length,
+                                  itemBuilder: (context, index) => Align(
+                                    alignment: state.response?.data
+                                                ?.chat?[index].adviser ==
                                             null
-                                            ? AlignmentDirectional.centerStart
-                                            : AlignmentDirectional.centerEnd,
-                                        child: state.response?.data?.chat?[index]
-                                            .mediaType ==
-                                            "1"
+                                        ? AlignmentDirectional.centerStart
+                                        : AlignmentDirectional.centerEnd,
+                                    child:
+                                        state.response?.data?.chat?[index]
+                                                    .mediaType ==
+                                                "1"
                                             ? Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            state
-                                                .response
-                                                ?.data
-                                                ?.chat?[index]
-                                                .message ==
-                                                null
-                                                ? const SizedBox()
-                                                : Container(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  state
+                                                              .response
+                                                              ?.data
+                                                              ?.chat?[index]
+                                                              .message ==
+                                                          null
+                                                      ? const SizedBox()
+                                                      : Container(
+                                                          constraints:
+                                                              const BoxConstraints(
+                                                                  maxWidth:
+                                                                      220),
+                                                          // width: 100,
+                                                          margin:
+                                                              const EdgeInsets.symmetric(
+                                                                  vertical: 8),
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                  8),
+                                                          // constraints: BoxConstraints(mi),
+                                                          decoration: BoxDecoration(
+                                                              color: state.response?.data?.chat?[index].adviser == null
+                                                                  ? const Color.fromARGB(
+                                                                          255,
+                                                                          185,
+                                                                          184,
+                                                                          180)
+                                                                      .withOpacity(
+                                                                          0.2)
+                                                                  : Constants
+                                                                      .primaryAppColor
+                                                                      .withOpacity(0.6),
+                                                              borderRadius: BorderRadius.circular(20)),
+                                                          child: Text(
+                                                            state
+                                                                    .response
+                                                                    ?.data
+                                                                    ?.chat?[
+                                                                        index]
+                                                                    .message ??
+                                                                "",
+                                                            style: Constants
+                                                                .subtitleFont,
+                                                          )),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      launchUrl(Uri.parse(state
+                                                              .response
+                                                              ?.data
+                                                              ?.chat?[index]
+                                                              .document?[0]
+                                                              .file ??
+                                                          ""));
+                                                    },
+                                                    child: Container(
+                                                      width:
+                                                          width(context) * 0.6,
+                                                      margin: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 10),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              7),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color: Colors.grey
+                                                                  .shade400)),
+                                                      child: state
+                                                                  .response
+                                                                  ?.data
+                                                                  ?.chat?[index]
+                                                                  .document?[0]
+                                                                  .file
+                                                                  ?.endsWith(
+                                                                      "mp3") ??
+                                                              false
+                                                          ? InkWell(
+                                                              onTap: () => playAudioFromUrl(state
+                                                                      .response
+                                                                      ?.data
+                                                                      ?.chat?[
+                                                                          index]
+                                                                      .document?[
+                                                                          0]
+                                                                      .file ??
+                                                                  ""),
+                                                              child: Row(
+                                                                children: [
+                                                                  Expanded(
+                                                                      child: SvgPicture
+                                                                          .asset(
+                                                                              voiceShape)),
+                                                                  const SizedBox(
+                                                                    width: 10,
+                                                                  ),
+                                                                  CircleAvatar(
+                                                                      child: SvgPicture
+                                                                          .asset(
+                                                                              voice)),
+                                                                ],
+                                                              ))
+                                                          : Row(
+                                                              children: [
+                                                                state
+                                                                            .response
+                                                                            ?.data
+                                                                            ?.chat?[
+                                                                                index]
+                                                                            .document?[
+                                                                                0]
+                                                                            .file
+                                                                            ?.endsWith(
+                                                                                "png") ??
+                                                                        false
+                                                                    ? SvgPicture
+                                                                        .asset(
+                                                                            photo)
+                                                                    : state.response?.data?.chat?[index].document?[0].file?.endsWith("jpg") ??
+                                                                            false
+                                                                        ? SvgPicture.asset(
+                                                                            photo)
+                                                                        : state.response?.data?.chat?[index].document?[0].file?.endsWith("jpeg") ??
+                                                                                false
+                                                                            ? SvgPicture.asset(photo)
+                                                                            : state.response?.data?.chat?[index].document?[0].file?.endsWith("pdf") ?? false
+                                                                                ? SvgPicture.asset(pdf)
+                                                                                : state.response?.data?.chat?[index].document?[0].file?.endsWith("mp4") ?? false
+                                                                                    ? SvgPicture.asset(mp4Icon)
+                                                                                    : const SizedBox(),
+                                                                const SizedBox(
+                                                                  width: 7,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    state
+                                                                            .response
+                                                                            ?.data
+                                                                            ?.chat?[index]
+                                                                            .document?[0]
+                                                                            .file
+                                                                            ?.split("/")
+                                                                            .last ??
+                                                                        "",
+                                                                    style: Constants
+                                                                        .subtitleFont,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            : Container(
                                                 constraints:
-                                                const BoxConstraints(
-                                                    maxWidth: 220),
+                                                    const BoxConstraints(
+                                                        maxWidth: 220),
                                                 // width: 100,
-                                                margin: const EdgeInsets.symmetric(
-                                                    vertical: 8),
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8),
                                                 padding:
-                                                const EdgeInsets.all(
-                                                    8),
+                                                    const EdgeInsets.all(8),
                                                 // constraints: BoxConstraints(mi),
                                                 decoration: BoxDecoration(
-                                                    color: state.response?.data?.chat?[index].adviser ==
-                                                        null
+                                                    color: state
+                                                                .response
+                                                                ?.data
+                                                                ?.chat?[index]
+                                                                .adviser ==
+                                                            null
                                                         ? const Color.fromARGB(
-                                                        255,
-                                                        185,
-                                                        184,
-                                                        180)
-                                                        .withOpacity(
-                                                        0.2)
+                                                                255,
+                                                                185,
+                                                                184,
+                                                                180)
+                                                            .withOpacity(0.2)
                                                         : Constants
-                                                        .primaryAppColor
-                                                        .withOpacity(0.6),
-                                                    borderRadius: BorderRadius.circular(20)),
+                                                            .primaryAppColor
+                                                            .withOpacity(0.6),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
                                                 child: Text(
                                                   state
-                                                      .response
-                                                      ?.data
-                                                      ?.chat?[index]
-                                                      .message ??
+                                                          .response
+                                                          ?.data
+                                                          ?.chat?[index]
+                                                          .message ??
                                                       "",
-                                                  style: Constants
-                                                      .subtitleFont,
-                                                )),
-                                            InkWell(
-                                              onTap: () {
-                                                launchUrl(Uri.parse(state
-                                                    .response
-                                                    ?.data
-                                                    ?.chat?[index]
-                                                    .document?[0]
-                                                    .file ??
-                                                    ""));
-                                              },
-                                              child: Container(
-                                                width: width(context) * 0.6,
-                                                margin: const EdgeInsets
-                                                    .symmetric(
-                                                    vertical: 10),
-                                                padding:
-                                                const EdgeInsets.all(7),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(10),
-                                                    border: Border.all(
-                                                        color: Colors.grey
-                                                            .shade400)),
-                                                child: state
-                                                    .response
-                                                    ?.data
-                                                    ?.chat?[index]
-                                                    .document?[0]
-                                                    .file
-                                                    ?.endsWith(
-                                                    "mp3") ??
-                                                    false
-                                                    ? InkWell(
-                                                    onTap: () =>
-                                                        playAudioFromUrl(state
-                                                            .response
-                                                            ?.data
-                                                            ?.chat?[
-                                                        index]
-                                                            .document?[
-                                                        0]
-                                                            .file ??
-                                                            ""),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                            child: SvgPicture
-                                                                .asset(
-                                                                voiceShape)),
-                                                        const SizedBox(width: 10,),
-                                                        CircleAvatar(
-                                                            child: SvgPicture
-                                                                .asset(
-                                                                voice)),
-                                                      ],
-                                                    ))
-                                                    : Row(
-                                                  children: [
-                                                    state
-                                                        .response
-                                                        ?.data
-                                                        ?.chat?[
-                                                    index]
-                                                        .document?[
-                                                    0]
-                                                        .file
-                                                        ?.endsWith(
-                                                        "png") ??
-                                                        false
-                                                        ? SvgPicture
-                                                        .asset(
-                                                        photo)
-                                                        : state.response?.data?.chat?[index].document?[0].file?.endsWith(
-                                                        "jpg") ??
-                                                        false
-                                                        ? SvgPicture.asset(
-                                                        photo)
-                                                        : state.response?.data?.chat?[index].document?[0].file?.endsWith("jpeg") ??
-                                                        false
-                                                        ? SvgPicture.asset(
-                                                        photo)
-                                                        : state.response?.data?.chat?[index].document?[0].file?.endsWith("pdf") ?? false
-                                                        ? SvgPicture.asset(pdf)
-                                                        : state.response?.data?.chat?[index].document?[0].file?.endsWith("mp4") ?? false
-                                                        ? SvgPicture.asset(mp4Icon)
-                                                        : const SizedBox(),
-                                                    const SizedBox(
-                                                      width: 7,
-                                                    ),
-                                                    Expanded(
-                                                      child: Text(
-                                                        state
-                                                            .response
-                                                            ?.data
-                                                            ?.chat?[
-                                                        index]
-                                                            .document?[
-                                                        0]
-                                                            .file
-                                                            ?.split(
-                                                            "/")
-                                                            .last ??
-                                                            "",
-                                                        style: Constants
-                                                            .subtitleFont,
-                                                      ),
-                                                    ),
-                                                  ],
+                                                  style: Constants.subtitleFont,
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        )
-                                            : Container(
-                                          constraints: const BoxConstraints(
-                                              maxWidth: 220),
-                                          // width: 100,
-                                          margin:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 8),
-                                          padding: const EdgeInsets.all(8),
-                                          // constraints: BoxConstraints(mi),
-                                          decoration: BoxDecoration(
-                                              color: state
-                                                  .response
-                                                  ?.data
-                                                  ?.chat?[index]
-                                                  .adviser ==
-                                                  null
-                                                  ? const Color.fromARGB(
-                                                  255,
-                                                  185,
-                                                  184,
-                                                  180)
-                                                  .withOpacity(0.2)
-                                                  : Constants
-                                                  .primaryAppColor
-                                                  .withOpacity(0.6),
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  20)),
-                                          child: Text(
-                                            state
-                                                .response
-                                                ?.data
-                                                ?.chat?[index]
-                                                .message ??
-                                                "",
-                                            style: Constants.subtitleFont,
-                                          ),
-                                        ),
-                                      ),
-                                    ));
-                              } else if (state is ShowAdviceError) {
-                                return const Center(
-                                  child: Text("Error"),
-                                );
-                              } else {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              }
-                            },
-                          )),
+                                  ),
+                                ));
+                          } else if (state is ShowAdviceError) {
+                            return const Center(
+                              child: Text("Error"),
+                            );
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        },
+                      )),
                       widget.openedStatus == true
                           ? Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 16),
-                        child: Column(
-                          children: [
-                            if (isRecording) const Text("recording"),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    controller: _textController,
-                                    focusNode: _focusNode,
-                                    decoration:
-                                    Constants.setTextInputDecoration(
-                                      isSuffix: true,
-                                      suffixIcon: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          InkWell(
-                                              onTap: () async {
-                                                FilePickerResult? result =
-                                                await FilePicker.platform
-                                                    .pickFiles();
-                                                // type:
-                                                // FileType.custom;
-                                                // allowedExtensions:
-                                                // ['pdf', 'jpg', 'png', "doc", "docx", "gif"];
-                                                if (result != null) {
-                                                  setState(() {
-                                                    pickedFile = File(result
-                                                        .files.single.path!);
-                                                  });
-                                                  List<int> imageBytes =
-                                                  await File(pickedFile!
-                                                      .path)
-                                                      .readAsBytesSync();
-                                                  // print(imageBytes);
-                                                  fileSelected = base64
-                                                      .encode(imageBytes);
-                                                }
-                                                return;
-                                              },
-                                              child: SvgPicture.asset(
-                                                  attachFiles)),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 16),
+                              child: Column(
+                                children: [
+                                  if (isRecording) const Text("recording"),
+                                  if (voiceSelected != null)
+                                    SvgPicture.asset(voiceShape),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: TextField(
+                                          controller: _textController,
+                                          focusNode: _focusNode,
+                                          decoration:
+                                              Constants.setTextInputDecoration(
+                                            isSuffix: true,
+                                            suffixIcon: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                InkWell(
+                                                    onTap: () async {
+                                                      FilePickerResult? result =
+                                                          await FilePicker
+                                                              .platform
+                                                              .pickFiles();
+                                                      // type:
+                                                      // FileType.custom;
+                                                      // allowedExtensions:
+                                                      // ['pdf', 'jpg', 'png', "doc", "docx", "gif"];
+                                                      if (result != null) {
+                                                        setState(() {
+                                                          pickedFile = File(
+                                                              result
+                                                                  .files
+                                                                  .single
+                                                                  .path!);
+                                                        });
+                                                        List<int> imageBytes =
+                                                            await File(
+                                                                    pickedFile!
+                                                                        .path)
+                                                                .readAsBytesSync();
+                                                        // print(imageBytes);
+                                                        fileSelected = base64
+                                                            .encode(imageBytes);
+                                                      }
+                                                      return;
+                                                    },
+                                                    child: SvgPicture.asset(
+                                                        attachFiles)),
 
-                                          // SvgPicture.asset(attachFiles),
-                                          const SizedBox(
-                                            width: 8,
+                                                // SvgPicture.asset(attachFiles),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                isRecording
+                                                    ? InkWell(
+                                                        onTap: stopRecord,
+                                                        child: const Icon(Icons
+                                                            .stop_circle_outlined))
+                                                    : InkWell(
+                                                        onTap: startRecord,
+                                                        child: SvgPicture.asset(
+                                                            micee)),
+                                                const SizedBox(
+                                                  width: 8,
+                                                )
+                                              ],
+                                            ),
+                                            hintText: "آكتب رسالتك...",
+                                          ).copyWith(
+                                            hintStyle: Constants
+                                                .subtitleRegularFontHint
+                                                .copyWith(
+                                                    color: const Color(
+                                                        0XFF5C5E6B)),
+                                            enabledBorder:
+                                                const OutlineInputBorder(
+                                              gapPadding: 0,
+                                              borderSide: BorderSide.none,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(25),
+                                              ),
+                                            ),
+                                            filled: true,
+                                            fillColor: const Color(0xffF5F4F5),
                                           ),
-                                          isRecording
-                                              ? InkWell(
-                                              onTap: stopRecord,
-                                              child: const Icon(Icons
-                                                  .stop_circle_outlined))
-                                              : InkWell(
-                                              onTap: startRecord,
-                                              child:
-                                              SvgPicture.asset(
-                                                  micee)),
-                                          const SizedBox(
-                                            width: 8,
-                                          )
-                                        ],
-                                      ),
-                                      hintText: "آكتب رسالتك...",
-                                    ).copyWith(
-                                      hintStyle: Constants
-                                          .subtitleRegularFontHint
-                                          .copyWith(
-                                          color: const Color(0XFF5C5E6B)),
-                                      enabledBorder: const OutlineInputBorder(
-                                        gapPadding: 0,
-                                        borderSide: BorderSide.none,
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(25),
                                         ),
                                       ),
-                                      filled: true,
-                                      fillColor: const Color(0xffF5F4F5),
-                                    ),
+                                      isRecording == true
+                                          ? const SizedBox()
+                                          : BlocBuilder<ShowAdviceCubit,
+                                              ShowAdviceState>(
+                                              builder: (context, state2) {
+                                                return BlocBuilder<
+                                                    SendChatCubit,
+                                                    SendChatState>(
+                                                  builder: (context, state3) {
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        if (state2
+                                                                is ShowAdviceLoading ||
+                                                            state3
+                                                                is SendChatLoading) {
+                                                          return;
+                                                        }
+
+                                                        MyApplication
+                                                            .dismissKeyboard(
+                                                                context);
+
+                                                        MyApplication
+                                                                .checkConnection()
+                                                            .then((value) {
+                                                          if (fileSelected !=
+                                                              null) {
+                                                            context.read<SendChatCubit>().sendChatFunction(
+                                                                filee:
+                                                                    fileSelected,
+                                                                msg:
+                                                                    _textController
+                                                                        .text,
+                                                                typee:
+                                                                    pickedFile!
+                                                                        .path
+                                                                        .split(
+                                                                            ".")
+                                                                        .last,
+                                                                adviceId: widget
+                                                                    .adviceId
+                                                                    .toString());
+
+                                                            fileSelected = null;
+                                                            print("new");
+                                                            print(fileSelected);
+                                                          } else if (voiceFile !=
+                                                              null) {
+                                                            context.read<SendChatCubit>().sendChatFunction(
+                                                                filee:
+                                                                    voiceSelected,
+                                                                msg:
+                                                                    _textController
+                                                                        .text,
+                                                                typee:
+                                                                    voiceFile!
+                                                                        .path
+                                                                        .split(
+                                                                            ".")
+                                                                        .last,
+                                                                adviceId: widget
+                                                                    .adviceId
+                                                                    .toString());
+                                                            // isRecording = false;
+                                                            setState(() {
+                                                              voiceSelected =
+                                                                  null;
+                                                            });
+
+                                                            print("new");
+                                                            print(fileSelected);
+                                                          } else if (value) {
+                                                            if (_textController
+                                                                .text.isEmpty) {
+                                                              MyApplication
+                                                                  .showToastView(
+                                                                      message:
+                                                                          "لا يمكن ارسال رسالة فارغة!");
+                                                            } else {
+                                                              context.read<SendChatCubit>().sendChatFunction(
+                                                                  filee:
+                                                                      fileSelected,
+                                                                  msg:
+                                                                      _textController
+                                                                          .text,
+                                                                  adviceId: widget
+                                                                      .adviceId
+                                                                      .toString());
+                                                            }
+                                                          } else {
+                                                            MyApplication
+                                                                .showToastView(
+                                                                    message:
+                                                                        "لا يوجد اتصال");
+                                                          }
+                                                        });
+                                                      },
+                                                      child:
+                                                          //  state is ShowAdviceLoading
+                                                          //     ? Center(
+                                                          //         child: CircularProgressIndicator(),
+                                                          //       )
+                                                          //     :
+                                                          Container(
+                                                              margin:
+                                                                  const EdgeInsetsDirectional
+                                                                      .only(
+                                                                      start: 8),
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(10),
+                                                              height: 40,
+                                                              width: 40,
+                                                              decoration: state3
+                                                                      is SendChatLoading
+                                                                  ? BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              15),
+                                                                      color: Colors
+                                                                          .grey)
+                                                                  : BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              15),
+                                                                      color: const Color(
+                                                                          0XFF273043)),
+                                                              child:
+                                                                  SvgPicture.asset(
+                                                                sendChat,
+                                                                color: state3
+                                                                        is SendChatLoading
+                                                                    ? const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        57,
+                                                                        53,
+                                                                        53)
+                                                                    : null,
+                                                              )),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            )
+                                    ],
                                   ),
-                                ),
-                                isRecording == true
-                                    ? const SizedBox()
-                                    : BlocBuilder<ShowAdviceCubit,
-                                    ShowAdviceState>(
-                                  builder: (context, state2) {
-                                    return BlocBuilder<
-                                        SendChatCubit,
-                                        SendChatState>(
-                                      builder: (context, state3) {
-                                        return InkWell(
-                                          onTap: () {
-                                            if (state2
-                                            is ShowAdviceLoading ||
-                                                state3
-                                                is SendChatLoading) {
-                                              return;
-                                            }
-
-                                            MyApplication
-                                                .dismissKeyboard(
-                                                context);
-
-                                            MyApplication
-                                                .checkConnection()
-                                                .then((value) {
-                                              if (fileSelected !=
-                                                  null) {
-                                                context.read<SendChatCubit>().sendChatFunction(
-                                                    filee:
-                                                    fileSelected,
-                                                    msg:
-                                                    _textController
-                                                        .text,
-                                                    typee: pickedFile!
-                                                        .path
-                                                        .split(
-                                                        ".")
-                                                        .last,
-                                                    adviceId: widget
-                                                        .adviceId
-                                                        .toString());
-
-                                                fileSelected =
-                                                null;
-                                                print("new");
-                                                print(
-                                                    fileSelected);
-                                              } else if (voiceFile !=
-                                                  null) {
-                                                context.read<SendChatCubit>().sendChatFunction(
-                                                    filee:
-                                                    voiceSelected,
-                                                    msg:
-                                                    _textController
-                                                        .text,
-                                                    typee: voiceFile!
-                                                        .path
-                                                        .split(
-                                                        ".")
-                                                        .last,
-                                                    adviceId: widget
-                                                        .adviceId
-                                                        .toString());
-                                                // isRecording = false;
-                                                voiceSelected =
-                                                null;
-
-                                                print("new");
-                                                print(
-                                                    fileSelected);
-                                              } else if (value) {
-                                                if (_textController
-                                                    .text
-                                                    .isEmpty) {
-                                                  MyApplication
-                                                      .showToastView(
-                                                      message:
-                                                      "لا يمكن ارسال رسالة فارغة!");
-                                                } else {
-                                                  context.read<SendChatCubit>().sendChatFunction(
-                                                      filee:
-                                                      fileSelected,
-                                                      msg: _textController
-                                                          .text,
-                                                      adviceId: widget
-                                                          .adviceId
-                                                          .toString());
-                                                }
-                                              } else {
-                                                MyApplication
-                                                    .showToastView(
-                                                    message:
-                                                    "لا يوجد اتصال");
-                                              }
-                                            });
-                                          },
-                                          child:
-                                          //  state is ShowAdviceLoading
-                                          //     ? Center(
-                                          //         child: CircularProgressIndicator(),
-                                          //       )
-                                          //     :
-                                          Container(
-                                              margin: const EdgeInsetsDirectional
-                                                  .only(
-                                                  start: 8),
-                                              padding:
-                                              const EdgeInsets.all(
-                                                  10),
-                                              height: 40,
-                                              width: 40,
-                                              decoration: state3
-                                              is SendChatLoading
-                                                  ? BoxDecoration(
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      15),
-                                                  color: Colors
-                                                      .grey)
-                                                  : BoxDecoration(
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      15),
-                                                  color: const Color(
-                                                      0XFF273043)),
-                                              child:
-                                              SvgPicture
-                                                  .asset(
-                                                sendChat,
-                                                color: state3
-                                                is SendChatLoading
-                                                    ? const Color
-                                                    .fromARGB(
-                                                    255,
-                                                    57,
-                                                    53,
-                                                    53)
-                                                    : null,
-                                              )),
-                                        );
-                                      },
-                                    );
-                                  },
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      )
-                          : Container(
-                        height: 90,
-                        width: width(context),
-                        color: Constants.primaryAppColor.withOpacity(0.1),
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const Text(
-                              "لا يمكنك التحدث مع هذا الناصح الان",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: Constants.mainFont),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                MyApplication.navigateTo(
-                                    context, const UserOrders());
-                              },
-                              child: const Text(
-                                "العودة الي طلباتي",
-                                style: TextStyle(
-                                    color: Constants.primaryAppColor,
-                                    fontFamily: Constants.mainFont),
+                                ],
                               ),
                             )
-                          ],
-                        ),
-                      ),
+                          : Container(
+                              height: 90,
+                              width: width(context),
+                              color: Constants.primaryAppColor.withOpacity(0.1),
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  const Text(
+                                    "لا يمكنك التحدث مع هذا الناصح الان",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: Constants.mainFont),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      MyApplication.navigateTo(
+                                          context, const UserOrders());
+                                    },
+                                    child: const Text(
+                                      "العودة الي طلباتي",
+                                      style: TextStyle(
+                                          color: Constants.primaryAppColor,
+                                          fontFamily: Constants.mainFont),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                     ],
                   ))),
         ),
