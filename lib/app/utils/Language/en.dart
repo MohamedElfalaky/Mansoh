@@ -89,6 +89,9 @@ Map<String, String> getEnglishLanguage() {
         "Explain your request clearly and concisely and provide the advisor with sufficient information to obtain a comprehensive answer",
     "total_balance": "Total Balance",
     "My Wallet": "My Wallet",
-    "recharge_wallet": "Recharge Wallet"
+    "recharge_wallet": "Recharge Wallet",
+    "Ask Advice":"Ask Advice",
+    "Confirm Order":"Confirm Order",
+    "Complete Order":"Complete Order"
   };
 }

@@ -11,13 +11,14 @@ import '../../models/home_models/advisor_list_model.dart';
 
 class AdvisorListRepo {
   Future<AdvisorListModel?> getAdList(
-      {String? catVal, String ?searchTxt, double? rateVal}) async {
+      {String? catVal, String? searchTxt, double? rateVal}) async {
     try {
       http.Response response = await http.get(
-        Uri.parse('${Keys.baseUrl}/client/adviser/list?category=$catVal&name=$searchTxt&rate=$rateVal'),
+        Uri.parse(
+            '${Keys.baseUrl}/client/adviser/list?category=${catVal ?? ""}&name=${searchTxt ?? ""}&rate=${rateVal ?? ""}'),
         headers: {
           'Accept': 'application/json',
-          'lang': Get.locale?.languageCode ??"ar",
+          'lang': Get.locale?.languageCode ?? "ar",
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );
@@ -41,7 +42,7 @@ class AdvisorListRepo {
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e ,st) {
+    } on Error catch (e, st) {
       if (kDebugMode) {
         print(e);
         print(st);

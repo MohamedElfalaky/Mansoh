@@ -20,21 +20,23 @@ class SendAdvise {
     int? adviserId,
   }) async {
     try {
-
-      Map<String , dynamic> map = {
+      Map<String, dynamic> map = {
         'name': name,
         'description': '$description',
         'adviser_id': '$adviserId',
         'price': '$price',
-        if (documentsFile != null)   'document[0][file]':documentsFile ,
-        if (documentsFile != null)   'document[0][type]':type
+        if (documentsFile != null) 'document[0][file]': documentsFile,
+        if (documentsFile != null) 'document[0][type]': type
       };
-      http.Response response = await http
-          .post(Uri.parse('${Keys.baseUrl}/client/advice/store'), headers: {
-        'Accept': 'application/json',
-        'lang': selectedLang,
-        "Authorization": "Bearer ${sharedPrefs.getToken()}"
-      }, body: map);
+      print(map);
+      http.Response response =
+          await http.post(Uri.parse('${Keys.baseUrl}/client/advice/store'),
+              headers: {
+                'Accept': 'application/json',
+                'lang': selectedLang,
+                "Authorization": "Bearer ${sharedPrefs.getToken()}"
+              },
+              body: map);
       if (kDebugMode) {
         print("map advice Sent You API");
         print(map);

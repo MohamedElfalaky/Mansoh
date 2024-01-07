@@ -132,18 +132,14 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       height: 50,
                       child: MyButton(
-                        txt: "تأكيد الطلب",
+                        txt:"Confirm Order".tr,
                         isBold: true,
                         onPressedHandler: () {
                           if (_formKey.currentState!.validate()) {
                             context.read<SendAdviseCubit>().sendAdviseMethod(
                                 context: context,
                                 adviserId: widget.adviserProfileData.id,
-                                type: pickedFile!
-                                    .path
-                                    .split(
-                                    ".")
-                                    .last,
+                                type: pickedFile?.path.split(".").last,
                                 name: requestTitle.text,
                                 description: descriptionController.text,
                                 price: priceController.text,
@@ -157,7 +153,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
           backgroundColor: Constants.whiteAppColor,
           appBar: customAppBar(
             context: context,
-            txt: "طلب نصيحة",
+            txt: "Ask Advice".tr,
           ),
           body: Container(
               color: Constants.whiteAppColor,

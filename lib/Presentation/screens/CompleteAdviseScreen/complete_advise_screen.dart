@@ -147,7 +147,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                             context.read<PayAdviceCubit>().getPay(
                                 paymentId: 2, adviceId: widget.adviceId);
                           },
-                          txt: "إتمام الطلب",
+                          txt: "Complete Order".tr,
                           isBold: true,
                         ))),
             floatingActionButtonLocation:
@@ -203,17 +203,17 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                     ),
                   ],
                 ),
-                title: const Column(
+                title:  Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
-                        Text("تأكيد الطلب"),
+                        Text("Confirm Order".tr),
                       ],
                     ),
                   ],

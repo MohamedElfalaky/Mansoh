@@ -90,6 +90,9 @@ Map<String, String> getArabicLanguage() {
         "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافية للحصول على إجابة وافية ...",
     "total_balance": "اجمالي الرصيد",
     "My Wallet": "محفظتي",
-    "recharge_wallet": "اشحن محفظتك"
+    "recharge_wallet": "اشحن محفظتك" ,
+    "Ask Advice":"طلب نصيحة" ,
+    "Confirm Order": "تأكيد الطلب" ,
+    "Complete Order":"إتمام الطلب" ,
   };
 }

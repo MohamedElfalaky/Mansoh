@@ -80,8 +80,8 @@ void main() async {
   // ignore: deprecated_member_use
   FlutterNativeSplash.removeAfter(initialization);
   await SharedPrefs().init();
-  await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // await Firebase.initializeApp();
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(const MyApp());
 }
@@ -94,18 +94,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? _locale;
-  FCMNotification fcmNotification = FCMNotification();
+  // Locale? _locale;
+  // FCMNotification fcmNotification = FCMNotification();
 
 // }
-  @override
-  void initState() {
-    Firebase.initializeApp().then((value) {
-      fcmNotification.registerNotification();
-      fcmNotification.configLocalNotification();
-    });
-    super.initState();
-  }
+//   @override
+//   void initState() {
+//     Firebase.initializeApp().then((value) {
+//       fcmNotification.registerNotification();
+//       fcmNotification.configLocalNotification();
+//     });
+//     super.initState();
+//   }
   @override
   Widget build(BuildContext contextt) {
     return MultiBlocProvider(
