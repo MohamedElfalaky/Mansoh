@@ -159,27 +159,28 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      !_checked
-                          ? InkWell(
+                      // !_checked
+                      //     ? InkWell(
+                      //   onTap: () {
+                      //     setState(() {
+                      //       _checked = !_checked;
+                      //     });
+                      //   },
+                      //   child: Container(
+                      //     width: 22,
+                      //     height: 22,
+                      //     decoration: BoxDecoration(
+                      //         shape: BoxShape.circle,
+                      //         border: Border.all(
+                      //             color: Colors.black, width: 1.4)),
+                      //   ),
+                      // )
+                      //     :
+                  InkWell(
                         onTap: () {
-                          setState(() {
-                            _checked = !_checked;
-                          });
-                        },
-                        child: Container(
-                          width: 22,
-                          height: 22,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: Colors.black, width: 1.4)),
-                        ),
-                      )
-                          : InkWell(
-                        onTap: () {
-                          setState(() {
-                            _checked = !_checked;
-                          });
+                          // setState(() {
+                          //   _checked = !_checked;
+                          // });
                         },
                         child: SvgPicture.asset(
                           checkIcon,
@@ -202,27 +203,28 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      !_privacy
-                          ? InkWell(
+                      // !_privacy
+                      //     ? InkWell(
+                      //   onTap: () {
+                      //     setState(() {
+                      //       _privacy = !_privacy;
+                      //     });
+                      //   },
+                      //   child: Container(
+                      //     width: 22,
+                      //     height: 22,
+                      //     decoration: BoxDecoration(
+                      //         shape: BoxShape.circle,
+                      //         border: Border.all(
+                      //             color: Colors.black, width: 1.4)),
+                      //   ),
+                      // )
+                      //     :
+                      InkWell(
                         onTap: () {
-                          setState(() {
-                            _privacy = !_privacy;
-                          });
-                        },
-                        child: Container(
-                          width: 22,
-                          height: 22,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: Colors.black, width: 1.4)),
-                        ),
-                      )
-                          : InkWell(
-                        onTap: () {
-                          setState(() {
-                            _privacy = !_privacy;
-                          });
+                          // setState(() {
+                          //   _privacy = !_privacy;
+                          // });
                         },
                         child: SvgPicture.asset(
                           checkIcon,

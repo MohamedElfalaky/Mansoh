@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -132,9 +133,12 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       height: 50,
                       child: MyButton(
-                        txt:"Confirm Order".tr,
+                        txt: "Confirm Order".tr,
                         isBold: true,
                         onPressedHandler: () {
+                          print(
+                              "pickedFile?.path.split).last is ${pickedFile?.path.split(".").last}");
+                          log(fileSelected.toString());
                           if (_formKey.currentState!.validate()) {
                             context.read<SendAdviseCubit>().sendAdviseMethod(
                                 context: context,
@@ -194,7 +198,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                           }
                           return null;
                         },
-                        autovalidateMode:AutovalidateMode.onUserInteraction ,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: requestTitle,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: MyPrefixWidget(),
@@ -231,9 +235,10 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         keyboardType: TextInputType.number,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: MyPrefixWidget(),
-                             isSuffix: true,
+                            isSuffix: true,
                             hintText: "0.00",
-                            suffixIcon: const Column(mainAxisAlignment: MainAxisAlignment.center,
+                            suffixIcon: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   "ريال سعودي",
@@ -264,43 +269,39 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             if (value!.isEmpty) {
                               return "Enter Advice details".tr;
                             } else if (value.length < 5) {
-                              return "Advice details should be more than 5 character".tr;
+                              return "Advice details should be more than 5 character"
+                                  .tr;
                             }
                             return null;
                           },
-                          controller: descriptionController,autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: descriptionController,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           maxLength: 700,
                           maxLines: 5,
                           decoration: Constants.setTextInputDecoration(
                             isParagraphTextField: true,
                             fillColor: const Color(0XFFF5F4F5),
-                            hintText: "Explain".tr
-                              ,
-                              // isSuffix: false
+                            hintText: "Explain".tr,
+                            // isSuffix: false
                           ),
                         ),
                       ),
                       InkWell(
                         onTap: () async {
                           FilePickerResult? result =
-                          await FilePicker.platform
-                              .pickFiles();
+                              await FilePicker.platform.pickFiles();
                           // type:
                           // FileType.custom;
                           // allowedExtensions:
                           // ['pdf', 'jpg', 'png', "doc", "docx", "gif"];
                           if (result != null) {
                             setState(() {
-                              pickedFile = File(result
-                                  .files.single.path!);
+                              pickedFile = File(result.files.single.path!);
                             });
                             List<int> imageBytes =
-                            await File(pickedFile!
-                                .path)
-                                .readAsBytesSync();
+                                await File(pickedFile!.path).readAsBytesSync();
                             // print(imageBytes);
-                            fileSelected = base64
-                                .encode(imageBytes);
+                            fileSelected = base64.encode(imageBytes);
                           }
                           return;
                         },
