@@ -588,7 +588,158 @@ class _ChatScreenState extends State<ChatScreen> {
                                 children: [
                                   if (isRecording) const Text("recording"),
                                   if (voiceSelected != null)
-                                    SvgPicture.asset(voiceShape),
+                                    Row(
+                                      children: [
+                                        Expanded(child:
+                                        Container(
+                                            padding: const EdgeInsets.all(5),
+                                            margin:
+                                            const EdgeInsets.symmetric(vertical: 5),
+                                            height: 50,
+                                            width: width(context),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: Colors.black12),
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.shade300,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 10.0,
+                                                    spreadRadius: 2.0,
+                                                  )
+                                                ],
+                                                borderRadius: BorderRadius.circular(10)),
+                                            child: SvgPicture.asset(voiceShape)
+                                        ),
+
+                                        ),
+                                        if (voiceFile != null)
+                                          IconButton(
+                                            icon: const Icon(Icons.close),
+                                            onPressed: () {
+                                              setState(() {
+                                                voiceFile = null;
+                                                voiceSelected=null;
+                                              });
+                                            },
+                                          ),
+                                      ],
+                                    ),
+                                  if (pickedFile != null)
+                                    pickedFile!.path.endsWith('.pdf')
+                                        ? Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                              padding: const EdgeInsets.all(5),
+                                              margin:
+                                              const EdgeInsets.symmetric(vertical: 5),
+                                              height: 50,
+                                              width: width(context),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey.shade300,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 10.0,
+                                                      spreadRadius: 2.0,
+                                                    )
+                                                  ],
+                                                  borderRadius: BorderRadius.circular(10)),
+                                              child: Row(
+                                                children: [
+                                                  const Spacer(),
+                                                  Text(pickedFile!.path
+                                                      .replaceRange(0, 56, "")),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  SvgPicture.asset(
+                                                    filePdf,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ],
+                                              )
+
+                                      // SfPdfViewer.file(
+                                      //   pickedFile!,
+                                      // ),
+                                    ),
+                                            ),
+                                            if (pickedFile != null)
+                                              IconButton(
+                                                icon: const Icon(Icons.close),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    pickedFile = null;
+                                                  });
+                                                },
+                                              ),
+                                          ],
+                                        )
+                                        : Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                              padding: const EdgeInsets.all(5),
+                                              margin:
+                                              const EdgeInsets.symmetric(vertical: 5),
+                                              height: 50,
+                                              width: width(context),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey.shade300,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 10.0,
+                                                      spreadRadius: 2.0,
+                                                    )
+                                                  ],
+                                                  borderRadius: BorderRadius.circular(10)),
+                                              child: Row(
+                                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                      child: Text(pickedFile!.path
+                                                          .replaceRange(0, 56, ""))),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  SvgPicture.asset(
+                                                    fileImage,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ],
+                                              )),
+                                            ),
+                                            if (pickedFile != null)
+                                              IconButton(
+                                                icon: const Icon(Icons.close),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    pickedFile = null;
+                                                  });
+                                                },
+                                              ),
+                                          ],
+                                        ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                 
                                   Row(
                                     children: [
                                       Expanded(
