@@ -92,6 +92,7 @@ Map<String, String> getEnglishLanguage() {
     "recharge_wallet": "Recharge Wallet",
     "Ask Advice":"Ask Advice",
     "Confirm Order":"Confirm Order",
-    "Complete Order":"Complete Order"
+    "Complete Order":"Complete Order",
+    "delete tile":"Confirm Delete Account?"
   };
 }

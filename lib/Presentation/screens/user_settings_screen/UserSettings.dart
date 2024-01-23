@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import '../../../../app/utils/myApplication.dart';
+import '../../../Data/cubit/authentication/delete_account_cubit/delete_account_cubit.dart';
+import '../../../Data/cubit/authentication/delete_account_cubit/delete_account_state.dart';
+import '../../../Data/cubit/settings_cubits/is_notification_cubit/is_notification_cubit.dart';
 import '../../../app/Style/Icons.dart';
 import '../../../app/constants.dart';
 import '../../../app/utils/Language/get_language.dart';
+import '../../../app/utils/sharedPreferenceClass.dart';
 import '../UserProfileScreens/UserProfileEdit/widgets/shared.dart';
 
 class UserSettings extends StatefulWidget {
@@ -17,6 +22,14 @@ class UserSettings extends StatefulWidget {
 
 class _UserSettingsState extends State<UserSettings> {
   int groupValue = 1;
+  bool? isNotificationValue;
+
+
+  @override
+  void initState() {
+    isNotificationValue = sharedPrefs.getIsNotification() == 1 ? true : false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +96,14 @@ class _UserSettingsState extends State<UserSettings> {
                         )),
                     trailing: Switch(
                       activeColor: Constants.primaryAppColor,
-                      value: true,
-                      onChanged: (value) {},
+                      value: isNotificationValue!,
+                      onChanged: (value) {
+
+                        setState(() {
+                          isNotificationValue =value;
+                        });
+                        context.read<IsNotificationCubit>().isNotify();
+                      },
                     ),
                   ),
                   const Padding(
@@ -98,11 +117,13 @@ class _UserSettingsState extends State<UserSettings> {
                       vertical: -4,
                     ),
                     leading: SvgPicture.asset(deleteUser),
-                    title: Text("Delete Account".tr,
-                        style: Constants.mainTitleFont.copyWith(
-                            letterSpacing: 0,
-                            wordSpacing: 0,
-                            color: Colors.red)),
+                    title: InkWell(onTap:()=> _showDeleteDialog(context),
+                      child: Text("Delete Account".tr,
+                          style: Constants.mainTitleFont.copyWith(
+                              letterSpacing: 0,
+                              wordSpacing: 0,
+                              color: Colors.red)),
+                    ),
                   ),
                 ],
               ),
@@ -113,3 +134,45 @@ class _UserSettingsState extends State<UserSettings> {
     );
   }
 }
+
+
+Future<void> _showDeleteDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return BlocBuilder<DeleteAccountCubit, DeleteAccountState>(
+          builder: (context, state) => AlertDialog(
+            // <-- SEE HERE
+            // title: const Text('Cancel booking'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text( "delete tile".tr),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text( "No".tr),
+                onPressed: () {
+                 Navigator.pop(context);
+                },
+              ),
+              state is DeleteAccountLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : TextButton(
+                child: Text( "Yes".tr),
+                onPressed: () {
+                  context.read<DeleteAccountCubit>().delete(
+                    context: context,
+                  );
+                  // Navigator.pop(context);
+                },
+              ),
+            ],
+          ));
+    },
+  );
+}
+

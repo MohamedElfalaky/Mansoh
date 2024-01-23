@@ -61,17 +61,17 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
 
-    player.onPlayerStateChanged.listen((PlayerState state) {
-      if (state == PlayerState.playing) {
-        setState(() {
-          isPlay = true;
-        });
-      } else {
-        setState(() {
-          isPlay = false;
-        });
-      }
-    });
+    // player.onPlayerStateChanged.listen((PlayerState state) {
+    //   if (state == PlayerState.playing) {
+    //     setState(() {
+    //       isPlay = true;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       isPlay = false;
+    //     });
+    //   }
+    // });
 
     MyApplication.checkConnection().then((value) {
       if (value) {
@@ -193,10 +193,31 @@ class _ChatScreenState extends State<ChatScreen> {
 
   final player = AudioPlayer();
 
-  bool isPlay = false;
+  int playingIndex = -1;
 
-  Future<void> playAudioFromUrl(String url) async {
-    await player.play(UrlSource(url));
+
+  Future<void> playAudioFromUrl(String url, int index) async {
+    if (playingIndex == index) {
+      // Stop the audio if it's already playing
+      await player.stop();
+      setState(() {
+        playingIndex = -1; // Reset playingIndex
+      });
+    } else {
+      // Play the audio for the selected index
+      await player.play(UrlSource(url));
+
+      // Set up a completion callback to reset playingIndex when playback is complete
+      player.onPlayerComplete.listen((event) {
+        setState(() {
+          playingIndex = -1; // Reset playingIndex
+        });
+      });
+
+      setState(() {
+        playingIndex = index;
+      });
+    }
   }
 
   @override
@@ -454,31 +475,54 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                   ?.endsWith(
                                                                       "mp3") ??
                                                               false
-                                                          ? InkWell(
-                                                              onTap: () => playAudioFromUrl(state
-                                                                      .response
-                                                                      ?.data
-                                                                      ?.chat?[
-                                                                          index]
-                                                                      .document?[
-                                                                          0]
-                                                                      .file ??
-                                                                  ""),
-                                                              child: Row(
-                                                                children: [
-                                                                  Expanded(
-                                                                      child: SvgPicture
-                                                                          .asset(
-                                                                              voiceShape)),
-                                                                  const SizedBox(
-                                                                    width: 10,
-                                                                  ),
-                                                                  CircleAvatar(
-                                                                      child: SvgPicture
-                                                                          .asset(
-                                                                              voice)),
-                                                                ],
-                                                              ))
+                                                          ?
+                                                      InkWell(
+                                                        onTap: () => playAudioFromUrl(
+                                                          state.response?.data?.chat?[index].document?[0].file ?? "",
+                                                          index,
+                                                        ),
+                                                        child: playingIndex == index
+                                                            ? Row(
+                                                          children: [
+                                                            Expanded(child: Image.asset(soundGIF, height: 20)),
+                                                            Text("playing"),
+                                                          ],
+                                                        )
+                                                            : Row(
+                                                          children: [
+                                                            Expanded(child: SvgPicture.asset(voiceShape)),
+                                                            const SizedBox(width: 10),
+                                                            CircleAvatar(child: SvgPicture.asset(voice)),
+                                                          ],
+                                                        ),
+                                                      )
+
+
+                                                      // InkWell(
+                                                      //         onTap: () => playAudioFromUrl(state
+                                                      //                 .response
+                                                      //                 ?.data
+                                                      //                 ?.chat?[
+                                                      //                     index]
+                                                      //                 .document?[
+                                                      //                     0]
+                                                      //                 .file ??
+                                                      //             ""),
+                                                      //         child: Row(
+                                                      //           children: [
+                                                      //             Expanded(
+                                                      //                 child: SvgPicture
+                                                      //                     .asset(
+                                                      //                         voiceShape)),
+                                                      //             const SizedBox(
+                                                      //               width: 10,
+                                                      //             ),
+                                                      //             CircleAvatar(
+                                                      //                 child: SvgPicture
+                                                      //                     .asset(
+                                                      //                         voice)),
+                                                      //           ],
+                                                      //         ))
                                                           : state
                                                                       .response
                                                                       ?.data
@@ -488,23 +532,49 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                       .file
                                                                       ?.endsWith("m4a") ??
                                                                   false
-                                                              ? InkWell(
-                                                                  onTap: () => playAudioFromUrl(state.response?.data?.chat?[index].document?[0].file ?? ""),
-                                                                  child: Row(
-                                                                    children: [
-                                                                      // isPlay ? Text("playing") :
-                                                                      Expanded(
-                                                                          child:
-                                                                              SvgPicture.asset(voiceShape)),
-                                                                      const SizedBox(
-                                                                        width:
-                                                                            10,
-                                                                      ),
-                                                                      CircleAvatar(
-                                                                          child:
-                                                                              SvgPicture.asset(voice)),
-                                                                    ],
-                                                                  ))
+                                                              ?   InkWell(
+                                                        onTap: () => playAudioFromUrl(
+                                                          state.response?.data?.chat?[index].document?[0].file ?? "",
+                                                          index,
+                                                        ),
+                                                        child: playingIndex == index
+                                                            ? Row(
+                                                          children: [
+                                                            Expanded(child: Image.asset(soundGIF, height: 20)),
+                                                            Text("playing"),
+                                                          ],
+                                                        )
+                                                            : Row(
+                                                          children: [
+                                                            Expanded(child: SvgPicture.asset(voiceShape)),
+                                                            const SizedBox(width: 10),
+                                                            CircleAvatar(child: SvgPicture.asset(voice)),
+                                                          ],
+                                                        ),
+                                                      )
+                                                      // InkWell(
+                                                      //             onTap: () => playAudioFromUrl(state.response?.data?.chat?[index].document?[0].file ?? ""),
+                                                      //             child: isPlay ? Row(
+                                                      //               children: [
+                                                      //
+                                                      //                 Expanded(child: Image.asset(soundGIF ,height: 20,)),
+                                                      //                 Text("playing"),
+                                                      //               ],
+                                                      //             ) : Row(
+                                                      //               children: [
+                                                      //
+                                                      //                 Expanded(
+                                                      //                     child:
+                                                      //                         SvgPicture.asset(voiceShape)),
+                                                      //                 const SizedBox(
+                                                      //                   width:
+                                                      //                       10,
+                                                      //                 ),
+                                                      //                 CircleAvatar(
+                                                      //                     child:
+                                                      //                         SvgPicture.asset(voice)),
+                                                      //               ],
+                                                      //             ))
                                                               : Row(
                                                                   children: [
                                                                     state.response?.data?.chat?[index].document?[0].file?.endsWith("png") ??

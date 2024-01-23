@@ -94,5 +94,6 @@ Map<String, String> getArabicLanguage() {
     "Ask Advice":"طلب نصيحة" ,
     "Confirm Order": "تأكيد الطلب" ,
     "Complete Order":"إتمام الطلب" ,
+    "delete tile":"تأكيد حذف الحساب ؟"
   };
 }

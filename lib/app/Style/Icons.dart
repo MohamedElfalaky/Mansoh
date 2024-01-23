@@ -59,3 +59,4 @@ const String voiceShape = "assets/images/SVGs/voice_shape.svg";
 
 const String handIcon = "assets/images/Jsons/hand.json";
 const String dialogIcon = "assets/images/reject.gif";
+const String soundGIF = "assets/images/Sound.gif";

@@ -7,6 +7,7 @@ import '../../Data/cubit/authentication/category_parent_cubit/category_parent_cu
 import '../../Data/cubit/authentication/check_code/check_code_cubit.dart';
 import '../../Data/cubit/authentication/city_cubit/city_cubit.dart';
 import '../../Data/cubit/authentication/country_cubit/country_cubit.dart';
+import '../../Data/cubit/authentication/delete_account_cubit/delete_account_cubit.dart';
 import '../../Data/cubit/authentication/get_by_token_cubit/get_by_token_cubit.dart';
 import '../../Data/cubit/authentication/get_user_by_mob_cubit/get_user_cubit.dart';
 import '../../Data/cubit/authentication/log_out_cubit/log_out_cubit.dart';
@@ -25,6 +26,7 @@ import '../../Data/cubit/rejections_cubit/reject_cubit/post_reject_cubit.dart';
 import '../../Data/cubit/rejections_cubit/rejection_list_cubit/rejection_list_cubit.dart';
 import '../../Data/cubit/review_cubit/review_cubit.dart';
 import '../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
+import '../../Data/cubit/settings_cubits/is_notification_cubit/is_notification_cubit.dart';
 import '../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/pay_advice_cubit/pay_advice_cubit.dart';
@@ -65,5 +67,7 @@ List<SingleChildWidget> providers = [
   BlocProvider<CategoryParentCubit>(create: (context) => CategoryParentCubit()),
   BlocProvider<ReviewCubit>(create: (context) => ReviewCubit()),
   BlocProvider<WalletCubit>(create: (context) => WalletCubit()),
+  BlocProvider<IsNotificationCubit>(create: (context) => IsNotificationCubit()),
   BlocProvider<NotificationCubit>(create: (context) => NotificationCubit()),
+  BlocProvider<DeleteAccountCubit>(create: (context) => DeleteAccountCubit()),
 ];

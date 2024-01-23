@@ -244,6 +244,15 @@ class SharedPrefs {
   bool getCurrentAddress() {
     return sharedPrefs!.getBool(currentAddredd) ?? true;
   }
+
+
+  setIsNotification(int value) {
+    sharedPrefs!.setInt("isNotification", value);
+  }
+
+  int getIsNotification() {
+    return sharedPrefs!.getInt("isNotification") ?? 0;
+  }
 }
 
 final sharedPrefs = SharedPrefs();

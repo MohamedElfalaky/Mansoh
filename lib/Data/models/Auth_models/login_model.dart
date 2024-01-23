@@ -43,6 +43,7 @@ class Data {
   String? description;
   String? lang;
   String? token;
+  int? isNotification;
   String? fullName;
   String? mobile;
   String? userName;
@@ -65,6 +66,7 @@ class Data {
     this.description,
     this.lang,
     this.token,
+    this.isNotification,
     this.fullName,
     this.mobile,
     this.userName,
@@ -88,6 +90,7 @@ class Data {
     description: json["description"],
     lang: json["lang"],
     token: json["token"],
+    isNotification: json["is_notification"],
     fullName: json["full_name"],
     mobile: json["mobile"],
     userName: json["user_name"],
