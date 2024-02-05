@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:get/get_utils/get_utils.dart';
+import 'package:nasooh/Presentation/screens/Home/Home.dart';
 import 'package:nasooh/Presentation/screens/UserProfileScreens/UserOrders/UserOrders.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../app/Style/Icons.dart';
@@ -40,7 +41,7 @@ List<DrawerModel> getDrawer(BuildContext context) => [
           title: "my_orders".tr,
           svg: SvgPicture.asset(ordersIcon, width: 24),
           onTap: () {
-            Get.to(() => const UserOrders());
+            Get.to(() =>  Home(currentIndex: 1));
           }),
       DrawerModel(
           title: "my_wallet".tr,

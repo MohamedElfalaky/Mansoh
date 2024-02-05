@@ -195,7 +195,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   int playingIndex = -1;
 
-
   Future<void> playAudioFromUrl(String url, int index) async {
     if (playingIndex == index) {
       // Stop the audio if it's already playing
@@ -243,7 +242,7 @@ class _ChatScreenState extends State<ChatScreen> {
       child: WillPopScope(
         onWillPop: () async {
           final shouldPop = await Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => const Home()),
+              MaterialPageRoute(builder: (context) =>  Home(currentIndex: 1,)),
               (Route<dynamic> route) => false);
           // Navigator.of(context).pu(
           //     MaterialPageRoute(builder: (context) =>  const Home()));
@@ -304,7 +303,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             ),
                             child: IconButton(
                               onPressed: () {
-                                MyApplication.navigateTo(context, const Home());
+                                MyApplication.navigateTo(context,  Home(currentIndex: 1,));
                               },
                               icon: Get.locale!.languageCode == "ar"
                                   ? SvgPicture.asset(
@@ -396,77 +395,85 @@ class _ChatScreenState extends State<ChatScreen> {
                                             null
                                         ? AlignmentDirectional.centerStart
                                         : AlignmentDirectional.centerEnd,
-                                    child: state.response?.data?.chat?[index]
-                                                .mediaType ==
-                                            "1"
-                                        ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              state.response?.data?.chat?[index]
-                                                          .message ==
-                                                      null
-                                                  ? const SizedBox()
-                                                  : Container(
-                                                      constraints:
-                                                          const BoxConstraints(
-                                                              maxWidth: 220),
-                                                      // width: 100,
-                                                      margin: const EdgeInsets.symmetric(
-                                                          vertical: 8),
-                                                      padding: const EdgeInsets.all(
-                                                          8),
-                                                      // constraints: BoxConstraints(mi),
+                                    child:
+                                        state.response?.data?.chat?[index]
+                                                    .mediaType ==
+                                                "1"
+                                            ? Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  state
+                                                              .response
+                                                              ?.data
+                                                              ?.chat?[index]
+                                                              .message ==
+                                                          null
+                                                      ? const SizedBox()
+                                                      : Container(
+                                                          constraints:
+                                                              const BoxConstraints(
+                                                                  maxWidth:
+                                                                      220),
+                                                          // width: 100,
+                                                          margin:
+                                                              const EdgeInsets.symmetric(
+                                                                  vertical: 8),
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                  8),
+                                                          // constraints: BoxConstraints(mi),
+                                                          decoration: BoxDecoration(
+                                                              color: state.response?.data?.chat?[index].adviser == null
+                                                                  ? const Color.fromARGB(
+                                                                          255,
+                                                                          185,
+                                                                          184,
+                                                                          180)
+                                                                      .withOpacity(
+                                                                          0.2)
+                                                                  : Constants
+                                                                      .primaryAppColor
+                                                                      .withOpacity(0.6),
+                                                              borderRadius: BorderRadius.circular(20)),
+                                                          child: Text(
+                                                            state
+                                                                    .response
+                                                                    ?.data
+                                                                    ?.chat?[
+                                                                        index]
+                                                                    .message ??
+                                                                "",
+                                                            style: Constants
+                                                                .subtitleFont,
+                                                          )),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      launchUrl(Uri.parse(state
+                                                              .response
+                                                              ?.data
+                                                              ?.chat?[index]
+                                                              .document?[0]
+                                                              .file ??
+                                                          ""));
+                                                    },
+                                                    child: Container(
+                                                      width:
+                                                          width(context) * 0.6,
+                                                      margin: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 10),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              7),
                                                       decoration: BoxDecoration(
-                                                          color: state
-                                                                      .response
-                                                                      ?.data
-                                                                      ?.chat?[
-                                                                          index]
-                                                                      .adviser ==
-                                                                  null
-                                                              ? const Color.fromARGB(255, 185, 184, 180)
-                                                                  .withOpacity(
-                                                                      0.2)
-                                                              : Constants
-                                                                  .primaryAppColor
-                                                                  .withOpacity(0.6),
-                                                          borderRadius: BorderRadius.circular(20)),
-                                                      child: Text(
-                                                        state
-                                                                .response
-                                                                ?.data
-                                                                ?.chat?[index]
-                                                                .message ??
-                                                            "",
-                                                        style: Constants
-                                                            .subtitleFont,
-                                                      )),
-                                              InkWell(
-                                                onTap: () {
-                                                  launchUrl(Uri.parse(state
-                                                          .response
-                                                          ?.data
-                                                          ?.chat?[index]
-                                                          .document?[0]
-                                                          .file ??
-                                                      ""));
-                                                },
-                                                child: Container(
-                                                  width: width(context) * 0.6,
-                                                  margin: const EdgeInsets
-                                                      .symmetric(vertical: 10),
-                                                  padding:
-                                                      const EdgeInsets.all(7),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                          color: Colors
-                                                              .grey.shade400)),
-                                                  child:
-                                                      state
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color: Colors.grey
+                                                                  .shade400)),
+                                                      child: state
                                                                   .response
                                                                   ?.data
                                                                   ?.chat?[index]
@@ -475,106 +482,125 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                   ?.endsWith(
                                                                       "mp3") ??
                                                               false
-                                                          ?
-                                                      InkWell(
-                                                        onTap: () => playAudioFromUrl(
-                                                          state.response?.data?.chat?[index].document?[0].file ?? "",
-                                                          index,
-                                                        ),
-                                                        child: playingIndex == index
-                                                            ? Row(
-                                                          children: [
-                                                            Expanded(child: Image.asset(soundGIF, height: 20)),
-                                                            Text("playing"),
-                                                          ],
-                                                        )
-                                                            : Row(
-                                                          children: [
-                                                            Expanded(child: SvgPicture.asset(voiceShape)),
-                                                            const SizedBox(width: 10),
-                                                            CircleAvatar(child: SvgPicture.asset(voice)),
-                                                          ],
-                                                        ),
-                                                      )
+                                                          ? InkWell(
+                                                              onTap: () =>
+                                                                  playAudioFromUrl(
+                                                                state
+                                                                        .response
+                                                                        ?.data
+                                                                        ?.chat?[
+                                                                            index]
+                                                                        .document?[
+                                                                            0]
+                                                                        .file ??
+                                                                    "",
+                                                                index,
+                                                              ),
+                                                              child:
+                                                                  playingIndex ==
+                                                                          index
+                                                                      ? Row(
+                                                                          children: [
+                                                                            Expanded(child: Image.asset(soundGIF, height: 20)),
+                                                                            Text("playing"),
+                                                                          ],
+                                                                        )
+                                                                      : Row(
+                                                                          children: [
+                                                                            Expanded(child: SvgPicture.asset(voiceShape)),
+                                                                            const SizedBox(width: 10),
+                                                                            CircleAvatar(child: SvgPicture.asset(voice)),
+                                                                          ],
+                                                                        ),
+                                                            )
 
-
-                                                      // InkWell(
-                                                      //         onTap: () => playAudioFromUrl(state
-                                                      //                 .response
-                                                      //                 ?.data
-                                                      //                 ?.chat?[
-                                                      //                     index]
-                                                      //                 .document?[
-                                                      //                     0]
-                                                      //                 .file ??
-                                                      //             ""),
-                                                      //         child: Row(
-                                                      //           children: [
-                                                      //             Expanded(
-                                                      //                 child: SvgPicture
-                                                      //                     .asset(
-                                                      //                         voiceShape)),
-                                                      //             const SizedBox(
-                                                      //               width: 10,
-                                                      //             ),
-                                                      //             CircleAvatar(
-                                                      //                 child: SvgPicture
-                                                      //                     .asset(
-                                                      //                         voice)),
-                                                      //           ],
-                                                      //         ))
+                                                          // InkWell(
+                                                          //         onTap: () => playAudioFromUrl(state
+                                                          //                 .response
+                                                          //                 ?.data
+                                                          //                 ?.chat?[
+                                                          //                     index]
+                                                          //                 .document?[
+                                                          //                     0]
+                                                          //                 .file ??
+                                                          //             ""),
+                                                          //         child: Row(
+                                                          //           children: [
+                                                          //             Expanded(
+                                                          //                 child: SvgPicture
+                                                          //                     .asset(
+                                                          //                         voiceShape)),
+                                                          //             const SizedBox(
+                                                          //               width: 10,
+                                                          //             ),
+                                                          //             CircleAvatar(
+                                                          //                 child: SvgPicture
+                                                          //                     .asset(
+                                                          //                         voice)),
+                                                          //           ],
+                                                          //         ))
                                                           : state
                                                                       .response
                                                                       ?.data
                                                                       ?.chat?[
                                                                           index]
-                                                                      .document?[0]
+                                                                      .document?[
+                                                                          0]
                                                                       .file
-                                                                      ?.endsWith("m4a") ??
+                                                                      ?.endsWith(
+                                                                          "m4a") ??
                                                                   false
-                                                              ?   InkWell(
-                                                        onTap: () => playAudioFromUrl(
-                                                          state.response?.data?.chat?[index].document?[0].file ?? "",
-                                                          index,
-                                                        ),
-                                                        child: playingIndex == index
-                                                            ? Row(
-                                                          children: [
-                                                            Expanded(child: Image.asset(soundGIF, height: 20)),
-                                                            Text("playing"),
-                                                          ],
-                                                        )
-                                                            : Row(
-                                                          children: [
-                                                            Expanded(child: SvgPicture.asset(voiceShape)),
-                                                            const SizedBox(width: 10),
-                                                            CircleAvatar(child: SvgPicture.asset(voice)),
-                                                          ],
-                                                        ),
-                                                      )
-                                                      // InkWell(
-                                                      //             onTap: () => playAudioFromUrl(state.response?.data?.chat?[index].document?[0].file ?? ""),
-                                                      //             child: isPlay ? Row(
-                                                      //               children: [
-                                                      //
-                                                      //                 Expanded(child: Image.asset(soundGIF ,height: 20,)),
-                                                      //                 Text("playing"),
-                                                      //               ],
-                                                      //             ) : Row(
-                                                      //               children: [
-                                                      //
-                                                      //                 Expanded(
-                                                      //                     child:
-                                                      //                         SvgPicture.asset(voiceShape)),
-                                                      //                 const SizedBox(
-                                                      //                   width:
-                                                      //                       10,
-                                                      //                 ),
-                                                      //                 CircleAvatar(
-                                                      //                     child:
-                                                      //                         SvgPicture.asset(voice)),
-                                                      //               ],
-                                                      //             ))
+                                                              ? InkWell(
+                                                                  onTap: () =>
+                                                                      playAudioFromUrl(
+                                                                    state
+                                                                            .response
+                                                                            ?.data
+                                                                            ?.chat?[index]
+                                                                            .document?[0]
+                                                                            .file ??
+                                                                        "",
+                                                                    index,
+                                                                  ),
+                                                                  child: playingIndex ==
+                                                                          index
+                                                                      ? Row(
+                                                                          children: [
+                                                                            Expanded(child: Image.asset(soundGIF, height: 20)),
+                                                                            Text("playing"),
+                                                                          ],
+                                                                        )
+                                                                      : Row(
+                                                                          children: [
+                                                                            Expanded(child: SvgPicture.asset(voiceShape)),
+                                                                            const SizedBox(width: 10),
+                                                                            CircleAvatar(child: SvgPicture.asset(voice)),
+                                                                          ],
+                                                                        ),
+                                                                )
+                                                              // InkWell(
+                                                              //             onTap: () => playAudioFromUrl(state.response?.data?.chat?[index].document?[0].file ?? ""),
+                                                              //             child: isPlay ? Row(
+                                                              //               children: [
+                                                              //
+                                                              //                 Expanded(child: Image.asset(soundGIF ,height: 20,)),
+                                                              //                 Text("playing"),
+                                                              //               ],
+                                                              //             ) : Row(
+                                                              //               children: [
+                                                              //
+                                                              //                 Expanded(
+                                                              //                     child:
+                                                              //                         SvgPicture.asset(voiceShape)),
+                                                              //                 const SizedBox(
+                                                              //                   width:
+                                                              //                       10,
+                                                              //                 ),
+                                                              //                 CircleAvatar(
+                                                              //                     child:
+                                                              //                         SvgPicture.asset(voice)),
+                                                              //               ],
+                                                              //             ))
                                                               : Row(
                                                                   children: [
                                                                     state.response?.data?.chat?[index].document?[0].file?.endsWith("png") ??
@@ -605,39 +631,50 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                     ),
                                                                   ],
                                                                 ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            : Container(
+                                                constraints:
+                                                    const BoxConstraints(
+                                                        maxWidth: 220),
+                                                // width: 100,
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8),
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                // constraints: BoxConstraints(mi),
+                                                decoration: BoxDecoration(
+                                                    color: state
+                                                                .response
+                                                                ?.data
+                                                                ?.chat?[index]
+                                                                .adviser ==
+                                                            null
+                                                        ? const Color.fromARGB(
+                                                                255,
+                                                                185,
+                                                                184,
+                                                                180)
+                                                            .withOpacity(0.2)
+                                                        : Constants
+                                                            .primaryAppColor
+                                                            .withOpacity(0.6),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                child: Text(
+                                                  state
+                                                          .response
+                                                          ?.data
+                                                          ?.chat?[index]
+                                                          .message ??
+                                                      "",
+                                                  style: Constants.subtitleFont,
                                                 ),
                                               ),
-                                            ],
-                                          )
-                                        : Container(
-                                            constraints: const BoxConstraints(
-                                                maxWidth: 220),
-                                            // width: 100,
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 8),
-                                            padding: const EdgeInsets.all(8),
-                                            // constraints: BoxConstraints(mi),
-                                            decoration: BoxDecoration(
-                                                color: state
-                                                            .response
-                                                            ?.data
-                                                            ?.chat?[index]
-                                                            .adviser ==
-                                                        null
-                                                    ? const Color.fromARGB(
-                                                            255, 185, 184, 180)
-                                                        .withOpacity(0.2)
-                                                    : Constants.primaryAppColor
-                                                        .withOpacity(0.6),
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
-                                            child: Text(
-                                              state.response?.data?.chat?[index]
-                                                      .message ??
-                                                  "",
-                                              style: Constants.subtitleFont,
-                                            ),
-                                          ),
                                   ),
                                 ));
                           } else if (state is ShowAdviceError) {
@@ -660,31 +697,35 @@ class _ChatScreenState extends State<ChatScreen> {
                                   if (voiceSelected != null)
                                     Row(
                                       children: [
-                                        Expanded(child:
-                                        Container(
-                                            padding: const EdgeInsets.all(5),
-                                            margin:
-                                            const EdgeInsets.symmetric(vertical: 5),
-                                            height: 50,
-                                            width: width(context),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(color: Colors.black12),
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey.shade300,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 10.0,
-                                                    spreadRadius: 2.0,
-                                                  )
-                                                ],
-                                                borderRadius: BorderRadius.circular(10)),
-                                            child: SvgPicture.asset(voiceShape)
-                                        ),
-
+                                        Expanded(
+                                          child: Container(
+                                              padding: const EdgeInsets.all(5),
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5),
+                                              height: 50,
+                                              width: width(context),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.black12),
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 10.0,
+                                                      spreadRadius: 2.0,
+                                                    )
+                                                  ],
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child:
+                                                  SvgPicture.asset(voiceShape)),
                                         ),
                                         if (voiceFile != null)
                                           IconButton(
@@ -692,7 +733,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                             onPressed: () {
                                               setState(() {
                                                 voiceFile = null;
-                                                voiceSelected=null;
+                                                voiceSelected = null;
                                               });
                                             },
                                           ),
@@ -701,115 +742,129 @@ class _ChatScreenState extends State<ChatScreen> {
                                   if (pickedFile != null)
                                     pickedFile!.path.endsWith('.pdf')
                                         ? Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                              padding: const EdgeInsets.all(5),
-                                              margin:
-                                              const EdgeInsets.symmetric(vertical: 5),
-                                              height: 50,
-                                              width: width(context),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey.shade300,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 10.0,
-                                                      spreadRadius: 2.0,
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(5),
+                                                    margin: const EdgeInsets
+                                                        .symmetric(vertical: 5),
+                                                    height: 50,
+                                                    width: width(context),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors
+                                                                .grey.shade300,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 10.0,
+                                                            spreadRadius: 2.0,
+                                                          )
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: Row(
+                                                      children: [
+                                                        const Spacer(),
+                                                        Text(pickedFile!.path
+                                                            .replaceRange(
+                                                                0, 56, "")),
+                                                        const SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        SvgPicture.asset(
+                                                          filePdf,
+                                                          width: 20,
+                                                          height: 20,
+                                                        ),
+                                                      ],
                                                     )
-                                                  ],
-                                                  borderRadius: BorderRadius.circular(10)),
-                                              child: Row(
-                                                children: [
-                                                  const Spacer(),
-                                                  Text(pickedFile!.path
-                                                      .replaceRange(0, 56, "")),
-                                                  const SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                    filePdf,
-                                                    width: 20,
-                                                    height: 20,
-                                                  ),
-                                                ],
-                                              )
 
-                                      // SfPdfViewer.file(
-                                      //   pickedFile!,
-                                      // ),
-                                    ),
-                                            ),
-                                            if (pickedFile != null)
-                                              IconButton(
-                                                icon: const Icon(Icons.close),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    pickedFile = null;
-                                                  });
-                                                },
+                                                    // SfPdfViewer.file(
+                                                    //   pickedFile!,
+                                                    // ),
+                                                    ),
                                               ),
-                                          ],
-                                        )
+                                              if (pickedFile != null)
+                                                IconButton(
+                                                  icon: const Icon(Icons.close),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      pickedFile = null;
+                                                    });
+                                                  },
+                                                ),
+                                            ],
+                                          )
                                         : Row(
-                                          children: [
-                                            Expanded(
-                                              child: Container(
-                                              padding: const EdgeInsets.all(5),
-                                              margin:
-                                              const EdgeInsets.symmetric(vertical: 5),
-                                              height: 50,
-                                              width: width(context),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey.shade300,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 10.0,
-                                                      spreadRadius: 2.0,
-                                                    )
-                                                  ],
-                                                  borderRadius: BorderRadius.circular(10)),
-                                              child: Row(
-                                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Expanded(
-                                                      child: Text(pickedFile!.path
-                                                          .replaceRange(0, 56, ""))),
-                                                  const SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  SvgPicture.asset(
-                                                    fileImage,
-                                                    width: 20,
-                                                    height: 20,
-                                                  ),
-                                                ],
-                                              )),
-                                            ),
-                                            if (pickedFile != null)
-                                              IconButton(
-                                                icon: const Icon(Icons.close),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    pickedFile = null;
-                                                  });
-                                                },
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(5),
+                                                    margin: const EdgeInsets
+                                                        .symmetric(vertical: 5),
+                                                    height: 50,
+                                                    width: width(context),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors
+                                                                .grey.shade300,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 10.0,
+                                                            spreadRadius: 2.0,
+                                                          )
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: Row(
+                                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                            child: Text(
+                                                                pickedFile!.path
+                                                                    .replaceRange(
+                                                                        0,
+                                                                        56,
+                                                                        ""))),
+                                                        const SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        SvgPicture.asset(
+                                                          fileImage,
+                                                          width: 20,
+                                                          height: 20,
+                                                        ),
+                                                      ],
+                                                    )),
                                               ),
-                                          ],
-                                        ),
+                                              if (pickedFile != null)
+                                                IconButton(
+                                                  icon: const Icon(Icons.close),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      pickedFile = null;
+                                                    });
+                                                  },
+                                                ),
+                                            ],
+                                          ),
                                   const SizedBox(
                                     width: 20,
                                   ),
-                                 
                                   Row(
                                     children: [
                                       Expanded(
@@ -934,8 +989,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                 adviceId: widget
                                                                     .adviceId
                                                                     .toString());
+                                                            setState(() {
+                                                              fileSelected =
+                                                                  null;
+                                                              pickedFile = null;
+                                                            });
 
-                                                            fileSelected = null;
                                                             print("new");
                                                             print(fileSelected);
                                                           } else if (voiceFile !=

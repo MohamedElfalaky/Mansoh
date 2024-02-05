@@ -21,6 +21,7 @@ import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_st
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_state.dart';
 import '../../../app/Style/Icons.dart';
+import '../Home/Home.dart';
 
 class CompleteAdviseScreen extends StatefulWidget {
   const CompleteAdviseScreen({
@@ -115,7 +116,11 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
       child: WillPopScope(
         onWillPop: () async {
           final shouldPop = await Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const UserOrders()));
+              MaterialPageRoute(builder: (context) =>  Home(currentIndex: 1,)),
+                  // (Route<dynamic> route) => false
+          );
+          // Navigator.of(context).pu(
+          //     MaterialPageRoute(builder: (context) =>  const Home()));
           return shouldPop;
         },
         child: Scaffold(
@@ -185,7 +190,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                           child: IconButton(
                             onPressed: () {
                               MyApplication.navigateToReplaceAllPrevious(
-                                  context, const UserOrders());
+                                  context,  Home(currentIndex: 1,));
                             },
                             icon: Get.locale!.languageCode == "ar"
                                 ? SvgPicture.asset(

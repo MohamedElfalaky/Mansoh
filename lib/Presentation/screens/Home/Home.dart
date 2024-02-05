@@ -6,14 +6,15 @@ import 'package:nasooh/app/constants.dart';
 import '../UserProfileScreens/UserOrders/UserOrders.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+   Home({super.key ,required this.currentIndex});
+   int currentIndex ;
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  int currentIndex = 0;
+
 
   final screens = [
     const HomeScreen(),
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Constants.whiteAppColor,
-      body: IndexedStack(index: currentIndex, children: screens),
+      body: IndexedStack(index: widget.currentIndex, children: screens),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -46,10 +47,10 @@ class _HomeState extends State<Home> {
                 const TextStyle(fontFamily: Constants.mainFont),
             type: BottomNavigationBarType.fixed,
             // backgroundColor: Theme.of(context).colorScheme.secondary,
-            currentIndex: currentIndex,
+            currentIndex: widget.currentIndex,
             onTap: (index) {
               setState(() {
-                currentIndex = index;
+                widget.currentIndex = index;
               });
             },
             items: [
