@@ -34,8 +34,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.1.1
   lottie: ^2.1.0
@@ -49,21 +47,15 @@ dependencies:
   intl_phone_field: ^3.1.0
   password_text_field: ^1.1.0
   flutter_svg: ^1.1.6
-  dropdown_textfield: ^1.0.7
   flutter_native_splash: ^2.2.17
-  badges: ^2.0.3
   smooth_page_indicator: ^1.0.0+2
   pinput: ^2.2.21
-  email_validator: ^2.1.16
   readmore: ^2.2.0
   dotted_border: ^2.0.0+3
   dotted_line: ^3.1.0
   flutter_countdown_timer:
   image_picker:
-  flutter_launcher_icons: ^0.13.1
   file_picker: ^5.2.4
-  #  flutter_pdfview: ^1.0.2
-  syncfusion_flutter_pdfviewer:
   get: ^4.6.5
   firebase_messaging: ^14.6.7
   flutter_local_notifications: ^15.1.1
@@ -86,45 +78,20 @@ flutter_launcher_icons:
   image_path: "assets/images/PNG/mansou7_icon.png"
 
 flutter_native_splash:
-  # color: "#0085A5"
   image: assets/images/PNG/NasohSplash.png
   background_image: assets/images/PNG/SplashScreenBackGround.png
-  # android: true
-  # ios: true
-  # android_12:
-  #   color: "#0085A5"
-  #   image: "assets/download.png"
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
 flutter:
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
     - assets/images/
     - assets/images/SVGs/
-    # - assets/images/Jsons/
     - assets/images/PNG/
     - assets/language/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   fonts:
     - family: Cairo
       fonts:
@@ -132,13 +99,3 @@ flutter:
         - asset: assets/fonts/Cairo-Bold.ttf
           weight: 700
         - asset: assets/fonts/Cairo-SemiBold.ttf
-    #     - asset: fonts/Schyler-Italic.ttf
-    #       style: italic
-    # - family: Trajan Pro
-    #   fonts:
-    #     - asset: fonts/TrajanPro.ttf
-    #     - asset: fonts/TrajanPro_Bold.ttf
-    #       weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
