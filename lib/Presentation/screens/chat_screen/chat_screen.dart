@@ -186,18 +186,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final sizee = MediaQuery.of(context).size;
-    if (isConnected == null) {
-      MyApplication.checkConnection().then((value) {
-        setState(() {
-          isConnected = value;
-        });
-      });
-    } else if (!isConnected!) {
-      MyApplication.showToastView(message: 'noInternet'.tr);
-      return NoInternetWidget(size: sizee);
-    }
-
+    print(widget.adviserProfileData?.category?.length);
     return GestureDetector(
       onTap: () {
         MyApplication.dismissKeyboard(context);
@@ -225,7 +214,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
         child: Scaffold(
             appBar: customChatAppBar(
-                context, widget.adviserProfileData?.description ?? ''),
+                context  ),
             body: Column(
               children: [
                 Padding(

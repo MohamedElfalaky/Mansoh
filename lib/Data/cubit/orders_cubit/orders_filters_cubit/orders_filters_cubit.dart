@@ -10,6 +10,10 @@ class OrdersFiltersCubit extends Cubit<OrdersFiltersState> {
     try {
       emit(OrdersFiltersLoading());
       final mList = await ordersStatus.getStatus( id: id);
+      mList?.data?.map((e) {
+        print('mmmm ${e.adviser?.category?.length}');
+        return e.adviser?.category?.map((e) => print('category name ${e.name}')).toList();
+      }).toList();
       emit(OrdersFiltersLoaded(mList));
     } catch (e) {
       emit(OrdersFiltersError());

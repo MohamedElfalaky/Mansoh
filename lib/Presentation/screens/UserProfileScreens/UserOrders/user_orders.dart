@@ -271,14 +271,15 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
                               context,
                               CompleteAdviseScreen(
                                 adviceId: filtersList[index].id!,
+
                               ));
                         }
                       : () {
-                    // print('zzzzzzzzzz');
-                    // print(filtersList[index].adviser?.experienceYear);
+                    print('advisor profile data ${ filtersList[index].adviser?.category?.length}');
                         MyApplication.navigateTo(
                           context,
                           ChatScreen(
+
                             statusClickable: filtersList[index].label!.id == 3,
                             labelToShow: filtersList[index].label!.id == 1 ||
                                 filtersList[index].label!.id == 2,

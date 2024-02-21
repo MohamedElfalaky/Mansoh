@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../app/utils/exports.dart';
 
-customChatAppBar(BuildContext context, String desc) => PreferredSize(
+customChatAppBar(BuildContext context) => PreferredSize(
       preferredSize: const Size.fromHeight(60.0),
       child: AppBar(
         leading: Column(
@@ -49,17 +49,11 @@ customChatAppBar(BuildContext context, String desc) => PreferredSize(
         ),
         title: const Column(
           children: [
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             Row(
               children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  'محادثة الناصح',
-                ),
+                SizedBox(width: 20),
+                Text('محادثة الناصح'),
               ],
             ),
           ],
@@ -72,14 +66,9 @@ customChatAppBar(BuildContext context, String desc) => PreferredSize(
               Row(
                 children: [
                   GestureDetector(
-
                     onTap: () {
                       Navigator.pop(context);
-                      // MyApplication.navigateTo(
-                      //     context,
-                      //     HomeLayout(
-                      //       currentIndex: 0,
-                      //     ));
+
                     },
                     child: SvgPicture.asset(
                       'assets/images/SVGs/home_icon.svg',
