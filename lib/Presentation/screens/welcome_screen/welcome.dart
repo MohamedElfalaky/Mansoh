@@ -11,7 +11,7 @@ import '../../../../app/constants.dart';
 import '../../../../app/utils/my_application.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({super.key});
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();

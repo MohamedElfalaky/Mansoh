@@ -27,7 +27,7 @@ import '../../AuthenticationScreens/RegisterationPinCodeConfirm/my_drop_list_col
 import 'widgets/shared.dart';
 
 class UserProfileEdit extends StatefulWidget {
-  const UserProfileEdit({Key? key}) : super(key: key);
+  const UserProfileEdit({super.key});
 
   @override
   State<UserProfileEdit> createState() => _UserProfileEditState();

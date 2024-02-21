@@ -5,9 +5,9 @@ import 'package:nasooh/app/constants.dart';
 
 class NoInternetWidget extends StatelessWidget {
   const NoInternetWidget({
-    Key? key,
+    super.key,
     required this.size,
-  }) : super(key: key);
+  });
 
   final Size size;
 

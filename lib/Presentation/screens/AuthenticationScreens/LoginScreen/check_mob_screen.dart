@@ -14,7 +14,7 @@ import '../../../widgets/phone_text_field.dart';
 String sendPhone = "";
 
 class CheckMobScreen extends StatefulWidget {
-  const CheckMobScreen({Key? key}) : super(key: key);
+  const CheckMobScreen({super.key});
 
   @override
   State<CheckMobScreen> createState() => _CheckMobScreenState();

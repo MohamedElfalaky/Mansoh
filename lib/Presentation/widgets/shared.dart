@@ -21,8 +21,8 @@ getMaterialColor({required int colorHex}) {
 
 class GoBack extends StatelessWidget {
   const GoBack({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class GoBack extends StatelessWidget {
 }
 
 class MyPrefixWidget extends StatelessWidget {
-  const MyPrefixWidget({Key? key, this.svgString}) : super(key: key);
+  const MyPrefixWidget({super.key, this.svgString});
  final String? svgString;
 
   String getSvgString() {
@@ -84,7 +84,7 @@ class MyPrefixWidget extends StatelessWidget {
 }
 
 class Back extends StatelessWidget {
-  const Back({Key? key, this.header}) : super(key: key);
+  const Back({super.key, this.header});
   final String? header;
 
   @override

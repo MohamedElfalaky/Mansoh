@@ -5,8 +5,7 @@ import '../../../../../app/constants.dart';
 import '../../../../../app/keys.dart';
 
 class MySeparator extends StatelessWidget {
-  const MySeparator({Key? key, this.height = 1, this.color = Colors.black})
-      : super(key: key);
+  const MySeparator({super.key, this.height = 1, this.color = Colors.black});
   final double height;
   final Color color;
 

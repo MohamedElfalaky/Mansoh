@@ -16,7 +16,7 @@ import '../../CompleteAdviseScreen/complete_advise_screen.dart';
 import 'OrderCard/order_card.dart';
 
 class UserOrdersScreen extends StatefulWidget {
-  const UserOrdersScreen({Key? key}) : super(key: key);
+  const UserOrdersScreen({super.key});
 
   @override
   State<UserOrdersScreen> createState() => _UserOrdersScreenState();

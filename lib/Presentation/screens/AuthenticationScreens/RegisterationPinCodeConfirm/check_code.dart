@@ -14,7 +14,7 @@ import '../../../widgets/shared.dart';
 import '../LoginScreen/check_mob_screen.dart';
 
 class CheckCodeScreen extends StatefulWidget {
-  const CheckCodeScreen({Key? key}) : super(key: key);
+  const CheckCodeScreen({super.key});
 
   @override
   State<CheckCodeScreen> createState() => _CheckCodeScreenState();

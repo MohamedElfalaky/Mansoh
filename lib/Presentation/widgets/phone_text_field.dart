@@ -84,7 +84,7 @@ class MyIntlPhoneField extends StatefulWidget {
   final EdgeInsets flagsButtonMargin;
 
   const MyIntlPhoneField({
-    Key? key,
+    super.key,
     this.initialCountryCode,
     this.obscureText = false,
     this.textAlign = TextAlign.left,
@@ -128,7 +128,7 @@ class MyIntlPhoneField extends StatefulWidget {
     this.showCursor = true,
     this.pickerDialogStyle,
     this.flagsButtonMargin = EdgeInsets.zero,
-  }) : super(key: key);
+  });
 
   @override
   _MyIntlPhoneFieldState createState() => _MyIntlPhoneFieldState();
@@ -190,6 +190,7 @@ class _MyIntlPhoneFieldState extends State<MyIntlPhoneField> {
       useRootNavigator: false,
       builder: (context) => StatefulBuilder(
         builder: (ctx, setState) => CountryPickerDialog(
+          languageCode: 'sa',
           style: widget.pickerDialogStyle,
           filteredCountries: filteredCountries,
           searchText: widget.searchText,

@@ -11,7 +11,7 @@ import '../../../widgets/no_internet.dart';
 import '../../../widgets/shared.dart';
 
 class UserNotifications extends StatefulWidget {
-  const UserNotifications({Key? key}) : super(key: key);
+  const UserNotifications({super.key});
 
   @override
   State<UserNotifications> createState() => _UserNotificationsState();

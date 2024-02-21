@@ -22,7 +22,7 @@ import '../LoginScreen/check_mob_screen.dart';
 import '../RegisterationPinCodeConfirm/my_drop_list_column.dart';
 
 class RegistrationInfoScreen extends StatefulWidget {
-  const RegistrationInfoScreen({Key? key}) : super(key: key);
+  const RegistrationInfoScreen({super.key});
 
   @override
   State<RegistrationInfoScreen> createState() => _RegistrationInfoScreenState();

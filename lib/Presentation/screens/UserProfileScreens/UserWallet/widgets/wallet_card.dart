@@ -7,8 +7,8 @@ class WalletCard extends StatelessWidget {
   final String description;
   final String oneTraBalance;
   const WalletCard({
-    Key? key, required this.description, required this.oneTraBalance,
-  }) : super(key: key);
+    super.key, required this.description, required this.oneTraBalance,
+  });
 
   @override
   Widget build(BuildContext context) {

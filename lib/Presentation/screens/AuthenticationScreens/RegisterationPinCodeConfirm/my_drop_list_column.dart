@@ -20,13 +20,13 @@ class CusDropData<T> extends StatefulWidget {
   final Widget? prefixIcon;
 
   const CusDropData({
-    Key? key,
+    super.key,
     this.prefixIcon,
      this.value,
     required this.hintData,
     required this.onChanged,
     required this.items,
-  }) : super(key: key);
+  });
 
   @override
   State<CusDropData<T>> createState() => _CusDropDataState<T>();
