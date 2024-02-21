@@ -7,11 +7,11 @@ class AdvisorListCubit extends Cubit<AdvisorState> {
 
   AdvisorListRepo advisorListRepo = AdvisorListRepo();
 
-  getAdvisorList({String? catVal, String? searchTxt, double? rateVal}) async {
+  getAdvisorList({String? categoryValue, String? searchTxt, double? rateVal}) async {
     try {
       emit(AdvisorListLoading());
-      final mList = await advisorListRepo.getAdList(
-          catVal: catVal, searchTxt: searchTxt, rateVal: rateVal);
+      final mList = await advisorListRepo.getAdvisorList(
+          catVal: categoryValue, searchTxt: searchTxt, rateVal: rateVal);
       emit(AdvisorListLoaded(mList));
     } catch (e) {
       emit(AdvisorListError());

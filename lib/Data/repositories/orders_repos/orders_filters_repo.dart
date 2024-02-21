@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:http/http.dart' as http;
-import '../../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../../app/utils/my_application.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import '../../models/orders_models/orders_filter_model.dart';
 
 class OrdersFiltersRepo {
-  Future<OrdersFiltersModel?> getStatus(String id) async {
+  Future<OrdersFiltersModel?> getStatus({required String id}) async {
     try {
       http.Response response = await http.get(
         Uri.parse('${Keys.baseUrl}/client/advice/list?status_id=$id'),

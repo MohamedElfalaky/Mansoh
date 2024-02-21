@@ -6,10 +6,10 @@ class OrdersFiltersCubit extends Cubit<OrdersFiltersState> {
   OrdersFiltersCubit() : super(OrdersFiltersInitial());
   OrdersFiltersRepo ordersStatus = OrdersFiltersRepo();
 
-  getOrdersFilters(String id) async {
+  getOrdersFilters({required String id}) async {
     try {
       emit(OrdersFiltersLoading());
-      final mList = await ordersStatus.getStatus( id);
+      final mList = await ordersStatus.getStatus( id: id);
       emit(OrdersFiltersLoaded(mList));
     } catch (e) {
       emit(OrdersFiltersError());

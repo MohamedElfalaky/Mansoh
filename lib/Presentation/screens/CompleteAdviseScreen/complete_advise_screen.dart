@@ -6,12 +6,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/complete_advisor_card.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/payment_card.dart';
-import 'package:nasooh/Presentation/screens/UserProfileScreens/UserOrders/UserOrders.dart';
 import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
-import 'package:nasooh/Presentation/widgets/MyButton.dart';
-import 'package:nasooh/Presentation/widgets/noInternet.dart';
+import 'package:nasooh/Presentation/widgets/my_button.dart';
+import 'package:nasooh/Presentation/widgets/no_internet.dart';
 import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/myApplication.dart';
+import 'package:nasooh/app/utils/my_application.dart';
 import '../../../Data/cubit/authentication/get_by_token_cubit/get_by_token_cubit.dart';
 import '../../../Data/cubit/authentication/get_by_token_cubit/get_by_token_state.dart';
 import '../../../Data/cubit/show_advice_cubit/pay_advice_cubit/pay_advice_cubit.dart';
@@ -20,8 +19,8 @@ import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cu
 import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_state.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_state.dart';
-import '../../../app/Style/Icons.dart';
-import '../Home/Home.dart';
+import '../../../app/Style/icons.dart';
+import '../Home/home.dart';
 
 class CompleteAdviseScreen extends StatefulWidget {
   const CompleteAdviseScreen({
@@ -46,12 +45,6 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
 
     MyApplication.checkConnection().then((value) {
       if (value) {
-        //////
-        // todo recall data
-        ///
-        ///
-        ///
-        ///
       } else {
         MyApplication.showToastView(message: 'noInternet'.tr);
       }
@@ -69,15 +62,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
         });
       }
 
-      /// if internet comes back
-      if (result != ConnectivityResult.none) {
-        /// call your apis
-        // todo recall data
-        ///
-        ///
-        ///
-        ///
-      }
+      if (result != ConnectivityResult.none) {}
     });
     context
         .read<ShowAdviceCubit>()
@@ -111,22 +96,24 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
     return GestureDetector(
       onTap: () {
         MyApplication.dismissKeyboard(context);
-      }, // hide keyboard on tap anywhere
-
+      },
       child: WillPopScope(
         onWillPop: () async {
           final shouldPop = await Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) =>  Home(currentIndex: 1,)),
-                  // (Route<dynamic> route) => false
+            MaterialPageRoute(
+                builder: (context) => HomeLayout(
+                      currentIndex: 1,
+                    )),
           );
-          // Navigator.of(context).pu(
-          //     MaterialPageRoute(builder: (context) =>  const Home()));
+
           return shouldPop;
         },
         child: Scaffold(
             floatingActionButton: BlocConsumer<PayAdviceCubit, PayAdviceState>(
                 listener: (context, state) {
                   if (state is PayAdviceLoaded) {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
                     MyApplication.navigateTo(
                         context,
                         ChatScreen(
@@ -143,7 +130,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                   }
                 },
                 builder: (context, state) => state is PayAdviceLoading
-                    ? const CircularProgressIndicator()
+                    ? const CircularProgressIndicator.adaptive()
                     : Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         height: 50,
@@ -190,7 +177,10 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                           child: IconButton(
                             onPressed: () {
                               MyApplication.navigateToReplaceAllPrevious(
-                                  context,  Home(currentIndex: 1,));
+                                  context,
+                                  HomeLayout(
+                                    currentIndex: 1,
+                                  ));
                             },
                             icon: Get.locale!.languageCode == "ar"
                                 ? SvgPicture.asset(
@@ -208,7 +198,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                     ),
                   ],
                 ),
-                title:  Column(
+                title: Column(
                   children: [
                     const SizedBox(
                       height: 10,
@@ -228,7 +218,8 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
             body: BlocBuilder<PaymentListCubit, PaymentListState>(
                 builder: (context, state) {
               if (state is PaymentListLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                    child: CircularProgressIndicator.adaptive());
               } else if (state is PaymentListLoaded) {
                 return SingleChildScrollView(
                   child: Column(
@@ -248,7 +239,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                   builder: (context, showAdviceState) {
                                 if (showAdviceState is ShowAdviceLoading) {
                                   return const Center(
-                                    child: CircularProgressIndicator(),
+                                    child: CircularProgressIndicator.adaptive(),
                                   );
                                 } else if (showAdviceState
                                     is ShowAdviceLoaded) {
@@ -277,7 +268,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                   builder: (context, getByTokenState) {
                                 if (getByTokenState is GetByTokenLoading) {
                                   return const Center(
-                                    child: CircularProgressIndicator(),
+                                    child: CircularProgressIndicator.adaptive(),
                                   );
                                 } else if (getByTokenState
                                     is GetByTokenLoaded) {

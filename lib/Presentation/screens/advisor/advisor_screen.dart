@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/widgets/MyButton.dart';
-import 'package:nasooh/Presentation/widgets/noInternet.dart';
+import 'package:nasooh/Presentation/widgets/my_button.dart';
+import 'package:nasooh/Presentation/widgets/no_internet.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
-import 'package:nasooh/app/Style/Icons.dart';
+import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/myApplication.dart';
+import 'package:nasooh/app/utils/my_application.dart';
 import 'package:readmore/readmore.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_state.dart';
-import '../ConfirmAdviseScreen/ConfirmAdviseScreen.dart';
+import '../ConfirmAdviseScreen/confirm_advise_screen.dart';
 
 class AdvisorScreen extends StatefulWidget {
   const AdvisorScreen({super.key, required this.id});
@@ -138,7 +138,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                         child: Column(
                           children: [
                             SizedBox(height: 300),
-                            CircularProgressIndicator(),
+                            CircularProgressIndicator.adaptive(),
                           ],
                         ),
                       );

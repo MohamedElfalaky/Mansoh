@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:http/http.dart' as http;
-import '../../../../app/utils/myApplication.dart';
+import '../../../../app/utils/my_application.dart';
 import '../../../app/global.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import '../../models/advice_screen_models/show_advice_model.dart';
 
 class ShowAdviceRepo {
@@ -26,8 +26,6 @@ class ShowAdviceRepo {
         debugPrint("responseMap.toString() is ${responseMap.toString()}");
         final adviceShowResult = showAdviceModelFromJson(responseMap);
         return adviceShowResult;
-      } else {
-        // MyApplication.showToastView(message: responseMap["message"]);
       }
     } on TimeoutException catch (e) {
       MyApplication.showToastView(message: e.toString());

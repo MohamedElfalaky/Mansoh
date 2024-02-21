@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
-import '../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../app/utils/my_application.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import 'package:http/http.dart' as http;
 
 class SendChatRepo {
@@ -29,12 +29,12 @@ class SendChatRepo {
         'lang': selectedLang,
         "Authorization": "Bearer ${sharedPrefs.getToken()}"
       }, body: map);
-      print(map);
+      // print(map);
 
 
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        // print(response.body);
+        print(response.body.toString());
         // MyApplication.showToastView(message: responseMap["message"]);
         return true;
       } else {

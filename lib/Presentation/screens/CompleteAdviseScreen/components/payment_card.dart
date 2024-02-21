@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nasooh/app/Style/Icons.dart';
+import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 
 class PaymentCard extends StatelessWidget {

@@ -9,7 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nasooh/Data/cubit/profile/profile_cubit/profile_cubit.dart';
-import 'package:nasooh/app/utils/sharedPreferenceClass.dart';
+import 'package:nasooh/app/utils/shared_preference_class.dart';
 import '../../../../Data/cubit/authentication/city_cubit/city_cubit.dart';
 import '../../../../Data/cubit/authentication/city_cubit/city_state.dart';
 import '../../../../Data/cubit/authentication/country_cubit/country_cubit.dart';
@@ -17,10 +17,10 @@ import '../../../../Data/cubit/authentication/country_cubit/country_state.dart';
 import '../../../../Data/cubit/profile/profile_cubit/profile_state.dart';
 import '../../../../Data/cubit/profile/update_profile_cubit/update_profile_cubit.dart';
 import '../../../../Data/cubit/profile/update_profile_cubit/update_profile_state.dart';
-import '../../../../app/Style/Icons.dart';
+import '../../../../app/Style/icons.dart';
 import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/myApplication.dart';
+import '../../../../app/utils/my_application.dart';
 import '../../../widgets/row_modal_sheet.dart';
 import '../../../widgets/shared.dart';
 import '../../AuthenticationScreens/RegisterationPinCodeConfirm/my_drop_list_column.dart';
@@ -55,15 +55,17 @@ class _UserProfileEditState extends State<UserProfileEdit>
       setState(() {
         regImage = myImage;
       });
-      List<int> imageBytes = await File(regImage!.path).readAsBytesSync();
+      List<int> imageBytes = File(regImage!.path).readAsBytesSync();
       // print(imageBytes);
       base64NewImage = base64.encode(imageBytes);
       // print("inputImagePhoto!.path  is ${regImage!.path}");
       log("base64Image!  is $base64NewImage");
-    } on PlatformException catch (e) {
+    } on PlatformException {
       // print("platform exeption : $e");
     }
-    Navigator.pop(context);
+    if(mounted) {
+      Navigator.pop(context);
+    }
   }
 
   late AnimationController _animationController;
@@ -78,9 +80,12 @@ class _UserProfileEditState extends State<UserProfileEdit>
   }
 
   Future<void> getDataFromApi() async {
-    await context.read<ProfileCubit>().getDataProfile();
-    await context.read<CountryCubit>().getCountries();
-    await context.read<CountryCubit>().getNationalities();
+    if(mounted) {
+      await context.read<ProfileCubit>().getDataProfile();
+    }
+      if(mounted) {
+        await context.read<CountryCubit>().getCountries();
+      }
 
     var profileCubit = ProfileCubit.get(context);
     _nameController.text = profileCubit.profileModel?.data?.fullName ?? "";
@@ -135,7 +140,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
           floatingActionButton:
               BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
                   builder: (context, state) => state is UpdateProfileLoading
-                      ? const CircularProgressIndicator()
+                      ? const CircularProgressIndicator.adaptive()
                       : buildSaveButton(
                           label: "save",
                           onPressed: () {
@@ -167,7 +172,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
               builder: (context, profileState) {
             if (profileState is ProfileLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               );
             } else if (profileState is ProfileLoaded) {
               return Padding(
@@ -206,22 +211,18 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                               radius: width(context) * 0.19,
                                               backgroundColor:
                                                   Colors.transparent,
-                                              backgroundImage:
-
-                                                  sharedPrefs.getUserPhoto() ==
-                                                          "" && regImage == null
-                                                      ? const AssetImage(
-                                                          'assets/images/PNG/no_profile_photo.png')
-                                                      :
-                                                  regImage == null
-                                                          ? NetworkImage(
-                                                              sharedPrefs
-                                                                  .getUserPhoto())
-                                                          :
-                                                  FileImage(
-                                                              File(regImage!
-                                                                  .path),
-                                                            ) as ImageProvider,
+                                              backgroundImage: sharedPrefs
+                                                              .getUserPhoto() ==
+                                                          "" &&
+                                                      regImage == null
+                                                  ? const AssetImage(
+                                                      'assets/images/PNG/no_profile_photo.png')
+                                                  : regImage == null
+                                                      ? NetworkImage(sharedPrefs
+                                                          .getUserPhoto())
+                                                      : FileImage(
+                                                          File(regImage!.path),
+                                                        ) as ImageProvider,
                                             ))),
                                   ),
                                   Align(
@@ -315,18 +316,17 @@ class _UserProfileEditState extends State<UserProfileEdit>
                               padding: const EdgeInsets.symmetric(
                                 vertical: 16,
                               ),
-                              child: Text(
-                                   "Personal Information".tr,
+                              child: Text("Personal Information".tr,
                                   textAlign: TextAlign.end,
                                   style: Constants.subtitleFontBold
                                       .copyWith(fontSize: 16))),
                           const SizedBox(height: 8),
                           TitleTxt(
-                            txt:  "Name".tr,
+                            txt: "Name".tr,
                           ),
                           InputTextField(
                             keyboardType: TextInputType.text,
-                            hintTxt:  "Name".tr,
+                            hintTxt: "Name".tr,
                             imageTxt: "assets/images/SVGs/name_icon.svg",
                             controller: _nameController,
                             onChanged: (val) {
@@ -384,7 +384,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                           /// =======================
 
                           TitleTxt(
-                            txt:  "email".tr,
+                            txt: "email".tr,
                           ),
                           InputTextField(
                             keyboardType: TextInputType.emailAddress,
@@ -403,8 +403,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                               padding: const EdgeInsets.symmetric(
                                 vertical: 10,
                               ),
-                              child: Text(
-                                   "Additional Information".tr,
+                              child: Text("Additional Information".tr,
                                   textAlign: TextAlign.end,
                                   style: Constants.subtitleFontBold
                                       .copyWith(fontSize: 16))),
@@ -412,12 +411,11 @@ class _UserProfileEditState extends State<UserProfileEdit>
                             height: 16,
                           ),
                           TitleTxt(
-                            txt:
-                                 "nationality_optional".tr,
+                            txt: "nationality_optional".tr,
                           ),
                           BlocBuilder<CountryCubit, CountryState>(
                               builder: (context, newState) {
-                            if (newState is NationalityLoaded) {
+                            if (newState is CountryLoaded) {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -427,7 +425,8 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                       child: CusDropData(
                                           hintData: "",
                                           value: nationalityValue,
-                                          items: newState.response!.data!
+                                          items: newState
+                                              .response!.data!.nationailties!
                                               .map(
                                                 (e) => DropdownMenuItem(
                                                     value: e.id.toString(),
@@ -444,7 +443,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                             height: 24,
                                           ))),
                                   TitleTxt(
-                                    txt:  "resident_country".tr,
+                                    txt: "resident_country".tr,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -460,7 +459,8 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                           context.read<CityCubit>().getCities(
                                               countryValue!.toString());
                                         },
-                                        items: newState.response!.data!
+                                        items: newState
+                                            .response!.data!.countries!
                                             .map((e) => DropdownMenuItem(
                                                 value: e.id.toString(),
                                                 child: Text(e.name!)))
@@ -472,24 +472,21 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                   )
                                 ],
                               );
-                            } else if (newState is NationalityError) {
-                              return const Center(child: SizedBox());
-                            } else {
-                              return const Center(child: SizedBox());
                             }
+                            return const Center(child: SizedBox());
                           }),
 
                           BlocBuilder<CityCubit, CityState>(
                               builder: (context, cityState) {
                             if (cityState is CityLoading) {
                               return const Center(
-                                  child: CircularProgressIndicator());
+                                  child: CircularProgressIndicator.adaptive());
                             } else if (cityState is CityLoaded) {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TitleTxt(
-                                    txt:  "resident_city".tr,
+                                    txt: "resident_city".tr,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -524,14 +521,14 @@ class _UserProfileEditState extends State<UserProfileEdit>
                             }
                           }),
                           TitleTxt(
-                            txt:  "gender".tr,
+                            txt: "gender".tr,
                           ),
                           // StatefulBuilder(
                           //     builder: (context, StateSetter setState) =>
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text( "female".tr,
+                              Text("female".tr,
                                   style: Constants.secondaryTitleRegularFont),
                               Radio(
                                   value: "0",
@@ -546,7 +543,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                 width: 48,
                               ),
                               Text(
-                                 "male".tr,
+                                "male".tr,
                                 style: Constants.secondaryTitleRegularFont,
                               ),
                               Radio(

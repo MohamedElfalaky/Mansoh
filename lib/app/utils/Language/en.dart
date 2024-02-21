@@ -12,6 +12,7 @@ Map<String, String> getEnglishLanguage() {
     "resident_country": "resident_country",
     "resident_city": "resident_city",
     "alsaudia": "saudia arabia",
+    "notifications": "Notifications",
     "confirm_account_pin":
         "please enter your phone number to confirm your account and receive a ",
     "verification_code": "verification code",
@@ -90,9 +91,9 @@ Map<String, String> getEnglishLanguage() {
     "total_balance": "Total Balance",
     "My Wallet": "My Wallet",
     "recharge_wallet": "Recharge Wallet",
-    "Ask Advice":"Ask Advice",
-    "Confirm Order":"Confirm Order",
-    "Complete Order":"Complete Order",
-    "delete tile":"Confirm Delete Account?"
+    "Ask Advice": "Ask Advice",
+    "Confirm Order": "Confirm Order",
+    "Complete Order": "Complete Order",
+    "delete tile": "Confirm Delete Account?"
   };
 }

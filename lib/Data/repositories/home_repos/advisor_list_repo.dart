@@ -5,13 +5,13 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:http/http.dart' as http;
-import '../../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../../app/utils/my_application.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import '../../models/home_models/advisor_list_model.dart';
 
 class AdvisorListRepo {
-  Future<AdvisorListModel?> getAdList(
-      {String? catVal, String? searchTxt, double? rateVal}) async {
+  Future<AdvisorListModel?> getAdvisorList(
+      {String? catVal, String? searchTxt, double? rateVal,String? subCategoryVal}) async {
     try {
       http.Response response = await http.get(
         Uri.parse(
@@ -29,7 +29,7 @@ class AdvisorListRepo {
         debugPrint("Data from Api is ${categoryFields.data!}");
         return categoryFields;
       } else {
-        // debugPrint("request is $phone & $pass");
+
         MyApplication.showToastView(message: responseMap["message"]);
       }
     } on TimeoutException catch (e) {

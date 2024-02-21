@@ -84,6 +84,7 @@ class Constants {
       {Widget? prefixIcon,
       Widget? suffixIcon,
       Color? prefixColor,
+      EdgeInsets? contentPadding,
       Color? suffixColor,
       Color? borderColor,
       Color? fillColor,
@@ -96,13 +97,12 @@ class Constants {
         ? InputDecoration(
             fillColor: fillColor,
             filled: true,
-
-            // prefixIconColor: prefixColor,
-            // suffixIconColor: suffixColor,
-            suffixIcon:isSuffix==true?  Padding(
-              padding: const EdgeInsets.all(8),
-              child: suffixIcon,
-            ): null,
+            suffixIcon: isSuffix == true
+                ? Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: suffixIcon,
+                  )
+                : null,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             border: const OutlineInputBorder(
@@ -129,11 +129,13 @@ class Constants {
                   ),
             prefixIconColor: prefixColor,
             suffixIconColor: suffixColor,
-            suffixIcon: isSuffix ==true ?  Padding(
-              padding: const EdgeInsets.all(3),
-              child: suffixIcon,
-            ): null,
-            contentPadding:
+            suffixIcon: isSuffix == true
+                ? Padding(
+                    padding: const EdgeInsets.all(3),
+                    child: suffixIcon,
+                  )
+                : null,
+            contentPadding: contentPadding ??
                 const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             border: const OutlineInputBorder(
               gapPadding: 0,

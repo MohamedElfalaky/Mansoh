@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/screens/Home/HomeScreen.dart';
-import 'package:nasooh/Presentation/widgets/MyButton.dart';
-import 'package:nasooh/app/Style/Icons.dart';
+import 'package:nasooh/Presentation/screens/Home/home_screen.dart';
+import 'package:nasooh/Presentation/widgets/my_button.dart';
+import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/myApplication.dart';
+import 'package:nasooh/app/utils/my_application.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});

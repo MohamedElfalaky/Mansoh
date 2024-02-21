@@ -1,18 +1,14 @@
 import 'dart:async';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
-import 'package:nasooh/Presentation/widgets/MyButton.dart';
-import 'package:nasooh/Presentation/widgets/noInternet.dart';
-import 'package:nasooh/app/Style/Icons.dart';
-import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/myApplication.dart';
+import 'package:nasooh/Presentation/widgets/my_button.dart';
+
 import '../../../Data/cubit/review_cubit/review_cubit.dart';
 import '../../../Data/cubit/review_cubit/review_state.dart';
+import '../../../app/utils/exports.dart';
 
 class RateScreen extends StatefulWidget {
   const RateScreen({super.key, required this.adviceId});
@@ -109,27 +105,21 @@ class _RateScreenState extends State<RateScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     height: 50,
                     child: state is ReviewLoading
-                        ? const Center(child: CircularProgressIndicator())
+                        ? const Center(
+                            child: CircularProgressIndicator.adaptive())
                         : MyButton(
                             txt: "ارسال التقييم",
                             isBold: true,
                             onPressedHandler: () {
-                              // if (_formKey.currentState!.validate()) {
-                              // print(widget.adviceId);
-
-                              print(
-                                widget.adviceId,
-                              );
-                              print(
-                                speedRate.toString(),
-                              );
-                              print(
-                                groupAdviserValue,
-                              );
-                              print(groupApplicationValue);
-                              print(flexibleRate.toString());
-                              print(opinionController.text);
-                              print(qualityRate.toString());
+                              if (kDebugMode) {
+                                print(speedRate);
+                                print(widget.adviceId);
+                                print(groupAdviserValue);
+                                print(groupApplicationValue);
+                                print(flexibleRate.toString());
+                                print(opinionController.text);
+                                print(qualityRate.toString());
+                              }
 
                               context.read<ReviewCubit>().reviewMethod(
                                     adviceId: widget.adviceId,

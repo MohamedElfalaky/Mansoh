@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/screens/AuthenticationScreens/RegisterationInfoScreen/registeration-info-screen.dart';
+import 'package:nasooh/Presentation/screens/AuthenticationScreens/RegisterationInfoScreen/registeration_info_screen.dart';
 import '../../../../Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
-import '../../../../app/utils/myApplication.dart';
+import '../../../../app/utils/my_application.dart';
 import '../../../repositories/authentication/check_code_repo.dart';
 import '../get_user_by_mob_cubit/get_user_cubit.dart';
 import '../get_user_by_mob_cubit/get_user_state.dart';
@@ -50,21 +50,21 @@ Future<void> _showAlertDialog(BuildContext context) async {
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text( "dialog tile".tr),
+                      Text("dialog tile".tr),
                     ],
                   ),
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: Text( "No".tr),
+                    child: Text("No".tr),
                     onPressed: () {
                       MyApplication.navigateTo(context, const CheckMobScreen());
                     },
                   ),
                   state is GetUserLoading
-                      ? const Center(child: CircularProgressIndicator())
+                      ? const Center(child: CircularProgressIndicator.adaptive())
                       : TextButton(
-                          child: Text( "Yes".tr),
+                          child: Text("Yes".tr),
                           onPressed: () {
                             context.read<GetUserCubit>().getMobMethod(
                                   context: context,

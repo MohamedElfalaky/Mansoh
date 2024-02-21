@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nasooh/Data/cubit/review_cubit/review_state.dart';
-import '../../../Presentation/screens/Home/Home.dart';
+import '../../../Presentation/screens/Home/home.dart';
 import '../../../Presentation/widgets/alerts.dart';
-import '../../../app/utils/myApplication.dart';
+import '../../../app/utils/my_application.dart';
 import '../../repositories/review_repo.dart';
 
 class ReviewCubit extends Cubit<ReviewState> {
@@ -38,7 +38,7 @@ class ReviewCubit extends Cubit<ReviewState> {
           Alert.alert(
               context: context,
               action: () {
-                MyApplication.navigateToReplaceAllPrevious(context!,  Home(currentIndex: 0));
+                MyApplication.navigateToReplaceAllPrevious(context!,  HomeLayout(currentIndex: 0));
               },
               content: "تم ارسال تقييمك بنجاح",
               titleAction: "الرئيسية");

@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
-import '../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../app/utils/my_application.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/advice_screen_models/show_advice_model.dart';
@@ -28,7 +28,7 @@ class SendAdvise {
         if (documentsFile != null) 'document[0][file]': documentsFile,
         if (documentsFile != null) 'document[0][type]': type
       };
-      print(map);
+      // print(map);
       http.Response response =
           await http.post(Uri.parse('${Keys.baseUrl}/client/advice/store'),
               headers: {

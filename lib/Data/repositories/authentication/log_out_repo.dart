@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../app/utils/my_application.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import '../../models/Auth_models/log_out_model.dart';
 import 'package:http/http.dart' as http;
 

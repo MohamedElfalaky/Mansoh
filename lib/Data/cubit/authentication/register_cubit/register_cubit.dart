@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../Presentation/screens/Home/Home.dart';
-import '../../../../app/utils/myApplication.dart';
+import '../../../../Presentation/screens/Home/home.dart';
+import '../../../../app/utils/my_application.dart';
 import '../../../repositories/authentication/register_repo.dart';
 import 'register_state.dart';
 
@@ -37,7 +37,11 @@ class RegisterCubit extends Cubit<RegisterState> {
           .then((value) {
         if (value != null) {
           emit(RegisterLoaded(value));
-          MyApplication.navigateToReplaceAllPrevious(context!,  Home(currentIndex: 0,));
+          MyApplication.navigateToReplaceAllPrevious(
+              context!,
+              HomeLayout(
+                currentIndex: 0,
+              ));
         } else {
           emit(RegisterError());
         }

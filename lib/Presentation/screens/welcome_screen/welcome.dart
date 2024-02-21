@@ -4,11 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/Data/cubit/authentication/login_cubit/login_cubit.dart';
 import 'package:nasooh/Data/cubit/authentication/login_cubit/login_state.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
-import 'package:nasooh/Presentation/widgets/MyButton.dart';
-import 'package:nasooh/app/Style/Icons.dart';
+import 'package:nasooh/Presentation/widgets/my_button.dart';
+import 'package:nasooh/app/Style/icons.dart';
 import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/myApplication.dart';
+import '../../../../app/utils/my_application.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -25,7 +25,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _animationController = AnimationController(
@@ -39,7 +38,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _animationController.dispose();
     _fadeController.dispose();

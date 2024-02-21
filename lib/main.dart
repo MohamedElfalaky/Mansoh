@@ -1,44 +1,28 @@
-import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/screens/Home/Home.dart';
+import 'package:nasooh/Presentation/screens/Home/home.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'Data/repositories/notification/fcm.dart';
 import 'Presentation/screens/welcome_screen/welcome.dart';
+import 'Presentation/widgets/shared.dart';
 import 'app/keys.dart';
-import 'app/utils/BlocProviders.dart';
+import 'app/utils/bloc_providers.dart';
 import 'app/utils/Language/get_language.dart';
-import 'app/utils/sharedPreferenceClass.dart';
-
-
-
-// @pragma('vm:entry-point')
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   // await Firebase.initializeApp();
-//   FCMNotification().showNotification(message);
-//   // if(Platform.isIOS){
-//   //
-//   //   AudioPlayer().play(AssetSource('sounds/synth.mp3'));
-//   // }
-// }
+import 'app/utils/shared_preference_class.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // ignore: deprecated_member_use
-  FlutterNativeSplash.removeAfter(initialization);
+  FlutterNativeSplash.remove();
 
   await SharedPrefs().init();
   await Firebase.initializeApp();
-
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   runApp(const MyApp());
 }
@@ -51,29 +35,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // Locale? _locale;
-  // FCMNotification fcmNotification = FCMNotification();
-
-// }
-//   @override
-//   void initState() {
-//     Firebase.initializeApp().then((value) {
-//       fcmNotification.registerNotification();
-//       fcmNotification.configLocalNotification();
-//     });
-//     super.initState();
-//   }
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: providers,
       child: GetMaterialApp(
         translations: Messages(),
-        // your translations
         locale: sharedPrefs.getLanguage() == ""
             ? const Locale('ar')
             : Locale(sharedPrefs.getLanguage()),
-        // translations will be displayed in that locale
         fallbackLocale: const Locale('ar'),
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
@@ -88,8 +58,8 @@ class _MyAppState extends State<MyApp> {
             maxWidth: 1200,
             minWidth: 450,
             defaultScale: false,
-            mediaQueryData:
-                MediaQuery.of(context2).copyWith(textScaleFactor: 1.0),
+            mediaQueryData: MediaQuery.of(context2)
+                .copyWith(textScaler: const TextScaler.linear(1.0)),
             breakpoints: [
               const ResponsiveBreakpoint.resize(450, name: MOBILE),
               const ResponsiveBreakpoint.autoScale(800, name: TABLET),
@@ -101,11 +71,11 @@ class _MyAppState extends State<MyApp> {
             background: Container(color: const Color(0xFFF5F5F5))),
         useInheritedMediaQuery: true,
         debugShowCheckedModeBanner: false,
-        title: 'MANSOU7',
+        title: 'نصوح',
         theme: ThemeData(
-            primarySwatch: getMaterialColor(
-                colorHex:
-                    0xFFbac0085A55), // todo change color to use default app color
+            dividerColor: Colors.transparent,
+            dividerTheme: const DividerThemeData(color: Colors.transparent),
+            primarySwatch: getMaterialColor(colorHex: 0xFFbac0085A55),
             appBarTheme: const AppBarTheme().copyWith(
               toolbarHeight: 70,
               titleSpacing: 4,
@@ -117,23 +87,6 @@ class _MyAppState extends State<MyApp> {
         home: const PreHome(),
       ),
     );
-  }
-
-  getMaterialColor({required int colorHex}) {
-    Map<int, Color> color = {
-      // ignore: use_full_hex_values_for_flutter_colors
-      50: const Color.fromRGBO(0, 123, 165, .1),
-      100: const Color.fromRGBO(0, 123, 165, .2),
-      200: const Color.fromRGBO(0, 123, 165, .3),
-      300: const Color.fromRGBO(0, 123, 165, .4),
-      400: const Color.fromRGBO(0, 123, 165, .5),
-      500: const Color.fromRGBO(0, 123, 165, .6),
-      600: const Color.fromRGBO(0, 123, 165, .7),
-      700: const Color.fromRGBO(0, 123, 165, .8),
-      800: const Color.fromRGBO(0, 123, 165, .9),
-      900: const Color.fromRGBO(0, 123, 165, 1),
-    };
-    return MaterialColor(colorHex, color);
   }
 }
 
@@ -147,23 +100,15 @@ class PreHome extends StatefulWidget {
 class _PreHomeState extends State<PreHome> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     FirebaseCustomNotification.setUpFirebase();
-
-    // FirebaseMessaging.onMessage
-    //     .listen(CustomLocalNotification.showFlutterNotification);
-    // FirebaseMessaging.onMessageOpenedApp
-    //     .listen((CustomLocalNotification.showFlutterNotification));
   }
 
   @override
   Widget build(BuildContext context) {
-    return sharedPrefs.getToken() != "" ?  Home(currentIndex: 0,) : const WelcomeScreen();
+    // return sharedPrefs.getToken() != "" ?  Home(currentIndex: 0,) : const RegistrationInfoScreen();
+    return sharedPrefs.getToken() != ""
+        ? HomeLayout(currentIndex: 0)
+        : const WelcomeScreen();
   }
-}
-
-Future<void> initialization(BuildContext? context) async {
-  await Future.delayed(const Duration(seconds: 1));
-  FlutterNativeSplash.remove();
 }

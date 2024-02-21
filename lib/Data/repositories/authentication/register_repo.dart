@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
-import '../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../app/utils/my_application.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import '../../models/Auth_models/register_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,16 +37,18 @@ class Register {
             'avatar[0][file]': '$avatar',
             'device': sharedPrefs.fCMToken,
           });
-      print("sharedPrefs.fCMToken is ${sharedPrefs.fCMToken}");
+      // print("sharedPrefs.fCMToken is ${sharedPrefs.fCMToken}");
       // print(
       //     " 'email': email,'full_name': '$fullName','mobile': '$mobile','country_id': '$countryId','city_id': '$cityId','gender': '$gender','nationality_id': '$nationalityId','avatar[0][type]': 'png','avatar[0][file]': '$avatar',");
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        // print(response.body);
+        // print("Registeratiom Response");
+        log(response.body);
         final userdata = registerModelFromJson(responseMap);
         sharedPrefs.setToken(userdata.data!.token!);
         sharedPrefs.setId(userdata.data!.id!);
         sharedPrefs.setUserName(userdata.data!.fullName!);
+        sharedPrefs.setIsNotification(userdata.data!.isNotification!);
         if (userdata.data!.avatar != "") {
           sharedPrefs.setUserPhoto(userdata.data!.avatar!);
         } else {

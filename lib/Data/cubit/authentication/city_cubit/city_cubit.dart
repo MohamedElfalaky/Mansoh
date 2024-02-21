@@ -10,12 +10,11 @@ class CityCubit extends Cubit<CityState> {
     try {
       emit(CityLoading());
       final mList = await cityRepo.getCities(id: id);
-      // if (mList?.status == 1) {
+      // print('city list $mList');
+
       emit(CityLoaded(mList));
-      // } else {
-      //   emit(CityError());
-      // }
     } catch (e) {
+      // print('city error $e');
       emit(CityError());
     }
   }

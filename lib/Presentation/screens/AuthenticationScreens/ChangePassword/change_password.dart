@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:password_text_field/password_text_field.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/myApplication.dart';
+import '../../../../app/utils/my_application.dart';
 import '../../../widgets/shared.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -98,7 +98,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     return null;
                                   },
                                   decoration: Constants.setTextInputDecoration(
-                                    prefixIcon: MyPrefixWidget(
+                                    prefixIcon: const MyPrefixWidget(
                                       svgString: 'assets/images/SVGs/key.svg',
                                     ),
                                   )),
@@ -131,7 +131,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                     return null;
                                   },
                                   decoration: Constants.setTextInputDecoration(
-                                    prefixIcon: MyPrefixWidget(
+                                    prefixIcon: const MyPrefixWidget(
                                       svgString: 'assets/images/SVGs/key.svg',
                                     ),
                                   )),

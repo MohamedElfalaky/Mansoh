@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/widgets/MyButton.dart';
-import 'package:nasooh/app/Style/Icons.dart';
+import 'package:nasooh/Presentation/widgets/my_button.dart';
+import 'package:nasooh/app/Style/icons.dart';
 import '../../../../Data/cubit/authentication/new_mob/mob_cubit.dart';
 import '../../../../Data/cubit/authentication/new_mob/mob_state.dart';
 import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/myApplication.dart';
-import '../../../widgets/PhoneTextField.dart';
+import '../../../../app/utils/my_application.dart';
+import '../../../widgets/phone_text_field.dart';
 
 String sendPhone = "";
 
@@ -184,7 +184,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                             height: 24,
                           ),
                           state is MobLoading
-                              ? const Center(child: CircularProgressIndicator())
+                              ? const Center(child: CircularProgressIndicator.adaptive())
                               : FadeTransition(
                                   opacity: _fadeController,
                                   child: SizedBox(
@@ -265,7 +265,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 //
 // import '../../../../app/constants.dart';
 // import '../../../../app/utils/lang/language_constants.dart';
-// import '../../../../app/utils/myApplication.dart';
+// import '../../../../app/utils/my_application.dart';
 // import '../../../widgets/shared.dart';
 //
 // class LoginScreen extends StatefulWidget {

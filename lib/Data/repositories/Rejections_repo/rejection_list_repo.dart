@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../../app/keys.dart';
-import '../../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../../app/utils/my_application.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import '../../models/rejection_models/list_rejection_model.dart';
 
 class ListRejectionRepo {

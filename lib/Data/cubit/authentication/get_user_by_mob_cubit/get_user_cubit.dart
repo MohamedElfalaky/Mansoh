@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../Presentation/screens/Home/Home.dart';
-import '../../../../app/utils/myApplication.dart';
+import '../../../../Presentation/screens/Home/home.dart';
+import '../../../../app/utils/my_application.dart';
 import '../../../repositories/authentication/get_user_by_mobile.dart';
 import 'get_user_state.dart';
 
@@ -23,7 +23,7 @@ class GetUserCubit extends Cubit<GetUserState> {
           .then((value) {
         if (value != null) {
           emit(GetUserLoaded(value));
-          MyApplication.navigateToReplaceAllPrevious(context!,  Home(currentIndex: 0,));
+          MyApplication.navigateToReplaceAllPrevious(context!,  HomeLayout(currentIndex: 0,));
         } else {
           emit(GetUserError());
         }

@@ -4,9 +4,6 @@ class SendChatInitial extends SendChatState {}
 
 class SendChatLoading extends SendChatState {}
 
-class SendChatLoaded extends SendChatState {
-  // SendChatModel? response;
-  // SendChatLoaded(this.response);
-}
+class SendChatLoaded extends SendChatState {}
 
 class SendChatError extends SendChatState {}

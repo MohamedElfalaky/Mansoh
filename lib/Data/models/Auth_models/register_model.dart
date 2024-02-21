@@ -44,6 +44,7 @@ class Data {
   final String? token;
   final String? fullName;
   final String? mobile;
+  final int? isNotification;
   final String? gender;
   final Country? countryId;
   final CityId? cityId;
@@ -60,6 +61,7 @@ class Data {
     this.mobile,
     this.gender,
     this.countryId,
+    this.isNotification,
     this.cityId,
     this.nationalityId,
     this.status,
@@ -74,6 +76,7 @@ class Data {
     fullName: json["full_name"],
     mobile: json["mobile"],
     gender: json["gender"],
+    isNotification: json["is_notification"],
     countryId: json["country_id"] == null ? null : Country.fromJson(json["country_id"]),
     cityId: json["city_id"] == null ? null : CityId.fromJson(json["city_id"]),
     nationalityId: json["nationality_id"] == null ? null : NationalityId.fromJson(json["nationality_id"]),
@@ -87,6 +90,7 @@ class Data {
     "lang": lang,
     "token": token,
     "full_name": fullName,
+    "is_notification": isNotification,
     "mobile": mobile,
     "gender": gender,
     "country_id": countryId?.toJson(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../Presentation/screens/AuthenticationScreens/RegisterationPinCodeConfirm/check_codee.dart';
-import '../../../../app/utils/myApplication.dart';
+import '../../../../Presentation/screens/AuthenticationScreens/RegisterationPinCodeConfirm/check_code.dart';
+import '../../../../app/utils/my_application.dart';
 import '../../../repositories/authentication/mob_repo.dart';
 import 'mob_state.dart';
 

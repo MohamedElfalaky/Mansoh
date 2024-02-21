@@ -12,8 +12,8 @@ String? inputCountry;
 String? inputCity;
 String? inputNationality;
 
-class CusDropData<T> extends StatelessWidget {
-  final dynamic value;
+class CusDropData<T> extends StatefulWidget {
+  final String? value;
   final String hintData;
   final List<DropdownMenuItem<String>>? items;
   final void Function(dynamic)? onChanged;
@@ -22,12 +22,17 @@ class CusDropData<T> extends StatelessWidget {
   const CusDropData({
     Key? key,
     this.prefixIcon,
-    required this.value,
+     this.value,
     required this.hintData,
     required this.onChanged,
     required this.items,
   }) : super(key: key);
 
+  @override
+  State<CusDropData<T>> createState() => _CusDropDataState<T>();
+}
+
+class _CusDropDataState<T> extends State<CusDropData<T>> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -54,10 +59,10 @@ class CusDropData<T> extends StatelessWidget {
                                   width: 1, color: Color(0xFFBDBDBD)))),
                       margin: const EdgeInsetsDirectional.only(end: 8),
                       padding: const EdgeInsetsDirectional.only(end: 8),
-                      child: prefixIcon,
+                      child: widget.prefixIcon,
                     ),
                   ),
-                  hintText: hintData,
+                  hintText: widget.hintData,
                   hintStyle: const TextStyle(
                     fontFamily: Constants.mainFont,
                     fontSize: 14,
@@ -69,23 +74,25 @@ class CusDropData<T> extends StatelessWidget {
                     color: Color(0xFFBDBDBD)),
               ),
               isExpanded: true,
-              value: value,
-              items: items,
-              onChanged: onChanged,
+              // value: widget.value,
+              items: widget.items,
+              onChanged: widget.onChanged,
             ),
           )),
     );
   }
 }
 
-class MyColumnData extends StatefulWidget {
-  const MyColumnData({super.key});
+class NationalityAndCountryWidget extends StatefulWidget {
+  const NationalityAndCountryWidget({super.key});
 
   @override
-  State<MyColumnData> createState() => _MyColumnDataState();
+  State<NationalityAndCountryWidget> createState() =>
+      _NationalityAndCountryWidgetState();
 }
 
-class _MyColumnDataState extends State<MyColumnData> {
+class _NationalityAndCountryWidgetState
+    extends State<NationalityAndCountryWidget> {
   String? countryValue;
   String? cityValue;
   String? nationalityValue;
@@ -98,8 +105,13 @@ class _MyColumnDataState extends State<MyColumnData> {
         TitleTxt(
           txt: "nationality_optional".tr,
         ),
-        BlocBuilder<CountryCubit, CountryState>(builder: (context, newState) {
-          if (newState is NationalityLoaded) {
+        BlocBuilder<CountryCubit, CountryState>(builder: (context, state) {
+          if (state is CountryLoading) {
+            return const SizedBox(
+                width: double.infinity,
+                child: Center(child: CircularProgressIndicator.adaptive()));
+          } else if (state is CountryLoaded) {
+            // print('nationality loaded');
             return Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -108,7 +120,7 @@ class _MyColumnDataState extends State<MyColumnData> {
                     child: CusDropData(
                         hintData: "سعودي",
                         value: nationalityValue,
-                        items: newState.response!.data!
+                        items: state.response!.data!.nationailties!
                             .map(
                               (e) => DropdownMenuItem(
                                   value: e.id.toString(), child: Text(e.name!)),
@@ -133,14 +145,16 @@ class _MyColumnDataState extends State<MyColumnData> {
                       hintData: "السعودية",
                       value: countryValue,
                       onChanged: (val) {
-                        setState(() {
-                          countryValue = val;
+                           countryValue = val;
+                          cityValue = null;
                           inputCountry = countryValue;
-                        });
+                          if(inputCountry!=null) {
+                            context.read<CityCubit>().getCities(inputCountry!);
+                          }
 
-                        context.read<CityCubit>().getCities(inputCountry!);
+
                       },
-                      items: newState.response!.data!
+                      items: state.response!.data!.countries!
                           .map((e) => DropdownMenuItem(
                               value: e.id.toString(), child: Text(e.name!)))
                           .toList(),
@@ -151,47 +165,43 @@ class _MyColumnDataState extends State<MyColumnData> {
                 )
               ],
             );
-          } else if (newState is NationalityError) {
-            return const Center(child: SizedBox());
-          } else {
-            return const Center(child: SizedBox());
           }
+          return const Center(child: SizedBox.shrink());
         }),
-        TitleTxt(
-          txt: "resident_city".tr,
-        ),
+        TitleTxt(txt: "resident_city".tr),
         BlocBuilder<CityCubit, CityState>(builder: (context, cityState) {
           if (cityState is CityLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator.adaptive());
           } else if (cityState is CityLoaded) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 24),
-              child: CusDropData(
-                  hintData: "جدة",
-                  value: cityValue,
-                  onChanged: (val) {
-                    setState(() {
-                      cityValue = val;
-                      inputCity = cityValue;
-                    });
-                    // print("$inputCity is CityChosen");
-                  },
-                  items: cityState.response!.data!
-                      .map(
-                        (e) => DropdownMenuItem(
-                            value: e.id.toString(), child: Text(e.name!)),
-                      )
-                      .toList(),
-                  prefixIcon: SvgPicture.asset(
-                    'assets/images/SVGs/city1.svg',
-                    height: 24,
-                  )),
-            );
-          } else if (cityState is CityError) {
-            return const SizedBox();
-          } else {
-            return const SizedBox();
+            if(cityState.response?.data?.isNotEmpty==true) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 24),
+                child: CusDropData(
+                    hintData: "اختر المدينة",
+                    // value: cityValue??'',
+                    onChanged: (val) {
+                      setState(() {
+                        cityValue = val;
+                        inputCity = cityValue;
+
+                      });
+                      // print("$inputCity is CityChosen");
+                    },
+                    items: cityState.response?.data!
+                        .map(
+                          (e) => DropdownMenuItem(
+                          value: '${e.id??''}', child: Text('${e.name}')),
+                    )
+                        .toList(),
+                    prefixIcon: SvgPicture.asset(
+                      'assets/images/SVGs/city1.svg',
+                      height: 24,
+                    )),
+              );
+            }
           }
+          return const SizedBox();
+
         }),
       ],
     );

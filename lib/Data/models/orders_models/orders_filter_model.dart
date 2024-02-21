@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final ordersFiltersModel = ordersFiltersModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -41,7 +38,7 @@ class OrdersFiltersModel {
 class OrderFilterData {
   int? id;
   String? name;
-  int? price;
+  num? price;
   String? date;
   Status? status;
   AdviserProfileData? adviser;

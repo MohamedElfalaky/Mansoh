@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:nasooh/Data/models/Auth_models/category_model.dart';
 import '../../../../app/keys.dart';
-import '../../../../app/utils/myApplication.dart';
+import '../../../../app/utils/my_application.dart';
 
 class CategoryRepo {
   Future<CategoryModel?> getData() async {
@@ -17,7 +17,7 @@ class CategoryRepo {
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
 
-        final categoryFields = categoryModelFromJson(responseMap);
+        final categoryFields = CategoryModel.fromJson(responseMap);
 
         // MyApplication.showToastView(message: responseMap["message"]);
         return categoryFields;

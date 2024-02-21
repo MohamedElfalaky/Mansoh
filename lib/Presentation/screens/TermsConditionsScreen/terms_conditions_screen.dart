@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/widgets/noInternet.dart';
+import 'package:nasooh/Presentation/widgets/no_internet.dart';
 import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/myApplication.dart';
+import 'package:nasooh/app/utils/my_application.dart';
 import '../../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
 import '../../../Data/cubit/settings_cubits/privacy_cubit/privacy_state.dart';
-import '../../../app/Style/Icons.dart';
+import '../../../app/Style/icons.dart';
 import '../../widgets/shared.dart';
 
 class TermsConditionsScreen extends StatefulWidget {
-  const TermsConditionsScreen();
+  const TermsConditionsScreen({super.key});
 
   @override
   State<TermsConditionsScreen> createState() => _TermsConditionsScreenState();
@@ -22,25 +22,18 @@ class TermsConditionsScreen extends StatefulWidget {
 class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
   late StreamSubscription<ConnectivityResult> subscription;
   bool? isConnected;
-  bool _checked = false;
-  bool _privacy = false;
+
   final controller = PageController(initialPage: 0);
 
   @override
   void initState() {
     super.initState();
 
-///////////////////////////
+
     MyApplication.checkConnection().then((value) {
-      if (value) {
-        //////
-        // todo recall data
-        ///
-        ///
-        ///
-        ///
-      } else {
-        MyApplication.showToastView(
+      if (!value) {
+
+       MyApplication.showToastView(
             message: 'noInternet'.tr);
       }
     });
@@ -57,15 +50,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
         });
       }
 
-      /// if internet comes back
-      if (result != ConnectivityResult.none) {
-        /// call your apis
-        // todo recall data
-        ///
-        ///
-        ///
-        ///
-      }
+
     });
     context.read<PrivacyCubit>().getPrivacy();
   }
@@ -105,7 +90,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
         body: BlocBuilder<PrivacyCubit, PrivacyState>(
             builder: (context, privacyState) {
           if (privacyState is PrivacyLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator.adaptive());
           } else if (privacyState is PrivacyLoaded) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),

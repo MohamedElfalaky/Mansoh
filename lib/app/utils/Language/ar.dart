@@ -73,6 +73,7 @@ Map<String, String> getArabicLanguage() {
     "Notification": "الأشعارات",
     "Delete Account": "حذف الحساب ",
     "Advice Title": "عنوان الطلب",
+    "notifications": "الإشعارات",
     "Enter Advice Title": "يجب ادخال عنوان الطلب",
     "Advice tilte should be more than 17 character":
         "عنوان الطلب يجب الا يقل عن 17 أحرف",
@@ -90,10 +91,10 @@ Map<String, String> getArabicLanguage() {
         "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافية للحصول على إجابة وافية ...",
     "total_balance": "اجمالي الرصيد",
     "My Wallet": "محفظتي",
-    "recharge_wallet": "اشحن محفظتك" ,
-    "Ask Advice":"طلب نصيحة" ,
-    "Confirm Order": "تأكيد الطلب" ,
-    "Complete Order":"إتمام الطلب" ,
-    "delete tile":"تأكيد حذف الحساب ؟"
+    "recharge_wallet": "اشحن محفظتك",
+    "Ask Advice": "طلب نصيحة",
+    "Confirm Order": "تأكيد الطلب",
+    "Complete Order": "إتمام الطلب",
+    "delete tile": "تأكيد حذف الحساب ؟"
   };
 }

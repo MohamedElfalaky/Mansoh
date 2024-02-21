@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
-import 'package:nasooh/Presentation/widgets/MyButton.dart';
-import 'package:nasooh/Presentation/widgets/noInternet.dart';
+import 'package:nasooh/Presentation/widgets/my_button.dart';
+import 'package:nasooh/Presentation/widgets/no_internet.dart';
 import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/myApplication.dart';
+import 'package:nasooh/app/utils/my_application.dart';
 import '../../../Data/cubit/rejections_cubit/reject_cubit/post_reject_cubit.dart';
 import '../../../Data/cubit/rejections_cubit/reject_cubit/post_reject_state.dart';
 import '../../../Data/cubit/rejections_cubit/rejection_list_cubit/rejection_list_cubit.dart';
 import '../../../Data/cubit/rejections_cubit/rejection_list_cubit/rejection_list_state.dart';
 import '../../widgets/alerts.dart';
-import '../Home/Home.dart';
+import '../Home/home.dart';
 
 class RejectScreen extends StatefulWidget {
   const RejectScreen({super.key, required this.adviceId});
@@ -97,7 +97,7 @@ class _RejectScreenState extends State<RejectScreen> {
                     context: context,
                     action: () {
                       MyApplication.navigateToReplaceAllPrevious(
-                          context,  Home(currentIndex: 0,));
+                          context,  HomeLayout(currentIndex: 0,));
                     },
                     content: "تم ارسال اعتراضك بنجاح",
                     titleAction: "الرئيسية");
@@ -107,7 +107,7 @@ class _RejectScreenState extends State<RejectScreen> {
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 height: 50,
                 child: state is PostRejectLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator.adaptive())
                     : MyButton(
                         txt: "ارسال الاعتراض",
                         isBold: true,
@@ -138,7 +138,7 @@ class _RejectScreenState extends State<RejectScreen> {
               builder: (context, homeState) {
             if (homeState is ListRejectionLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               );
             } else if (homeState is ListRejectionLoaded) {
               return Container(
@@ -205,7 +205,7 @@ class _RejectScreenState extends State<RejectScreen> {
                                     )),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 8),
+                                padding: const EdgeInsets.only(bottom: 4,top: 25),
                                 child: Text(
                                   "أضف ملاحظة".tr,
                                   style: Constants.secondaryTitleRegularFont,

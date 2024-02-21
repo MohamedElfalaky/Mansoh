@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../app/Style/Icons.dart';
+import '../../app/Style/icons.dart';
 import '../../app/constants.dart';
+getMaterialColor({required int colorHex}) {
+  Map<int, Color> color = {
+    50: const Color.fromRGBO(0, 123, 165, .1),
+    100: const Color.fromRGBO(0, 123, 165, .2),
+    200: const Color.fromRGBO(0, 123, 165, .3),
+    300: const Color.fromRGBO(0, 123, 165, .4),
+    400: const Color.fromRGBO(0, 123, 165, .5),
+    500: const Color.fromRGBO(0, 123, 165, .6),
+    600: const Color.fromRGBO(0, 123, 165, .7),
+    700: const Color.fromRGBO(0, 123, 165, .8),
+    800: const Color.fromRGBO(0, 123, 165, .9),
+    900: const Color.fromRGBO(0, 123, 165, 1),
+  };
+  return MaterialColor(colorHex, color);
+}
 
 class GoBack extends StatelessWidget {
   const GoBack({
@@ -40,8 +55,8 @@ class GoBack extends StatelessWidget {
 }
 
 class MyPrefixWidget extends StatelessWidget {
-  MyPrefixWidget({Key? key, this.svgString}) : super(key: key);
-  String? svgString;
+  const MyPrefixWidget({Key? key, this.svgString}) : super(key: key);
+ final String? svgString;
 
   String getSvgString() {
     return svgString == null ? 'assets/images/SVGs/flag.svg' : svgString!;
@@ -162,27 +177,18 @@ customAppBar({
   );
 }
 
-customABarNoIcon({
+customABarNoIcon({required BuildContext context,
   required String txt,
+  required bool  back,
 }) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(60.0),
     child: AppBar(
-      title: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 50,
-              ),
-              Text(txt),
-            ],
-          ),
-        ],
+      title: Padding(
+        padding: const EdgeInsets.only(right: 10,left: 10),
+        child: Text(txt.tr),
       ),
+      automaticallyImplyLeading: back,
     ),
   );
 }

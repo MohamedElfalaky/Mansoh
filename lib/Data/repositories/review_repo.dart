@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
-import '../../../app/utils/myApplication.dart';
-import '../../../app/utils/sharedPreferenceClass.dart';
+import '../../../app/utils/my_application.dart';
+import '../../../app/utils/shared_preference_class.dart';
 import 'package:http/http.dart' as http;
 import '../models/rejection_models/post_reject_model.dart';
 
@@ -36,7 +36,7 @@ class ReviewRepo {
             "Authorization": "Bearer ${sharedPrefs.getToken()}"
           },
           body: mapData);
-      print(mapData);
+      // print(mapData);
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print(response.body);

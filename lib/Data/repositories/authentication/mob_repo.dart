@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
-import '../../../app/utils/myApplication.dart';
+import '../../../app/utils/my_application.dart';
 import '../../models/Auth_models/check_mobile_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,11 +17,11 @@ class MobRepo {
           body: {
             'mobile': '$phone',
           });
-      print("response.body");
-      print(response.statusCode);
+      // print("response.body");
+      // print(response.statusCode);
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        print("response.body");
+        // print("response.body");
 
         final userdata = mobModelFromJson(responseMap);
         return userdata;
