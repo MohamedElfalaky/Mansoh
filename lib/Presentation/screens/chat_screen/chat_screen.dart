@@ -119,7 +119,6 @@ class _ChatScreenState extends State<ChatScreen> {
     String uniqueKey = const Uuid().v4() +
         DateTime.now().toIso8601String().replaceAll('.', '-');
     Directory tempDir = await getApplicationDocumentsDirectory();
-    // Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
     if (Platform.isIOS) {
       voiceFile = File('$tempPath/$uniqueKey.m4a');
@@ -420,45 +419,48 @@ class _ChatScreenState extends State<ChatScreen> {
                                           color: Colors.grey.shade400)),
                                   child: mp3End || m4aEnd
                                       ? GestureDetector(
-                                          onTap: () => playAudioFromUrl(
-                                            state.response?.data?.chat?[index]
-                                                    .document?[0].file ??
-                                                "",
-                                            index,
-                                          ),
+                                          onTap: () {
+                                            player.stop();
+                                            playAudioFromUrl(
+                                                state
+                                                        .response
+                                                        ?.data
+                                                        ?.chat?[index]
+                                                        .document?[0]
+                                                        .file ??
+                                                    "",
+                                                index);
+                                          },
                                           child: playingIndex == index
                                               ? Row(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
-                                                    SizedBox(
-                                                      height: 40,
-                                                      width: 210,
-                                                      child: Image.asset(
-                                                        'assets/images/gifnasoh.gif',
-                                                        fit: BoxFit.fill,
+                                                      SizedBox(
+                                                        height: 40,
+                                                        width: 210,
+                                                        child: Image.asset(
+                                                            'assets/images/gifnasoh.gif',
+                                                            fit: BoxFit.fill),
                                                       ),
-                                                    ),
-                                                    const SizedBox(width: 10),
-                                                    const CircleAvatar(
-                                                        backgroundColor:
-                                                            Constants
-                                                                .primaryAppColor,
-                                                        child: Icon(Icons.pause,
-                                                            color:
-                                                                Colors.white)),
-                                                  ],
-                                                )
+                                                      const SizedBox(width: 10),
+                                                      const CircleAvatar(
+                                                          backgroundColor:
+                                                              Constants
+                                                                  .primaryAppColor,
+                                                          child: Icon(
+                                                              Icons.pause,
+                                                              color: Colors
+                                                                  .white)),
+                                                    ])
                                               : Row(
-                                                  // mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     SizedBox(
                                                       height: 40,
                                                       width: 210,
                                                       child: SvgPicture.asset(
-                                                        voiceShape,
-                                                        fit: BoxFit.fill,
-                                                      ),
+                                                          voiceShape,
+                                                          fit: BoxFit.fill),
                                                     ),
                                                     const SizedBox(width: 10),
                                                     CircleAvatar(
@@ -483,17 +485,17 @@ class _ChatScreenState extends State<ChatScreen> {
                                             const SizedBox(width: 7),
                                             Expanded(
                                               child: Text(
-                                                state
-                                                        .response
-                                                        ?.data
-                                                        ?.chat?[index]
-                                                        .document?[0]
-                                                        .file
-                                                        ?.split("/")
-                                                        .last ??
-                                                    "",
-                                                style: Constants.subtitleFont,
-                                              ),
+                                                  state
+                                                          .response
+                                                          ?.data
+                                                          ?.chat?[index]
+                                                          .document?[0]
+                                                          .file
+                                                          ?.split("/")
+                                                          .last ??
+                                                      "",
+                                                  style:
+                                                      Constants.subtitleFont),
                                             ),
                                           ],
                                         ),
@@ -612,7 +614,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             return;
                           }
 
-                          if(mounted) {
+                          if (mounted) {
                             context.read<SendChatCubit>().sendChatFunction(
                                 filee: fileSelected,
                                 msg: _textController.text,

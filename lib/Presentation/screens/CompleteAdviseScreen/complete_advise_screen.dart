@@ -138,7 +138,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                         child: MyButton(
                           onPressedHandler: () {
                             context.read<PayAdviceCubit>().getPay(
-                                paymentId: 2, adviceId: widget.adviceId);
+                                paymentId: 1, adviceId: widget.adviceId);
                           },
                           txt: "Complete Order".tr,
                           isBold: true,

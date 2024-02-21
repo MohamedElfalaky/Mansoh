@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../app/Style/icons.dart';
 import '../../app/constants.dart';
+
 getMaterialColor({required int colorHex}) {
   Map<int, Color> color = {
     50: const Color.fromRGBO(0, 123, 165, .1),
@@ -56,7 +57,7 @@ class GoBack extends StatelessWidget {
 
 class MyPrefixWidget extends StatelessWidget {
   const MyPrefixWidget({super.key, this.svgString});
- final String? svgString;
+  final String? svgString;
 
   String getSvgString() {
     return svgString == null ? 'assets/images/SVGs/flag.svg' : svgString!;
@@ -109,83 +110,77 @@ customAppBar({
   bool endIcon = false,
   List<Widget>? actions,
 }) {
-  return PreferredSize(
-    preferredSize: const Size.fromHeight(60.0),
-    child: AppBar(
-      leading: Column(
-        children: [
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 16,
+  return AppBar(
+    leading: Column(
+      children: [
+        const SizedBox(height: 15),
+        Row(
+          children: [
+            const SizedBox(width: 16),
+            Container(
+              // margin: EdgeInsets.symmetric(horizontal: 10),
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.1),
+                    offset: Offset(0, 4),
+                    blurRadius: 8,
+                  ),
+                ],
               ),
-              Container(
-                // margin: EdgeInsets.symmetric(horizontal: 10),
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.1),
-                      offset: Offset(0, 4),
-                      blurRadius: 8,
-                    ),
-                  ],
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Get.locale!.languageCode == "ar"
-                      ? SvgPicture.asset(
-                          backArIcon,
-                          width: 14,
-                          height: 14,
-                        )
-                      : const Icon(
-                          Icons.arrow_back,
-                          color: Colors.black54,
-                        ),
-                ),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Get.locale!.languageCode == "ar"
+                    ? SvgPicture.asset(
+                        backArIcon,
+                        width: 14,
+                        height: 14,
+                      )
+                    : const Icon(
+                        Icons.arrow_back,
+                        color: Colors.black54,
+                      ),
               ),
-            ],
-          ),
-        ],
-      ),
-      title: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 20,
-              ),
-              Text(txt),
-            ],
-          ),
-        ],
-      ),
-      actions: endIcon ? actions : [],
+            ),
+          ],
+        ),
+      ],
     ),
+    title: Column(
+      children: [
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            Text(txt),
+          ],
+        ),
+      ],
+    ),
+    actions: endIcon ? actions : [],
   );
 }
 
-customABarNoIcon({required BuildContext context,
+customABarNoIcon({
+  required BuildContext context,
   required String txt,
-  required bool  back,
+  required bool back,
 }) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(60.0),
     child: AppBar(
       title: Padding(
-        padding: const EdgeInsets.only(right: 10,left: 10),
+        padding: const EdgeInsets.only(right: 10, left: 10),
         child: Text(txt.tr),
       ),
       automaticallyImplyLeading: back,
