@@ -23,7 +23,7 @@ class GetUserCubit extends Cubit<GetUserState> {
           .then((value) {
         if (value != null) {
           emit(GetUserLoaded(value));
-          MyApplication.navigateToReplaceAllPrevious(context!,  HomeLayout(currentIndex: 0,));
+          MyApplication.navigateToReplaceAllPrevious(context!,  const HomeLayout(currentIndex: 0,));
         } else {
           emit(GetUserError());
         }

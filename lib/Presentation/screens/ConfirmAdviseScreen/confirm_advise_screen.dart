@@ -313,7 +313,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                           dashPattern: const [10, 6],
                           borderType: BorderType.RRect,
                           radius: const Radius.circular(8),
-                          color: const Color(0xff80848866),
+                          color: Colors.blue,
                           child: SizedBox(
                             height: 56,
                             child: Row(

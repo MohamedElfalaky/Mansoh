@@ -106,9 +106,8 @@ class _PreHomeState extends State<PreHome> {
 
   @override
   Widget build(BuildContext context) {
-    // return sharedPrefs.getToken() != "" ?  Home(currentIndex: 0,) : const RegistrationInfoScreen();
     return sharedPrefs.getToken() != ""
-        ? HomeLayout(currentIndex: 0)
+        ? const HomeLayout(currentIndex: 0)
         : const WelcomeScreen();
   }
 }

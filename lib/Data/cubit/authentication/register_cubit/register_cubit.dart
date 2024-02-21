@@ -38,10 +38,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         if (value != null) {
           emit(RegisterLoaded(value));
           MyApplication.navigateToReplaceAllPrevious(
-              context!,
-              HomeLayout(
-                currentIndex: 0,
-              ));
+              context!, const HomeLayout(currentIndex: 0));
         } else {
           emit(RegisterError());
         }

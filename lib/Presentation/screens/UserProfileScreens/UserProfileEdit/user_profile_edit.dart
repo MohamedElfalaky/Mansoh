@@ -63,7 +63,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
     } on PlatformException {
       // print("platform exeption : $e");
     }
-    if(mounted) {
+    if (mounted) {
       Navigator.pop(context);
     }
   }
@@ -80,34 +80,31 @@ class _UserProfileEditState extends State<UserProfileEdit>
   }
 
   Future<void> getDataFromApi() async {
-    if(mounted) {
+    if (mounted) {
       await context.read<ProfileCubit>().getDataProfile();
     }
-      if(mounted) {
-        await context.read<CountryCubit>().getCountries();
-      }
+    if (mounted) {
+      await context.read<CountryCubit>().getCountries();
+    }
 
-    var profileCubit = ProfileCubit.get(context);
+    late ProfileCubit profileCubit;
+    if (mounted) {
+      profileCubit = ProfileCubit.get(context);
+    }
     _nameController.text = profileCubit.profileModel?.data?.fullName ?? "";
     _emailController.text = profileCubit.profileModel?.data?.email ?? "";
     _phoneController.text =
         profileCubit.profileModel?.data?.mobile?.substring(5, 14) ?? "";
-    // if (profileCubit.profileModel?.data?.gender != "") {
     setState(() {
       genderValue = profileCubit.profileModel?.data?.gender ?? "";
     });
 
-    // print(profileCubit.profileModel?.data?.gender);
-    // }
-    // nationalityValue = 1;
     if (profileCubit.profileModel?.data?.nationalityId != null) {
       nationalityValue =
           profileCubit.profileModel?.data?.nationalityId?.id.toString();
     }
     if (profileCubit.profileModel?.data?.countryId != null) {
       countryValue = profileCubit.profileModel?.data?.countryId?.id.toString();
-      // context.read<CityCubit>().getCities(
-      //     profileState.response!.data!.countryId!.id.toString());
     }
     if (profileCubit.profileModel?.data?.cityId != null) {
       cityValue = profileCubit.profileModel?.data?.cityId!.id.toString();
@@ -155,15 +152,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                 avatar: base64NewImage,
                                 mobile: phoneNumber ??
                                     "+966${_phoneController.text}");
-                            // print(phoneNumber);
-                            // print("base64NewImage is $base64NewImage");
-                            // print("+966${_phoneController.text}");
-                            // print("${_emailController.text}");
-                            // print("${_nameController.text}");
-                            // print("$cityValue");
-                            // print("$countryValue");
-                            // print("$nationalityValue");
-                            // print(" gender value send $genderValue");
                           })),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
@@ -185,7 +173,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                       keyboardDismissBehavior:
                           ScrollViewKeyboardDismissBehavior.onDrag,
                       child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Back(header: "Update Profile"),
@@ -232,7 +219,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                         showModalBottomSheet(
                                           context: context,
                                           shape: const RoundedRectangleBorder(
-                                            // <-- SEE HERE
                                             borderRadius: BorderRadius.vertical(
                                               top: Radius.circular(25.0),
                                             ),
@@ -241,7 +227,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                             return Container(
                                                 padding:
                                                     const EdgeInsets.all(18),
-                                                // height: 100,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -257,14 +242,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                                                   .camera,
                                                               ctx,
                                                               setState);
-                                                          // inputImageName =
-                                                          //     RegistrationController
-                                                          //         .regImage!.path;
-                                                          // inputImagePhoto =
-                                                          //     RegistrationController
-                                                          //         .regImage;
-                                                          // print(
-                                                          //     "Image PAth is $inputImageName");
                                                         }),
                                                     const Divider(),
                                                     RowModalSheet(
@@ -275,14 +252,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                                             ImageSource.gallery,
                                                             ctx,
                                                             setState);
-                                                        // inputImageName =
-                                                        //     RegistrationController
-                                                        //         .regImage!.path;
-                                                        // inputImagePhoto =
-                                                        //     RegistrationController
-                                                        //         .regImage;
-                                                        // print(
-                                                        //     "Image path is ${inputImagePhoto!.path}");
                                                       },
                                                     ),
                                                     const Divider(),
@@ -329,60 +298,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                             hintTxt: "Name".tr,
                             imageTxt: "assets/images/SVGs/name_icon.svg",
                             controller: _nameController,
-                            onChanged: (val) {
-                              // print(_nameController.toString());
-                            },
                           ),
-
-                          ///===============
-                          // TitleTxt(
-                          //   txt:  "phone_number".tr,
-                          // ),
-                          // FadeTransition(
-                          //   opacity: _fadeController,
-                          //   child: Padding(
-                          //     padding:
-                          //         const EdgeInsets.only(top: 10, bottom: 10),
-                          //     child: MyIntlPhoneField(
-                          //       countries: ['SA'],
-                          //       controller: _phoneController,
-                          //       showDropdownIcon: true,
-                          //       dropdownIcon: const Icon(
-                          //         Icons.arrow_drop_down,
-                          //         color: Colors.transparent,
-                          //         size: 6,
-                          //       ),
-                          //       style: Constants.subtitleFont1,
-                          //       textAlign: TextAlign.right,
-                          //       decoration: InputDecoration(
-                          //         hintText: "رقم الجوال...",
-                          //         hintStyle: Constants.subtitleRegularFontHint,
-                          //         errorStyle: Constants.subtitleFont1.copyWith(
-                          //           color: Colors.red,
-                          //         ),
-                          //         contentPadding: const EdgeInsets.symmetric(
-                          //             vertical: 10, horizontal: 10),
-                          //         border: OutlineInputBorder(
-                          //           borderRadius: BorderRadius.circular(20),
-                          //           gapPadding: 0,
-                          //           borderSide: const BorderSide(
-                          //             color: Color(0xff808488),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //       initialCountryCode: 'SA',
-                          //       onChanged: (phone) {
-                          //         print(phone.completeNumber);
-                          //         phoneNumber = phone.completeNumber;
-                          //       },
-                          //       invalidNumberMessage:
-                          //            "invalid_number".tr,
-                          //     ),
-                          //   ),
-                          // ),
-
-                          /// =======================
-
                           TitleTxt(
                             txt: "email".tr,
                           ),
@@ -391,9 +307,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                             hintTxt: "example@example.com",
                             imageTxt: "assets/images/SVGs/email_icon.svg",
                             controller: _emailController,
-                            onChanged: (val) {
-                              // print(_emailController.toString());
-                            },
                           ),
                           const Padding(
                             padding: EdgeInsets.all(16.0),
@@ -475,7 +388,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                             }
                             return const Center(child: SizedBox());
                           }),
-
                           BlocBuilder<CityCubit, CityState>(
                               builder: (context, cityState) {
                             if (cityState is CityLoading) {
@@ -520,11 +432,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                               return const SizedBox();
                             }
                           }),
-                          TitleTxt(
-                            txt: "gender".tr,
-                          ),
-                          // StatefulBuilder(
-                          //     builder: (context, StateSetter setState) =>
+                          TitleTxt(txt: "gender".tr),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -537,7 +445,6 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                     setState(() {
                                       genderValue = s;
                                     });
-                                    // print(genderValue);
                                   }),
                               const SizedBox(
                                 width: 48,
@@ -553,23 +460,16 @@ class _UserProfileEditState extends State<UserProfileEdit>
                                     setState(() {
                                       genderValue = s;
                                     });
-                                    // print(genderValue);
                                   }),
                             ],
-                            // )
                           ),
-                          const SizedBox(
-                            height: 64,
-                          ),
+                          const SizedBox(height: 64),
                         ],
                       )),
                 ),
               );
-            } else if (profileState is ProfileError) {
-              return const Center(child: SizedBox());
-            } else {
-              return const Center(child: SizedBox());
             }
+            return const SizedBox.shrink();
           }),
         )),
       ),

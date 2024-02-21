@@ -34,7 +34,7 @@ class SendChatRepo {
 
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        print(response.body.toString());
+        debugPrint(response.body.toString());
         // MyApplication.showToastView(message: responseMap["message"]);
         return true;
       } else {

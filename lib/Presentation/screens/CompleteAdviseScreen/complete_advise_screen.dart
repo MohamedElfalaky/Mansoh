@@ -97,11 +97,12 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
       onTap: () {
         MyApplication.dismissKeyboard(context);
       },
-      child: WillPopScope(
-        onWillPop: () async {
+      child: PopScope(
+
+        onPopInvoked: (val) async {
           final shouldPop = await Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-                builder: (context) => HomeLayout(
+                builder: (context) => const HomeLayout(
                       currentIndex: 1,
                     )),
           );
@@ -178,8 +179,8 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                             onPressed: () {
                               MyApplication.navigateToReplaceAllPrevious(
                                   context,
-                                  HomeLayout(
-                                    currentIndex: 1,
+                                  const HomeLayout(
+                                    currentIndex: 1
                                   ));
                             },
                             icon: Get.locale!.languageCode == "ar"

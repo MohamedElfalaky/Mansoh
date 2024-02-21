@@ -246,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 onTap: () {
                                                   setState(() {
                                                     selectedCategoryId = e.id!;
-                                                    print(
+                                                    debugPrint(
                                                         'cat id $selectedCategoryId');
                                                     for (var element
                                                         in catList) {

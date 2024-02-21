@@ -6,8 +6,8 @@ import 'package:nasooh/app/constants.dart';
 import '../UserProfileScreens/UserOrders/user_orders.dart';
 
 class HomeLayout extends StatefulWidget {
-  HomeLayout({super.key, required this.currentIndex});
-  int currentIndex;
+  const HomeLayout({super.key, required this.currentIndex});
+  final int currentIndex;
 
   @override
   State<HomeLayout> createState() => _HomeLayoutState();
@@ -19,12 +19,19 @@ class _HomeLayoutState extends State<HomeLayout> {
     const UserOrdersScreen(),
     const UserProfileScreen(),
   ];
+  late int currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.currentIndex;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Constants.whiteAppColor,
-      body: IndexedStack(index: widget.currentIndex, children: screens),
+      body: IndexedStack(index: currentIndex, children: screens),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -39,32 +46,25 @@ class _HomeLayoutState extends State<HomeLayout> {
             topRight: Radius.circular(30.0),
           ),
           child: BottomNavigationBar(
-            // backgroundColor: Colors.red,
             selectedLabelStyle: const TextStyle(fontFamily: Constants.mainFont),
             unselectedLabelStyle:
                 const TextStyle(fontFamily: Constants.mainFont),
             type: BottomNavigationBarType.fixed,
-            // backgroundColor: Theme.of(context).colorScheme.secondary,
-            currentIndex: widget.currentIndex,
+            currentIndex: currentIndex,
             onTap: (index) {
               setState(() {
-                widget.currentIndex = index;
+                currentIndex = index;
               });
             },
             items: [
               BottomNavigationBarItem(
-                // activeIcon: SvgPicture.asset(tempPic),
                 icon: const Icon(Icons.home),
                 label: "Home".tr,
               ),
               BottomNavigationBarItem(
-                  // activeIcon: SvgPicture.asset(tempPic),
-                  icon: const Icon(Icons.shopping_bag),
-                  label: "My Orders".tr),
+                  icon: const Icon(Icons.shopping_bag), label: "My Orders".tr),
               BottomNavigationBarItem(
-                  // activeIcon: SvgPicture.asset(tempPic),
-                  icon: const Icon(Icons.person),
-                  label: "My Account".tr),
+                  icon: const Icon(Icons.person), label: "My Account".tr),
             ],
           ),
         ),

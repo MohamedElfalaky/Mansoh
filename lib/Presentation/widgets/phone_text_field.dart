@@ -1,4 +1,5 @@
 library intl_phone_field;
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,95 +20,36 @@ class MyIntlPhoneField extends StatefulWidget {
   final bool readOnly;
   final FormFieldSetter<PhoneNumber>? onSaved;
 
-  ///
-  ///  * [inputFormatters], which are called before [onChanged]
-  ///    runs and can validate and change ("format") the input value.
-  ///  * [onEditingComplete], [onSubmitted], [onSelectionChanged]:
-  ///    which are more specialized input change notifications.
   final ValueChanged<PhoneNumber>? onChanged;
 
   final ValueChanged<Country>? onCountryChanged;
 
-  ///
-  /// A [PhoneNumber] is passed to the validator as argument.
-  /// The validator can handle asynchronous validation when declared as a [Future].
-  /// Or run synchronously when declared as a [Function].
-  ///
-  /// By default, the validator checks whether the input number length is between selected country's phone numbers min and max length.
-  /// If `disableLengthCheck` is not set to `true`, your validator returned value will be overwritten by the default validator.
-  /// But, if `disableLengthCheck` is set to `true`, your validator will have to check phone number length itself.
   final FutureOr<String?> Function(PhoneNumber?)? validator;
-
-  /// {@macro flutter.widgets.editableText.keyboardType}
   final TextInputType keyboardType;
 
-  /// Controls the text being edited.
-  ///
-  /// If null, this widget will create its own [TextEditingController].
   final TextEditingController? controller;
 
-  /// Defines the keyboard focus for this widget.
-  ///
-  /// The [focusNode] is a long-lived object that's typically managed by a
-  /// [StatefulWidget] parent. See [FocusNode] for more information.
-  ///
-  /// To give the keyboard focus to this widget, provide a [focusNode] and then
-  /// use the current [FocusScope] to request the focus:
-
-  /// If null, this widget will create its own [FocusNode].
-
-  ///
-  /// This widget builds an [EditableText] and will ensure that the keyboard is
-  /// showing when it is tapped by calling [EditableTextState.requestKeyboard()].
   final FocusNode? focusNode;
 
-  ///  * [EditableText.onSubmitted] for an example of how to handle moving to
-  ///    the next/previous field when using [TextInputAction.next] and
-  ///    [TextInputAction.previous] for [textInputAction].
   final void Function(String)? onSubmitted;
-
-  /// If false the widget is "disabled": it ignores taps, the [TextFormField]'s
-  /// [decoration] is rendered in grey,
-  /// [decoration]'s [InputDecoration.counterText] is set to `""`,
-  /// and the drop down icon is hidden no matter [showDropdownIcon] value.
-  ///
-  /// If non-null this property overrides the [decoration]'s
-  /// [Decoration.enabled] property.
   final bool enabled;
-
-  ///
-  /// If unset, defaults to the brightness of [ThemeData.brightness].
   final Brightness? keyboardAppearance;
 
   final String? initialValue;
-
-  /// 2 Letter ISO Code
   final String? initialCountryCode;
 
-  /// List of 2 Letter ISO Codes of countries to show. Defaults to showing the inbuilt list of all countries.
   final List<String>? countries;
 
   final InputDecoration decoration;
 
-  /// The style to use for the text being edited.
-  ///
-  /// This text style is also used as the base style for the [decoration].
-  ///
-  /// If null, defaults to the `subtitle1` text style from the current [Theme].
   final TextStyle? style;
 
-  /// Disable view Min/Max Length check
   final bool disableLengthCheck;
-
-  /// Won't work if [enabled] is set to `false`.
   final bool showDropdownIcon;
 
   final BoxDecoration dropdownDecoration;
-
-  /// The style use for the country dial code.
   final TextStyle? dropdownTextStyle;
 
-  /// {@macro flutter.widgets.editableText.inputFormatters}
   final List<TextInputFormatter>? inputFormatters;
   final String searchText;
 
@@ -117,58 +59,28 @@ class MyIntlPhoneField extends StatefulWidget {
 
   final bool autofocus;
 
-  ///
-  /// If [AutovalidateMode.onUserInteraction], this FormField will only auto-validate after its content changes.
-  /// If [AutovalidateMode.always], it will auto-validate even without user interaction.
-  /// If [AutovalidateMode.disabled], auto-validation will be disabled.
-  ///
-  /// Defaults to [AutovalidateMode.onUserInteraction].
   final AutovalidateMode? autovalidateMode;
 
-  /// Whether to show or hide country flag.
-  ///
-  /// Default value is `true`.
   final bool showCountryFlag;
 
-  /// Message to be displayed on autoValidate error
-  ///
-  /// Default value is `Invalid Mobile Number`.
   final String? invalidNumberMessage;
 
-  /// The color of the cursor.
   final Color? cursorColor;
 
-  /// How tall the cursor will be.
   final double? cursorHeight;
 
-  /// How rounded the corners of the cursor should be.
   final Radius? cursorRadius;
 
-  /// How thick the cursor will be.
   final double cursorWidth;
 
-  /// Whether to show cursor.
   final bool? showCursor;
 
-  /// The padding of the Flags Button.
-  ///
-  /// The amount of insets that are applied to the Flags Button.
-  ///
-  /// If unset, defaults to [EdgeInsets.zero].
   final EdgeInsetsGeometry flagsButtonPadding;
 
-  /// The type of action button to use for the keyboard.
   final TextInputAction? textInputAction;
 
-  /// Optional set of styles to allow for customizing the country search
-  /// & pick dialog
   final PickerDialogStyle? pickerDialogStyle;
 
-  /// The margin of the country selector button.
-  ///
-  /// The amount of space to surround the country selector button.
-  ///
-  /// If unset, defaults to [EdgeInsets.zero].
   final EdgeInsets flagsButtonMargin;
 
   const MyIntlPhoneField({
@@ -198,7 +110,7 @@ class MyIntlPhoneField extends StatefulWidget {
     this.enabled = true,
     this.keyboardAppearance,
     @Deprecated('Use searchFieldInputDecoration of PickerDialogStyle instead')
-        this.searchText = 'Search country',
+    this.searchText = 'Search country',
     this.dropdownIconPosition = IconPosition.leading,
     this.dropdownIcon = const Icon(Icons.arrow_drop_down),
     this.autofocus = false,
@@ -212,6 +124,7 @@ class MyIntlPhoneField extends StatefulWidget {
     this.cursorHeight,
     this.cursorRadius = Radius.zero,
     this.cursorWidth = 2.0,
+
     this.showCursor = true,
     this.pickerDialogStyle,
     this.flagsButtonMargin = EdgeInsets.zero,
@@ -241,7 +154,6 @@ class _MyIntlPhoneFieldState extends State<MyIntlPhoneField> {
     number = widget.initialValue ?? '';
     if (widget.initialCountryCode == null && number.startsWith('+')) {
       number = number.substring(1);
-      // parse initial value
       _selectedCountry = countries.firstWhere(
           (country) => number.startsWith(country.dialCode),
           orElse: () => _countryList.first);
@@ -368,7 +280,6 @@ class _MyIntlPhoneFieldState extends State<MyIntlPhoneField> {
         } else if (!value.toString().startsWith("5")) {
           return "رقم الهاتف يبدأ ب 5";
         } else if (!widget.disableLengthCheck) {
-          // print("hahahaahaha $value");
           return value.length >= _selectedCountry.minLength &&
                   value.length <= _selectedCountry.maxLength
               ? null

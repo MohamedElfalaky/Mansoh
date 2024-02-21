@@ -612,11 +612,13 @@ class _ChatScreenState extends State<ChatScreen> {
                             return;
                           }
 
-                          context.read<SendChatCubit>().sendChatFunction(
-                              filee: fileSelected,
-                              msg: _textController.text,
-                              typee: pickedFile!.path.split(".").last,
-                              adviceId: widget.adviceId.toString());
+                          if(mounted) {
+                            context.read<SendChatCubit>().sendChatFunction(
+                                filee: fileSelected,
+                                msg: _textController.text,
+                                typee: pickedFile!.path.split(".").last,
+                                adviceId: widget.adviceId.toString());
+                          }
 
                           setState(() {
                             fileSelected = null;

@@ -97,7 +97,7 @@ class _RejectScreenState extends State<RejectScreen> {
                     context: context,
                     action: () {
                       MyApplication.navigateToReplaceAllPrevious(
-                          context,  HomeLayout(currentIndex: 0,));
+                          context,  const HomeLayout(currentIndex: 0,));
                     },
                     content: "تم ارسال اعتراضك بنجاح",
                     titleAction: "الرئيسية");
