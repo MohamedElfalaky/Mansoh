@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../app/constants.dart';
-import '../../../../../app/keys.dart';
 
 class MySeparator extends StatelessWidget {
   const MySeparator({super.key, this.height = 1, this.color = Colors.black});
@@ -36,9 +35,8 @@ class MySeparator extends StatelessWidget {
 }
 
 Widget buildSaveButton({required String label, void Function()? onPressed}) =>
-    SizedBox(
-      width: MediaQuery.of(Keys.navigatorKey.currentState!.context).size.width *
-          0.8,
+    Padding(
+      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
       child: FloatingActionButton.extended(
         backgroundColor: Constants.primaryAppColor,
         onPressed: onPressed??(){},

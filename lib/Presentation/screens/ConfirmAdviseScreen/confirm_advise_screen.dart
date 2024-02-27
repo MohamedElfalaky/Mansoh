@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/Presentation/screens/ConfirmAdviseScreen/Components/outlined_advisor_card.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
-import 'package:nasooh/Presentation/widgets/no_internet.dart';
 import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
@@ -39,75 +36,12 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  // AdvisorController AdvisorController = AdvisorController();
-  late StreamSubscription<ConnectivityResult> _subscription;
   String? fileSelected;
-  bool? isConnected;
   final _formKey = GlobalKey<FormState>();
   File? pickedFile;
 
   @override
-  void initState() {
-    super.initState();
-
-    MyApplication.checkConnection().then((value) {
-      if (value) {
-        //////
-        // todo recall data
-        ///
-        ///
-        ///
-        ///
-      } else {
-        MyApplication.showToastView(message: 'noInternet'.tr);
-      }
-    });
-
-    // todo subscribe to internet change
-    _subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (mounted) {
-        setState(() {
-          result == ConnectivityResult.none
-              ? isConnected = false
-              : isConnected = true;
-        });
-      }
-
-      /// if internet comes back
-      if (result != ConnectivityResult.none) {
-        /// call your apis
-        // todo recall data
-        ///
-        ///
-        ///
-        ///
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _subscription.cancel();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // todo if not connected display nointernet widget else continue to the rest build code
-    final sizee = MediaQuery.of(context).size;
-    if (isConnected == null) {
-      MyApplication.checkConnection().then((value) {
-        setState(() {
-          isConnected = value;
-        });
-      });
-    } else if (!isConnected!) {
-      MyApplication.showToastView(message: 'noInternet'.tr);
-      return NoInternetWidget(size: sizee);
-    }
-
     return GestureDetector(
       onTap: () {
         MyApplication.dismissKeyboard(context);
@@ -136,7 +70,8 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         txt: "Confirm Order".tr,
                         isBold: true,
                         onPressedHandler: () {
-                          debugPrint("pickedFile?.path.split).last is ${pickedFile?.path.split(".").last}");
+                          debugPrint(
+                              "pickedFile?.path.split).last is ${pickedFile?.path.split(".").last}");
                           log(fileSelected.toString());
                           if (_formKey.currentState!.validate()) {
                             context.read<SendAdviseCubit>().sendAdviseMethod(
@@ -154,10 +89,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
               FloatingActionButtonLocation.centerFloat,
           resizeToAvoidBottomInset: false,
           backgroundColor: Constants.whiteAppColor,
-          appBar: customAppBar(
-            context: context,
-            txt: "Ask Advice".tr,
-          ),
+          appBar: customAppBar(context: context, txt: "Ask Advice".tr),
           body: Container(
               color: Constants.whiteAppColor,
               height: MediaQuery.of(context).size.height,
@@ -172,7 +104,6 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // SizedBox(height: 15,),
                       OutlinedAdvisorCard(
                         labelToShow: true,
                         adviceId: 1,
@@ -215,9 +146,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: 8,
-                        ),
+                        padding: const EdgeInsets.only(bottom: 8),
                         child: Text(
                           "How Much can you afford for advice".tr,
                           style: Constants.secondaryTitleRegularFont,
@@ -232,9 +161,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         },
                         controller: priceController,
                         keyboardType: TextInputType.number,
-
                         decoration: Constants.setTextInputDecoration(
-
                             prefixIcon: const MyPrefixWidget(),
                             isSuffix: true,
                             hintText: "0.00",
@@ -324,9 +251,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                                   Icons.upload,
                                   color: Color(0xFF0076FF),
                                 ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
+                                const SizedBox(width: 4),
                                 Text(
                                   "Upload Advice Files".tr,
                                   style: Constants.subtitleFont,
@@ -373,12 +298,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                                       height: 20,
                                     ),
                                   ],
-                                )
-
-                                // SfPdfViewer.file(
-                                //   pickedFile!,
-                                // ),
-                                )
+                                ))
                             : Container(
                                 padding: const EdgeInsets.all(5),
                                 margin:
@@ -402,33 +322,47 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                                 child: Row(
                                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Expanded(
-                                        child: Text(pickedFile!.path
-                                            .replaceRange(0, 56, ""))),
-                                    const SizedBox(
-                                      width: 10,
+                                    Flexible(
+                                      child: Text(
+                                        pickedFile!.path.replaceRange(
+                                            0,
+                                            (pickedFile!.path.length) ~/ 2.4,
+                                            ""),
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                     ),
+                                    const SizedBox(width: 10),
                                     SvgPicture.asset(
                                       fileImage,
-                                      width: 20,
-                                      height: 20,
+                                      width: 25,
+                                      height: 25,
                                     ),
+                                    if (pickedFile != null)
+                                      if (pickedFile != null)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 4),
+                                          child: CircleAvatar(
+                                            radius: 15,
+                                            backgroundColor:
+                                                Colors.grey.shade200,
+                                            child: IconButton(
+                                              padding: EdgeInsets.zero,
+                                              icon: const Icon(Icons.close),
+                                              onPressed: () {
+                                                setState(() {
+                                                  pickedFile = null;
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                        ),
                                   ],
                                 )),
                       const SizedBox(
                         width: 20,
-                      ),
-                      if (pickedFile != null)
-                        IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () {
-                            setState(() {
-                              pickedFile = null;
-                            });
-                          },
-                        ),
-
-                      const SizedBox(
                         height: 80,
                       ),
                     ],

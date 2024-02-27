@@ -186,8 +186,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.adviserProfileData?.category?.length);
-    return GestureDetector(
+     return GestureDetector(
       onTap: () {
         MyApplication.dismissKeyboard(context);
       }, // hide keyboard on tap anywhere
@@ -203,18 +202,10 @@ class _ChatScreenState extends State<ChatScreen> {
               }
             },
           ),
-          BlocListener<ShowAdviceCubit, ShowAdviceState>(
-            listener: (context, state) {
-              if (state is ShowAdviceLoaded) {
-                // _textController.clear();
-                // AudioPlayer().play(AssetSource("click.wav"));
-              }
-            },
-          ),
+
         ],
         child: Scaffold(
-            appBar: customChatAppBar(
-                context  ),
+            appBar: customChatAppBar(context),
             body: Column(
               children: [
                 Padding(
@@ -294,7 +285,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(pickedFile!.path.replaceRange(0, 56, "")),
+        Text(pickedFile!.path.replaceRange(0, 160, "")),
         const SizedBox(width: 10),
         SvgPicture.asset(fileImage, width: 20, height: 20),
         if (pickedFile != null)

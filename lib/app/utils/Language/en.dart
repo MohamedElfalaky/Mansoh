@@ -82,7 +82,7 @@ Map<String, String> getEnglishLanguage() {
     "Advice Details": "Advice Details",
     "Enter Advice details": "Enter Advice details",
     "Advice details should be more than 5 character":
-        "تفاصيل الطلب يجب الا تقل عن 5 أحرف",
+        "Advice details should be more than 5 character",
     "Upload Advice Files": "Upload Advice Files",
     "advice reject":
         "Adviser has the right to reject the order if the price doesn't match device value from his point of view",
