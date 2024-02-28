@@ -52,12 +52,11 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
           floatingActionButton: BlocConsumer<PayAdviceCubit, PayAdviceState>(
               listener: (context, state) {
                 if (state is PayAdviceLoaded) {
-                  Navigator.pop(context);
                   MyApplication.navigateToReplace(
                       context,
                       ChatScreen(
                         statusClickable: false,
-                        openedStatus: state.response!.data!.label!.id == 2,
+                        openedStatus: state.response?.data?.label?.id == 2,
                         labelToShow: true,
                         adviceId: state.response!.data!.id!,
                         adviserProfileData: state.response!.data!.adviser,
@@ -75,7 +74,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                         onPressedHandler: () {
                           context
                               .read<PayAdviceCubit>()
-                              .getPay(paymentId: 1, adviceId: widget.adviceId);
+                              .getPay(paymentId: 2, adviceId: widget.adviceId);
                         },
                         txt: "Complete Order".tr,
                         isBold: true,

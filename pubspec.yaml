@@ -43,6 +43,9 @@ dependencies:
   permission_handler:
   path_provider:
   uuid:
+  myfatoorah_flutter: ^3.0.8
+  open_filex: ^4.4.0
+  flutter_document_picker: ^5.2.3
 
 dev_dependencies:
   flutter_test:

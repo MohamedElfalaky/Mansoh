@@ -107,6 +107,7 @@ class _PreHomeState extends State<PreHome> {
   @override
   Widget build(BuildContext context) {
     return sharedPrefs.getToken() != ""
+        // ? const ChatScreen(adviceId: 10,)
         ? const HomeLayout(currentIndex: 0)
         : const WelcomeScreen();
   }

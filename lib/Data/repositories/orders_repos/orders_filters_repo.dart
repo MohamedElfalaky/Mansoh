@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/keys.dart';
@@ -22,6 +23,7 @@ class OrdersFiltersRepo {
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
+        log("order status whole data  is ${response.body}");
         debugPrint("order status whole data  is ${responseMap.toString()}");
         final sliders = ordersFiltersModelFromJson(responseMap);
         return sliders;

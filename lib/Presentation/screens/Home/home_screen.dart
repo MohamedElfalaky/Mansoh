@@ -22,10 +22,9 @@ import '../FilterScreen/filter_screen.dart';
 import '../UserProfileScreens/UserNotifications/user_notifications.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, this.catVal, this.searchTxt, this.rateVal});
+  const HomeScreen({super.key, this.catVal, this.rateVal});
 
   final String? catVal;
-  final String? searchTxt;
   final double? rateVal;
 
   @override
@@ -37,9 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController searchController = TextEditingController();
   late PageController controller;
   int _currentPage = 0;
-
   int selectedCategoryId = 0;
   int? selectedSubCategory;
+
+  late AdvisorListCubit advisorListCubit;
 
   Future<void> getDataFromApi() async {
     await context.read<CategoryParentCubit>().getCategoryParent();
@@ -50,10 +50,12 @@ class _HomeScreenState extends State<HomeScreen> {
     controller = PageController(initialPage: 0);
     super.initState();
     context.read<HomeSliderCubit>().getDataHomeSlider();
-    context.read<AdvisorListCubit>().getAdvisorList(
-        categoryValue: widget.catVal,
-        searchTxt: widget.searchTxt,
-        rateVal: widget.rateVal);
+    advisorListCubit = context.read<AdvisorListCubit>();
+
+    advisorListCubit.getAdvisorList(
+      categoryValue: widget.catVal,
+      rateVal: widget.rateVal,
+    );
     getDataFromApi();
   }
 
@@ -118,9 +120,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         controller: searchController,
                         onSubmitted: (val) {
                           context.read<AdvisorListCubit>().getAdvisorList(
-                              categoryValue: widget.catVal,
-                              searchTxt: widget.searchTxt,
-                              rateVal: widget.rateVal);
+                                categoryValue: widget.catVal,
+                                searchTxt: searchController.text,
+                                rateVal: widget.rateVal,
+                              );
                         },
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: Padding(
@@ -254,25 +257,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     }
                                                     e.selected = true;
                                                     if (e.id == 0) {
-                                                      context
-                                                          .read<
-                                                              AdvisorListCubit>()
-                                                          .getAdvisorList(
-                                                              // catVal: "",
-                                                              // searchTxt: "",
-                                                              );
+                                                      advisorListCubit
+                                                          .getAdvisorList();
                                                     } else {
-                                                      context
-                                                          .read<
-                                                              AdvisorListCubit>()
-                                                          .getAdvisorList(
-                                                              categoryValue:
-                                                                  selectedCategoryId
-                                                                      .toString(),
-                                                              searchTxt: widget
-                                                                  .searchTxt,
-                                                              rateVal: widget
-                                                                  .rateVal);
+                                                      advisorListCubit.getAdvisorList(
+                                                          categoryValue:
+                                                              '$selectedCategoryId',
+                                                          searchTxt:
+                                                              searchController
+                                                                  .text,
+                                                          rateVal:
+                                                              widget.rateVal);
                                                     }
                                                   });
                                                 },
@@ -303,8 +298,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const SizedBox(height: 5),
                                   SizedBox(
                                     height: 40,
-
-
                                     child: ListView(
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
@@ -313,19 +306,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                             return Row(
                                                 children: e.children!
                                                     .map((e) => Container(
-
-                                                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                                                  padding: const EdgeInsets.symmetric(vertical: 3),
-
-                                                  decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(15),
-                                                      border: Border.all(
-                                                        width: 1.5,
-                                                          color:selectedSubCategory ==
-                                                              e.id ?Colors.blueAccent:Colors.black38
-                                                      )
-                                                  ),
-                                                      child: InkWell(
+                                                          margin:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                      4),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  vertical: 3),
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15),
+                                                              border: Border.all(
+                                                                  width: 1.5,
+                                                                  color: selectedSubCategory ==
+                                                                          e.id
+                                                                      ? Colors
+                                                                          .blueAccent
+                                                                      : Colors
+                                                                          .black38)),
+                                                          child: InkWell(
                                                             onTap: () {
                                                               debugPrint(
                                                                   'sub category ${e.id}');
@@ -335,14 +338,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   e.id;
                                                               setState(() {});
 
-                                                              context.read<AdvisorListCubit>().getAdvisorList(
-                                                                  categoryValue:
-                                                                      selectedSubCategory
-                                                                          .toString(),
-                                                                  searchTxt: widget
-                                                                      .searchTxt,
-                                                                  rateVal: widget
-                                                                      .rateVal);
+                                                              context
+                                                                  .read<
+                                                                      AdvisorListCubit>()
+                                                                  .getAdvisorList(
+                                                                      categoryValue:
+                                                                          '$selectedSubCategory');
                                                             },
                                                             child: Padding(
                                                               padding:
@@ -352,7 +353,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           8.0),
                                                               child: Text(
                                                                 e.name!,
-                                                                style: TextStyle(
+                                                                style:
+                                                                    TextStyle(
                                                                   fontSize: e.id ==
                                                                           selectedSubCategory
                                                                       ? 14
@@ -371,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               ),
                                                             ),
                                                           ),
-                                                    ))
+                                                        ))
                                                     .toList());
                                           }
                                           return const SizedBox.shrink();

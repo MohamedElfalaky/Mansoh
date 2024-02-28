@@ -15,7 +15,7 @@ class AdvisorListRepo {
     try {
       http.Response response = await http.get(
         Uri.parse(
-            '${Keys.baseUrl}/client/adviser/list?category=${catVal ?? ""}&name=${searchTxt ?? ""}&rate=${rateVal ?? ""}'),
+            '${Keys.baseUrl}/client/adviser/list?parent_id=${catVal ?? ""}&search=${searchTxt ?? ""}&rate=${rateVal ?? ""}'),
         headers: {
           'Accept': 'application/json',
           'lang': Get.locale?.languageCode ?? "ar",

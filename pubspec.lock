@@ -358,6 +358,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  flutter_document_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_document_picker
+      sha256: "5229e22fb9ac7939c516b56736714bb92305762cf4027f34aaf9edda229c5004"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -629,6 +637,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  myfatoorah_flutter:
+    dependency: "direct main"
+    description:
+      name: myfatoorah_flutter
+      sha256: "71f1d922c97ad2410317276a9d7ea4f3d651e744fab1ae8be4b9e89d018ab2f6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.8"
   nested:
     dependency: transitive
     description:
@@ -645,6 +661,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.0"
+  open_filex:
+    dependency: "direct main"
+    description:
+      name: open_filex
+      sha256: "74e2280754cf8161e860746c3181db2c996d6c1909c7057b738ede4a469816b8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.4.0"
   password_text_field:
     dependency: "direct main"
     description:

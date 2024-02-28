@@ -7,7 +7,8 @@ class AdvisorListCubit extends Cubit<AdvisorState> {
 
   AdvisorListRepo advisorListRepo = AdvisorListRepo();
 
-  Future<void>getAdvisorList({String? categoryValue, String? searchTxt, double? rateVal}) async {
+  Future<void> getAdvisorList(
+      {String? categoryValue, String? searchTxt, double? rateVal}) async {
     try {
       emit(AdvisorListLoading());
       final mList = await advisorListRepo.getAdvisorList(

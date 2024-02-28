@@ -401,7 +401,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                 height: 50,
                                 child: MyButton(
                                   onPressedHandler: () {
-                                    MyApplication.navigateTo(
+                                    MyApplication.navigateToReplace(
                                         context,
                                         ConfirmAdviseScreen(
                                             adviserProfileData: allData));

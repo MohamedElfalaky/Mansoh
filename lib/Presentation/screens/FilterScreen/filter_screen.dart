@@ -120,119 +120,111 @@ class _FilterScreenState extends State<FilterScreen> {
                           hintText: "اختر المجال أو التخصص..."),
                     ),
                   ),
-                  Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.grey.shade200)),
-                      height: 250,
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      margin: const EdgeInsets.only(bottom: 10),
-                      child: textFieldPressed
-                          ? ListView.builder(
-                              itemCount: catList.length,
-                              itemBuilder: (context, int index) =>
-                                  ExpansionTile(
-                                      tilePadding: const EdgeInsets.all(0),
-                                      title: Row(
-                                        children: [
-                                          SizedBox(
-                                              height: 24,
-                                              width: 24,
-                                              child: Checkbox(
-                                                  side: MaterialStateBorderSide
-                                                      .resolveWith(
-                                                    (states) => const BorderSide(
-                                                        width: 1.0,
-                                                        color: Constants
-                                                            .primaryAppColor),
-                                                  ),
-                                                  value:
-                                                      catList[index].selected,
-                                                  onChanged: (bool? s) {
-                                                    setState(() {
-                                                      catList[index].selected =
-                                                          s;
-                                                      if (catList[index]
-                                                              .selected ==
-                                                          true) {
-                                                        catList[index]
-                                                            .children
-                                                            ?.map((e) {
-                                                          selectedItems.add(e);
-                                                          e.selected = true;
-                                                        }).toList();
-                                                      } else {
-                                                        catList[index]
-                                                            .children
-                                                            ?.map((e) {
-                                                          selectedItems
-                                                              .remove(e);
-                                                          e.selected = false;
-                                                        }).toList();
-                                                      }
-                                                    });
-                                                  })),
-                                          const SizedBox(width: 4),
-                                          Expanded(
-                                              child: Text(catList[index].name!,
-                                                  style: Constants
-                                                      .secondaryTitleFont)),
-                                        ],
-                                      ),
-                                      children: catList[index]
-                                          .children!
-                                          .map((e) => Padding(
-                                                padding:
-                                                    const EdgeInsetsDirectional
-                                                        .only(
-                                                        start: 12,
-                                                        end: 4,
-                                                        top: 4,
-                                                        bottom: 4),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                        height: 24,
-                                                        width: 24,
-                                                        child: Checkbox(
-                                                            value: e.selected ==
-                                                                    true ||
-                                                                selectedItems
-                                                                    .contains(
-                                                                        e),
-                                                            side: MaterialStateBorderSide
-                                                                .resolveWith((states) =>
-                                                                    const BorderSide(
-                                                                        width:
-                                                                            1,
-                                                                        color: Constants
-                                                                            .primaryAppColor)),
-                                                            onChanged: (s) {
-                                                              setState(() {
-                                                                e.selected = s;
-                                                                if (e.selected ==
-                                                                    true) {
-                                                                  selectedItems
-                                                                      .add(e);
-                                                                } else {
-                                                                  selectedItems
-                                                                      .remove(
-                                                                          e);
-                                                                }
-                                                              });
-                                                            })),
-                                                    const SizedBox(width: 8),
-                                                    Text(
-                                                      e.name!,
-                                                      style: Constants
-                                                          .secondaryTitleRegularFont,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ))
-                                          .toList()))
-                          : const SizedBox.shrink()),
+                  if (textFieldPressed)
+                    Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.grey.shade200)),
+                        height: 250,
+                        width: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: ListView.builder(
+                            itemCount: catList.length,
+                            itemBuilder: (context, int index) => ExpansionTile(
+                                tilePadding: const EdgeInsets.all(0),
+                                title: Row(
+                                  children: [
+                                    SizedBox(
+                                        height: 24,
+                                        width: 24,
+                                        child: Checkbox(
+                                            side: MaterialStateBorderSide
+                                                .resolveWith(
+                                              (states) => const BorderSide(
+                                                  width: 1.0,
+                                                  color: Constants
+                                                      .primaryAppColor),
+                                            ),
+                                            value: catList[index].selected,
+                                            onChanged: (bool? s) {
+                                              setState(() {
+                                                catList[index].selected = s;
+                                                if (catList[index].selected ==
+                                                    true) {
+                                                  catList[index]
+                                                      .children
+                                                      ?.map((e) {
+                                                    selectedItems.add(e);
+                                                    e.selected = true;
+                                                  }).toList();
+                                                } else {
+                                                  catList[index]
+                                                      .children
+                                                      ?.map((e) {
+                                                    selectedItems.remove(e);
+                                                    e.selected = false;
+                                                  }).toList();
+                                                }
+                                              });
+                                            })),
+                                    const SizedBox(width: 4),
+                                    Expanded(
+                                        child: Text(catList[index].name!,
+                                            style:
+                                                Constants.secondaryTitleFont)),
+                                  ],
+                                ),
+                                children: catList[index]
+                                    .children!
+                                    .map((e) => Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.only(
+                                                  start: 12,
+                                                  end: 4,
+                                                  top: 4,
+                                                  bottom: 4),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                  height: 24,
+                                                  width: 24,
+                                                  child: Checkbox(
+                                                      value:
+                                                          e.selected == true ||
+                                                              selectedItems
+                                                                  .contains(e),
+                                                      side: MaterialStateBorderSide
+                                                          .resolveWith((states) =>
+                                                              const BorderSide(
+                                                                  width: 1,
+                                                                  color: Constants
+                                                                      .primaryAppColor)),
+                                                      onChanged: (s) {
+                                                        setState(() {
+                                                          e.selected = s;
+                                                          if (e.selected ==
+                                                              true) {
+                                                            selectedItems
+                                                                .add(e);
+                                                          } else {
+                                                            selectedItems
+                                                                .remove(e);
+                                                          }
+                                                        });
+                                                      })),
+                                              const SizedBox(width: 8),
+                                              Text(
+                                                e.name!,
+                                                style: Constants
+                                                    .secondaryTitleRegularFont,
+                                              ),
+                                            ],
+                                          ),
+                                        ))
+                                    .toList())))
+                  else
+                    SizedBox(height: 250),
                   SizedBox(
                     height: 290,
                     child: SingleChildScrollView(
@@ -319,7 +311,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 ),
               ),
               MyButton(
-                onPressedHandler: () async {
+                onPressedHandler: ()   {
                   List<String?> idList = selectedItems
                       .map((category) => category.id.toString())
                       .toList();
@@ -329,7 +321,9 @@ class _FilterScreenState extends State<FilterScreen> {
                       .getAdvisorList(
                           categoryValue: idString,
                           searchTxt: widget.searchTxt,
-                          rateVal: initialRate)
+                          rateVal: initialRate,
+
+                  )
                       .then((value) => {Navigator.pop(context)});
                 },
                 txt: "تصفية",

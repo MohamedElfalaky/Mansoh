@@ -186,7 +186,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-     return GestureDetector(
+    return GestureDetector(
       onTap: () {
         MyApplication.dismissKeyboard(context);
       }, // hide keyboard on tap anywhere
@@ -202,7 +202,6 @@ class _ChatScreenState extends State<ChatScreen> {
               }
             },
           ),
-
         ],
         child: Scaffold(
             appBar: customChatAppBar(context),
@@ -246,7 +245,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                               children: [
                                                 const Spacer(),
                                                 Text(pickedFile!.path
-                                                    .replaceRange(0, 56, "")),
+                                                    .replaceRange(
+                                                        0,
+                                                        (pickedFile!
+                                                                .path.length) ~/
+                                                            2.4,
+                                                        "")),
                                                 const SizedBox(width: 10),
                                                 SvgPicture.asset(
                                                   filePdf,
@@ -285,7 +289,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(pickedFile!.path.replaceRange(0, 160, "")),
+        Flexible(child: Text(pickedFile!.path.replaceRange(0, 50, ""))),
         const SizedBox(width: 10),
         SvgPicture.asset(fileImage, width: 20, height: 20),
         if (pickedFile != null)
@@ -384,9 +388,39 @@ class _ChatScreenState extends State<ChatScreen> {
                                       )),
                               GestureDetector(
                                 onTap: () {
-                                  launchUrl(Uri.parse(state.response?.data
-                                          ?.chat?[index].document?[0].file ??
-                                      ""));
+                                  print(state.response?.data?.chat?[index]
+                                      .document?[0].file);
+                                  if (state.response?.data?.chat?[index]
+                                              .document?[0].file
+                                              ?.contains('png') ==
+                                          true ||
+                                      state.response?.data?.chat?[index]
+                                              .document?[0].file
+                                              ?.contains('jpg') ==
+                                          true ||
+                                      state.response?.data?.chat?[index]
+                                              .document?[0].file
+                                              ?.contains('jpeg') ==
+                                          true) {
+                                    showAdaptiveDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            contentPadding: EdgeInsets.zero,
+                                            content: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              child: Image.network(
+                                                '${state.response?.data?.chat?[index].document?[0].file}',
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                  } else {
+                                    launchUrl(Uri.parse(state.response?.data
+                                            ?.chat?[index].document?[0].file ??
+                                        ""));
+                                  }
                                 },
                                 child: Container(
                                   width: mp3End || m4aEnd ? 280 : 200,

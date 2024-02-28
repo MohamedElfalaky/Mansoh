@@ -51,7 +51,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
           floatingActionButton: BlocConsumer<SendAdviseCubit, SendAdviseState>(
               listener: (context, state) {
                 if (state is SendAdviseLoaded) {
-                  MyApplication.navigateTo(
+                  MyApplication.navigateToReplace(
                       context,
                       CompleteAdviseScreen(
                         adviceId: state.response!.data!.id!,
