@@ -329,22 +329,15 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                     ],
                                   ),
                                   state is RegisterLoading
-                                      ? const Center(
-                                          child: CircularProgressIndicator.adaptive())
+                                      ? const CustomLoadingButton()
                                       : Container(
                                           margin: const EdgeInsets.symmetric(
                                               vertical: 25),
                                           width: double.infinity,
                                           height: 48,
-                                          child: MyButton(
+                                          child: CustomElevatedButton(
                                             onPressedHandler: () {
-                                              // if (base64Image == null) {
-                                              //   return MyApplication
-                                              //       .showToastView(
-                                              //           message:
-                                              //               "please add image");
-                                              // } else
-                                              // print("avatar is $base64Image");
+
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 context

@@ -30,6 +30,9 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      extendBody: false,
+      extendBodyBehindAppBar: false,
       backgroundColor: Constants.whiteAppColor,
       body: IndexedStack(index: currentIndex, children: screens),
       bottomNavigationBar: Container(
@@ -56,6 +59,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                 currentIndex = index;
               });
             },
+            selectedItemColor: const Color(0xFF0085A5),
             items: [
               BottomNavigationBarItem(
                 icon: const Icon(Icons.home),

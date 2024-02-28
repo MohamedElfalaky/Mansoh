@@ -88,7 +88,7 @@ class OnBoarding extends StatelessWidget {
                       const SizedBox(
                         height: 70,
                       ),
-                      MyButton(
+                      CustomElevatedButton(
                         txt: "ابدأ الآن",
                         isBold: true,
                         onPressedHandler: () {

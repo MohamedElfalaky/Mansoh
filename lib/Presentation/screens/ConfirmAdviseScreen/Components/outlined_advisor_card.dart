@@ -315,7 +315,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                             ? const Center(
                                                 child:
                                                     CircularProgressIndicator.adaptive())
-                                            : MyButton(
+                                            : CustomElevatedButton(
                                                 isBold: true,
                                                 txt: "استلام",
                                                 onPressedHandler: () {

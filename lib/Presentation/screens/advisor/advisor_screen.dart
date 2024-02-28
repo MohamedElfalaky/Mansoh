@@ -399,7 +399,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                             Container(
                                 margin: const EdgeInsets.only(bottom: 15),
                                 height: 50,
-                                child: MyButton(
+                                child: CustomElevatedButton(
                                   onPressedHandler: () {
                                     MyApplication.navigateToReplace(
                                         context,

@@ -42,17 +42,17 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
   double changePositionedOfLine() {
     switch (current) {
       case 0:
-        return MediaQuery.of(context).size.width * 0.85;
+        return MediaQuery.of(context).size.width * 0.83;
       case 1:
-        return MediaQuery.of(context).size.width * 0.73;
+        return MediaQuery.of(context).size.width * 0.7;
       case 2:
-        return MediaQuery.of(context).size.width * 0.60;
+        return MediaQuery.of(context).size.width * 0.57;
       case 3:
-        return MediaQuery.of(context).size.width * 0.45;
+        return MediaQuery.of(context).size.width * 0.42;
       case 4:
-        return MediaQuery.of(context).size.width * 0.28;
+        return MediaQuery.of(context).size.width * 0.27;
       case 5:
-        return MediaQuery.of(context).size.width * 0.13;
+        return MediaQuery.of(context).size.width * 0.14;
       default:
         return 0;
     }
@@ -132,7 +132,7 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
                           ),
                         ],
                       ),
-                      height: size.height * 0.06,
+                      height: 40,
                       child: Stack(
                         children: [
                           Positioned(
@@ -190,7 +190,8 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
                                               context
                                                   .read<OrdersFiltersCubit>()
                                                   .getOrdersFilters(
-                                                      id: ordersList[index].id
+                                                      id: ordersList[index]
+                                                          .id
                                                           .toString());
                                             }
                                           },
@@ -213,20 +214,16 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
                           ),
                           AnimatedPositioned(
                             curve: Curves.fastLinearToSlowEaseIn,
-                            bottom: 5,
+                            bottom: 10,
                             left: changePositionedOfLine(),
                             duration: const Duration(milliseconds: 500),
-
                             child: AnimatedContainer(
-
                               margin: const EdgeInsets.symmetric(horizontal: 5),
                               width: changeContainerWidth(),
-
                               alignment: Alignment.center,
-                              height: size.height * 0.002,
-
+                              height: 2,
                               decoration: BoxDecoration(
-                                color: Colors.black38,
+                                color: Colors.blue,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               duration: const Duration(milliseconds: 1000),
@@ -239,6 +236,20 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
                     buildOrdersFilterBlocBuilder()
                   ],
                 );
+              } else if (homeState is OrdersStatusEmpty) {
+                return const Expanded(
+                    child: Padding(
+                  padding: EdgeInsets.only(bottom: 150),
+                  child: Center(
+                      child: Text(
+                    'لا يوجد ناصحين بهذا القسم',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                      fontFamily: Constants.mainFont,
+                    ),
+                  )),
+                ));
               }
               return const SizedBox.shrink();
             })));
@@ -248,6 +259,21 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
       buildOrdersFilterBlocBuilder() {
     return BlocBuilder<OrdersFiltersCubit, OrdersFiltersState>(
         builder: (context, ordersFilters) {
+      if (ordersFilters is OrdersFiltersEmpty) {
+        return const Expanded(
+            child: Padding(
+          padding: EdgeInsets.only(bottom: 150),
+          child: Center(
+              child: Text(
+            'لا يوجد طلبات بهذا القسم',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 18,
+              fontFamily: Constants.mainFont,
+            ),
+          )),
+        ));
+      }
       if (ordersFilters is OrdersFiltersLoading) {
         return const SizedBox(
           height: 200,
@@ -271,23 +297,24 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
                               context,
                               CompleteAdviseScreen(
                                 adviceId: filtersList[index].id!,
-
                               ));
                         }
                       : () {
-                    print('advisor profile data ${ filtersList[index].adviser?.category?.length}');
-                        MyApplication.navigateTo(
-                          context,
-                          ChatScreen(
-
-                            statusClickable: filtersList[index].label!.id == 3,
-                            labelToShow: filtersList[index].label!.id == 1 ||
-                                filtersList[index].label!.id == 2,
-                            openedStatus: filtersList[index].label!.id == 2,
-                            adviceId: filtersList[index].id!,
-                            adviserProfileData: filtersList[index].adviser,
-                          ));
-                      },
+                          print(
+                              'advisor profile data ${filtersList[index].adviser?.category?.length}');
+                          MyApplication.navigateTo(
+                              context,
+                              ChatScreen(
+                                statusClickable:
+                                    filtersList[index].label!.id == 3,
+                                labelToShow:
+                                    filtersList[index].label!.id == 1 ||
+                                        filtersList[index].label!.id == 2,
+                                openedStatus: filtersList[index].label!.id == 2,
+                                adviceId: filtersList[index].id!,
+                                adviserProfileData: filtersList[index].adviser,
+                              ));
+                        },
                   child: OrderCard(orderFilterData: filtersList[index]),
                 );
               }),

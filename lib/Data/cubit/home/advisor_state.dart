@@ -14,3 +14,4 @@ class AdvisorListLoaded extends AdvisorState {
 }
 
 class AdvisorListError extends AdvisorState {}
+class AdvisorListEmpty extends AdvisorState {}

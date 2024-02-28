@@ -108,7 +108,7 @@ class _RejectScreenState extends State<RejectScreen> {
                 height: 50,
                 child: state is PostRejectLoading
                     ? const Center(child: CircularProgressIndicator.adaptive())
-                    : MyButton(
+                    : CustomElevatedButton(
                         txt: "ارسال الاعتراض",
                         isBold: true,
                         onPressedHandler: () {

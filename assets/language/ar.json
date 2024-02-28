@@ -11,6 +11,8 @@
   "register": "تسجيل",
   "recording": "جارِ التسجيل",
   "resident_country": "دولة الاقامة",
+  "empty advisor data": "لا يوجد ناصحين بهذا القسم",
+
   "Advice details should be more than 5 character": "تفاصيل النصيحة يجب ألا تقل عن ٥ حروف",
   "resident_city": "المدينة المقيم فيها",
   "alsaudia": "السعودية",

@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nasooh/Data/cubit/home/advisor_state.dart';
+ import 'package:nasooh/Data/cubit/home/advisor_state.dart';
 import 'package:nasooh/Data/models/category_parent_model.dart';
 import 'package:nasooh/Presentation/screens/Advisor/advisor_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/advisor_card.dart';
@@ -74,6 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
           MyApplication.dismissKeyboard(context);
         },
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          extendBody: false,
+          extendBodyBehindAppBar: false,
           backgroundColor: Constants.whiteAppColor,
           body: BlocBuilder<HomeSliderCubit, HomeState>(
               builder: (context, homeState) {
@@ -395,6 +398,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           );
+                        } else if (advisorState is AdvisorListEmpty) {
+                          return const Expanded(
+                              child: Padding(
+                            padding: EdgeInsets.only(bottom: 150),
+                            child: Center(
+                                child: Text(
+                              'لا يوجد ناصحين بهذا القسم',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                                fontFamily: Constants.mainFont,
+                              ),
+                            )),
+                          ));
                         } else if (advisorState is AdvisorListLoaded) {
                           return Expanded(
                             child: ListView.builder(

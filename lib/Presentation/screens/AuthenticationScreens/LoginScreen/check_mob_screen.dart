@@ -30,8 +30,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
+     super.initState();
 
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 3000));
@@ -184,13 +183,13 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                             height: 24,
                           ),
                           state is MobLoading
-                              ? const Center(child: CircularProgressIndicator.adaptive())
+                              ? const CustomLoadingButton()
                               : FadeTransition(
                                   opacity: _fadeController,
                                   child: SizedBox(
                                     width: double.infinity,
                                     height: 48,
-                                    child: MyButton(
+                                    child: CustomElevatedButton(
                                       isBold: true,
                                       txt: "التالي",
                                       onPressedHandler: () {
@@ -220,7 +219,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                               child: SizedBox(
                                 width: width(context) * 0.36,
                                 height: 48,
-                                child: MyButton(
+                                child: CustomElevatedButton(
                                   isBold: true,
                                   txt: "login_guest".tr,
                                   onPressedHandler: () {},
@@ -229,22 +228,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                             ),
                           ),
 
-                          // Center(
-                          //   child: SizedBox(
-                          //     width: MediaQuery.of(context).size.width * 0.3,
-                          //     child: ElevatedButton(
-                          //       onPressed: () {},
-                          //       child: Center(
-                          //         child: Text(
-                          //           "login_guest")!,
-                          //           style: Constants.secondaryTitleRegularFont.copyWith(
-                          //             color: Colors.white,
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+
                         ],
                       ),
                     )),
@@ -258,190 +242,3 @@ class _CheckMobScreenState extends State<CheckMobScreen>
 }
 
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_svg/svg.dart';
-// import 'package:intl_phone_field/intl_phone_field.dart';
-// import 'package:password_text_field/password_text_field.dart';
-//
-// import '../../../../app/constants.dart';
-// import '../../../../app/utils/lang/language_constants.dart';
-// import '../../../../app/utils/my_application.dart';
-// import '../../../widgets/shared.dart';
-//
-// class LoginScreen extends StatefulWidget {
-//   const LoginScreen({Key? key}) : super(key: key);
-//
-//   @override
-//   State<LoginScreen> createState() => _LoginScreenState();
-// }
-//
-// class _LoginScreenState extends State<LoginScreen> {
-//   final TextEditingController _passwordController = TextEditingController();
-//   final TextEditingController _phoneController = TextEditingController();
-//   @override
-//   Widget build(BuildContext context) {
-//     return Directionality(
-//       textDirection: TextDirection.ltr,
-//       child: GestureDetector(
-//         onTap: () {
-//           MyApplication.dismissKeyboard(context);
-//         },
-//         child: Scaffold(
-//           resizeToAvoidBottomInset: false,
-//           body: Padding(
-//             padding: const EdgeInsets.all(16),
-//             child: Center(
-//                 child: Padding(
-//               padding: EdgeInsets.only(
-//                 bottom: MediaQuery.of(context).viewInsets.bottom,
-//               ),
-//               child: SingleChildScrollView(
-//                   keyboardDismissBehavior:
-//                       ScrollViewKeyboardDismissBehavior.onDrag,
-//                   child: Column(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     crossAxisAlignment: CrossAxisAlignment.end,
-//                     children: [
-//                       // SvgPicture.asset(
-//                       //   'assets/images/SVGs/logo.svg',
-//                       //   width: 24,
-//                       //   height: 24,
-//                       // ),
-//                       Text(
-//                         "phone_number")!,
-//                         textAlign: TextAlign.right,
-//                         style: Constants.mainTitleRegularFont,
-//                       ),
-//                       IntlPhoneField(
-//                         controller: _phoneController,
-//                         showDropdownIcon: true,
-//                         dropdownIcon: const Icon(Icons.arrow_drop_down,
-//                             color: Colors.transparent),
-//                         style: Constants.subtitleFont1,
-//                         dropdownIconPosition: IconPosition.leading,
-//                         textAlign: TextAlign.right,
-//                         decoration: InputDecoration(
-//                           errorStyle: Constants.subtitleFont1.copyWith(
-//                             color: Colors.red,
-//                           ),
-//                           suffixIcon: MyPrefixWidget(
-//                               svgString: "assets/images/SVGs/phone.svg"),
-//                           // labelText: 'Phone Number',
-//                           border: const OutlineInputBorder(
-//                             gapPadding: 0,
-//                             borderSide: BorderSide(),
-//                           ),
-//                         ),
-//                         initialCountryCode: 'SA',
-//                         onChanged: (phone) {
-//                           print(phone.completeNumber);
-//                         },
-//                         invalidNumberMessage:
-//                             "invalid_number")!,
-//                       ),
-//                       const SizedBox(
-//                         height: 16,
-//                       ),
-//                       Text(
-//                         "password")!,
-//                         textAlign: TextAlign.right,
-//                         style: Constants.mainTitleRegularFont,
-//                       ),
-//                       Directionality(
-//                         textDirection: TextDirection.rtl,
-//                         child: PasswordTextFormField(
-//                           style: Constants.subtitleFont1,
-//                           autovalidateMode: AutovalidateMode.onUserInteraction,
-//                           validator: (value) {
-//                             if (value!.isEmpty) {
-//                               return getTranslated(
-//                                   context, "password_required")!;
-//                             }
-//                             if (value.length < 6) {
-//                               return "password_length")!;
-//                             }
-//                             return null;
-//                           },
-//                           decoration: InputDecoration(
-//                             errorStyle: Constants.subtitleFont1.copyWith(
-//                               color: Colors.red,
-//                             ),
-//                             prefixIcon: MyPrefixWidget(
-//                                 svgString: "assets/images/SVGs/key.svg"),
-//                             // labelText: 'Password',
-//                             border: const OutlineInputBorder(
-//                               borderSide: BorderSide(),
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                       const SizedBox(
-//                         height: 32,
-//                       ),
-//                       SizedBox(
-//                         width: double.infinity,
-//                         height: 48,
-//                         child: ElevatedButton(
-//                           onPressed: () {},
-//                           child: Text(
-//                             "login")!,
-//                             style: Constants.secondaryTitleFont.copyWith(
-//                               color: Colors.white,
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                       const SizedBox(
-//                         height: 16,
-//                       ),
-//                       Center(
-//                         child: Text("forgot_password")!,
-//                             textAlign: TextAlign.center,
-//                             style: Constants.subtitleFont),
-//                       ),
-//                       const SizedBox(
-//                         height: 30,
-//                       ),
-//                       SizedBox(
-//                           width: double.infinity,
-//                           child: Text("no_account")!,
-//                               textAlign: TextAlign.center,
-//                               style: Constants.subtitleRegularFontHint)),
-//                       SizedBox(
-//                         width: double.infinity,
-//                         child: TextButton(
-//                             onPressed: (() {}),
-//                             child: Text(
-//                               "create_new_account")!,
-//                               style: Constants.mainTitleFont,
-//                             )),
-//                       ),
-//                       const SizedBox(
-//                         height: 30,
-//                       ),
-//                       Center(
-//                         child: SizedBox(
-//                           width: MediaQuery.of(context).size.width * 0.3,
-//                           child: ElevatedButton(
-//                             onPressed: () {},
-//                             child: Center(
-//                               child: Text(
-//                                 "login_guest")!,
-//                                 style: Constants.secondaryTitleRegularFont
-//                                     .copyWith(
-//                                   color: Colors.white,
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   )),
-//             )),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

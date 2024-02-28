@@ -224,7 +224,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                         ))
                                     .toList())))
                   else
-                    SizedBox(height: 250),
+                    const SizedBox(height: 250),
                   SizedBox(
                     height: 290,
                     child: SingleChildScrollView(
@@ -310,7 +310,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   },
                 ),
               ),
-              MyButton(
+              CustomElevatedButton(
                 onPressedHandler: ()   {
                   List<String?> idList = selectedItems
                       .map((category) => category.id.toString())

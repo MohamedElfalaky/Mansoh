@@ -23,8 +23,7 @@ class OrdersFiltersRepo {
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        log("order status whole data  is ${response.body}");
-        debugPrint("order status whole data  is ${responseMap.toString()}");
+        log("ALL ORDERS DATA ${response.body}");
         final sliders = ordersFiltersModelFromJson(responseMap);
         return sliders;
       } else {

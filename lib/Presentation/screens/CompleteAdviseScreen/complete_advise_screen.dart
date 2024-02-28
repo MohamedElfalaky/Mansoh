@@ -70,7 +70,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                   : Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       height: 50,
-                      child: MyButton(
+                      child: CustomElevatedButton(
                         onPressedHandler: () {
                           context
                               .read<PayAdviceCubit>()

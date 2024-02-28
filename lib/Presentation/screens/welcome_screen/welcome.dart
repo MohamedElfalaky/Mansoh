@@ -129,11 +129,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                             child: SizedBox(
                               width: double.infinity,
                               height: 48,
-                              child: MyButton(
+                              child: CustomElevatedButton(
                                 isBold: true,
                                 txt: "ابدأ الان",
                                 onPressedHandler: () {
-                                  MyApplication.navigateTo(
+                                  MyApplication.navigateToReplace(
                                       context, const CheckMobScreen());
                                 },
                               ),

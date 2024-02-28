@@ -11,11 +11,12 @@ import '../../models/home_models/advisor_list_model.dart';
 
 class AdvisorListRepo {
   Future<AdvisorListModel?> getAdvisorList(
-      {String? catVal, String? searchTxt, double? rateVal,String? subCategoryVal}) async {
+      {String? catVal, String? searchTxt, double? rateVal}) async {
     try {
+      String url=
+          '${Keys.baseUrl}/client/adviser/list?category=${catVal ?? ""}&name=${searchTxt ?? ""}&rate=${rateVal ?? ""}';
       http.Response response = await http.get(
-        Uri.parse(
-            '${Keys.baseUrl}/client/adviser/list?parent_id=${catVal ?? ""}&search=${searchTxt ?? ""}&rate=${rateVal ?? ""}'),
+        Uri.parse(url),
         headers: {
           'Accept': 'application/json',
           'lang': Get.locale?.languageCode ?? "ar",
@@ -29,7 +30,6 @@ class AdvisorListRepo {
         debugPrint("Data from Api is ${categoryFields.data!}");
         return categoryFields;
       } else {
-
         MyApplication.showToastView(message: responseMap["message"]);
       }
     } on TimeoutException catch (e) {

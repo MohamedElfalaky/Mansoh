@@ -66,7 +66,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   : Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       height: 50,
-                      child: MyButton(
+                      child: CustomElevatedButton(
                         txt: "Confirm Order".tr,
                         isBold: true,
                         onPressedHandler: () {
@@ -119,6 +119,9 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                       ),
                       TextFormField(
                         maxLength: 35,
+                        style: const TextStyle(
+                          fontFamily: 'Cairo'
+                        ),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Enter Advice Title".tr;
@@ -129,6 +132,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                           return null;
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
+
                         controller: requestTitle,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: const MyPrefixWidget(),

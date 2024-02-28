@@ -1,5 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nasooh/Data/cubit/home/advisor_state.dart';
+import '../../../app/utils/exports.dart';
 import '../../repositories/home_repos/advisor_list_repo.dart';
 
 class AdvisorListCubit extends Cubit<AdvisorState> {
@@ -11,9 +11,15 @@ class AdvisorListCubit extends Cubit<AdvisorState> {
       {String? categoryValue, String? searchTxt, double? rateVal}) async {
     try {
       emit(AdvisorListLoading());
-      final mList = await advisorListRepo.getAdvisorList(
+      final advisorList = await advisorListRepo.getAdvisorList(
           catVal: categoryValue, searchTxt: searchTxt, rateVal: rateVal);
-      emit(AdvisorListLoaded(mList));
+      debugPrint('ADVISOR LIST ${advisorList?.data?.length}');
+
+      if (advisorList?.data?.isEmpty == true) {
+        emit(AdvisorListEmpty());
+      } else {
+        emit(AdvisorListLoaded(advisorList));
+      }
     } catch (e) {
       emit(AdvisorListError());
     }

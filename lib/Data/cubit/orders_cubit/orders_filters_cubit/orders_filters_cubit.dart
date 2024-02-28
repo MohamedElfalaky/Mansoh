@@ -11,14 +11,17 @@ class OrdersFiltersCubit extends Cubit<OrdersFiltersState> {
   getOrdersFilters({required String id}) async {
     try {
       emit(OrdersFiltersLoading());
-      final mList = await ordersStatus.getStatus( id: id);
+      final ordersList = await ordersStatus.getStatus(id: id);
+      log('Hany ${ordersList?.data}');
 
-      mList?.data?.map((e) {
-        return e.adviser?.category?.map((e) => print('category name ${e.name}')).toList();
-      }).toList();
-      log('HANYYYYY ${mList?.data}');
+      if(ordersList?.data?.isEmpty==true)
+        {
+          emit(OrdersFiltersEmpty());
 
-      emit(OrdersFiltersLoaded(mList));
+        }
+      else {
+        emit(OrdersFiltersLoaded(ordersList));
+      }
     } catch (e) {
       emit(OrdersFiltersError());
     }

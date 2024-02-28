@@ -107,7 +107,7 @@ class _RateScreenState extends State<RateScreen> {
                     child: state is ReviewLoading
                         ? const Center(
                             child: CircularProgressIndicator.adaptive())
-                        : MyButton(
+                        : CustomElevatedButton(
                             txt: "ارسال التقييم",
                             isBold: true,
                             onPressedHandler: () {

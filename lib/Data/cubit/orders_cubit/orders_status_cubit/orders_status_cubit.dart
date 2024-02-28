@@ -9,8 +9,13 @@ class OrdersStatusCubit extends Cubit<OrdersStatusState> {
   getOrdersStatus() async {
     try {
       emit(OrdersStatusLoading());
-      final mList = await ordersStatus.getStatus();
-      emit(OrdersStatusLoaded(mList));
+      final ordersList = await ordersStatus.getStatus();
+
+      if (ordersList?.data?.isEmpty == true) {
+        emit(OrdersStatusEmpty());
+      } else {
+        emit(OrdersStatusLoaded(ordersList));
+      }
     } catch (e) {
       emit(OrdersStatusError());
     }

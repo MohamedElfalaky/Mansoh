@@ -83,7 +83,7 @@ class _FatooraScreenState extends State<FatooraScreen> {
     return Column(
       children: [
         SizedBox(height: 220, child: mfCardView),
-        MyButton(
+        CustomElevatedButton(
             onPressedHandler: () {
               payToFatoorah();
             },
