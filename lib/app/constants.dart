@@ -105,13 +105,10 @@ class Constants {
                 : null,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            border: const OutlineInputBorder(
-              gapPadding: 0,
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-            ),
+            border: outlineInputBorder(),
+            enabledBorder: outlineInputBorder(),
+            disabledBorder: outlineInputBorder(),
+            focusedBorder: outlineInputBorder(),
             hintText: hintText,
             hintStyle: const TextStyle(
               fontFamily: mainFont,
@@ -121,6 +118,9 @@ class Constants {
         : InputDecoration(
             fillColor: fillColor,
             filled: isFilled,
+            enabledBorder: outlineInputBorder(),
+            disabledBorder: outlineInputBorder(),
+            focusedBorder: outlineInputBorder(),
             prefixIcon: isPrefexed == false
                 ? null
                 : Padding(
@@ -152,6 +152,16 @@ class Constants {
               fontSize: 12,
               color: fontHintColor,
             ));
+  }
+
+  static OutlineInputBorder outlineInputBorder() {
+    return const OutlineInputBorder(
+      gapPadding: 0,
+      borderSide: BorderSide(color: primaryAppColor),
+      borderRadius: BorderRadius.all(
+        Radius.circular(10),
+      ),
+    );
   }
 
   /// strings

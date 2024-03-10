@@ -77,9 +77,7 @@ class _MyAppState extends State<MyApp> {
             dividerColor: Colors.transparent,
 
             dividerTheme: const DividerThemeData(color: Colors.transparent),
-            primarySwatch: getMaterialColor(colorHex: 0xFF0085A5),
             primaryColor: const Color(0xFF0085A5),
-            backgroundColor: Colors.white,
             appBarTheme: const AppBarTheme().copyWith(
               toolbarHeight: 70,
               titleSpacing: 4,
@@ -88,7 +86,7 @@ class _MyAppState extends State<MyApp> {
               elevation: 0,
               titleTextStyle: Constants.mainTitleFont,
             ),
-            scaffoldBackgroundColor: Constants.whiteAppColor),
+            scaffoldBackgroundColor: Constants.whiteAppColor, colorScheme: ColorScheme.fromSwatch(primarySwatch: getMaterialColor(colorHex: 0xFF0085A5)).copyWith(background: Colors.white)),
         home: const PreHome(),
       ),
     );

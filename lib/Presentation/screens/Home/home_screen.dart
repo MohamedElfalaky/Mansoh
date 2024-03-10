@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: SvgPicture.asset(
-                                searchIcon,
+                                searchIcon
                               ),
                             ),
                             isSuffix: true,

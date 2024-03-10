@@ -75,9 +75,9 @@ class CustomLoadingButton extends StatelessWidget {
           backgroundColor: Constants.primaryAppColor,
         ),
         onPressed: () {},
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: const Center(
+        child: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          child: Center(
             child: CircularProgressIndicator.adaptive(
                 backgroundColor: Colors.white),
           ),
