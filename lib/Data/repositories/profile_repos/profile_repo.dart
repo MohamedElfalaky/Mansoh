@@ -16,7 +16,7 @@ class GetProfileRepo {
         Uri.parse('${Keys.baseUrl}/client/profile/${sharedPrefs.getId()}'),
         headers: {
           'Accept': 'application/json',
-          'lang':  Get.locale?.languageCode ??"ar",
+          'lang': Get.locale?.languageCode ?? "ar",
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

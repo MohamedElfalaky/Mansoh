@@ -57,6 +57,7 @@ class GoBack extends StatelessWidget {
 
 class MyPrefixWidget extends StatelessWidget {
   const MyPrefixWidget({super.key, this.svgString});
+
   final String? svgString;
 
   String getSvgString() {
@@ -86,6 +87,7 @@ class MyPrefixWidget extends StatelessWidget {
 
 class Back extends StatelessWidget {
   const Back({super.key, this.header});
+
   final String? header;
 
   @override

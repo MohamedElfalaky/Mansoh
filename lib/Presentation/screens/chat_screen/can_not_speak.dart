@@ -7,7 +7,7 @@ class CanNotSpeak extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: 90,
       width: width(context),
       color: Constants.primaryAppColor.withOpacity(0.1),
@@ -18,9 +18,7 @@ class CanNotSpeak extends StatelessWidget {
           ),
           const Text(
             "لا يمكنك التحدث مع هذا الناصح الان",
-            style: TextStyle(
-                fontSize: 12,
-                fontFamily: Constants.mainFont),
+            style: TextStyle(fontSize: 12, fontFamily: Constants.mainFont),
           ),
           InkWell(
             onTap: () {

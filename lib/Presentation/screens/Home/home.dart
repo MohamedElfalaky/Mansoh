@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/Home/home_screen.dart';
 import 'package:nasooh/Presentation/screens/UserProfileScreens/userProfileSettings/user_profile_screen.dart';
 import 'package:nasooh/app/constants.dart';
+import '../../../Data/repositories/notification/fcm.dart';
 import '../UserProfileScreens/UserOrders/user_orders.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key, required this.currentIndex});
+
   final int currentIndex;
 
   @override
@@ -24,7 +26,9 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   void initState() {
     super.initState();
+
     currentIndex = widget.currentIndex;
+    FirebaseCustomNotification.setUpFirebase();
   }
 
   @override

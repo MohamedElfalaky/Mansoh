@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-UpdateProfileModel updateProfileModelFromJson(dynamic str) => UpdateProfileModel.fromJson(str);
+UpdateProfileModel updateProfileModelFromJson(dynamic str) =>
+    UpdateProfileModel.fromJson(str);
 
-String updateProfileModelToJson(UpdateProfileModel data) => json.encode(data.toJson());
+String updateProfileModelToJson(UpdateProfileModel data) =>
+    json.encode(data.toJson());
 
 class UpdateProfileModel {
   Data? data;
@@ -21,19 +23,24 @@ class UpdateProfileModel {
     this.pagination,
   });
 
-  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) => UpdateProfileModel(
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    status: json["status"],
-    message: json["message"],
-    pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
-  );
+  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) =>
+      UpdateProfileModel(
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        status: json["status"],
+        message: json["message"],
+        pagination: json["pagination"] == null
+            ? []
+            : List<dynamic>.from(json["pagination"]!.map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data?.toJson(),
-    "status": status,
-    "message": message,
-    "pagination": pagination == null ? [] : List<dynamic>.from(pagination!.map((x) => x)),
-  };
+        "data": data?.toJson(),
+        "status": status,
+        "message": message,
+        "pagination": pagination == null
+            ? []
+            : List<dynamic>.from(pagination!.map((x) => x)),
+      };
 }
 
 class Data {
@@ -66,34 +73,39 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"],
-    avatar: json["avatar"],
-    email: json["email"],
-    lang: json["lang"],
-    token: json["token"],
-    fullName: json["full_name"],
-    mobile: json["mobile"],
-    gender: json["gender"],
-    countryId: json["country_id"] == null ? null : Country.fromJson(json["country_id"]),
-    cityId: json["city_id"] == null ? null : CityId.fromJson(json["city_id"]),
-    nationalityId: json["nationality_id"] == null ? null : NationalityId.fromJson(json["nationality_id"]),
-    status: json["status"],
-  );
+        id: json["id"],
+        avatar: json["avatar"],
+        email: json["email"],
+        lang: json["lang"],
+        token: json["token"],
+        fullName: json["full_name"],
+        mobile: json["mobile"],
+        gender: json["gender"],
+        countryId: json["country_id"] == null
+            ? null
+            : Country.fromJson(json["country_id"]),
+        cityId:
+            json["city_id"] == null ? null : CityId.fromJson(json["city_id"]),
+        nationalityId: json["nationality_id"] == null
+            ? null
+            : NationalityId.fromJson(json["nationality_id"]),
+        status: json["status"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "avatar": avatar,
-    "email": email,
-    "lang": lang,
-    "token": token,
-    "full_name": fullName,
-    "mobile": mobile,
-    "gender": gender,
-    "country_id": countryId?.toJson(),
-    "city_id": cityId?.toJson(),
-    "nationality_id": nationalityId?.toJson(),
-    "status": status,
-  };
+        "id": id,
+        "avatar": avatar,
+        "email": email,
+        "lang": lang,
+        "token": token,
+        "full_name": fullName,
+        "mobile": mobile,
+        "gender": gender,
+        "country_id": countryId?.toJson(),
+        "city_id": cityId?.toJson(),
+        "nationality_id": nationalityId?.toJson(),
+        "status": status,
+      };
 }
 
 class CityId {
@@ -108,16 +120,17 @@ class CityId {
   });
 
   factory CityId.fromJson(Map<String, dynamic> json) => CityId(
-    id: json["id"],
-    country: json["country"] == null ? null : Country.fromJson(json["country"]),
-    name: json["name"],
-  );
+        id: json["id"],
+        country:
+            json["country"] == null ? null : Country.fromJson(json["country"]),
+        name: json["name"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "country": country?.toJson(),
-    "name": name,
-  };
+        "id": id,
+        "country": country?.toJson(),
+        "name": name,
+      };
 }
 
 class Country {
@@ -130,14 +143,14 @@ class Country {
   });
 
   factory Country.fromJson(Map<String, dynamic> json) => Country(
-    id: json["id"],
-    name: json["name"],
-  );
+        id: json["id"],
+        name: json["name"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-  };
+        "id": id,
+        "name": name,
+      };
 }
 
 class NationalityId {
@@ -152,14 +165,14 @@ class NationalityId {
   });
 
   factory NationalityId.fromJson(Map<String, dynamic> json) => NationalityId(
-    id: json["id"],
-    name: json["name"],
-    logo: json["logo"],
-  );
+        id: json["id"],
+        name: json["name"],
+        logo: json["logo"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "logo": logo,
-  };
+        "id": id,
+        "name": name,
+        "logo": logo,
+      };
 }

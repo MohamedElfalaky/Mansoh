@@ -14,21 +14,22 @@ class PostRejectRepo {
     String? commentId,
     String? commentOther,
     String? adviceId,
-   }) async {
+  }) async {
     try {
-      http.Response response =
-      await http.post(Uri.parse('${Keys.baseUrl}/client/advice/reject/$adviceId'), headers: {
-        'Accept': 'application/json',
-        'lang': Get.locale?.languageCode ??"ar",
-        "Authorization": "Bearer ${sharedPrefs.getToken()}"
-      }, body: {
-        'comment_id': commentId,
-        'comment_other': '$commentOther',
-
-      });
+      http.Response response = await http.post(
+          Uri.parse('${Keys.baseUrl}/client/advice/reject/$adviceId'),
+          headers: {
+            'Accept': 'application/json',
+            'lang': Get.locale?.languageCode ?? "ar",
+            "Authorization": "Bearer ${sharedPrefs.getToken()}"
+          },
+          body: {
+            'comment_id': commentId,
+            'comment_other': '$commentOther',
+          });
       Map<String, dynamic> responseMap = json.decode(response.body);
 
-       if (response.statusCode == 200 && responseMap["status"] == 1) {
+      if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print("response.bodyis ${response.body}");
         final userdata = postRejectModelFromJson(responseMap);
         // sharedPrefs.setToken(userdata.data!.token!);
@@ -48,7 +49,7 @@ class PostRejectRepo {
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e,st) {
+    } on Error catch (e, st) {
       if (kDebugMode) {
         print(e);
         print(st);

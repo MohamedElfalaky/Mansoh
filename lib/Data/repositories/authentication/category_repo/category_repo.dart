@@ -16,7 +16,6 @@ class CategoryRepo {
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-
         final categoryFields = CategoryModel.fromJson(responseMap);
 
         // MyApplication.showToastView(message: responseMap["message"]);
@@ -44,5 +43,3 @@ class CategoryRepo {
     return null;
   }
 }
-
-

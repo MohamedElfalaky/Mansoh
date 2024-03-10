@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-PaymentListModel paymentListModelFromJson(dynamic str) => PaymentListModel.fromJson(str);
+PaymentListModel paymentListModelFromJson(dynamic str) =>
+    PaymentListModel.fromJson(str);
 
-String paymentListModelToJson(PaymentListModel data) => json.encode(data.toJson());
+String paymentListModelToJson(PaymentListModel data) =>
+    json.encode(data.toJson());
 
 class PaymentListModel {
   List<Datum>? data;
@@ -21,19 +23,28 @@ class PaymentListModel {
     this.pagination,
   });
 
-  factory PaymentListModel.fromJson(Map<String, dynamic> json) => PaymentListModel(
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
-    status: json["status"],
-    message: json["message"],
-    pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
-  );
+  factory PaymentListModel.fromJson(Map<String, dynamic> json) =>
+      PaymentListModel(
+        data: json["data"] == null
+            ? []
+            : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+        status: json["status"],
+        message: json["message"],
+        pagination: json["pagination"] == null
+            ? []
+            : List<dynamic>.from(json["pagination"]!.map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
-    "status": status,
-    "message": message,
-    "pagination": pagination == null ? [] : List<dynamic>.from(pagination!.map((x) => x)),
-  };
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+        "status": status,
+        "message": message,
+        "pagination": pagination == null
+            ? []
+            : List<dynamic>.from(pagination!.map((x) => x)),
+      };
 }
 
 class Datum {
@@ -48,14 +59,14 @@ class Datum {
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    id: json["id"],
-    name: json["name"],
-    logo: json["logo"],
-  );
+        id: json["id"],
+        name: json["name"],
+        logo: json["logo"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "logo": logo,
-  };
+        "id": id,
+        "name": name,
+        "logo": logo,
+      };
 }

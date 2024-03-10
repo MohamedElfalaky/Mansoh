@@ -9,6 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
   final double? txtSize;
   final bool? isBold;
   final Widget? prefixWidget;
+
   const CustomElevatedButton(
       {super.key,
       this.onPressedHandler,
@@ -59,6 +60,7 @@ class CustomLoadingButton extends StatelessWidget {
 
   final bool? isBold;
   final Widget? prefixWidget;
+
   const CustomLoadingButton(
       {super.key, this.onPressedHandler, this.isBold, this.prefixWidget});
 
@@ -95,6 +97,7 @@ class MyButtonOutlined extends StatelessWidget {
   final double? txtSize;
   final bool? isBold;
   final Widget? prefixWidget;
+
   const MyButtonOutlined(
       {super.key,
       this.onPressedHandler,

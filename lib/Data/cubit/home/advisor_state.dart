@@ -1,7 +1,6 @@
 import '../../models/home_models/advisor_list_model.dart';
 
-abstract class AdvisorState{}
-
+abstract class AdvisorState {}
 
 class AdvisorListInitial extends AdvisorState {}
 
@@ -14,4 +13,5 @@ class AdvisorListLoaded extends AdvisorState {
 }
 
 class AdvisorListError extends AdvisorState {}
+
 class AdvisorListEmpty extends AdvisorState {}

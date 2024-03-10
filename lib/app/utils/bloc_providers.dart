@@ -33,14 +33,15 @@ import '../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cubit
 import '../../Data/cubit/subcategory_cubit/subcategory_cubit.dart';
 import '../../Data/cubit/wallet_cubit/wallet_cubit.dart';
 
-List <BlocProvider>providers = [
+List<BlocProvider> providers = [
   BlocProvider<LoginCubit>(create: (context) => LoginCubit()),
   BlocProvider<MobCubit>(create: (context) => MobCubit()),
   BlocProvider<CheckCodeCubit>(create: (context) => CheckCodeCubit()),
   BlocProvider<CountryCubit>(create: (context) => CountryCubit()),
   BlocProvider<CityCubit>(create: (context) => CityCubit()),
   BlocProvider<RegisterCubit>(create: (context) => RegisterCubit()),
-  BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()..getDataProfile()),
+  BlocProvider<ProfileCubit>(
+      create: (context) => ProfileCubit()..getDataProfile()),
   BlocProvider<LogOutCubit>(create: (context) => LogOutCubit()),
   BlocProvider<UpdateProfileCubit>(create: (context) => UpdateProfileCubit()),
   BlocProvider<GetUserCubit>(create: (context) => GetUserCubit()),

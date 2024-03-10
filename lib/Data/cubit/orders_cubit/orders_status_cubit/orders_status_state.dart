@@ -13,5 +13,5 @@ class OrdersStatusLoaded extends OrdersStatusState {
 }
 
 class OrdersStatusError extends OrdersStatusState {}
-class OrdersStatusEmpty extends OrdersStatusState {}
 
+class OrdersStatusEmpty extends OrdersStatusState {}

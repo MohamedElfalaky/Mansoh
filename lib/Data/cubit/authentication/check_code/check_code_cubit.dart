@@ -50,27 +50,31 @@ Future<void> _showAlertDialog(BuildContext context) async {
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
-                      Text("dialog tile".tr,style: const TextStyle(
-                        fontFamily: 'Cairo'
-                      ),),
+                      Text(
+                        "dialog tile".tr,
+                        style: const TextStyle(fontFamily: 'Cairo'),
+                      ),
                     ],
                   ),
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: Text("No".tr,style: const TextStyle(
-                        fontFamily: 'Cairo'
-                    ),),
+                    child: Text(
+                      "No".tr,
+                      style: const TextStyle(fontFamily: 'Cairo'),
+                    ),
                     onPressed: () {
                       MyApplication.navigateTo(context, const CheckMobScreen());
                     },
                   ),
                   state is GetUserLoading
-                      ? const Center(child: CircularProgressIndicator.adaptive())
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive())
                       : TextButton(
-                          child: Text("Yes".tr,style: const TextStyle(
-                              fontFamily: 'Cairo'
-                          ),),
+                          child: Text(
+                            "Yes".tr,
+                            style: const TextStyle(fontFamily: 'Cairo'),
+                          ),
                           onPressed: () {
                             context.read<GetUserCubit>().getMobMethod(
                                   context: context,

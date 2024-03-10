@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-
-
 class Validations {
   static String? validateName(String? name, BuildContext context) {
     String? validateString = '';
-   // Pattern pattern = r'[a-zA-Zء-يa-zA-Zء-ي]';
+    // Pattern pattern = r'[a-zA-Zء-يa-zA-Zء-ي]';
     Pattern pattern = r'[a-zA-zء-ي]{2,}[\s]{1,}[a-zA-Zء-ي]{2,}$';
     RegExp regex = RegExp(pattern.toString());
     if (name!.trim().isEmpty) {
@@ -19,7 +17,8 @@ class Validations {
     return validateString;
   }
 
-  static String? validateNameForUpdateScreen(String? name, BuildContext context) {
+  static String? validateNameForUpdateScreen(
+      String? name, BuildContext context) {
     String? validateString = '';
     // Pattern pattern = r'[a-zA-Zء-يa-zA-Zء-ي]';
     Pattern pattern = r'[a-zA-zء-ي]{2,}[\s]{1,}[a-zA-Zء-ي]{2,}$';
@@ -57,7 +56,7 @@ class Validations {
     } else if (phone.trim().length != 9) {
       validateString = 'invaliddata'.tr;
     } else if (!phone.startsWith("5", 0)) {
-      validateString =  "invaliddata".tr;
+      validateString = "invaliddata".tr;
     } else {
       validateString = null;
     }
@@ -103,6 +102,6 @@ class Validations {
     return validateString;
   }
 
-  static   String validationEmail =
+  static String validationEmail =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
 }

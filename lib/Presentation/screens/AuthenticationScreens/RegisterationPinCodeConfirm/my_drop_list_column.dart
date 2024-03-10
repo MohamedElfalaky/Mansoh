@@ -22,7 +22,7 @@ class CusDropData<T> extends StatefulWidget {
   const CusDropData({
     super.key,
     this.prefixIcon,
-     this.value,
+    this.value,
     required this.hintData,
     required this.onChanged,
     required this.items,
@@ -145,14 +145,12 @@ class _NationalityAndCountryWidgetState
                       hintData: "السعودية",
                       value: countryValue,
                       onChanged: (val) {
-                           countryValue = val;
-                          cityValue = null;
-                          inputCountry = countryValue;
-                          if(inputCountry!=null) {
-                            context.read<CityCubit>().getCities(inputCountry!);
-                          }
-
-
+                        countryValue = val;
+                        cityValue = null;
+                        inputCountry = countryValue;
+                        if (inputCountry != null) {
+                          context.read<CityCubit>().getCities(inputCountry!);
+                        }
                       },
                       items: state.response!.data!.countries!
                           .map((e) => DropdownMenuItem(
@@ -173,7 +171,7 @@ class _NationalityAndCountryWidgetState
           if (cityState is CityLoading) {
             return const Center(child: CircularProgressIndicator.adaptive());
           } else if (cityState is CityLoaded) {
-            if(cityState.response?.data?.isNotEmpty==true) {
+            if (cityState.response?.data?.isNotEmpty == true) {
               return Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 24),
                 child: CusDropData(
@@ -183,15 +181,14 @@ class _NationalityAndCountryWidgetState
                       setState(() {
                         cityValue = val;
                         inputCity = cityValue;
-
                       });
                       // print("$inputCity is CityChosen");
                     },
                     items: cityState.response?.data!
                         .map(
                           (e) => DropdownMenuItem(
-                          value: '${e.id??''}', child: Text('${e.name}')),
-                    )
+                              value: '${e.id ?? ''}', child: Text('${e.name}')),
+                        )
                         .toList(),
                     prefixIcon: SvgPicture.asset(
                       'assets/images/SVGs/city1.svg',
@@ -201,7 +198,6 @@ class _NationalityAndCountryWidgetState
             }
           }
           return const SizedBox();
-
         }),
       ],
     );

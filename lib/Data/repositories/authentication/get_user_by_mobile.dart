@@ -9,14 +9,14 @@ import '../../../app/utils/shared_preference_class.dart';
 import '../../models/Auth_models/register_model.dart';
 import 'package:http/http.dart' as http;
 
-class GetUserByMobile{
-  Future<RegisterModel?>getUser({
+class GetUserByMobile {
+  Future<RegisterModel?> getUser({
     String? mobile,
   }) async {
     try {
       http.Response response = await http.post(
           Uri.parse('${Keys.baseUrl}/client/auth/getUserByMobile'),
-          headers:headers,
+          headers: headers,
           body: {
             'mobile': '$mobile',
             'device': sharedPrefs.fCMToken,
@@ -28,7 +28,7 @@ class GetUserByMobile{
         sharedPrefs.setToken(userdata.data!.token!);
         sharedPrefs.setId(userdata.data!.id!);
         sharedPrefs.setUserName(userdata.data!.fullName!);
-        sharedPrefs.setIsNotification(userdata.data!.isNotification??0);
+        sharedPrefs.setIsNotification(userdata.data!.isNotification ?? 0);
         if (userdata.data!.avatar != "") {
           sharedPrefs.setUserPhoto(userdata.data!.avatar!);
         } else {

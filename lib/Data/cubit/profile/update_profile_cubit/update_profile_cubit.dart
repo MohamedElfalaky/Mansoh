@@ -37,7 +37,11 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
           .then((value) {
         if (value != null) {
           emit(UpdateProfileLoaded(value));
-          MyApplication.navigateToReplaceAllPrevious(context!,  const HomeLayout(currentIndex: 0,));
+          MyApplication.navigateToReplaceAllPrevious(
+              context!,
+              const HomeLayout(
+                currentIndex: 0,
+              ));
         } else {
           emit(UpdateProfileError());
         }

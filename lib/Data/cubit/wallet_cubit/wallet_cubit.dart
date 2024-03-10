@@ -6,8 +6,16 @@ class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(WalletInitial());
   WalletRepo listRejectionRepo = WalletRepo();
 
-
-  // static WalletCubit get(context) => BlocProvider.of(context);
+  getPromoCode({required String promoCode}) async {
+    try {
+      emit(WalletLoading());
+      final mList =
+          await (listRejectionRepo.getPromoCode(promoCode: promoCode));
+      emit(WalletLoaded(mList));
+    } catch (e) {
+      emit(WalletError());
+    }
+  }
 
   getDataWallet() async {
     try {

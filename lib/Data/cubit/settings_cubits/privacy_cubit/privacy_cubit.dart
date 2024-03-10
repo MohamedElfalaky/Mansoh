@@ -6,7 +6,6 @@ class PrivacyCubit extends Cubit<PrivacyState> {
   PrivacyCubit() : super(PrivacyInitial());
   PolicyRepo privacyRepo = PolicyRepo();
 
-
   getPrivacy() async {
     try {
       emit(PrivacyLoading());

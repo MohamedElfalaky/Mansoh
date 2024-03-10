@@ -7,7 +7,6 @@ class NotificationCubit extends Cubit<NotificationState> {
   NotificationCubit() : super(NotificationInitial());
   NotificationRepo notificationRepo = NotificationRepo();
 
-
   getDataNotification() async {
     try {
       emit(NotificationLoading());

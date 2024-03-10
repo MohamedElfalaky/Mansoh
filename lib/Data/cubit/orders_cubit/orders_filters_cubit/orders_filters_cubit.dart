@@ -14,12 +14,9 @@ class OrdersFiltersCubit extends Cubit<OrdersFiltersState> {
       final ordersList = await ordersStatus.getStatus(id: id);
       log('Hany ${ordersList?.data}');
 
-      if(ordersList?.data?.isEmpty==true)
-        {
-          emit(OrdersFiltersEmpty());
-
-        }
-      else {
+      if (ordersList?.data?.isEmpty == true) {
+        emit(OrdersFiltersEmpty());
+      } else {
         emit(OrdersFiltersLoaded(ordersList));
       }
     } catch (e) {

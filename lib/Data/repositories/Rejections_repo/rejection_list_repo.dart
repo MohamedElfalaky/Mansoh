@@ -16,7 +16,7 @@ class ListRejectionRepo {
           Uri.parse('${Keys.baseUrl}/client/coredata/comment/list'),
           headers: {
             'Accept': 'application/json',
-            'lang': Get.locale?.languageCode ??"ar",
+            'lang': Get.locale?.languageCode ?? "ar",
             'Authorization': 'Bearer ${sharedPrefs.getToken()}',
           });
       Map<String, dynamic> responseMap = json.decode(response.body);

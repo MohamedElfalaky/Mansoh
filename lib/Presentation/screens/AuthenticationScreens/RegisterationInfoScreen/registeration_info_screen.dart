@@ -54,7 +54,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
     } on PlatformException {
       // print("platform exeption : $e");
     }
-    if(mounted)Navigator.pop(context);
+    if (mounted) Navigator.pop(context);
   }
 
   @override
@@ -196,7 +196,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                                         .gallery,
                                                                     ctx,
                                                                     setState);
-                                                               },
+                                                              },
                                                             ),
                                                             const Divider(),
                                                             RowModalSheet(
@@ -254,9 +254,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                       }
                                       return null;
                                     },
-                                    onChanged: (val) {
-
-                                    },
+                                    onChanged: (val) {},
                                   ),
                                   TitleTxt(
                                     txt: "email".tr,
@@ -337,7 +335,6 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                           height: 48,
                                           child: CustomElevatedButton(
                                             onPressedHandler: () {
-
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 context

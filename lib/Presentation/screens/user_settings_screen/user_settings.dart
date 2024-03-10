@@ -23,7 +23,6 @@ class _UserSettingsState extends State<UserSettings> {
   int groupValue = 1;
   bool? isNotificationValue;
 
-
   @override
   void initState() {
     isNotificationValue = sharedPrefs.getIsNotification() == 1 ? true : false;
@@ -38,8 +37,7 @@ class _UserSettingsState extends State<UserSettings> {
       },
       child: SafeArea(
         child: Scaffold(
-          appBar: customAppBar(
-              context: context, txt:  "settings".tr),
+          appBar: customAppBar(context: context, txt: "settings".tr),
           // floatingActionButton: buildSaveButton(label: "save"),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
@@ -65,7 +63,7 @@ class _UserSettingsState extends State<UserSettings> {
                       const SizedBox(
                         width: 10,
                       ),
-                       Text("change Language".tr,
+                      Text("change Language".tr,
                           style: Constants.mainTitleFont),
                     ],
                   ),
@@ -97,9 +95,8 @@ class _UserSettingsState extends State<UserSettings> {
                       activeColor: Constants.primaryAppColor,
                       value: isNotificationValue!,
                       onChanged: (value) {
-
                         setState(() {
-                          isNotificationValue =value;
+                          isNotificationValue = value;
                         });
                         context.read<IsNotificationCubit>().isNotify();
                       },
@@ -116,7 +113,8 @@ class _UserSettingsState extends State<UserSettings> {
                       vertical: -4,
                     ),
                     leading: SvgPicture.asset(deleteUser),
-                    title: InkWell(onTap:()=> _showDeleteDialog(context),
+                    title: InkWell(
+                      onTap: () => _showDeleteDialog(context),
                       child: Text("Delete Account".tr,
                           style: Constants.mainTitleFont.copyWith(
                               letterSpacing: 0,
@@ -134,7 +132,6 @@ class _UserSettingsState extends State<UserSettings> {
   }
 }
 
-
 Future<void> _showDeleteDialog(BuildContext context) async {
   return showDialog<void>(
     context: context,
@@ -142,36 +139,36 @@ Future<void> _showDeleteDialog(BuildContext context) async {
     builder: (BuildContext context) {
       return BlocBuilder<DeleteAccountCubit, DeleteAccountState>(
           builder: (context, state) => AlertDialog(
-            // <-- SEE HERE
-            // title: const Text('Cancel booking'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text( "delete tile".tr),
+                // <-- SEE HERE
+                // title: const Text('Cancel booking'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text("delete tile".tr),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text("No".tr),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  state is DeleteAccountLoading
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive())
+                      : TextButton(
+                          child: Text("Yes".tr),
+                          onPressed: () {
+                            context.read<DeleteAccountCubit>().delete(
+                                  context: context,
+                                );
+                            // Navigator.pop(context);
+                          },
+                        ),
                 ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text( "No".tr),
-                onPressed: () {
-                 Navigator.pop(context);
-                },
-              ),
-              state is DeleteAccountLoading
-                  ? const Center(child: CircularProgressIndicator.adaptive())
-                  : TextButton(
-                child: Text( "Yes".tr),
-                onPressed: () {
-                  context.read<DeleteAccountCubit>().delete(
-                    context: context,
-                  );
-                  // Navigator.pop(context);
-                },
-              ),
-            ],
-          ));
+              ));
     },
   );
 }
-

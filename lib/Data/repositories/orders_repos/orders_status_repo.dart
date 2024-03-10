@@ -17,7 +17,7 @@ class OrdersStatusRepo {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'lang': Get.locale!.languageCode ,
+          'lang': Get.locale!.languageCode,
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

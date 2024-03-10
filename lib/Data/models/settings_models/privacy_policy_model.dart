@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-PrivacyPolicyModel privacyPolicyModelFromJson(dynamic str) => PrivacyPolicyModel.fromJson(str);
+PrivacyPolicyModel privacyPolicyModelFromJson(dynamic str) =>
+    PrivacyPolicyModel.fromJson(str);
 
-String privacyPolicyModelToJson(PrivacyPolicyModel data) => json.encode(data.toJson());
+String privacyPolicyModelToJson(PrivacyPolicyModel data) =>
+    json.encode(data.toJson());
 
 class PrivacyPolicyModel {
   Data? data;
@@ -21,19 +23,24 @@ class PrivacyPolicyModel {
     this.pagination,
   });
 
-  factory PrivacyPolicyModel.fromJson(Map<String, dynamic> json) => PrivacyPolicyModel(
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    status: json["status"],
-    message: json["message"],
-    pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
-  );
+  factory PrivacyPolicyModel.fromJson(Map<String, dynamic> json) =>
+      PrivacyPolicyModel(
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        status: json["status"],
+        message: json["message"],
+        pagination: json["pagination"] == null
+            ? []
+            : List<dynamic>.from(json["pagination"]!.map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data?.toJson(),
-    "status": status,
-    "message": message,
-    "pagination": pagination == null ? [] : List<dynamic>.from(pagination!.map((x) => x)),
-  };
+        "data": data?.toJson(),
+        "status": status,
+        "message": message,
+        "pagination": pagination == null
+            ? []
+            : List<dynamic>.from(pagination!.map((x) => x)),
+      };
 }
 
 class Data {
@@ -48,14 +55,14 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"],
-    name: json["name"],
-    description: json["description"],
-  );
+        id: json["id"],
+        name: json["name"],
+        description: json["description"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "description": description,
-  };
+        "id": id,
+        "name": name,
+        "description": description,
+      };
 }

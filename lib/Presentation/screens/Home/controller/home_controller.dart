@@ -61,14 +61,16 @@ class HomeController {
               ],
             ),
           ),
-          const SizedBox(width: 50,),
+          const SizedBox(
+            width: 50,
+          ),
           Flexible(
               child: Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: Image.network(
               imageNeeded,
               // "https://www.vhv.rs/dpng/d/18-187042_futbol-messi-png-2019-transparent-png.png",
-              width :  130, height: 100,fit: BoxFit.cover,
+              width: 130, height: 100, fit: BoxFit.cover,
             ),
           )),
         ],

@@ -10,6 +10,26 @@ import '../../../app/utils/shared_preference_class.dart';
 import '../../models/wallet_models/wallet_model.dart';
 
 class WalletRepo {
+  Future<WalletData?> getPromoCode({required String promoCode}) async {
+    http.Response response = await http.post(
+      body: {'code': promoCode},
+      Uri.parse('${Keys.baseUrl}/client/promo-code/apply'),
+      headers: {
+        'Accept': 'application/json',
+        'lang': Get.locale?.languageCode ?? "ar",
+        'Authorization': 'Bearer ${sharedPrefs.getToken()}',
+      },
+    );
+    Map<String, dynamic> responseMap = json.decode(response.body);
+    if (response.statusCode == 200 && responseMap["status"] == 1) {
+      return walletModelFromJson(responseMap).data;
+    } else {
+      MyApplication.showToastView(message: responseMap["message"]);
+    }
+
+    return null;
+  }
+
   Future<WalletData?> getData() async {
     try {
       http.Response response = await http
@@ -20,7 +40,6 @@ class WalletRepo {
       });
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        // MyApplication.showToastView(message: responseMap["message"]);
         return walletModelFromJson(responseMap).data;
       } else {
         // debugPrint("request is $phone & $pass");

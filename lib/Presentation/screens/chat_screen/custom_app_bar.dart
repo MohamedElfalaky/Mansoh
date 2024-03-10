@@ -68,7 +68,6 @@ customChatAppBar(BuildContext context) => PreferredSize(
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
-
                     },
                     child: SvgPicture.asset(
                       'assets/images/SVGs/home_icon.svg',

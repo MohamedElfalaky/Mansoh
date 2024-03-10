@@ -5,6 +5,7 @@ import '../../../../../app/constants.dart';
 
 class MySeparator extends StatelessWidget {
   const MySeparator({super.key, this.height = 1, this.color = Colors.black});
+
   final double height;
   final Color color;
 
@@ -36,15 +37,14 @@ class MySeparator extends StatelessWidget {
 
 Widget buildSaveButton({required String label, void Function()? onPressed}) =>
     Padding(
-      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       child: FloatingActionButton.extended(
         backgroundColor: Constants.primaryAppColor,
-        onPressed: onPressed??(){},
-        label:
-            Text( label.tr,
-                style: Constants.secondaryTitleFont.copyWith(
-                  color: Colors.white,
-                )),
+        onPressed: onPressed ?? () {},
+        label: Text(label.tr,
+            style: Constants.secondaryTitleFont.copyWith(
+              color: Colors.white,
+            )),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

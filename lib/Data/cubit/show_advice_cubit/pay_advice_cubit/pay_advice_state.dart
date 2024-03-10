@@ -8,6 +8,7 @@ class PayAdviceLoading extends PayAdviceState {}
 
 class PayAdviceLoaded extends PayAdviceState {
   ShowAdviceModel? response;
+
   PayAdviceLoaded(this.response);
 }
 

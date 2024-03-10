@@ -12,12 +12,13 @@ import '../../models/notification_model/notification_model.dart';
 class NotificationRepo {
   Future<List<NotificationData>?> getData() async {
     try {
-      http.Response response = await http
-          .get(Uri.parse('${Keys.baseUrl}/client/setting/notification/list'), headers: {
-        'Accept': 'application/json',
-        'lang': Get.locale?.languageCode ?? "ar",
-        'Authorization': 'Bearer ${sharedPrefs.getToken()}',
-      });
+      http.Response response = await http.get(
+          Uri.parse('${Keys.baseUrl}/client/setting/notification/list'),
+          headers: {
+            'Accept': 'application/json',
+            'lang': Get.locale?.languageCode ?? "ar",
+            'Authorization': 'Bearer ${sharedPrefs.getToken()}',
+          });
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         // MyApplication.showToastView(message: responseMap["message"]);

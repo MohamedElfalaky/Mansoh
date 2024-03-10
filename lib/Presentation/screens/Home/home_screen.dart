@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
- import 'package:nasooh/Data/cubit/home/advisor_state.dart';
+import 'package:nasooh/Data/cubit/home/advisor_state.dart';
 import 'package:nasooh/Data/models/category_parent_model.dart';
 import 'package:nasooh/Presentation/screens/Advisor/advisor_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/advisor_card.dart';
@@ -132,9 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             prefixIcon: Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
-                              child: SvgPicture.asset(
-                                searchIcon
-                              ),
+                              child: SvgPicture.asset(searchIcon),
                             ),
                             isSuffix: true,
                             suffixIcon: InkWell(

@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-CheckCodeModel checkCodeModelFromJson(dynamic str) => CheckCodeModel.fromJson(str);
+CheckCodeModel checkCodeModelFromJson(dynamic str) =>
+    CheckCodeModel.fromJson(str);
 
 String checkCodeModelToJson(CheckCodeModel data) => json.encode(data.toJson());
 
@@ -22,18 +23,22 @@ class CheckCodeModel {
   });
 
   factory CheckCodeModel.fromJson(Map<String, dynamic> json) => CheckCodeModel(
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    status: json["status"],
-    message: json["message"],
-    pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
-  );
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        status: json["status"],
+        message: json["message"],
+        pagination: json["pagination"] == null
+            ? []
+            : List<dynamic>.from(json["pagination"]!.map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data?.toJson(),
-    "status": status,
-    "message": message,
-    "pagination": pagination == null ? [] : List<dynamic>.from(pagination!.map((x) => x)),
-  };
+        "data": data?.toJson(),
+        "status": status,
+        "message": message,
+        "pagination": pagination == null
+            ? []
+            : List<dynamic>.from(pagination!.map((x) => x)),
+      };
 }
 
 class Data {
@@ -44,10 +49,10 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    login: json["login"],
-  );
+        login: json["login"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "login": login,
-  };
+        "login": login,
+      };
 }

@@ -4,7 +4,9 @@ import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 
 class PaymentCard extends StatelessWidget {
-  const PaymentCard({super.key, required this.payMethod, required this.walletVal});
+  const PaymentCard(
+      {super.key, required this.payMethod, required this.walletVal});
+
   final String payMethod;
   final String walletVal;
 
@@ -27,20 +29,19 @@ class PaymentCard extends StatelessWidget {
           const SizedBox(
             width: 8,
           ),
-           Text(
-             payMethod,
+          Text(
+            payMethod,
             style: Constants.secondaryTitleRegularFont,
           ),
           const Spacer(),
           RichText(
-            text:  TextSpan(
-                style: Constants.secondaryTitleRegularFont,
-                children: [
-                  TextSpan(
-                      text: walletVal,
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
-                  const TextSpan(text: " ريال سعودي")
-                ]),
+            text:
+                TextSpan(style: Constants.secondaryTitleRegularFont, children: [
+              TextSpan(
+                  text: walletVal,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              const TextSpan(text: " ريال سعودي")
+            ]),
           )
         ],
       ),

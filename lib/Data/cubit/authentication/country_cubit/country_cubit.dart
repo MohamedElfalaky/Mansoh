@@ -10,12 +10,9 @@ class CountryCubit extends Cubit<CountryState> {
     try {
       emit(CountryLoading());
       final mList = await countryRepo.getCountries();
-        emit(CountryLoaded(mList));
-
+      emit(CountryLoaded(mList));
     } catch (e) {
       emit(CountryError());
     }
   }
-
-
 }

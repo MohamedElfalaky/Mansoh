@@ -1,6 +1,3 @@
-
-
-
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -77,7 +74,7 @@ class CustomLocalNotification {
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     await FirebaseMessaging.instance
@@ -112,15 +109,15 @@ class CustomLocalNotification {
       );
       debugPrint('local notification ${message.notification?.title}');
 
-          if (message.data["is_chat"] == "1") {
-      // print("render chat");
-      Keys.navigatorKey.currentState!.context
-          .read<ShowAdviceCubit>()
-          .getAdviceFunction(adviceId: int.parse(message.data["advice_id"]))
-          .then((value) {
-        // print("hello $value");
-      });
-    }
+      if (message.data["is_chat"] == "1") {
+        // print("render chat");
+        Keys.navigatorKey.currentState!.context
+            .read<ShowAdviceCubit>()
+            .getAdviceFunction(adviceId: int.parse(message.data["advice_id"]))
+            .then((value) {
+          // print("hello $value");
+        });
+      }
     }
   }
 

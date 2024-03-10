@@ -17,10 +17,9 @@ class GetByTokenRepo {
         Uri.parse('${Keys.baseUrl}/client/auth/get_user'),
         headers: {
           'Accept': 'application/json',
-          'lang':  Get.locale?.languageCode ??"ar",
+          'lang': Get.locale?.languageCode ?? "ar",
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
-
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
@@ -41,7 +40,7 @@ class GetByTokenRepo {
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e,st) {
+    } on Error catch (e, st) {
       if (kDebugMode) {
         print(e);
         print(st);

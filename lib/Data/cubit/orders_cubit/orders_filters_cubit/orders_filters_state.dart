@@ -8,6 +8,7 @@ class OrdersFiltersLoading extends OrdersFiltersState {}
 
 class OrdersFiltersLoaded extends OrdersFiltersState {
   OrdersFiltersModel? response;
+
   OrdersFiltersLoaded(this.response);
 }
 

@@ -1,4 +1,3 @@
-
 import 'package:nasooh/Data/models/Auth_models/register_model.dart';
 
 abstract class GetUserState {}

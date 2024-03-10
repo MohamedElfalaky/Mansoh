@@ -81,9 +81,7 @@ List<DrawerModel> getDrawer(BuildContext context) => [
           svg: SvgPicture.asset(
             knowAboutIcon,
           ),
-          onTap: () {
-
-          })
+          onTap: () {})
     ];
 
 class DrawerModel {

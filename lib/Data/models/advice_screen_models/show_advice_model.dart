@@ -68,17 +68,19 @@ class ShowAdviceData {
   });
 
   factory ShowAdviceData.fromJson(Map<String, dynamic> json) => ShowAdviceData(
-        id: json["id"]??0,
+        id: json["id"] ?? 0,
         adviser: json["adviser"] == null
             ? null
             : AdviserProfileData.fromJson(json["adviser"]),
         price: json["price"] ?? 0,
         tax: json["tax"]?.toDouble(),
         total: json["total"]?.toDouble(),
-    status: json["status"] == null ? null : Label.fromJson(json["status"]),
-    chat: json["chat"] == null ? [] : List<Chat>.from(json["chat"]!.map((x) => Chat.fromJson(x))),
-    label: json["label"] == null ? null : Label.fromJson(json["label"]),
-  );
+        status: json["status"] == null ? null : Label.fromJson(json["status"]),
+        chat: json["chat"] == null
+            ? []
+            : List<Chat>.from(json["chat"]!.map((x) => Chat.fromJson(x))),
+        label: json["label"] == null ? null : Label.fromJson(json["label"]),
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -103,14 +105,14 @@ class Label {
   });
 
   factory Label.fromJson(Map<String, dynamic> json) => Label(
-    id: json["id"],
-    name: json["name"],
-  );
+        id: json["id"],
+        name: json["name"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-  };
+        "id": id,
+        "name": name,
+      };
 }
 
 class Chat {

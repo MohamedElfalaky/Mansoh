@@ -11,7 +11,6 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   static ProfileCubit get(context) => BlocProvider.of(context);
 
-
   getDataProfile() async {
     try {
       emit(ProfileLoading());

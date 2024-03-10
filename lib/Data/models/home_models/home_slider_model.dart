@@ -22,18 +22,27 @@ class HomeSlider {
   });
 
   factory HomeSlider.fromJson(Map<String, dynamic> json) => HomeSlider(
-    data: json["data"] == null ? [] : List<HSListData>.from(json["data"]!.map((x) => HSListData.fromJson(x))),
-    status: json["status"],
-    message: json["message"],
-    pagination: json["pagination"] == null ? [] : List<dynamic>.from(json["pagination"]!.map((x) => x)),
-  );
+        data: json["data"] == null
+            ? []
+            : List<HSListData>.from(
+                json["data"]!.map((x) => HSListData.fromJson(x))),
+        status: json["status"],
+        message: json["message"],
+        pagination: json["pagination"] == null
+            ? []
+            : List<dynamic>.from(json["pagination"]!.map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
-    "status": status,
-    "message": message,
-    "pagination": pagination == null ? [] : List<dynamic>.from(pagination!.map((x) => x)),
-  };
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+        "status": status,
+        "message": message,
+        "pagination": pagination == null
+            ? []
+            : List<dynamic>.from(pagination!.map((x) => x)),
+      };
 }
 
 class HSListData {
@@ -48,14 +57,14 @@ class HSListData {
   });
 
   factory HSListData.fromJson(Map<String, dynamic> json) => HSListData(
-    id: json["id"],
-    url: json["url"],
-    image: json["image"],
-  );
+        id: json["id"],
+        url: json["url"],
+        image: json["image"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "url": url,
-    "image": image,
-  };
+        "id": id,
+        "url": url,
+        "image": image,
+      };
 }

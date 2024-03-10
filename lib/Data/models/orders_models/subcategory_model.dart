@@ -2,7 +2,7 @@ class SubCategoryModel {
   List<SubCategoryData>? data;
   int? status;
   String? message;
- 
+
   SubCategoryModel({this.data, this.status, this.message});
 
   SubCategoryModel.fromJson(Map<String, dynamic> json) {
@@ -14,7 +14,6 @@ class SubCategoryModel {
     }
     status = json['status'];
     message = json['message'];
- 
   }
 
   Map<String, dynamic> toJson() {
@@ -24,7 +23,7 @@ class SubCategoryModel {
     }
     data['status'] = status;
     data['message'] = message;
-  
+
     return data;
   }
 }
@@ -36,7 +35,8 @@ class SubCategoryData {
   bool? selected;
   List<Children>? children;
 
-  SubCategoryData({this.id, this.name, this.parentId, this.selected, this.children});
+  SubCategoryData(
+      {this.id, this.name, this.parentId, this.selected, this.children});
 
   SubCategoryData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -69,7 +69,7 @@ class Children {
   String? name;
   int? parentId;
   bool? selected;
- 
+
   Children({this.id, this.name, this.parentId, this.selected});
 
   Children.fromJson(Map<String, dynamic> json) {
@@ -77,7 +77,6 @@ class Children {
     name = json['name'];
     parentId = json['parent_id'];
     selected = json['selected'];
- 
   }
 
   Map<String, dynamic> toJson() {
@@ -86,7 +85,7 @@ class Children {
     data['name'] = name;
     data['parent_id'] = parentId;
     data['selected'] = selected;
-   
+
     return data;
   }
 }

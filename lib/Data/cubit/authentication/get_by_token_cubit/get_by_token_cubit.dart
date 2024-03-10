@@ -6,8 +6,6 @@ class GetByTokenCubit extends Cubit<GetByTokenState> {
   GetByTokenCubit() : super(GetByTokenInitial());
   GetByTokenRepo profileRepo = GetByTokenRepo();
 
-
-
   getDataGetByToken() async {
     try {
       emit(GetByTokenLoading());

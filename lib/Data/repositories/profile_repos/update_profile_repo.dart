@@ -11,19 +11,20 @@ import 'package:http/http.dart' as http;
 import '../../models/profile_models/update_profile_model.dart';
 
 class UpdateProfile {
-  Future<UpdateProfileModel?> update({String? email,
-    String? fullName,
-    String? mobile,
-    String? countryId,
-    String? cityId,
-    String? gender,
-    String? nationalityId,
-    String? avatar}) async {
+  Future<UpdateProfileModel?> update(
+      {String? email,
+      String? fullName,
+      String? mobile,
+      String? countryId,
+      String? cityId,
+      String? gender,
+      String? nationalityId,
+      String? avatar}) async {
     try {
       http.Response response =
-      await http.post(Uri.parse('${Keys.baseUrl}/client/update'), headers: {
+          await http.post(Uri.parse('${Keys.baseUrl}/client/update'), headers: {
         'Accept': 'application/json',
-        'lang': Get.locale?.languageCode ??"ar",
+        'lang': Get.locale?.languageCode ?? "ar",
         "Authorization": "Bearer ${sharedPrefs.getToken()}"
       }, body: {
         'email': email,

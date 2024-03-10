@@ -8,7 +8,7 @@ import '../../../../app/utils/my_application.dart';
 import '../../../models/Auth_models/city_model.dart';
 
 class CityRepo {
-  Future<CityModel?> getCities({String ?id}) async {
+  Future<CityModel?> getCities({String? id}) async {
     try {
       http.Response response = await http.get(
         Uri.parse('${Keys.baseUrl}/client/coredata/city/list?country_id=$id'),

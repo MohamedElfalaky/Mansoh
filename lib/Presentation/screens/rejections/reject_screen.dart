@@ -97,7 +97,10 @@ class _RejectScreenState extends State<RejectScreen> {
                     context: context,
                     action: () {
                       MyApplication.navigateToReplaceAllPrevious(
-                          context,  const HomeLayout(currentIndex: 0,));
+                          context,
+                          const HomeLayout(
+                            currentIndex: 0,
+                          ));
                     },
                     content: "تم ارسال اعتراضك بنجاح",
                     titleAction: "الرئيسية");
@@ -205,7 +208,8 @@ class _RejectScreenState extends State<RejectScreen> {
                                     )),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 4,top: 25),
+                                padding:
+                                    const EdgeInsets.only(bottom: 4, top: 25),
                                 child: Text(
                                   "أضف ملاحظة".tr,
                                   style: Constants.secondaryTitleRegularFont,

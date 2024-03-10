@@ -8,6 +8,7 @@ class DoneAdviceLoading extends DoneAdviceState {}
 
 class DoneAdviceLoaded extends DoneAdviceState {
   ShowAdviceModel? response;
+
   DoneAdviceLoaded(this.response);
 }
 

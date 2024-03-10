@@ -3,14 +3,12 @@ class CountriesAndNationalitiesModel {
   int? status;
   String? message;
 
-  CountriesAndNationalitiesModel(
-      {this.data, this.status, this.message});
+  CountriesAndNationalitiesModel({this.data, this.status, this.message});
 
   CountriesAndNationalitiesModel.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
     status = json['status'];
     message = json['message'];
-
   }
 }
 
@@ -41,8 +39,7 @@ class Data {
       data['countries'] = countries!.map((v) => v.toJson()).toList();
     }
     if (nationailties != null) {
-      data['nationailties'] =
-          nationailties!.map((v) => v.toJson()).toList();
+      data['nationailties'] = nationailties!.map((v) => v.toJson()).toList();
     }
     return data;
   }

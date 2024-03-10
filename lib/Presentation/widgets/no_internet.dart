@@ -29,7 +29,7 @@ class NoInternetWidget extends StatelessWidget {
                 height: size.height * 0.015,
               ),
               Text(
-                 'noInternet'.tr,
+                'noInternet'.tr,
                 style: const TextStyle(color: Colors.black45, fontSize: 20.0),
               ),
               const Spacer(),

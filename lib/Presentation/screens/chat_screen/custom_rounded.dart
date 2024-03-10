@@ -2,6 +2,7 @@ import '../../../app/utils/exports.dart';
 
 class CustomRoundedWidget extends StatelessWidget {
   const CustomRoundedWidget({super.key, required this.child});
+
   final Widget child;
 
   @override
@@ -25,6 +26,6 @@ class CustomRoundedWidget extends StatelessWidget {
               )
             ],
             borderRadius: BorderRadius.circular(10)),
-        child:child);
+        child: child);
   }
 }

@@ -43,7 +43,7 @@ class PayAdviceRepo {
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e,st) {
+    } on Error catch (e, st) {
       if (kDebugMode) {
         print(e);
         print(st);

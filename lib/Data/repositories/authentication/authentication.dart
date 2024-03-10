@@ -13,13 +13,12 @@ class Auth {
   ///Create Login Cycle
   Future<LoginModel?> login({String? phone, String? pass}) async {
     try {
-      var response = await http.post(Uri.parse('${Keys.baseUrl}/login'),
-          headers: headers,
-          body: {
-            'phone': '$phone',
-            'password': '$pass',
-            'device': sharedPrefs.fCMToken,
-          });
+      var response = await http
+          .post(Uri.parse('${Keys.baseUrl}/login'), headers: headers, body: {
+        'phone': '$phone',
+        'password': '$pass',
+        'device': sharedPrefs.fCMToken,
+      });
       Map<String, dynamic> responsemap = json.decode(response.body);
       if (response.statusCode == 200 && responsemap["success"] == true) {
         // final userdata = LoginModel.fromJson(jsonDecode(response.body));

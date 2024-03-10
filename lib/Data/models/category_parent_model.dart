@@ -14,7 +14,6 @@ class CategoryParentModel {
     }
     status = json['status'];
     message = json['message'];
-
   }
 
   Map<String, dynamic> toJson() {
@@ -36,7 +35,8 @@ class CategoryParentData {
   int? parentId;
   bool? selected;
 
-  CategoryParentData({this.id, this.name, this.children, this.parentId, this.selected});
+  CategoryParentData(
+      {this.id, this.name, this.children, this.parentId, this.selected});
 
   CategoryParentData.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -1,4 +1,3 @@
-
 import 'package:nasooh/Data/models/settings_models/privacy_policy_model.dart';
 
 abstract class PrivacyState {}

@@ -26,11 +26,10 @@ class _CheckMobScreenState extends State<CheckMobScreen>
   late AnimationController _animationController;
   late AnimationController _fadeController;
   final TextEditingController _phoneController = TextEditingController();
-  // final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
-     super.initState();
+    super.initState();
 
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 3000));
@@ -41,12 +40,10 @@ class _CheckMobScreenState extends State<CheckMobScreen>
     _fadeController.forward();
   }
 
-
   bool termsVal = false;
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _animationController.dispose();
     _fadeController.dispose();
@@ -105,7 +102,6 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                               ),
                             ),
                           ),
-
                           SizedBox(height: height(context) * 0.08),
                           Text(
                             "phone_number".tr,
@@ -115,8 +111,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                           FadeTransition(
                             opacity: _fadeController,
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 10),
+                              padding: const EdgeInsets.only(top: 10),
                               child: MyIntlPhoneField(
                                 countries: const ['SA'],
                                 controller: _phoneController,
@@ -150,35 +145,24 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                                   // print(phone.completeNumber);
                                   sendPhone = phone.completeNumber;
                                 },
-                                invalidNumberMessage:
-                                    "invalid_number".tr,
+                                invalidNumberMessage: "invalid_number".tr,
                               ),
                             ),
                           ),
-
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 30),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: 24,
-                                  width: 30,
-                                  child: Checkbox(
-                                    value: termsVal,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        termsVal = !termsVal;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const Text(
-                                  "أوافق علي جميع الشروط و الأحكام",
-                                  style: Constants.secondaryTitleRegularFont,
-                                )
-                              ],
-                            ),
-                          ),
+                          CheckboxMenuButton(
+                              style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      EdgeInsets.zero)),
+                              value: termsVal,
+                              onChanged: (value) {
+                                setState(() {
+                                  termsVal = !termsVal;
+                                });
+                              },
+                              child: const Text(
+                                "أوافق علي جميع الشروط و الأحكام",
+                                style: Constants.secondaryTitleRegularFont,
+                              )),
                           const SizedBox(
                             height: 24,
                           ),
@@ -212,7 +196,6 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                           SizedBox(
                             height: height(context) * 0.2,
                           ),
-
                           FadeTransition(
                             opacity: _fadeController,
                             child: Center(
@@ -227,8 +210,6 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                               ),
                             ),
                           ),
-
-
                         ],
                       ),
                     )),
@@ -240,5 +221,3 @@ class _CheckMobScreenState extends State<CheckMobScreen>
     );
   }
 }
-
-

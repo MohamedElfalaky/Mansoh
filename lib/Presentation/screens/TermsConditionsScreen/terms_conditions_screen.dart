@@ -29,12 +29,9 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
   void initState() {
     super.initState();
 
-
     MyApplication.checkConnection().then((value) {
       if (!value) {
-
-       MyApplication.showToastView(
-            message: 'noInternet'.tr);
+        MyApplication.showToastView(message: 'noInternet'.tr);
       }
     });
 
@@ -49,8 +46,6 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
               : isConnected = true;
         });
       }
-
-
     });
     context.read<PrivacyCubit>().getPrivacy();
   }
@@ -72,8 +67,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
         });
       });
     } else if (!isConnected!) {
-      MyApplication.showToastView(
-          message: 'noInternet'.tr);
+      MyApplication.showToastView(message: 'noInternet'.tr);
       return NoInternetWidget(size: sizee);
     }
 
@@ -85,8 +79,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Constants.whiteAppColor,
-        appBar: customAppBar(
-            context: context, txt:  "terms_conditions".tr),
+        appBar: customAppBar(context: context, txt: "terms_conditions".tr),
         body: BlocBuilder<PrivacyCubit, PrivacyState>(
             builder: (context, privacyState) {
           if (privacyState is PrivacyLoading) {
@@ -161,7 +154,7 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
                       //   ),
                       // )
                       //     :
-                  InkWell(
+                      InkWell(
                         onTap: () {
                           // setState(() {
                           //   _checked = !_checked;
@@ -220,7 +213,10 @@ class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      const Text("اوافق علي سياسة الخصوصية" , style: TextStyle(fontWeight: FontWeight.w700),),
+                      const Text(
+                        "اوافق علي سياسة الخصوصية",
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
                     ],
                   ),
                   const SizedBox(

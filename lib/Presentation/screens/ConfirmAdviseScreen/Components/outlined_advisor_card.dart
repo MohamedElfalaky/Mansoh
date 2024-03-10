@@ -35,16 +35,13 @@ class OutlinedAdvisorCard extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 16),
-
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Constants.whiteAppColor,
                       borderRadius: BorderRadius.circular(6),
-
                       boxShadow: [
                         BoxShadow(
                             offset: const Offset(0, 18),
-
                             spreadRadius: -8,
                             blurStyle: BlurStyle.normal,
                             color: Constants.primaryAppColor.withOpacity(0.1)),
@@ -63,7 +60,6 @@ class OutlinedAdvisorCard extends StatelessWidget {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-
                               CircleAvatar(
                                 radius: 22,
                                 backgroundImage: NetworkImage(
@@ -310,22 +306,25 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                                 ));
                                           }
                                         },
-                                        builder: (context, doneState) => doneState
-                                                is DoneAdviceLoading
-                                            ? const Center(
-                                                child:
-                                                    CircularProgressIndicator.adaptive())
-                                            : CustomElevatedButton(
-                                                isBold: true,
-                                                txt: "استلام",
-                                                onPressedHandler: () {
-                                                  context
-                                                      .read<DoneAdviceCubit>()
-                                                      .done(
-                                                          context: context,
-                                                          adviceId: adviceId);
-                                                },
-                                              ))),
+                                        builder: (context, doneState) =>
+                                            doneState is DoneAdviceLoading
+                                                ? const Center(
+                                                    child:
+                                                        CircularProgressIndicator
+                                                            .adaptive())
+                                                : CustomElevatedButton(
+                                                    isBold: true,
+                                                    txt: "استلام",
+                                                    onPressedHandler: () {
+                                                      context
+                                                          .read<
+                                                              DoneAdviceCubit>()
+                                                          .done(
+                                                              context: context,
+                                                              adviceId:
+                                                                  adviceId);
+                                                    },
+                                                  ))),
                               ),
                               Flexible(
                                 flex: 2,
@@ -359,7 +358,6 @@ class OutlinedAdvisorCard extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Constants.whiteAppColor,
                 borderRadius: BorderRadius.circular(6),
-
                 boxShadow: [
                   BoxShadow(
                       offset: const Offset(0, 18),
@@ -405,7 +403,6 @@ class OutlinedAdvisorCard extends StatelessWidget {
                             const SizedBox(
                               height: 8,
                             ),
-
                             SizedBox(
                               height: 26,
                               width: width(context) * 0.59,
@@ -469,7 +466,6 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                         0), // Ensure only 4 items are displayed
                               ),
                             )
-
                           ],
                         ),
                         const Spacer(),

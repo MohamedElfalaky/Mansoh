@@ -12,6 +12,7 @@ import '../../models/orders_models/subcategory_model.dart';
 class SubCategoryCubit extends Cubit<SubCategoryState> {
   SubCategoryCubit() : super(SubCategoryInitial());
   SubCategoryModel? subCategoryModel;
+
   Future<void> getSubCategory(id) async {
     emit(SubCategoryLoading());
     http.Response response = await http.get(

@@ -214,8 +214,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                               "",
                                         ));
                               }
-                                return const SizedBox.shrink();
-
+                              return const SizedBox.shrink();
                             })
                           ],
                         )),

@@ -45,7 +45,8 @@ class OrderCard extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(width: width(context)*0.65,
+                              SizedBox(
+                                width: width(context) * 0.65,
                                 child: Text(
                                   orderFilterData.name ?? "",
                                   style: Constants.secondaryTitleFont,

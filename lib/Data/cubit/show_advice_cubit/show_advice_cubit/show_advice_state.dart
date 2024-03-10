@@ -8,6 +8,7 @@ class ShowAdviceLoading extends ShowAdviceState {}
 
 class ShowAdviceLoaded extends ShowAdviceState {
   ShowAdviceModel? response;
+
   ShowAdviceLoaded(this.response);
 }
 

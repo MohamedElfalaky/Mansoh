@@ -24,21 +24,23 @@ class ReviewCubit extends Cubit<ReviewState> {
     try {
       emit(ReviewLoading());
       reviewRepo
-          .review(adviceId:adviceId ,
-              adviser:adviser ,
-              app:app ,
-              flexibility:flexibility ,
-              other:other ,
-              quality:quality ,
-              speed:speed ,
-              )
+          .review(
+        adviceId: adviceId,
+        adviser: adviser,
+        app: app,
+        flexibility: flexibility,
+        other: other,
+        quality: quality,
+        speed: speed,
+      )
           .then((value) {
         if (value != null) {
           emit(ReviewLoaded(value));
           Alert.alert(
               context: context,
               action: () {
-                MyApplication.navigateToReplaceAllPrevious(context!,  const HomeLayout(currentIndex: 0));
+                MyApplication.navigateToReplaceAllPrevious(
+                    context!, const HomeLayout(currentIndex: 0));
               },
               content: "تم ارسال تقييمك بنجاح",
               titleAction: "الرئيسية");

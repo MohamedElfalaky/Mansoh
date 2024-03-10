@@ -1,4 +1,3 @@
-
 import '../../models/advisor_profile_model/advisor_profile.dart';
 
 abstract class AdvisorProfileState {}

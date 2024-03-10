@@ -42,19 +42,19 @@ class IsNotificationRepo {
         // debugPrint("request is $phone & $pass");
         MyApplication.showToastView(message: responseMap["message"].toString());
       }
-    } on TimeoutException catch (e,st) {
+    } on TimeoutException catch (e, st) {
       MyApplication.showToastView(message: e.toString());
       if (kDebugMode) {
         print(e);
         print(st);
       }
-    } on SocketException catch (e,st) {
+    } on SocketException catch (e, st) {
       MyApplication.showToastView(message: e.toString());
       if (kDebugMode) {
         print(e);
         print(st);
       }
-    } on Error catch (e,st) {
+    } on Error catch (e, st) {
       if (kDebugMode) {
         print(e);
         print(st);

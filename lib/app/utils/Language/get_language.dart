@@ -88,6 +88,7 @@ class _ChangeLangItemState extends State<ChangeLangItem> {
 
 class ColoredContain extends StatelessWidget {
   const ColoredContain({super.key, this.color, this.txt});
+
   final Color? color;
   final String? txt;
 

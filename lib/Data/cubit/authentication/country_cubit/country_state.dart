@@ -1,4 +1,3 @@
-
 import '../../../models/countries_and_nationalities_model.dart';
 
 abstract class CountryState {}

@@ -6,8 +6,11 @@ import '../../../../../app/constants.dart';
 class WalletCard extends StatelessWidget {
   final String description;
   final String oneTraBalance;
+
   const WalletCard({
-    super.key, required this.description, required this.oneTraBalance,
+    super.key,
+    required this.description,
+    required this.oneTraBalance,
   });
 
   @override
@@ -45,7 +48,7 @@ class WalletCard extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                   Text(
+                  Text(
                     "$oneTraBalance  ريال سعودي ",
                     style: Constants.secondaryTitleFont,
                   ),
@@ -54,9 +57,9 @@ class WalletCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-               Center(
+              Center(
                 child: Text(
-                 description,
+                  description,
                   style: Constants.subtitleRegularFont,
                 ),
               ),

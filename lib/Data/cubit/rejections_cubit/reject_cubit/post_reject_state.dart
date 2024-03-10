@@ -8,6 +8,7 @@ class PostRejectLoading extends PostRejectState {}
 
 class PostRejectLoaded extends PostRejectState {
   PostRejectModel? response;
+
   PostRejectLoaded(this.response);
 }
 

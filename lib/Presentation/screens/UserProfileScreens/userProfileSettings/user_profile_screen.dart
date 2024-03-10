@@ -29,117 +29,114 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         child: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            const UserInfoCard(),
-            const SizedBox(
-              height: 10
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => BuildItem(
-                  drawerModel: getDrawer(context)[index],
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const UserInfoCard(),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => BuildItem(
+                      drawerModel: getDrawer(context)[index],
+                    ),
+                    separatorBuilder: (context, index) => Divider(
+                      color: Colors.grey[300],
+                      height: 1,
+                      thickness: 1,
+                    ),
+                    itemCount: getDrawer(context).length,
+                  ),
                 ),
-                separatorBuilder: (context, index) => Divider(
+                Divider(
                   color: Colors.grey[300],
                   height: 1,
                   thickness: 1,
                 ),
-                itemCount: getDrawer(context).length,
-              ),
-            ),
-            Divider(
-              color: Colors.grey[300],
-              height: 1,
-              thickness: 1,
-            ),
-            const SizedBox(height: 6),
-            BlocBuilder<LogOutCubit, LogOutState>(
-              builder: (context, state) => state is LogOutLoading
-                  ? const Center(child: CircularProgressIndicator.adaptive())
-                  : ListTile(
-                      minLeadingWidth: 0,
-                      onTap: () {
-                        context.read<LogOutCubit>().logOut(
-                              context: context,
-                            );
-                      },
-                      title: Text(
-                        "signout".tr,
-                        style: Constants.mainTitleFont,
-                      ),
-                      leading: SvgPicture.asset(
-                        logoutIcon,
-                      ),
-                    ),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(top: 80, bottom: 10),
-                width: MediaQuery.of(context).size.width * 0.42,
-                height: 40,
-                decoration: BoxDecoration(
-                    color: Constants.primaryAppColor,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Center(
-                  child: TextButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.share,
-                      color: Colors.white,
-                    ),
-                    label: Text(
-                      "share_app".tr,
-                      style: Constants.subtitleFont1.copyWith(
-                        color: Colors.white,
+                const SizedBox(height: 6),
+                BlocBuilder<LogOutCubit, LogOutState>(
+                  builder: (context, state) => state is LogOutLoading
+                      ? const Center(
+                          child: CircularProgressIndicator.adaptive())
+                      : ListTile(
+                          minLeadingWidth: 0,
+                          onTap: () {
+                            context.read<LogOutCubit>().logOut(
+                                  context: context,
+                                );
+                          },
+                          title: Text(
+                            "signout".tr,
+                            style: Constants.mainTitleFont,
+                          ),
+                          leading: SvgPicture.asset(
+                            logoutIcon,
+                          ),
+                        ),
+                ),
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 80, bottom: 10),
+                    width: MediaQuery.of(context).size.width * 0.42,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Constants.primaryAppColor,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: TextButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.share,
+                          color: Colors.white,
+                        ),
+                        label: Text(
+                          "share_app".tr,
+                          style: Constants.subtitleFont1.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Center(
-              child: Text(
-                  "إذا كنت مختص أو خبير وأردت التسجيل كناصح  حمل تطبيق الناصحين",
-                  style: Constants.subtitleRegularFontHint.copyWith(
-                    color: Colors.grey[700],
-                  )),
-            ),
-            const SizedBox(
-              height: 15
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                LimitedBox(
-                  maxHeight: 35,
-                  maxWidth: 35,
-                  child: Image.asset(
-                    appStoreIcon,
-                    fit: BoxFit.fill,
-                    width: 35,
-                    height: 35,
-                  ),
+                Center(
+                  child: Text(
+                      "إذا كنت مختص أو خبير وأردت التسجيل كناصح  حمل تطبيق الناصحين",
+                      style: Constants.subtitleRegularFontHint.copyWith(
+                        color: Colors.grey[700],
+                      )),
                 ),
-                const SizedBox(width: 20),
-                LimitedBox(
-                  maxHeight: 35,
-                  maxWidth: 35,
-                  child: Image.asset(
-                    googlePlayIcon,
-                    fit: BoxFit.fill,
-                    width: 35,
-                    height: 35,
-                  ),
-                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LimitedBox(
+                      maxHeight: 35,
+                      maxWidth: 35,
+                      child: Image.asset(
+                        appStoreIcon,
+                        fit: BoxFit.fill,
+                        width: 35,
+                        height: 35,
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                    LimitedBox(
+                      maxHeight: 35,
+                      maxWidth: 35,
+                      child: Image.asset(
+                        googlePlayIcon,
+                        fit: BoxFit.fill,
+                        width: 35,
+                        height: 35,
+                      ),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
-        )),
+            )),
       ),
     );
   }

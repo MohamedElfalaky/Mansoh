@@ -14,6 +14,7 @@ import '../../../app/Style/icons.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key, this.searchTxt});
+
   final String? searchTxt;
 
   @override
@@ -25,6 +26,7 @@ class _FilterScreenState extends State<FilterScreen> {
   bool textFieldPressed = true;
   double initialRate = 0;
   List<CategoryData> catList = [];
+
   @override
   void initState() {
     super.initState();
@@ -111,9 +113,8 @@ class _FilterScreenState extends State<FilterScreen> {
                     child: TextField(
                       enabled: false,
                       decoration: Constants.setTextInputDecoration(
-                          prefixIcon: const MyPrefixWidget(
-                            svgString: categoriesIcon,
-                          ),
+                          prefixIcon:
+                              const MyPrefixWidget(svgString: categoriesIcon),
                           isSuffix: true,
                           suffixIcon:
                               const Icon(Icons.keyboard_arrow_down_sharp),
@@ -311,7 +312,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 ),
               ),
               CustomElevatedButton(
-                onPressedHandler: ()   {
+                onPressedHandler: () {
                   List<String?> idList = selectedItems
                       .map((category) => category.id.toString())
                       .toList();
@@ -319,11 +320,10 @@ class _FilterScreenState extends State<FilterScreen> {
                   context
                       .read<AdvisorListCubit>()
                       .getAdvisorList(
-                          categoryValue: idString,
-                          searchTxt: widget.searchTxt,
-                          rateVal: initialRate,
-
-                  )
+                        categoryValue: idString,
+                        searchTxt: widget.searchTxt,
+                        rateVal: initialRate,
+                      )
                       .then((value) => {Navigator.pop(context)});
                 },
                 txt: "تصفية",

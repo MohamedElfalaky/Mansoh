@@ -13,7 +13,7 @@ class AdvisorListRepo {
   Future<AdvisorListModel?> getAdvisorList(
       {String? catVal, String? searchTxt, double? rateVal}) async {
     try {
-      String url=
+      String url =
           '${Keys.baseUrl}/client/adviser/list?category=${catVal ?? ""}&name=${searchTxt ?? ""}&rate=${rateVal ?? ""}';
       http.Response response = await http.get(
         Uri.parse(url),

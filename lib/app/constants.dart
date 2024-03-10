@@ -15,6 +15,7 @@ class Constants {
   static const Color prefixContainerColor = Color(0xFFEEEEEE);
   static const Color whiteAppColor = Color(0xFFFFFFFF);
   static const Color outLineColor = Color(0xFFBDBDBD);
+
   // fonts
   static const String mainFont = 'Cairo';
 

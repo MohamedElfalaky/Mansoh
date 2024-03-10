@@ -13,5 +13,3 @@ class HomeSliderLoaded extends HomeState {
 }
 
 class HomeSliderError extends HomeState {}
-
-

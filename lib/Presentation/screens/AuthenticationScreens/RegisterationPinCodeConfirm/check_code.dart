@@ -32,7 +32,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
 
   @override
   void initState() {
-     super.initState();
+    super.initState();
     myFocusNode = FocusNode();
 
     timerController = CountdownTimerController(endTime: endTime, onEnd: () {});
@@ -46,12 +46,10 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
         },
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-
           body: Directionality(
             textDirection: TextDirection.rtl,
             child: SingleChildScrollView(
-              keyboardDismissBehavior:
-              ScrollViewKeyboardDismissBehavior.onDrag,
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               child: Column(
                 children: [
                   const SizedBox(
@@ -64,15 +62,14 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
                         child: GoBack(),
                       ),
-
-                      Text(
-                         "enter_pin".tr,
+                      Text("enter_pin".tr,
                           textAlign: TextAlign.right,
-                          style:
-                          Constants.headerNavigationFont),
+                          style: Constants.headerNavigationFont),
                     ],
                   ),
-                  const SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   Form(
                     key: _formKey,
                     child: Container(
@@ -94,7 +91,8 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                   Text(
                                     "pin_from_phone".tr,
                                     style: const TextStyle(
-                                        fontFamily: Constants.mainFont, fontSize: 24),
+                                        fontFamily: Constants.mainFont,
+                                        fontSize: 24),
                                   ),
                                   Text(
                                     "pin_sent".tr,
@@ -108,8 +106,10 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                     textDirection: TextDirection.ltr,
                                     child: Padding(
                                       padding: EdgeInsets.only(
-                                          top: MyApplication.hightClc(context, 30),
-                                          bottom: MyApplication.hightClc(context, 32)),
+                                          top: MyApplication.hightClc(
+                                              context, 30),
+                                          bottom: MyApplication.hightClc(
+                                              context, 32)),
                                       child: Pinput(
                                         errorTextStyle: Constants.subtitleFont
                                             .copyWith(color: Colors.red),
@@ -118,15 +118,18 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                         showCursor: true,
                                         controller: _pinController,
                                         focusNode: myFocusNode,
-                                        defaultPinTheme: Constants.defaultPinTheme,
-                                        focusedPinTheme: Constants.focusedPinTheme,
+                                        defaultPinTheme:
+                                            Constants.defaultPinTheme,
+                                        focusedPinTheme:
+                                            Constants.focusedPinTheme,
                                         errorPinTheme: Constants.errorPinTheme,
-                                          autofocus:true,
+                                        autofocus: true,
                                         // errorBuilder: (errorText, pin) {},
                                         validator: (value) {
                                           if (value!.isEmpty ||
                                               value.length != 4 ||
-                                              !RegExp(r'^[0-9]+$').hasMatch(value)) {
+                                              !RegExp(r'^[0-9]+$')
+                                                  .hasMatch(value)) {
                                             return "يرجى ادخال رمز تحقق صحيح";
                                           }
                                           return null;
@@ -151,7 +154,8 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                             isBold: true,
                                             txt: "login".tr,
                                             onPressedHandler: () {
-                                              if (_formKey.currentState!.validate()) {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
                                                 context
                                                     .read<CheckCodeCubit>()
                                                     .checkCodeMethod(
@@ -208,27 +212,28 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                           if (time == null) {
                                             return Text(
                                               '00:00',
-                                              style: Constants.subtitleRegularFont
+                                              style: Constants
+                                                  .subtitleRegularFont
                                                   .copyWith(
-                                                      color:
-                                                          Constants.primaryAppColor),
+                                                      color: Constants
+                                                          .primaryAppColor),
                                             );
                                           }
                                           return Text(
                                             '${time.min ?? "00"}:${time.sec}',
                                             style: Constants.subtitleRegularFont
                                                 .copyWith(
-                                                    color: Constants.primaryAppColor),
+                                                    color: Constants
+                                                        .primaryAppColor),
                                           );
                                         },
                                       ),
                                     ],
                                   ),
                                   Padding(
-                                    padding:
-                                        EdgeInsets.only(top: height(context) * 0.12),
-                                    child: Text(
-                                        "didnt_receive".tr,
+                                    padding: EdgeInsets.only(
+                                        top: height(context) * 0.12),
+                                    child: Text("didnt_receive".tr,
                                         style: Constants.subtitleFont1),
                                   ),
                                   Text(

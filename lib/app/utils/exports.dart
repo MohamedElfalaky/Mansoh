@@ -7,5 +7,5 @@ export 'package:nasooh/app/utils/my_application.dart';
 export 'package:nasooh/app/Style/icons.dart';
 export 'package:nasooh/app/Style/sizes.dart';
 export 'package:nasooh/Presentation/screens/ConfirmAdviseScreen/Components/outlined_advisor_card.dart';
-export  'package:connectivity_plus/connectivity_plus.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:flutter/foundation.dart';
