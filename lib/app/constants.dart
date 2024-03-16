@@ -96,6 +96,9 @@ class Constants {
       bool? isParagraphTextField}) {
     return isParagraphTextField == true
         ? InputDecoration(
+            errorStyle: const TextStyle(fontFamily: Constants.mainFont),
+            labelStyle: const TextStyle(fontFamily: Constants.mainFont),
+            helperStyle: const TextStyle(fontFamily: Constants.mainFont),
             fillColor: fillColor,
             filled: true,
             suffixIcon: isSuffix == true
@@ -208,67 +211,69 @@ class Constants {
       bool? isParagraph,
       String? hintText}) {
     return InputDecoration(
-        errorStyle: Constants.subtitleFont1.copyWith(
-          color: Colors.red,
-        ),
-        prefixIcon: isParagraph == true
-            ? SizedBox(
-                height: 140,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                          start: 12, end: 6, top: 10, bottom: 10),
-                      child: Container(
-                        width: 30,
-                        decoration: const BoxDecoration(
-                            border: Border(
-                                left: BorderSide(
-                                    width: 1, color: Color(0xFFBDBDBD)))),
-                        margin: const EdgeInsetsDirectional.only(end: 8),
-                        padding: const EdgeInsetsDirectional.only(end: 8),
-                        child: prefixIcon,
-                      ),
+      errorStyle: Constants.subtitleFont1.copyWith(
+        color: Colors.red,
+      ),
+      prefixIcon: isParagraph == true
+          ? SizedBox(
+              height: 140,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        start: 12, end: 6, top: 10, bottom: 10),
+                    child: Container(
+                      width: 30,
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              left: BorderSide(
+                                  width: 1, color: Color(0xFFBDBDBD)))),
+                      margin: const EdgeInsetsDirectional.only(end: 8),
+                      padding: const EdgeInsetsDirectional.only(end: 8),
+                      child: prefixIcon,
                     ),
-                  ],
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsetsDirectional.only(
-                    start: 12, end: 6, top: 10, bottom: 10),
-                child: Container(
-                  width: 30,
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          left:
-                              BorderSide(width: 1, color: Color(0xFFBDBDBD)))),
-                  margin: const EdgeInsetsDirectional.only(end: 8),
-                  padding: const EdgeInsetsDirectional.only(end: 8),
-                  child: prefixIcon,
-                ),
+                  ),
+                ],
               ),
-        prefixIconColor: prefixColor,
-        suffixIconColor: suffixColor,
-        suffixIcon: Padding(
-          padding: const EdgeInsets.all(4),
-          child: suffixIcon,
+            )
+          : Padding(
+              padding: const EdgeInsetsDirectional.only(
+                  start: 12, end: 6, top: 10, bottom: 10),
+              child: Container(
+                width: 30,
+                decoration: const BoxDecoration(
+                    border: Border(
+                        left: BorderSide(width: 1, color: Color(0xFFBDBDBD)))),
+                margin: const EdgeInsetsDirectional.only(end: 8),
+                padding: const EdgeInsetsDirectional.only(end: 8),
+                child: prefixIcon,
+              ),
+            ),
+      prefixIconColor: prefixColor,
+      suffixIconColor: suffixColor,
+      suffixIcon: Padding(
+        padding: const EdgeInsets.all(4),
+        child: suffixIcon,
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      border: const OutlineInputBorder(
+        gapPadding: 0,
+        borderSide: BorderSide(
+          color: Color(0xff808488),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        border: const OutlineInputBorder(
-          gapPadding: 0,
-          borderSide: BorderSide(
-            color: Color(0xff808488),
-          ),
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          ),
-        ),
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          fontFamily: mainFont,
-          fontSize: 12,
-          color: fontHintColor,
-        ));
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+      ),
+      hintText: hintText,
+      suffixStyle: const TextStyle(
+        fontFamily: Constants.mainFont,
+        fontSize: 12,
+        color: fontHintColor,
+      ),
+      hintStyle: const TextStyle(
+        fontFamily: Constants.mainFont,
+        fontSize: 12,
+        color: fontHintColor,
+      ),
+    );
   }
 }

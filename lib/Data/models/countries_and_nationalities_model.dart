@@ -1,6 +1,6 @@
 class CountriesAndNationalitiesModel {
   Data? data;
-  int? status;
+  dynamic status;
   String? message;
 
   CountriesAndNationalitiesModel({this.data, this.status, this.message});
@@ -46,7 +46,7 @@ class Data {
 }
 
 class Countries {
-  int? id;
+  dynamic id;
   String? name;
 
   Countries({this.id, this.name});
@@ -65,7 +65,7 @@ class Countries {
 }
 
 class Nationailties {
-  int? id;
+  dynamic id;
   String? name;
   String? code;
   String? logo;

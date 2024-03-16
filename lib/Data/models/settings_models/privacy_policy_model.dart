@@ -12,7 +12,7 @@ String privacyPolicyModelToJson(PrivacyPolicyModel data) =>
 
 class PrivacyPolicyModel {
   Data? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -44,7 +44,7 @@ class PrivacyPolicyModel {
 }
 
 class Data {
-  int? id;
+  dynamic id;
   String? name;
   String? description;
 

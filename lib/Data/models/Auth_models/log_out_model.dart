@@ -10,7 +10,7 @@ String logOutModelToJson(LogOutModel data) => json.encode(data.toJson());
 
 class LogOutModel {
   List<dynamic>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 

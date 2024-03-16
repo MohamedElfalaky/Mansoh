@@ -156,14 +156,10 @@ customAppBar({
     ),
     title: Column(
       children: [
-        const SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
         Row(
           children: [
-            const SizedBox(
-              width: 20,
-            ),
+            const SizedBox(width: 20),
             Text(txt),
           ],
         ),

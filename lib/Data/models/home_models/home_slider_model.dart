@@ -10,7 +10,7 @@ String homeSliderToJson(HomeSlider data) => json.encode(data.toJson());
 
 class HomeSlider {
   List<HSListData>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -46,7 +46,7 @@ class HomeSlider {
 }
 
 class HSListData {
-  int? id;
+  dynamic id;
   String? url;
   String? image;
 

@@ -6,6 +6,10 @@ class WalletInitial extends WalletState {}
 
 class WalletLoading extends WalletState {}
 
+class GetCouponsLoading extends WalletState {}
+
+class GetCouponsDone extends WalletState {}
+
 class WalletLoaded extends WalletState {
   WalletData? response;
 

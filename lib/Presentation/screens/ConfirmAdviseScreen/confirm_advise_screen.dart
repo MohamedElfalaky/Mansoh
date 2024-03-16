@@ -118,8 +118,9 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         ),
                       ),
                       TextFormField(
+
                         maxLength: 35,
-                        style: const TextStyle(fontFamily: 'Cairo'),
+                        style: const TextStyle(fontFamily: Constants.mainFont),
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Enter Advice Title".tr;
@@ -133,6 +134,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         controller: requestTitle,
                         decoration: Constants.setTextInputDecoration(
                             prefixIcon: const MyPrefixWidget(),
+
                             // isSuffix: false ,
                             hintText: "Enter Advice Title...".tr),
                       ),
@@ -369,7 +371,8 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                     ],
                   ),
                 ),
-              ))),
+              )),
+      ),
     );
   }
 }

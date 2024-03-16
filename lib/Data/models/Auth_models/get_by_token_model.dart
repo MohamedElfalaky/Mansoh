@@ -12,7 +12,7 @@ String getByTokenModelToJson(GetByTokenModel data) =>
 
 class GetByTokenModel {
   Data? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -44,14 +44,14 @@ class GetByTokenModel {
 }
 
 class Data {
-  int? id;
+  dynamic id;
   String? avatar;
   String? email;
   String? lang;
   String? fullName;
   String? mobile;
   String? token;
-  int? isNotification;
+  dynamic isNotification;
   String? wallet;
 
   Data({

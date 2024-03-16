@@ -14,7 +14,7 @@ String showAdviceModelToJson(ShowAdviceModel data) =>
 
 class ShowAdviceModel {
   ShowAdviceData? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -47,11 +47,11 @@ class ShowAdviceModel {
 }
 
 class ShowAdviceData {
-  int? id;
+  dynamic id;
   AdviserProfileData? adviser;
-  int? price;
-  double? tax;
-  double? total;
+  dynamic price;
+  dynamic tax;
+  dynamic total;
   Label? status;
   List<Chat>? chat;
   Label? label;
@@ -73,8 +73,8 @@ class ShowAdviceData {
             ? null
             : AdviserProfileData.fromJson(json["adviser"]),
         price: json["price"] ?? 0,
-        tax: json["tax"]?.toDouble(),
-        total: json["total"]?.toDouble(),
+        tax: json["tax"],
+        total: json["total"],
         status: json["status"] == null ? null : Label.fromJson(json["status"]),
         chat: json["chat"] == null
             ? []
@@ -96,7 +96,7 @@ class ShowAdviceData {
 }
 
 class Label {
-  int? id;
+  dynamic id;
   String? name;
 
   Label({
@@ -116,7 +116,7 @@ class Label {
 }
 
 class Chat {
-  int? id;
+  dynamic id;
   dynamic adviser;
   Client? client;
   String? message;
@@ -157,7 +157,7 @@ class Chat {
 }
 
 class Client {
-  int? id;
+  dynamic id;
   String? avatar;
   String? fullName;
 
@@ -181,7 +181,7 @@ class Client {
 }
 
 class Document {
-  int? id;
+  dynamic id;
   String? file;
 
   Document({

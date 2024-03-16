@@ -12,7 +12,7 @@ String advisorListModelToJson(AdvisorListModel data) =>
 
 class AdvisorListModel {
   List<AdviserData>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -49,7 +49,7 @@ class AdvisorListModel {
 }
 
 class AdviserData {
-  int? id;
+  dynamic id;
   String? avatar;
   String? fullName;
   String? info;
@@ -94,7 +94,7 @@ class AdviserData {
 }
 
 class Category {
-  int? id;
+  dynamic id;
   String? name;
 
   Category({

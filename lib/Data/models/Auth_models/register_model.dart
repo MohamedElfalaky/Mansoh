@@ -10,7 +10,7 @@ String registerModelToJson(RegisterModel data) => json.encode(data.toJson());
 
 class RegisterModel {
   final Data? data;
-  final int? status;
+  final dynamic status;
   final String? message;
   final List<dynamic>? pagination;
 
@@ -41,19 +41,19 @@ class RegisterModel {
 }
 
 class Data {
-  final int? id;
+  final dynamic id;
   final String? avatar;
   final String? email;
   final String? lang;
   final String? token;
   final String? fullName;
   final String? mobile;
-  final int? isNotification;
+  final dynamic isNotification;
   final String? gender;
   final Country? countryId;
   final CityId? cityId;
   final NationalityId? nationalityId;
-  final int? status;
+  final dynamic status;
 
   Data({
     this.id,
@@ -110,7 +110,7 @@ class Data {
 }
 
 class CityId {
-  final int? id;
+  final dynamic id;
   final Country? country;
   final String? name;
 
@@ -135,7 +135,7 @@ class CityId {
 }
 
 class Country {
-  final int? id;
+  final dynamic id;
   final String? name;
 
   Country({
@@ -155,7 +155,7 @@ class Country {
 }
 
 class NationalityId {
-  final int? id;
+  final dynamic id;
   final String? name;
   final String? logo;
 

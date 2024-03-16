@@ -10,7 +10,7 @@ String categoryModelToJson(CategoryModel data) => json.encode(data.toJson());
 
 class CategoryModel {
   List<CategoryData>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -46,10 +46,10 @@ class CategoryModel {
 }
 
 class CategoryData {
-  int? id;
+  dynamic id;
   String? name;
   List<CategoryData>? children;
-  int? parentId;
+  dynamic parentId;
   bool? selected;
 
   CategoryData({

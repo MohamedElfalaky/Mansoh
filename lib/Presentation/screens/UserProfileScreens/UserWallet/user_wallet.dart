@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/wallet_cubit/wallet_cubit.dart';
+import 'package:nasooh/Presentation/screens/UserProfileScreens/UserWallet/coupons_screen.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import '../../../../Data/cubit/wallet_cubit/wallet_state.dart';
 import '../../../../app/constants.dart';
@@ -33,15 +34,33 @@ class _UserWalletState extends State<UserWallet> {
         MyApplication.dismissKeyboard(context);
       },
       child: Scaffold(
-        appBar: customAppBar(context: context, txt: "My Wallet".tr),
+        appBar: customAppBar(
+            endIcon: true,
+            context: context, txt: "My Wallet".tr, actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Constants.primaryAppColor,
+                     shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    )),
+                onPressed: () {
+                  MyApplication.navigateTo(context, const CouponsScreen());
+                },
+                child: const Text(' كوبونات الخصم',style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: Constants.mainFont,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700
+                ),textAlign: TextAlign.center,)),
+          )
+        ]),
         resizeToAvoidBottomInset: true,
         extendBody: true,
         body: BlocBuilder<WalletCubit, WalletState>(
           builder: (context, state) {
-            if (state is WalletLoading) {
-              return const Center(child: CircularProgressIndicator.adaptive());
-            } else if (state is WalletLoaded) {
-              return Padding(
+         return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
@@ -52,76 +71,69 @@ class _UserWalletState extends State<UserWallet> {
                         cursorOpacityAnimates: false,
                         controller: couponController,
                         decoration: const InputDecoration(
-                            hintText: 'برجاء كتابة كود الخصم',
-                            hintStyle: TextStyle(
-                              fontFamily: Constants.mainFont,
-                              fontSize: 12,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              gapPadding: 0,
-                              borderSide:
-                                  BorderSide(color: Constants.primaryAppColor),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              gapPadding: 0,
-                              borderSide:
-                                  BorderSide(color: Constants.primaryAppColor),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            )),
+                          hintText: 'برجاء كتابة كود الخصم',
+                          hintStyle: TextStyle(
+                            fontFamily: Constants.mainFont,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
                     ),
+                    if(state is GetCouponsLoading)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        child: CustomLoadingButton(),
+                      )
+                      else
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: CustomElevatedButton(
                           txt: 'تطبيق',
                           onPressedHandler: () {
-                            context
-                                .read<WalletCubit>()
-                                .getPromoCode(promoCode: couponController.text);
+                            if (couponController.text != '') {
+                              context.read<WalletCubit>().getPromoCode(
+                                  promoCode: couponController.text);
+                            }
+                            couponController.clear();
                           }),
                     ),
-                    Text(
-                      "total_balance".tr,
-                      style: Constants.secondaryTitleRegularFont,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "${state.response!.balance}  ريال سعودي ",
-                      style: Constants.headerNavigationFont.copyWith(
-                        color: Constants.primaryAppColor,
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.only(bottom: 40),
-                        itemCount: state.response!.transaction?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          return WalletCard(
-                            description: state.response?.transaction?[index]
-                                    .description ??
-                                "",
-                            oneTraBalance: state
-                                    .response?.transaction?[index].balance
-                                    .toString() ??
-                                "",
-                          );
-                        },
-                      ),
-                    )
+                    if(state is WalletLoaded)
+                      ...
+                      [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "total_balance".tr,
+                              style: Constants.secondaryTitleRegularFont,
+                            ),
+                            const SizedBox(width: 10),
+                            Text("${state.response?.balance ?? 0} ريال سعودي",
+                                style: Constants.headerNavigationFont.copyWith(
+                                  color: Constants.primaryAppColor,
+                                )),
+                          ],
+                        ),
+                        const SizedBox(height: 40),
+                        Expanded(
+                          child: ListView.builder(
+                            padding: const EdgeInsets.only(bottom: 40),
+                            itemCount: state.response?.transaction?.length ?? 0,
+                            itemBuilder: (context, index) {
+                              return WalletCard(
+                                  description:
+                                  '${state.response?.transaction?[index].description}',
+                                  oneTraBalance:
+                                  '${state.response?.transaction?[index].balance}');
+                            },
+                          ),
+                        )
+                      ]
                   ],
                 ),
               );
-            }
-            return const SizedBox.shrink();
-          },
+
+           },
         ),
       ),
     );

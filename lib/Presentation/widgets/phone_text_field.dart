@@ -67,7 +67,7 @@ class MyIntlPhoneField extends StatefulWidget {
 
   final Color? cursorColor;
 
-  final double? cursorHeight;
+  final dynamic cursorHeight;
 
   final Radius? cursorRadius;
 

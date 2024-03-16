@@ -56,7 +56,7 @@ class SharedPrefs {
     return sharedPrefs!.getInt(idKey);
   }
 
-  int? getReceiveMethod() {
+  dynamic getReceiveMethod() {
     return sharedPrefs!.getInt(receiveMethodKey);
   }
 

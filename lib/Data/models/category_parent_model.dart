@@ -1,6 +1,6 @@
 class CategoryParentModel {
   List<CategoryParentData>? data;
-  int? status;
+  dynamic status;
   String? message;
 
   CategoryParentModel({this.data, this.status, this.message});
@@ -29,10 +29,10 @@ class CategoryParentModel {
 }
 
 class CategoryParentData {
-  int? id;
+  dynamic id;
   String? name;
   List<Children>? children;
-  int? parentId;
+  dynamic parentId;
   bool? selected;
 
   CategoryParentData(
@@ -65,9 +65,9 @@ class CategoryParentData {
 }
 
 class Children {
-  int? id;
+  dynamic id;
   String? name;
-  int? parentId;
+  dynamic parentId;
   bool? selected;
 
   Children({this.id, this.name, this.parentId, this.selected});

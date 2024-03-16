@@ -12,7 +12,7 @@ String postRejectModelToJson(PostRejectModel data) =>
 
 class PostRejectModel {
   List<dynamic>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 

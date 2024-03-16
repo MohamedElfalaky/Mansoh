@@ -235,12 +235,16 @@ class InputTextField extends StatelessWidget {
           controller: controller,
           onChanged: onChanged,
           keyboardType: keyboardType,
+          style: const TextStyle(
+            fontFamily: Constants.mainFont,
+            fontSize: 12,
+          ),
           decoration: Constants.setRegistrationTextInputDecoration(
               hintText: hintTxt,
               prefixIcon: SvgPicture.asset(
                 imageTxt,
                 height: 24,
-              )).copyWith(),
+              )),
         ),
       ),
     );

@@ -18,7 +18,7 @@ class Register {
       String? mobile,
       String? countryId,
       String? cityId,
-      int? gender,
+      dynamic gender,
       String? nationalityId,
       String? avatar}) async {
     try {

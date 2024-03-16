@@ -17,7 +17,7 @@ class SendAdvise {
     String? price,
     String? documentsFile,
     String? type,
-    int? adviserId,
+    dynamic adviserId,
   }) async {
     try {
       Map<String, dynamic> map = {

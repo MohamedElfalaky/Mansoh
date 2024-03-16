@@ -346,7 +346,7 @@ class _RateScreenState extends State<RateScreen> {
   }
 
   Widget _itemRate(
-      {String? txt, double? rateVal, void Function(double)? onRatingUpdate}) {
+      {String? txt, dynamic rateVal, void Function(double)? onRatingUpdate}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(

@@ -14,7 +14,7 @@ class SendAdviseCubit extends Cubit<SendAdviseState> {
     String? price,
     String? documentsFile,
     String? type,
-    int? adviserId,
+    dynamic adviserId,
     BuildContext? context,
   }) {
     try {

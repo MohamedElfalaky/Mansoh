@@ -14,6 +14,7 @@ import '../../Data/cubit/authentication/log_out_cubit/log_out_cubit.dart';
 import '../../Data/cubit/authentication/login_cubit/login_cubit.dart';
 import '../../Data/cubit/authentication/new_mob/mob_cubit.dart';
 import '../../Data/cubit/authentication/register_cubit/register_cubit.dart';
+import '../../Data/cubit/coupons_cubit/coupons_cubit.dart';
 import '../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../Data/cubit/home/home_slider_cubit.dart';
 import '../../Data/cubit/notification_cubit/notification_cubit.dart';
@@ -43,6 +44,7 @@ List<BlocProvider> providers = [
   BlocProvider<ProfileCubit>(
       create: (context) => ProfileCubit()..getDataProfile()),
   BlocProvider<LogOutCubit>(create: (context) => LogOutCubit()),
+  BlocProvider<CouponsCubit>(create: (context) => CouponsCubit()),
   BlocProvider<UpdateProfileCubit>(create: (context) => UpdateProfileCubit()),
   BlocProvider<GetUserCubit>(create: (context) => GetUserCubit()),
   BlocProvider<HomeSliderCubit>(create: (context) => HomeSliderCubit()),

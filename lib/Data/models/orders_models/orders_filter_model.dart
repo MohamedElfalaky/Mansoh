@@ -10,7 +10,7 @@ String ordersFiltersModelToJson(OrdersFiltersModel data) =>
 
 class OrdersFiltersModel {
   List<OrderFilterData>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -47,9 +47,9 @@ class OrdersFiltersModel {
 }
 
 class OrderFilterData {
-  int? id;
+  dynamic id;
   String? name;
-  num? price;
+  dynamic price;
   String? date;
   Status? status;
   AdviserProfileData? adviser;
@@ -88,7 +88,7 @@ class OrderFilterData {
 }
 
 class Status {
-  int? id;
+  dynamic id;
   String? name;
 
   Status({

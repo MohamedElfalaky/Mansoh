@@ -31,7 +31,7 @@ class RegistrationInfoScreen extends StatefulWidget {
 class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
   static final ImagePicker _picker = ImagePicker();
   static XFile? regImage;
-  int? inputGender;
+  dynamic inputGender;
 
   static final TextEditingController _nameController = TextEditingController();
   static final TextEditingController _emailController = TextEditingController();

@@ -67,6 +67,7 @@ Map<String, String> getArabicLanguage() {
     "name length": "عدد أحرف الاسم يجب ان تكون أكثر من 2 و  أقل 33 حرف ",
     "Home": "الرئيسية",
     "My Orders": "طلباتي",
+    "promo_codes":"كوبونات الخصم",
     "My Account": "ملفي",
     "share_app": "مشاركة التطبيق",
     "change Language": "تغيير اللغة ",

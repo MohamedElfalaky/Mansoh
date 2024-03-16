@@ -10,7 +10,7 @@ String mobModelToJson(MobModel data) => json.encode(data.toJson());
 
 class MobModel {
   final List<dynamic>? data;
-  final int? status;
+  final dynamic status;
   final String? message;
   final List<dynamic>? pagination;
 

@@ -1,6 +1,6 @@
 class SubCategoryModel {
   List<SubCategoryData>? data;
-  int? status;
+  dynamic status;
   String? message;
 
   SubCategoryModel({this.data, this.status, this.message});
@@ -29,9 +29,9 @@ class SubCategoryModel {
 }
 
 class SubCategoryData {
-  int? id;
+  dynamic id;
   String? name;
-  int? parentId;
+  dynamic parentId;
   bool? selected;
   List<Children>? children;
 
@@ -65,9 +65,9 @@ class SubCategoryData {
 }
 
 class Children {
-  int? id;
+  dynamic id;
   String? name;
-  int? parentId;
+  dynamic parentId;
   bool? selected;
 
   Children({this.id, this.name, this.parentId, this.selected});

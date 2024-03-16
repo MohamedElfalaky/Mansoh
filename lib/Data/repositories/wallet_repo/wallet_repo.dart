@@ -4,13 +4,33 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:nasooh/Data/models/coupons_model.dart';
 import '../../../../app/keys.dart';
 import '../../../../app/utils/my_application.dart';
 import '../../../app/utils/shared_preference_class.dart';
 import '../../models/wallet_models/wallet_model.dart';
 
 class WalletRepo {
-  Future<WalletData?> getPromoCode({required String promoCode}) async {
+  Future<CouponsModel?> getPromoCodes() async {
+    http.Response response = await http.get(
+      Uri.parse('${Keys.baseUrl}/client/promo-code'),
+      headers: {
+        'Accept': 'application/json',
+        'lang': Get.locale?.languageCode ?? "ar",
+        'Authorization': 'Bearer ${sharedPrefs.getToken()}',
+      },
+    );
+    Map<String, dynamic> responseMap = json.decode(response.body);
+    if (response.statusCode == 200 && responseMap["status"] == 1) {
+      return CouponsModel.fromJson(responseMap);
+    } else {
+      MyApplication.showToastView(message: responseMap["message"]);
+    }
+
+    return null;
+  }
+
+  Future<WalletData?> applyPromoCode({required String promoCode}) async {
     http.Response response = await http.post(
       body: {'code': promoCode},
       Uri.parse('${Keys.baseUrl}/client/promo-code/apply'),
@@ -20,12 +40,18 @@ class WalletRepo {
         'Authorization': 'Bearer ${sharedPrefs.getToken()}',
       },
     );
+
     Map<String, dynamic> responseMap = json.decode(response.body);
-    if (response.statusCode == 200 && responseMap["status"] == 1) {
+    debugPrint('wallet data');
+    print(responseMap);
+    print(responseMap["status"]);
+    if (response.statusCode == 200) {
+      if (responseMap["status"] == 0) {
+        MyApplication.showToastView(message: responseMap["message"]);
+      }
       return walletModelFromJson(responseMap).data;
-    } else {
-      MyApplication.showToastView(message: responseMap["message"]);
     }
+
 
     return null;
   }

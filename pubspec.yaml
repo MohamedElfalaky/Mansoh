@@ -46,6 +46,7 @@ dependencies:
   myfatoorah_flutter: ^3.0.8
   open_filex: ^4.4.0
   flutter_document_picker: ^5.2.3
+  flutter_linkify: ^6.0.0
 
 dev_dependencies:
   delete_un_used_assets: ^1.0.1

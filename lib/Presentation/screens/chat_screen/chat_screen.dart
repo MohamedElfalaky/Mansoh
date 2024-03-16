@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/send_chat_cubit/send_chat_cubit.dart';
 import 'package:nasooh/Data/cubit/send_chat_cubit/send_chat_state.dart';
@@ -212,6 +213,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: OutlinedAdvisorCard(
                     labelToShow: widget.labelToShow,
                     adviceId: widget.adviceId,
+
                     adviserProfileData: widget.adviserProfileData!,
                     isClickable: widget.statusClickable,
                   ),
@@ -388,8 +390,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       )),
                               GestureDetector(
                                 onTap: () {
-                                  print(state.response?.data?.chat?[index]
-                                      .document?[0].file);
+                                  print(state.response?.data?.chat?[index].document?[0].file);
                                   if (state.response?.data?.chat?[index]
                                               .document?[0].file
                                               ?.contains('png') ==
@@ -531,7 +532,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                     : Constants.primaryAppColor
                                         .withOpacity(0.6),
                                 borderRadius: BorderRadius.circular(20)),
-                            child: Text(
+                            child: Linkify(
+
+                              onOpen: (text){
+                                launchUrl(Uri.parse(text.url));
+                              },
+                              text:
                               state.response?.data?.chat?[index].message ?? "",
                               style: Constants.subtitleFont,
                             ),

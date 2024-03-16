@@ -12,7 +12,7 @@ String notificationModelToJson(NotificationModel data) =>
 
 class NotificationModel {
   List<NotificationData>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -49,11 +49,11 @@ class NotificationModel {
 }
 
 class NotificationData {
-  int? id;
+  dynamic id;
   String? name;
   String? description;
   String? date;
-  int? readAt;
+  dynamic readAt;
 
   NotificationData({
     this.id,

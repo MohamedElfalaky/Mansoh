@@ -16,9 +16,9 @@ class ReviewCubit extends Cubit<ReviewState> {
     String? quality,
     String? flexibility,
     String? other,
-    int? adviser,
-    int? adviceId,
-    int? app,
+    dynamic adviser,
+    dynamic adviceId,
+    dynamic app,
     BuildContext? context,
   }) {
     try {

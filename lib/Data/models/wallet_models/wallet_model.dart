@@ -10,7 +10,7 @@ String walletModelToJson(WalletModel data) => json.encode(data.toJson());
 
 class WalletModel {
   WalletData? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -41,8 +41,8 @@ class WalletModel {
 }
 
 class WalletData {
-  int? id;
-  double? balance;
+  dynamic id;
+  dynamic balance;
   List<Transaction>? transaction;
 
   WalletData({
@@ -53,7 +53,7 @@ class WalletData {
 
   factory WalletData.fromJson(Map<String, dynamic> json) => WalletData(
         id: json["id"],
-        balance: json["balance"]?.toDouble(),
+        balance: json["balance"],
         transaction: json["transaction"] == null
             ? []
             : List<Transaction>.from(
@@ -70,8 +70,8 @@ class WalletData {
 }
 
 class Transaction {
-  int? id;
-  double? balance;
+  dynamic id;
+  dynamic balance;
   String? key;
   String? description;
 
@@ -84,7 +84,7 @@ class Transaction {
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
         id: json["id"],
-        balance: json["balance"]?.toDouble(),
+        balance: json["balance"],
         key: json["key"],
         description: json["description"],
       );

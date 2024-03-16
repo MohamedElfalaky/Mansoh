@@ -12,7 +12,7 @@ String updateProfileModelToJson(UpdateProfileModel data) =>
 
 class UpdateProfileModel {
   Data? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -44,7 +44,7 @@ class UpdateProfileModel {
 }
 
 class Data {
-  int? id;
+  dynamic id;
   String? avatar;
   String? email;
   String? lang;
@@ -55,7 +55,7 @@ class Data {
   Country? countryId;
   CityId? cityId;
   NationalityId? nationalityId;
-  int? status;
+  dynamic status;
 
   Data({
     this.id,
@@ -109,7 +109,7 @@ class Data {
 }
 
 class CityId {
-  int? id;
+  dynamic id;
   Country? country;
   String? name;
 
@@ -134,7 +134,7 @@ class CityId {
 }
 
 class Country {
-  int? id;
+  dynamic id;
   String? name;
 
   Country({
@@ -154,7 +154,7 @@ class Country {
 }
 
 class NationalityId {
-  int? id;
+  dynamic id;
   String? name;
   String? logo;
 

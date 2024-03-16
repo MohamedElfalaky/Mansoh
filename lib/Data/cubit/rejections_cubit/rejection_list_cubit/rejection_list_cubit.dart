@@ -10,8 +10,6 @@ class ListRejectionCubit extends Cubit<ListRejectionState> {
 
   ListRejectionModel? profileModel;
 
-  // static ListRejectionCubit get(context) => BlocProvider.of(context);
-
   getDataListRejection() async {
     try {
       emit(ListRejectionLoading());

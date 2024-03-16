@@ -12,7 +12,7 @@ String listRejectionModelToJson(ListRejectionModel data) =>
 
 class ListRejectionModel {
   List<RejectData>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -49,7 +49,7 @@ class ListRejectionModel {
 }
 
 class RejectData {
-  int? id;
+  dynamic id;
   String? name;
 
   RejectData({

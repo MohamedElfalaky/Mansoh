@@ -25,7 +25,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.catVal, this.rateVal});
 
   final String? catVal;
-  final double? rateVal;
+  final dynamic rateVal;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late PageController controller;
   int _currentPage = 0;
   int selectedCategoryId = 0;
-  int? selectedSubCategory;
+  dynamic selectedSubCategory;
 
   late AdvisorListCubit advisorListCubit;
 

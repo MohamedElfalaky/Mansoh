@@ -11,7 +11,7 @@ import '../../models/home_models/advisor_list_model.dart';
 
 class AdvisorListRepo {
   Future<AdvisorListModel?> getAdvisorList(
-      {String? catVal, String? searchTxt, double? rateVal}) async {
+      {String? catVal, String? searchTxt, dynamic rateVal}) async {
     try {
       String url =
           '${Keys.baseUrl}/client/adviser/list?category=${catVal ?? ""}&name=${searchTxt ?? ""}&rate=${rateVal ?? ""}';

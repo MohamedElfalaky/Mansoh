@@ -15,9 +15,9 @@ class ReviewRepo {
     String? quality,
     String? flexibility,
     String? other,
-    int? adviser,
-    int? adviceId,
-    int? app,
+    dynamic adviser,
+    dynamic adviceId,
+    dynamic app,
   }) async {
     Map<String, dynamic> mapData = {
       'rate_speed': '$speed',

@@ -10,7 +10,7 @@ String cityModelToJson(CityModel data) => json.encode(data.toJson());
 
 class CityModel {
   final List<CityData>? data;
-  final int? status;
+  final dynamic status;
   final String? message;
   final List<dynamic>? pagination;
 
@@ -46,7 +46,7 @@ class CityModel {
 }
 
 class CityData {
-  final int? id;
+  final dynamic id;
   final Country? country;
   final String? name;
 
@@ -71,7 +71,7 @@ class CityData {
 }
 
 class Country {
-  final int? id;
+  final dynamic id;
   final String? name;
 
   Country({

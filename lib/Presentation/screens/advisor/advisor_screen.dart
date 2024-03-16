@@ -43,6 +43,19 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                 const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // BlocSelector<AdvisorProfileCubit, AdvisorProfileState,
+                    //     bool>(
+                    //   builder: (context, state) {
+                    //     if (state) {
+                    //       return const Text('data');
+                    //     }
+                    //     return const SizedBox();
+                    //   },
+                    //   selector: (state) {
+                    //     return state is AdvisorProfileError ? true : false;
+                    //   },
+                    // ),
+                    
                     SizedBox(height: 10),
                     Row(
                       children: [

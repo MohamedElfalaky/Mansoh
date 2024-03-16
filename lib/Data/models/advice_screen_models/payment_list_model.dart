@@ -12,7 +12,7 @@ String paymentListModelToJson(PaymentListModel data) =>
 
 class PaymentListModel {
   List<Datum>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -48,7 +48,7 @@ class PaymentListModel {
 }
 
 class Datum {
-  int? id;
+  dynamic id;
   String? name;
   String? logo;
 

@@ -11,7 +11,7 @@ String checkCodeModelToJson(CheckCodeModel data) => json.encode(data.toJson());
 
 class CheckCodeModel {
   final Data? data;
-  final int? status;
+  final dynamic status;
   final String? message;
   final List<dynamic>? pagination;
 
@@ -42,7 +42,7 @@ class CheckCodeModel {
 }
 
 class Data {
-  final int? login;
+  final dynamic login;
 
   Data({
     this.login,

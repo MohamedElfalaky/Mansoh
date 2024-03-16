@@ -6,7 +6,7 @@ class CustomElevatedButton extends StatelessWidget {
   final String? txt;
   final Color? btnColor;
   final Color? txtColor;
-  final double? txtSize;
+  final dynamic txtSize;
   final bool? isBold;
   final Widget? prefixWidget;
 
@@ -24,6 +24,8 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        fixedSize: const Size.fromHeight(45),
+
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8))),
         textStyle: const TextStyle(fontWeight: FontWeight.normal),
@@ -35,7 +37,7 @@ class CustomElevatedButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            prefixWidget ?? const SizedBox(),
+            prefixWidget ?? const SizedBox.shrink(),
             Container(
               margin: const EdgeInsets.all(3),
               child: Text(
@@ -56,33 +58,23 @@ class CustomElevatedButton extends StatelessWidget {
 }
 
 class CustomLoadingButton extends StatelessWidget {
-  final dynamic onPressedHandler;
-
-  final bool? isBold;
-  final Widget? prefixWidget;
-
-  const CustomLoadingButton(
-      {super.key, this.onPressedHandler, this.isBold, this.prefixWidget});
-
+  const CustomLoadingButton({super.key});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8))),
-          textStyle: const TextStyle(fontWeight: FontWeight.normal),
-          elevation: 0,
-          backgroundColor: Constants.primaryAppColor,
-        ),
-        onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
-          child: Center(
-            child: CircularProgressIndicator.adaptive(
-                backgroundColor: Colors.white),
-          ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        fixedSize: const Size.fromHeight(45),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8))),
+        elevation: 0,
+        backgroundColor: Constants.primaryAppColor,
+      ),
+      onPressed: () {},
+      child: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        child: Center(
+          child:
+          CircularProgressIndicator.adaptive(backgroundColor: Colors.white),
         ),
       ),
     );
@@ -94,7 +86,7 @@ class MyButtonOutlined extends StatelessWidget {
   final String? txt;
   final Color? btnColor;
   final Color? txtColor;
-  final double? txtSize;
+  final dynamic txtSize;
   final bool? isBold;
   final Widget? prefixWidget;
 

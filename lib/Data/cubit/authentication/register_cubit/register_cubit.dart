@@ -16,7 +16,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     String? mobile,
     String? countryId,
     String? cityId,
-    int? gender,
+    dynamic gender,
     String? nationalityId,
     String? avatar,
     BuildContext? context,

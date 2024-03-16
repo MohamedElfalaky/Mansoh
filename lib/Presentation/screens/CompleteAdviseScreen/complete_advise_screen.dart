@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/complete_advisor_card.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/payment_card.dart';
 import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
+import 'package:nasooh/Presentation/screens/fatorah/fatorah_screen.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
@@ -176,12 +177,11 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                   moneyPut: showAdviceState
                                       .response!.data!.price
                                       .toString(),
-                                  taxVal: showAdviceState.response?.data?.tax
-                                          ?.toStringAsFixed(2) ??
-                                      "",
+                                  taxVal:
+                                      showAdviceState.response?.data?.tax ?? "",
                                 );
                               } else {
-                                return const SizedBox();
+                                return const SizedBox.shrink();
                               }
                             }),
                             const Padding(
@@ -204,15 +204,22 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                                     shrinkWrap: true,
                                     itemCount:
                                         state.response?.data?.length ?? 0,
-                                    itemBuilder: (context, int index) =>
-                                        PaymentCard(
+                                    itemBuilder: (context, int index) {
+                                      return InkWell(
+                                        onTap: () {
+                                          MyApplication.navigateTo(context,
+                                              const FatooraScreen(amount: 10));
+                                        },
+                                        child: PaymentCard(
                                           payMethod: state.response
                                                   ?.data?[index].name ??
                                               "",
                                           walletVal: getByTokenState
                                                   .response?.data?.wallet ??
                                               "",
-                                        ));
+                                        ),
+                                      );
+                                    });
                               }
                               return const SizedBox.shrink();
                             })

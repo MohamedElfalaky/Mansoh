@@ -13,6 +13,7 @@ Map<String, String> getEnglishLanguage() {
     "resident_city": "resident_city",
     "alsaudia": "saudia arabia",
     "notifications": "Notifications",
+    "promo_codes":"Promo codes",
     "confirm_account_pin":
         "please enter your phone number to confirm your account and receive a ",
     "verification_code": "verification code",

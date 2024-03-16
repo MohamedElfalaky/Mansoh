@@ -12,7 +12,7 @@ String ordersStatusModelToJson(OrdersStatusModel data) =>
 
 class OrdersStatusModel {
   List<Datum>? data;
-  int? status;
+  dynamic status;
   String? message;
   List<dynamic>? pagination;
 
@@ -48,7 +48,7 @@ class OrdersStatusModel {
 }
 
 class Datum {
-  int? id;
+  dynamic id;
   String? name;
 
   Datum({

@@ -8,9 +8,9 @@ class WalletCubit extends Cubit<WalletState> {
 
   getPromoCode({required String promoCode}) async {
     try {
-      emit(WalletLoading());
+      emit(GetCouponsLoading());
       final mList =
-          await (listRejectionRepo.getPromoCode(promoCode: promoCode));
+          await (listRejectionRepo.applyPromoCode(promoCode: promoCode));
       emit(WalletLoaded(mList));
     } catch (e) {
       emit(WalletError());
