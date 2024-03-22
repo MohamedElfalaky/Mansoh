@@ -62,8 +62,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                         adviceId: state.response!.data!.id!,
                         adviserProfileData: state.response!.data!.adviser,
                       ));
-                  MyApplication.showToastView(
-                      message: state.response?.data?.status?.name ?? "");
+
                 }
               },
               builder: (context, state) => state is PayAdviceLoading

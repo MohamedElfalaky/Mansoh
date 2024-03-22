@@ -6,10 +6,12 @@ import '../../../../../app/constants.dart';
 class WalletCard extends StatelessWidget {
   final String description;
   final String oneTraBalance;
+  final String title;
 
   const WalletCard({
     super.key,
     required this.description,
+    required this.title,
     required this.oneTraBalance,
   });
 
@@ -26,6 +28,7 @@ class WalletCard extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
@@ -41,27 +44,29 @@ class WalletCard extends StatelessWidget {
                       const SizedBox(
                         width: 5,
                       ),
-                      const Text(
-                        "استرجاع",
-                        style: Constants.secondaryTitleFont,
-                      ),
+                       Text(
+                       title,
+                       style: Constants.secondaryTitleFont,
+                     )
                     ],
                   ),
                   const Spacer(),
                   Text(
                     "$oneTraBalance  ريال سعودي ",
-                    style: Constants.secondaryTitleFont,
+                    style: Constants.secondaryTitleFont.copyWith(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14
+                    ),
                   ),
+
                 ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              Center(
-                child: Text(
-                  description,
-                  style: Constants.subtitleRegularFont,
-                ),
+              Text(
+                description,
+                style: Constants.subtitleRegularFont,
               ),
             ],
           ),

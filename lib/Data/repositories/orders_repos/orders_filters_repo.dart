@@ -11,6 +11,7 @@ import '../../models/orders_models/orders_filter_model.dart';
 
 class OrdersFiltersRepo {
   Future<OrdersFiltersModel?> getStatus({required String id}) async {
+    log(sharedPrefs.getToken());
     try {
       http.Response response = await http.get(
         Uri.parse('${Keys.baseUrl}/client/advice/list?status_id=$id'),
@@ -23,7 +24,7 @@ class OrdersFiltersRepo {
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        log("ALL ORDERS DATA ${response.body}");
+        log("ALL ORDERS DATA ${response.body.length} ");
         final sliders = ordersFiltersModelFromJson(responseMap);
         return sliders;
       } else {

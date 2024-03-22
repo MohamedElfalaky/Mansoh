@@ -45,7 +45,6 @@ class SendAdvise {
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print(response.body);
         final userdata = showAdviceModelFromJson(responseMap);
-        MyApplication.showToastView(message: responseMap["message"]);
         return userdata;
       } else {
         MyApplication.showToastView(

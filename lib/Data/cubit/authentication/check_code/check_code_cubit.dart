@@ -45,45 +45,46 @@ Future<void> _showAlertDialog(BuildContext context) async {
     builder: (BuildContext context) {
       return BlocBuilder<GetUserCubit, GetUserState>(
           builder: (context, state) => AlertDialog(
-                // <-- SEE HERE
-                // title: const Text('Cancel booking'),
                 content: SingleChildScrollView(
                   child: ListBody(
                     children: <Widget>[
                       Text(
                         "dialog tile".tr,
-                        style: const TextStyle(fontFamily: 'Cairo'),
+                        style: const TextStyle(
+                            fontFamily: 'Cairo',
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text(
-                      "No".tr,
-                      style: const TextStyle(fontFamily: 'Cairo'),
-                    ),
-                    onPressed: () {
-                      MyApplication.navigateTo(context, const CheckMobScreen());
-                    },
-                  ),
-                  state is GetUserLoading
-                      ? const Center(
-                          child: CircularProgressIndicator.adaptive())
-                      : TextButton(
+                actions: state is GetUserLoading
+                    ? [
+                        const Center(
+                            child: CircularProgressIndicator.adaptive())
+                      ]
+                    : <Widget>[
+                        TextButton(
+                          child: Text(
+                            "No".tr,
+                            style: const TextStyle(fontFamily: 'Cairo'),
+                          ),
+                          onPressed: () {
+                            MyApplication.navigateTo(
+                                context, const CheckMobScreen());
+                          },
+                        ),
+                        TextButton(
                           child: Text(
                             "Yes".tr,
                             style: const TextStyle(fontFamily: 'Cairo'),
                           ),
                           onPressed: () {
                             context.read<GetUserCubit>().getMobMethod(
-                                  context: context,
-                                  mobile: sendPhone,
-                                );
-                            // Navigator.pop(context);
+                                context: context, mobile: sendPhone);
                           },
                         ),
-                ],
+                      ],
               ));
     },
   );

@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/send_chat_cubit/send_chat_cubit.dart';
 import 'package:nasooh/Data/cubit/send_chat_cubit/send_chat_state.dart';
 import 'package:nasooh/Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
@@ -44,7 +43,6 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   late StreamSubscription<ConnectivityResult> _subscription;
   String? fileSelected;
-  bool? isConnected;
   int countSec = 0;
 
   final TextEditingController _textController = TextEditingController();
@@ -52,6 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
   File? pickedFile;
   String? voiceSelected;
   Timer? countdownTimer;
+  late SendChatCubit sendChatCubit;
 
   void startTimer() {
     countdownTimer = Timer.periodic(const Duration(seconds: 1), (_) {
@@ -64,33 +63,12 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
+    sendChatCubit = context.read<SendChatCubit>();
+    sendChatCubit.emit(SendChatInitial());
 
-    MyApplication.checkConnection().then((value) {
-      if (value) {
-        context
-            .read<ShowAdviceCubit>()
-            .getAdviceFunction(adviceId: widget.adviceId);
-      } else {
-        MyApplication.showToastView(message: 'noInternet'.tr);
-      }
-    });
-
-    _subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (mounted) {
-        setState(() {
-          result == ConnectivityResult.none
-              ? isConnected = false
-              : isConnected = true;
-        });
-      }
-      if (result != ConnectivityResult.none) {
-        context
-            .read<ShowAdviceCubit>()
-            .getAdviceFunction(adviceId: widget.adviceId);
-      }
-    });
+    context
+        .read<ShowAdviceCubit>()
+        .getAdviceFunction(adviceId: widget.adviceId);
   }
 
   @override
@@ -187,6 +165,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    // print('zzzz ${widget.adviserProfileData?.info}');
     return GestureDetector(
       onTap: () {
         MyApplication.dismissKeyboard(context);
@@ -213,7 +193,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: OutlinedAdvisorCard(
                     labelToShow: widget.labelToShow,
                     adviceId: widget.adviceId,
-
                     adviserProfileData: widget.adviserProfileData!,
                     isClickable: widget.statusClickable,
                   ),
@@ -238,42 +217,44 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ],
                               ),
                             if (pickedFile != null)
-                              pickedFile!.path.endsWith('.pdf')
-                                  ? Row(
+                              Row(
+                                children: [
+                                  CustomRoundedWidget(
+                                    color: Colors.grey.shade300,
+                                    child: Row(
                                       children: [
-                                        CustomRoundedWidget(
-                                          child: Expanded(
-                                            child: Row(
-                                              children: [
-                                                const Spacer(),
-                                                Text(pickedFile!.path
-                                                    .replaceRange(
-                                                        0,
-                                                        (pickedFile!
-                                                                .path.length) ~/
-                                                            2.4,
-                                                        "")),
-                                                const SizedBox(width: 10),
-                                                SvgPicture.asset(
-                                                  filePdf,
-                                                  width: 20,
-                                                  height: 20,
-                                                ),
-                                              ],
-                                            ),
+                                        // const Spacer(),
+                                        Flexible(
+                                          // width: 200,
+                                          child: Text(
+                                            pickedFile!.path.replaceRange(
+                                                0,
+                                                (pickedFile!.path.length) ~/
+                                                    2.4,
+                                                ""),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
                                           ),
                                         ),
-                                        if (pickedFile != null)
-                                          CloseIcon(
-                                            onPressed: () {
-                                              setState(() {
-                                                pickedFile = null;
-                                              });
-                                            },
-                                          )
+                                        const SizedBox(width: 10),
+                                        SvgPicture.asset(
+                                          filePdf,
+                                          width: 20,
+                                          height: 20,
+                                        ),
+                                        CloseIcon(
+                                          onPressed: () {
+                                            setState(() {
+                                              pickedFile = null;
+                                            });
+                                          },
+                                        )
                                       ],
-                                    )
-                                  : closeFileIconWidget(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            // : closeFileIconWidget(),
                             const SizedBox(width: 20),
                             writeMessage()
                           ],
@@ -390,7 +371,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                       )),
                               GestureDetector(
                                 onTap: () {
-                                  print(state.response?.data?.chat?[index].document?[0].file);
                                   if (state.response?.data?.chat?[index]
                                               .document?[0].file
                                               ?.contains('png') ==
@@ -533,12 +513,12 @@ class _ChatScreenState extends State<ChatScreen> {
                                         .withOpacity(0.6),
                                 borderRadius: BorderRadius.circular(20)),
                             child: Linkify(
-
-                              onOpen: (text){
+                              onOpen: (text) {
                                 launchUrl(Uri.parse(text.url));
                               },
                               text:
-                              state.response?.data?.chat?[index].message ?? "",
+                                  state.response?.data?.chat?[index].message ??
+                                      "",
                               style: Constants.subtitleFont,
                             ),
                           ),
@@ -562,7 +542,6 @@ class _ChatScreenState extends State<ChatScreen> {
         Expanded(
           child: TextField(
             controller: _textController,
-            focusNode: _focusNode,
             decoration: Constants.setTextInputDecoration(
               isSuffix: true,
               suffixIcon: Row(
@@ -618,62 +597,56 @@ class _ChatScreenState extends State<ChatScreen> {
               return BlocBuilder<SendChatCubit, SendChatState>(
                 builder: (context, state3) {
                   return GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       if (state2 is ShowAdviceLoading ||
                           state3 is SendChatLoading) {
                         return;
                       }
                       MyApplication.dismissKeyboard(context);
-                      MyApplication.checkConnection().then((value) async {
-                        if (fileSelected != null) {
-                          var fileLength = await pickedFile?.length();
-                          debugPrint('file length is $fileLength');
-                          if (fileLength! >= 5000000 == true) {
-                            MyApplication.showToastView(
-                                message: ' 5 MB لا يمكن ان يتعدي الملف');
-                            return;
-                          }
 
-                          if (mounted) {
-                            context.read<SendChatCubit>().sendChatFunction(
-                                filee: fileSelected,
-                                msg: _textController.text,
-                                typee: pickedFile!.path.split(".").last,
-                                adviceId: widget.adviceId.toString());
-                          }
-
-                          setState(() {
-                            fileSelected = null;
-                            pickedFile = null;
-                          });
-                        } else if (voiceFile != null) {
-                          countdownTimer?.cancel();
-                          countSec = 0;
-                          context.read<SendChatCubit>().sendChatFunction(
-                              filee: voiceSelected,
-                              msg: _textController.text,
-                              typee: voiceFile!.path.split(".").last,
-                              adviceId: widget.adviceId.toString());
-                          setState(() {
-                            voiceSelected = null;
-                          });
-                        } else if (value) {
-                          if (_textController.text.isEmpty) {
-                            MyApplication.showToastView(
-                                message: "لا يمكن ارسال رسالة فارغة!");
-                          } else {
-                            String text = _textController.text;
-                            _textController.clear();
-                            setState(() {});
-                            context.read<SendChatCubit>().sendChatFunction(
-                                filee: fileSelected,
-                                msg: text,
-                                adviceId: widget.adviceId.toString());
-                          }
-                        } else {
-                          MyApplication.showToastView(message: "لا يوجد اتصال");
+                      if (fileSelected != null) {
+                        var fileLength = await pickedFile?.length();
+                        debugPrint('file length is $fileLength');
+                        if (fileLength! >= 5000000 == true) {
+                          MyApplication.showToastView(
+                              message: ' 5 MB لا يمكن ان يتعدي الملف');
+                          return;
                         }
-                      });
+
+                        sendChatCubit.sendChatFunction(
+                            filee: fileSelected,
+                            msg: _textController.text,
+                            typee: pickedFile!.path.split(".").last,
+                            adviceId: widget.adviceId.toString());
+
+                        setState(() {
+                          fileSelected = null;
+                          pickedFile = null;
+                        });
+                      } else if (voiceFile != null) {
+                        countdownTimer?.cancel();
+                        countSec = 0;
+                        sendChatCubit.sendChatFunction(
+                            filee: voiceSelected,
+                            msg: _textController.text,
+                            typee: voiceFile!.path.split(".").last,
+                            adviceId: widget.adviceId.toString());
+                        setState(() {
+                          voiceSelected = null;
+                        });
+                      }
+                      if (_textController.text.isEmpty) {
+                        MyApplication.showToastView(
+                            message: "لا يمكن ارسال رسالة فارغة!");
+                      } else {
+                        String text = _textController.text;
+                        _textController.clear();
+                        setState(() {});
+                        sendChatCubit.sendChatFunction(
+                            filee: fileSelected,
+                            msg: text,
+                            adviceId: widget.adviceId.toString());
+                      }
                     },
                     child: sendMessageButton(state3),
                   );

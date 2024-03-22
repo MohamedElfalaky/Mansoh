@@ -304,6 +304,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   itemSize: 40.0,
                   itemBuilder: (context, _) => const Icon(
                     Icons.star,
+
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) {

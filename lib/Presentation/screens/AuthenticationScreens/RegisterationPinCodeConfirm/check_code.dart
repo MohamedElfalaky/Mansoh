@@ -162,42 +162,14 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                                       context: context,
                                                       code: _pinController.text,
                                                       mobile: sendPhone,
-                                                      // widgetScreen:
-                                                      //     const HomeScreen()
                                                     );
                                               }
                                             },
                                           )),
-                                  // SizedBox(
-                                  //   height: height(context) * 0.05,
-                                  // ),
-                                  // SizedBox(
-                                  //   width: double.infinity,
-                                  //   height: 48,
-                                  //   child: MyButton(
-                                  //     isBold: true,
-                                  //     txt: getTranslated(
-                                  //         context, "register first time"),
-                                  //     onPressedHandler: () {
-                                  //       if (_formKey.currentState!
-                                  //           .validate()) {
-                                  //         context
-                                  //             .read<CheckCodeCubit>()
-                                  //             .checkCodeMethod(
-                                  //                 context: context,
-                                  //                 code: _pinController.text,
-                                  //                 mobile: "+9665252589",
-                                  //                 widgetScreen:
-                                  //                     const RegistrationInfoScreen());
-                                  //       }
-                                  //     },
-                                  //   ),
-                                  // ),
-                                  //   ],
-                                  // ),
+
 
                                   SizedBox(
-                                    height: height(context) * 0.06,
+                                    height: height(context) * 0.06
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,4 @@
-import 'dart:developer';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../app/utils/exports.dart';
 import '../../../repositories/orders_repos/orders_filters_repo.dart';
 import 'orders_filters_state.dart';
 
@@ -12,7 +10,11 @@ class OrdersFiltersCubit extends Cubit<OrdersFiltersState> {
     try {
       emit(OrdersFiltersLoading());
       final ordersList = await ordersStatus.getStatus(id: id);
-      log('Hany ${ordersList?.data}');
+       ordersList?.data?.map((e) {
+         debugPrint('ORDERS FILTER ');
+         debugPrint(e.adviser?.fullName);
+         debugPrint(e.adviser?.description);
+      }).toList();
 
       if (ordersList?.data?.isEmpty == true) {
         emit(OrdersFiltersEmpty());

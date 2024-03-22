@@ -1,22 +1,18 @@
 ///////// pngs /////////
 const String onBoardingPNG = "assets/images/PNG/onBoarding.png";
 const String welcomePNG = "assets/images/PNG/welcome_photo.png";
-// const String splashPhoto = "assets/images/PNG/NasohSplash.png";
 const String logo = "assets/images/PNG/logo.png";
 const String onBoardingPNGbk = "assets/images/PNG/1761.png";
 const String appStoreIcon = "assets/images/PNG/app_store_icon.png";
 const String googlePlayIcon = "assets/images/PNG/google_play_icon.png";
 
 ///////// SVGs /////////
-// const String onBoardingg = "assets/images/SVGs/onBoarding.svg";
 const String logoo = "assets/images/SVGs/Logo2.svg";
 const String curve1 = "assets/images/SVGs/Curve1.svg";
 const String curve2 = "assets/images/SVGs/Curve2.svg";
-// const String appBarLogo = "assets/images/SVGs/FINAL Nasoh LOGO (1) 1.svg";
 const String termsConditions = "assets/images/SVGs/termsConditions.svg";
 const String notifcation = "assets/images/SVGs/66744-notification 1.svg";
 const String tempPic = "assets/images/SVGs/illustration.svg";
-// const String wlt = "assets/images/SVGs/wlt.svg";
 const String rateIcon = "assets/images/SVGs/star.svg";
 const String adviceQ = "assets/images/SVGs/comment_icon.svg";
 const String advisorIcon = "assets/images/SVGs/advisor_icon.svg";
@@ -33,7 +29,6 @@ const String knowAboutIcon = "assets/images/SVGs/know_about_icon.svg";
 const String techIcon = "assets/images/SVGs/tech_icon.svg";
 const String termsIcon = "assets/images/SVGs/terms_icon.svg";
 const String settingIcon = "assets/images/SVGs/setting_icon.svg";
-// const String ordersIcon = "assets/images/SVGs/orders_icon.svg";
 const String deleteUser = "assets/images/SVGs/delete_user.svg";
 const String languageIcon = "assets/images/SVGs/language_icon.svg";
 const String notificationIcon = "assets/images/SVGs/notification_icon.svg";
@@ -53,8 +48,6 @@ const String mp4Icon = "assets/images/SVGs/mp4_icon.svg";
 const String voice = "assets/images/SVGs/voice.svg";
 const String voiceShape = "assets/images/SVGs/voice_shape.svg";
 ///////////////////// Jsons////////
-///
 
-// const String handIcon = "assets/images/Jsons/hand.json";
 const String dialogIcon = "assets/images/reject.gif";
 // const String soundGIF = "assets/images/Sound.gif";

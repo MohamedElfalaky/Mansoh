@@ -10,7 +10,6 @@ class OrdersStatusCubit extends Cubit<OrdersStatusState> {
     try {
       emit(OrdersStatusLoading());
       final ordersList = await ordersStatus.getStatus();
-
       if (ordersList?.data?.isEmpty == true) {
         emit(OrdersStatusEmpty());
       } else {

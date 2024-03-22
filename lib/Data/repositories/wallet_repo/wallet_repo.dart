@@ -43,8 +43,7 @@ class WalletRepo {
 
     Map<String, dynamic> responseMap = json.decode(response.body);
     debugPrint('wallet data');
-    print(responseMap);
-    print(responseMap["status"]);
+
     if (response.statusCode == 200) {
       if (responseMap["status"] == 0) {
         MyApplication.showToastView(message: responseMap["message"]);

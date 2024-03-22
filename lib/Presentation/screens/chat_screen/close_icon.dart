@@ -7,6 +7,6 @@ class CloseIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(icon: const Icon(Icons.close), onPressed: onPressed);
+    return IconButton(icon: const Icon(Icons.delete), onPressed: onPressed,color: Colors.red,);
   }
 }

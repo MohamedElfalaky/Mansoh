@@ -53,7 +53,7 @@ Map<String, String> getArabicLanguage() {
     "my_wallet": "محفظتي",
     "settings": "الإعدادات",
     "support": "الدعم",
-    "know_nasouh": "تعرف علي تطبيق نصوح",
+    "know_nasouh": "تعرف على تطبيق نصوح",
     "signout": "تسجيل الخروج",
     "register first time": "تسجيل دخول أول مرة",
     "Personal Information": "المعلومات الشخصية",
@@ -90,7 +90,7 @@ Map<String, String> getArabicLanguage() {
         "يحق للناصح رفض الطلب في حال كان المبلغ لا يتناسب مع قيمة النصيحة حسب تقديره",
     "Explain":
         "اشرح طلبك بوضوح وإيجاز وزود الناصح بمعلومات كافية للحصول على إجابة وافية ...",
-    "total_balance": "اجمالي الرصيد",
+    "total_balance": "إجمالي الرصيد",
     "My Wallet": "محفظتي",
     "recharge_wallet": "اشحن محفظتك",
     "Ask Advice": "طلب نصيحة",

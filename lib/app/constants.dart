@@ -88,6 +88,7 @@ class Constants {
       EdgeInsets? contentPadding,
       Color? suffixColor,
       Color? borderColor,
+      Color? hintColor,
       Color? fillColor,
       String? hintText,
       bool? isPrefexed,
@@ -97,7 +98,7 @@ class Constants {
     return isParagraphTextField == true
         ? InputDecoration(
             errorStyle: const TextStyle(fontFamily: Constants.mainFont),
-            labelStyle: const TextStyle(fontFamily: Constants.mainFont),
+            labelStyle:   const TextStyle(fontFamily: Constants.mainFont),
             helperStyle: const TextStyle(fontFamily: Constants.mainFont),
             fillColor: fillColor,
             filled: true,
@@ -114,10 +115,10 @@ class Constants {
             disabledBorder: outlineInputBorder(),
             focusedBorder: outlineInputBorder(),
             hintText: hintText,
-            hintStyle: const TextStyle(
+            hintStyle:   TextStyle(
               fontFamily: mainFont,
               fontSize: 12,
-              color: Color(0xFF5C5E6B),
+              color:hintColor?? const Color(0xFF5C5E6B),
             ))
         : InputDecoration(
             fillColor: fillColor,
@@ -151,10 +152,10 @@ class Constants {
               ),
             ),
             hintText: hintText,
-            hintStyle: const TextStyle(
+            hintStyle:   TextStyle(
               fontFamily: mainFont,
               fontSize: 12,
-              color: fontHintColor,
+              color:hintColor?? fontHintColor,
             ));
   }
 
@@ -276,4 +277,6 @@ class Constants {
       ),
     );
   }
+
+  static String imagePlaceHolder='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png';
 }

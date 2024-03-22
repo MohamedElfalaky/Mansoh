@@ -100,27 +100,37 @@ class _UserWalletState extends State<UserWallet> {
                     if(state is WalletLoaded)
                       ...
                       [
-                        Row(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              "total_balance".tr,
-                              style: Constants.secondaryTitleRegularFont,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Text(
+                                "total_balance".tr,
+                                style: Constants.secondaryTitleRegularFont.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400
+                                ),
+                              ),
                             ),
-                            const SizedBox(width: 10),
-                            Text("${state.response?.balance ?? 0} ريال سعودي",
+                             Text("${state.response?.balance ?? 0} ريال سعودي",
                                 style: Constants.headerNavigationFont.copyWith(
                                   color: Constants.primaryAppColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
                                 )),
                           ],
                         ),
-                        const SizedBox(height: 40),
+                        const SizedBox(height: 10),
                         Expanded(
                           child: ListView.builder(
-                            padding: const EdgeInsets.only(bottom: 40),
+                            padding: const EdgeInsets.only(bottom: 40,top: 10),
                             itemCount: state.response?.transaction?.length ?? 0,
                             itemBuilder: (context, index) {
                               return WalletCard(
+                                title: 'استرجاع رصيد المحفظة',
+                                //todo
+                                // title: '${state.response?.transaction?[index].balance}',
                                   description:
                                   '${state.response?.transaction?[index].description}',
                                   oneTraBalance:

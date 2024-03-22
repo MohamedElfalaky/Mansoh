@@ -135,7 +135,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
         bottomNavigationBar:
             BlocBuilder<UpdateProfileCubit, UpdateProfileState>(
                 builder: (context, state) => state is UpdateProfileLoading
-                    ? const CircularProgressIndicator.adaptive()
+                    ? const Center(child: CircularProgressIndicator.adaptive())
                     : buildSaveButton(
                         label: "save",
                         onPressed: () {
@@ -288,7 +288,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                   ),
                   const Padding(
                     padding: EdgeInsets.all(16.0),
-                    child: MySeparator(),
+                    child: SeparatorWidget(),
                   ),
                   Container(
                       padding: const EdgeInsets.symmetric(

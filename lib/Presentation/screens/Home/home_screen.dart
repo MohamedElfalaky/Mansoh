@@ -1,6 +1,3 @@
-import 'dart:async';
-
-// import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,11 +5,9 @@ import 'package:nasooh/Data/cubit/home/advisor_state.dart';
 import 'package:nasooh/Data/models/category_parent_model.dart';
 import 'package:nasooh/Presentation/screens/Advisor/advisor_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/advisor_card.dart';
-import 'package:nasooh/Presentation/screens/Home/controller/home_controller.dart';
 import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../Data/cubit/authentication/category_parent_cubit/category_parent_cubit.dart';
 import '../../../Data/cubit/authentication/category_parent_cubit/category_parent_state.dart';
 import '../../../Data/cubit/home/advisor_list_cubit.dart';
@@ -32,39 +27,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  HomeController homeController = HomeController();
   final TextEditingController searchController = TextEditingController();
-  late PageController controller;
-  int _currentPage = 0;
   int selectedCategoryId = 0;
-  dynamic selectedSubCategory;
+  int? selectedSubCategory;
 
   late AdvisorListCubit advisorListCubit;
 
-  Future<void> getDataFromApi() async {
-    await context.read<CategoryParentCubit>().getCategoryParent();
-  }
-
   @override
   void initState() {
-    controller = PageController(initialPage: 0);
     super.initState();
-    context.read<HomeSliderCubit>().getDataHomeSlider();
     advisorListCubit = context.read<AdvisorListCubit>();
 
-    advisorListCubit.getAdvisorList(
-      categoryValue: widget.catVal,
-      rateVal: widget.rateVal,
-    );
-    getDataFromApi();
-  }
+    context.read<HomeSliderCubit>().getDataHomeSlider();
 
-  @override
-  void dispose() {
-    super.dispose();
-    for (var element in homeController.categories) {
-      element["isSelected"] = false;
-    }
+    advisorListCubit.getAdvisorList(
+        categoryValue: widget.catVal, rateVal: widget.rateVal);
+    context.read<CategoryParentCubit>().getCategoryParent();
   }
 
   @override
@@ -118,20 +96,21 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 55, width: 55, fit: BoxFit.cover),
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      TextField(
-                        controller: searchController,
-                        onSubmitted: (val) {
-                          context.read<AdvisorListCubit>().getAdvisorList(
-                                categoryValue: widget.catVal,
-                                searchTxt: searchController.text,
-                                rateVal: widget.rateVal,
-                              );
-                        },
-                        decoration: Constants.setTextInputDecoration(
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16,bottom: 8),
+                        child: TextField(
+                          controller: searchController,
+                          onSubmitted: (val) {
+                            context.read<AdvisorListCubit>().getAdvisorList(
+                                  categoryValue: widget.catVal,
+                                  searchTxt: searchController.text,
+                                  rateVal: widget.rateVal,
+                                );
+                          },
+                          decoration: Constants.setTextInputDecoration(
+                            hintColor: const Color(0xff5C5E6B),
                             prefixIcon: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
                               child: SvgPicture.asset(searchIcon),
                             ),
                             isSuffix: true,
@@ -144,86 +123,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(8.0),
-                                // margin: const EdgeInsets.all(2.0),
-                                color:
-                                    Constants.primaryAppColor.withOpacity(0.2),
+                                decoration: BoxDecoration(
+                                    color: Constants.primaryAppColor
+                                        .withOpacity(0.2),
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      topLeft: Radius.circular(10),
+                                    )),
                                 child: SvgPicture.asset(
                                   filterIcon,
                                   fit: BoxFit.fill,
                                 ),
                               ),
                             ),
-                            hintText: "ابحث باسم الناصح أو التخصص ...."),
-                      ),
-                      const SizedBox(height: 16),
-                      if (homeState.response?.data?.isEmpty == false)
-                        Container(
-                          height: 140,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              gradient: const LinearGradient(colors: [
-                                Constants.primaryAppColor,
-                                Constants.whiteAppColor,
-                              ], stops: [
-                                0,
-                                0.6
-                              ]),
-                              boxShadow: [
-                                BoxShadow(
-                                    offset: const Offset(0, 6),
-                                    blurRadius: 10,
-                                    spreadRadius: -5,
-                                    blurStyle: BlurStyle.normal,
-                                    color: Colors.black45.withOpacity(0.1)),
-                              ],
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              PageView(
-                                  controller: controller,
-                                  children: homeState.response!.data!
-                                      .map((e) => homeController.pageViewItem(e
-                                              .image ??
-                                          "https://w7.pngwing.com/pngs/895/199/png-transparent-spider-man-heroes-download-with-transparent-background-free-thumbnail.png"))
-                                      .toList()),
-                              SizedBox(
-                                height: 20,
-                                width: 70,
-                                child: Center(
-                                  child: SmoothPageIndicator(
-                                    onDotClicked: (index) {
-                                      if (_currentPage < 2) {
-                                        _currentPage++;
-                                      } else {
-                                        _currentPage = 0;
-                                      }
-
-                                      controller.animateToPage(
-                                        _currentPage,
-                                        duration:
-                                            const Duration(milliseconds: 350),
-                                        curve: Curves.easeIn,
-                                      );
-                                    },
-                                    controller: controller,
-                                    count:
-                                        homeState.response?.data?.length ?? 0,
-                                    effect: ExpandingDotsEffect(
-                                        activeDotColor:
-                                            Constants.primaryAppColor,
-                                        dotColor: Constants.primaryAppColor
-                                            .withOpacity(0.2),
-                                        spacing: 5,
-                                        dotWidth: 8,
-                                        dotHeight: 4),
-                                  ),
-                                ),
-                              )
-                            ],
+                            hintText: "ابحث باسم الناصح أو التخصص ....",
                           ),
                         ),
-                      const SizedBox(height: 8),
+                      ),
+
                       BlocBuilder<CategoryParentCubit, CategoryParentState>(
                           builder: (context, categoryState) {
                         if (categoryState is CategoryParentLoading) {
@@ -250,8 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 onTap: () {
                                                   setState(() {
                                                     selectedCategoryId = e.id!;
-                                                    debugPrint(
-                                                        'cat id $selectedCategoryId');
+
                                                     for (var element
                                                         in catList) {
                                                       element.selected = false;
@@ -292,13 +208,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                   Constants
                                                                       .mainFont),
                                                     )),
-                                              ),
-                                            )
+                                              ))
                                             .toList()),
                                   ),
                                   const SizedBox(height: 5),
                                   SizedBox(
-                                    height: 40,
+                                    height: selectedCategoryId==0?0:40,
                                     child: ListView(
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
@@ -411,10 +326,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             )),
                           ));
                         } else if (advisorState is AdvisorListLoaded) {
-                          return Expanded(
+                          return Flexible(
                             child: ListView.builder(
-                              // shrinkWrap: true,
-                              // physics: BouncingScrollPhysics(),
+                              padding: EdgeInsets.zero,
                               itemCount:
                                   advisorState.adListResponse?.data?.length ??
                                       0,

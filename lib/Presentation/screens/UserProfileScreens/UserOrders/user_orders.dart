@@ -1,6 +1,4 @@
-import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -15,16 +13,14 @@ import '../../../widgets/shared.dart';
 import '../../CompleteAdviseScreen/complete_advise_screen.dart';
 import 'OrderCard/order_card.dart';
 
-class UserOrdersScreen extends StatefulWidget {
-  const UserOrdersScreen({super.key});
+class OrdersScreen extends StatefulWidget {
+  const OrdersScreen({super.key});
 
   @override
-  State<UserOrdersScreen> createState() => _UserOrdersScreenState();
+  State<OrdersScreen> createState() => _OrdersScreenState();
 }
 
-class _UserOrdersScreenState extends State<UserOrdersScreen> {
-  late StreamSubscription<ConnectivityResult> subscription;
-  bool? isConnected;
+class _OrdersScreenState extends State<OrdersScreen> {
 
   final ScrollController _controller = ScrollController();
 
@@ -71,26 +67,7 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
 
   @override
   void initState() {
-    MyApplication.checkConnection().then((value) {
-      if (value) {
-      } else {
-        MyApplication.showToastView(message: 'noInternet'.tr);
-      }
-    });
 
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (mounted) {
-        setState(() {
-          result == ConnectivityResult.none
-              ? isConnected = false
-              : isConnected = true;
-        });
-      }
-
-      if (result != ConnectivityResult.none) {}
-    });
     context.read<OrdersStatusCubit>().getOrdersStatus();
     context.read<OrdersFiltersCubit>().getOrdersFilters(id: "");
     super.initState();
@@ -223,7 +200,7 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
                               alignment: Alignment.center,
                               height: 2,
                               decoration: BoxDecoration(
-                                color: Colors.blue,
+                                color: Colors.black,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               duration: const Duration(milliseconds: 1000),
@@ -287,21 +264,16 @@ class _UserOrdersScreenState extends State<UserOrdersScreen> {
         return Expanded(
           child: ListView.builder(
               shrinkWrap: true,
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               itemCount: filtersList?.length ?? 0,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: filtersList![index].label!.id == 1
                       ? () {
                           MyApplication.navigateTo(
-                              context,
-                              CompleteAdviseScreen(
-                                adviceId: filtersList[index].id!,
-                              ));
+                              context, CompleteAdviseScreen(adviceId: filtersList[index].id!));
                         }
                       : () {
-                          print(
-                              'advisor profile data ${filtersList[index].adviser?.category?.length}');
                           MyApplication.navigateTo(
                               context,
                               ChatScreen(
