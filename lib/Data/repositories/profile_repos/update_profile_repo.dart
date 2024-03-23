@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/app/keys.dart';
 import '../../../app/utils/my_application.dart';
@@ -17,63 +15,46 @@ class UpdateProfile {
       String? mobile,
       String? countryId,
       String? cityId,
+      String? cityName,
+      String? nationalityName,
+      String? countryName,
       String? gender,
       String? nationalityId,
       String? avatar}) async {
-    try {
-      http.Response response =
-          await http.post(Uri.parse('${Keys.baseUrl}/client/update'), headers: {
-        'Accept': 'application/json',
-        'lang': Get.locale?.languageCode ?? "ar",
-        "Authorization": "Bearer ${sharedPrefs.getToken()}"
-      }, body: {
-        'email': email,
-        'full_name': '$fullName',
-        'mobile': '$mobile',
-        'country_id': '$countryId',
-        'city_id': '$cityId',
-        'gender': '$gender',
-        'nationality_id': '$nationalityId',
-        'avatar[0][type]': 'png',
-        'avatar[0][file]': '$avatar',
-      });
-      Map<String, dynamic> responseMap = json.decode(response.body);
+    http.Response response =
+        await http.post(Uri.parse('${Keys.baseUrl}/client/update'), headers: {
+      'Accept': 'application/json',
+      'lang': Get.locale?.languageCode ?? "ar",
+      "Authorization": "Bearer ${sharedPrefs.getToken()}"
+    }, body: {
+      'email': email,
+      'full_name': '$fullName',
+      'mobile': '$mobile',
+      'country_id': '$countryId',
+      'city_id': '$cityId',
+      'gender': '$gender',
+      'nationality_id': '$nationalityId',
+      'avatar[0][type]': 'png',
+      'avatar[0][file]': '$avatar',
+    });
+    Map<String, dynamic> responseMap = json.decode(response.body);
+    if (response.statusCode == 200 && responseMap["status"] == 1) {
+      final userData = updateProfileModelFromJson(responseMap);
+      sharedPrefs.setId(userData.data!.id!);
+      sharedPrefs.setUserName(userData.data!.fullName!);
+      sharedPrefs.setUserNationality(nationalityName ?? '');
+      sharedPrefs.setUserCountry(countryName ?? '');
+      sharedPrefs.setUserCity(cityName ?? '');
+      sharedPrefs.setUserType(userData.data?.gender ?? '');
+      sharedPrefs.setUserPhoto(userData.data?.avatar ?? '');
 
-      // print(
-      //     "'email': email  ,'full_name': '$fullName','mobile': '$mobile','country_id': '$countryId','city_id': '$cityId','gender': '$gender','nationality_id': '$nationalityId','avatar[0][type]': 'png','avatar[0][file]': '$avatar',");
-      if (response.statusCode == 200 && responseMap["status"] == 1) {
-        // print(response.body);
-        final userdata = updateProfileModelFromJson(responseMap);
-        // sharedPrefs.setToken(userdata.data!.token!);
-        sharedPrefs.setId(userdata.data!.id!);
-        sharedPrefs.setUserName(userdata.data!.fullName!);
-        if (userdata.data!.avatar != "") {
-          sharedPrefs.setUserPhoto(userdata.data!.avatar!);
-        } else {
-          sharedPrefs.setUserPhoto('');
-        }
-        MyApplication.showToastView(message: responseMap["message"]);
-        return userdata;
-      } else {
-        MyApplication.showToastView(
-            message: responseMap["message"].values.toString());
-      }
-    } on TimeoutException catch (e) {
-      MyApplication.showToastView(message: e.toString());
-      if (kDebugMode) {
-        print(e);
-      }
-    } on SocketException catch (e) {
-      MyApplication.showToastView(message: e.toString());
-      if (kDebugMode) {
-        print(e);
-      }
-    } on Error catch (e) {
-      if (kDebugMode) {
-        print(e);
-        MyApplication.showToastView(message: e.toString());
-      }
+      MyApplication.showToastView(message: responseMap["message"]);
+      return userData;
+    } else {
+      MyApplication.showToastView(
+          message: responseMap["message"].values.toString());
     }
+
     return null;
   }
 }

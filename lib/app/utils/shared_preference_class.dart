@@ -4,21 +4,29 @@ class SharedPrefs {
   static SharedPreferences? sharedPrefs;
 
   Future<void> init() async {
-    // SharedPreferences.setMockInitialValues({});
     sharedPrefs = await SharedPreferences.getInstance();
   }
 
   String get fCMToken => sharedPrefs!.getString(fcmkey) ?? "";
 
-  String getUserName() {
+  String get getUserName {
     return sharedPrefs!.getString(keyUserName) ?? "";
+  }
+
+  String get getUserNationality {
+    return sharedPrefs!.getString(userNationality) ?? "";
+  }
+
+  String get getUserCountry {
+    return sharedPrefs!.getString(userCountry) ?? "";
+  }
+  String get getUserCity {
+    return sharedPrefs!.getString(userCity) ?? "";
   }
 
   String getUserPhoto() {
     return sharedPrefs!.getString(keyUserPhoto) ?? "";
   }
-
-  // String get fcmtoken => sharedPrefs!.getString(fcmkey) ?? "";
 
   setIsUnBoarded(bool value) {
     sharedPrefs!.setBool(keyUnBoarded, value);
@@ -32,6 +40,20 @@ class SharedPrefs {
     sharedPrefs!.setString(keyUserName, value);
   }
 
+  setUserNationality(String value) {
+    sharedPrefs!.setString(userNationality, value);
+  }
+
+
+  setUserCountry(String value) {
+    sharedPrefs!.setString(userCountry, value);
+  }
+
+  setUserCity(String value) {
+    sharedPrefs!.setString(userCity, value);
+  }  setUserType(String value) {
+    sharedPrefs!.setString(userType, value);
+  }
   setUserPhoto(String value) {
     sharedPrefs!.setString(keyUserPhoto, value);
   }
@@ -119,8 +141,9 @@ class SharedPrefs {
 
 final sharedPrefs = SharedPrefs();
 
-// constants/strings.dart
-String keyToken = "key_token";
+const String langCode = 'languageCode';
+
+const String keyToken = "key_token";
 String pickupMethod = "pickupMethod_key";
 String keySignedIn = "signed_in";
 String keyUnBoarded = "key_unBoarded";
@@ -128,10 +151,13 @@ String keyShowPickDialog = "key_show_pick_dialog";
 String keyUserName = "key_user_name";
 String cartAmount = "cartAmount";
 String keyUserPhoto = "key_user_photo";
-const String langCode = 'languageCode';
 String currentAddress = 'currentAddress';
 String receiveMethodKey = 'receive_method_key';
 String cartamount = "amountcart";
 String currentAddredd = 'currentAddress';
 String fcmkey = "Fcm_key";
 String idKey = "idKey";
+String userNationality = "userNationality";
+String userCountry = "userCountry";
+String userCity = "userCity";
+String userType = "userType";

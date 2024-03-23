@@ -70,7 +70,7 @@ class UserInfoCard extends StatelessWidget {
         ],
       ),
       title: Text(
-        sharedPrefs.getUserName(),
+        sharedPrefs.getUserName,
         style: Constants.mainTitleFont,
       ),
       subtitle: const Text(

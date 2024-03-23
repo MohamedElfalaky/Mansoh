@@ -35,11 +35,11 @@ class OrderCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 280,
+                          width: MediaQuery.of(context).size.width*.6,
                           child: Text(
                             orderFilterData.name ?? "",
                             style: Constants.secondaryTitleFont.copyWith(
-                              fontSize: 16,
+                              fontSize: 15,
                             ),
                           ),
                         ),

@@ -12,14 +12,14 @@ String? inputCountry;
 String? inputCity;
 String? inputNationality;
 
-class CusDropData<T> extends StatefulWidget {
+class CustomDropDown<T> extends StatefulWidget {
   final String? value;
   final String hintData;
   final List<DropdownMenuItem<String>>? items;
   final void Function(dynamic)? onChanged;
   final Widget? prefixIcon;
 
-  const CusDropData({
+  const CustomDropDown({
     super.key,
     this.prefixIcon,
     this.value,
@@ -29,10 +29,10 @@ class CusDropData<T> extends StatefulWidget {
   });
 
   @override
-  State<CusDropData<T>> createState() => _CusDropDataState<T>();
+  State<CustomDropDown<T>> createState() => _CustomDropDownState<T>();
 }
 
-class _CusDropDataState<T> extends State<CusDropData<T>> {
+class _CustomDropDownState<T> extends State<CustomDropDown<T>> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -117,7 +117,7 @@ class _NationalityAndCountryWidgetState
               children: [
                 Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 24),
-                    child: CusDropData(
+                    child: CustomDropDown(
                         hintData: "سعودي",
                         value: nationalityValue,
                         items: state.response!.data!.nationailties!
@@ -141,7 +141,7 @@ class _NationalityAndCountryWidgetState
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 24),
-                  child: CusDropData(
+                  child: CustomDropDown(
                       hintData: "السعودية",
                       value: countryValue,
                       onChanged: (val) {
@@ -174,7 +174,7 @@ class _NationalityAndCountryWidgetState
             if (cityState.response?.data?.isNotEmpty == true) {
               return Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 24),
-                child: CusDropData(
+                child: CustomDropDown(
                     hintData: "اختر المدينة",
                     // value: cityValue??'',
                     onChanged: (val) {

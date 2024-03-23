@@ -1,11 +1,9 @@
-import 'dart:async';
-import 'package:connectivity_plus/connectivity_plus.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
-import 'package:nasooh/Presentation/widgets/no_internet.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
 import '../../../Data/cubit/rejections_cubit/reject_cubit/post_reject_cubit.dart';
@@ -26,8 +24,7 @@ class RejectScreen extends StatefulWidget {
 
 class _RejectScreenState extends State<RejectScreen> {
   final TextEditingController rejectController = TextEditingController();
-  late StreamSubscription<ConnectivityResult> _subscription;
-  bool? isConnected;
+   bool? isConnected;
   final _formKey = GlobalKey<FormState>();
   String? idSelected;
 
@@ -35,54 +32,14 @@ class _RejectScreenState extends State<RejectScreen> {
   void initState() {
     super.initState();
 
-    MyApplication.checkConnection().then((value) {
-      if (value) {
-        context.read<ListRejectionCubit>().getDataListRejection();
-      } else {
-        MyApplication.showToastView(message: 'noInternet'.tr);
-      }
-    });
+    context.read<ListRejectionCubit>().getDataListRejection();
 
-    // todo subscribe to internet change
-    _subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (mounted) {
-        setState(() {
-          result == ConnectivityResult.none
-              ? isConnected = false
-              : isConnected = true;
-        });
-      }
-
-      /// if internet comes back
-      if (result != ConnectivityResult.none) {
-        context.read<ListRejectionCubit>().getDataListRejection();
-      }
-    });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _subscription.cancel();
-  }
 
   @override
   Widget build(BuildContext context) {
-    // print(widget.adviceId);
-    // todo if not connected display nointernet widget else continue to the rest build code
-    final sizee = MediaQuery.of(context).size;
-    if (isConnected == null) {
-      MyApplication.checkConnection().then((value) {
-        setState(() {
-          isConnected = value;
-        });
-      });
-    } else if (!isConnected!) {
-      MyApplication.showToastView(message: 'noInternet'.tr);
-      return NoInternetWidget(size: sizee);
-    }
+
 
     return GestureDetector(
         onTap: () {

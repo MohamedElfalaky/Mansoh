@@ -16,6 +16,9 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
     String? mobile,
     String? countryId,
     String? cityId,
+    String? cityName,
+    String? countryName,
+    String? nationalityName,
     String? gender,
     String? nationalityId,
     String? avatar,
@@ -29,6 +32,9 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
         email: email,
         fullName: fullName,
         gender: gender,
+        cityName: cityName,
+        countryName: countryName,
+        nationalityName: nationalityName,
         mobile: mobile,
         nationalityId: nationalityId,
         cityId: cityId,
@@ -38,10 +44,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
         if (value != null) {
           emit(UpdateProfileLoaded(value));
           MyApplication.navigateToReplaceAllPrevious(
-              context!,
-              const HomeLayout(
-                currentIndex: 0,
-              ));
+              context!, const HomeLayout(currentIndex: 0));
         } else {
           emit(UpdateProfileError());
         }

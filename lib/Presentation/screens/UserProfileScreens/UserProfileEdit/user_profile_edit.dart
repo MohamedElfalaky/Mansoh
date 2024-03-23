@@ -16,6 +16,7 @@ import '../../../../Data/cubit/authentication/country_cubit/country_state.dart';
 import '../../../../Data/cubit/profile/profile_cubit/profile_state.dart';
 import '../../../../Data/cubit/profile/update_profile_cubit/update_profile_cubit.dart';
 import '../../../../Data/cubit/profile/update_profile_cubit/update_profile_state.dart';
+import '../../../../Data/models/countries_and_nationalities_model.dart';
 import '../../../../app/Style/icons.dart';
 import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
@@ -36,9 +37,12 @@ class _UserProfileEditState extends State<UserProfileEdit>
     with TickerProviderStateMixin {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  String? nationalityValue;
-  String? countryValue;
-  String? cityValue;
+  String? nationalityName;
+  String? countryName;
+  String? cityName;
+  String? cityId;
+  String? countryId;
+  String? nationalityId;
   String? genderValue;
   String? phoneNumber;
   static final ImagePicker _picker = ImagePicker();
@@ -62,16 +66,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
     }
   }
 
-  late AnimationController _animationController;
-  late AnimationController _fadeController;
   final TextEditingController _phoneController = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-    _animationController.dispose();
-    _fadeController.dispose();
-  }
 
   Future<void> getDataFromApi() async {
     if (mounted) {
@@ -85,7 +80,8 @@ class _UserProfileEditState extends State<UserProfileEdit>
     if (mounted) {
       profileCubit = ProfileCubit.get(context);
     }
-    _nameController.text = profileCubit.profileModel?.data?.fullName ?? "";
+
+    _nameController.text = sharedPrefs.getUserName;
     _emailController.text = profileCubit.profileModel?.data?.email ?? "";
     _phoneController.text =
         profileCubit.profileModel?.data?.mobile?.substring(5, 14) ?? "";
@@ -94,27 +90,29 @@ class _UserProfileEditState extends State<UserProfileEdit>
     });
 
     if (profileCubit.profileModel?.data?.nationalityId != null) {
-      nationalityValue =
-          profileCubit.profileModel?.data?.nationalityId?.id.toString();
+      nationalityId = profileCubit.profileModel!.data!.nationalityId!.id!;
     }
     if (profileCubit.profileModel?.data?.countryId != null) {
-      countryValue = profileCubit.profileModel?.data?.countryId?.id.toString();
+      countryId = profileCubit.profileModel!.data!.countryId!.id!.toString();
     }
     if (profileCubit.profileModel?.data?.cityId != null) {
-      cityValue = profileCubit.profileModel?.data?.cityId!.id.toString();
+      cityId = profileCubit.profileModel!.data!.cityId!.id!.toString();
     }
+    countryName = sharedPrefs.getUserCountry;
+    nationalityName = sharedPrefs.getUserNationality;
+    cityName = sharedPrefs.getUserCity;
+    print('zzz');
+    print(cityId);
+    print(countryId);
+    print(countryName);
+    print(nationalityName);
+    print(cityName);
+    setState(() {});
   }
 
   @override
   void initState() {
     getDataFromApi();
-    _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 3000));
-    _animationController.forward();
-
-    _fadeController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1500));
-    _fadeController.forward();
     super.initState();
   }
 
@@ -140,24 +138,26 @@ class _UserProfileEditState extends State<UserProfileEdit>
                         label: "save",
                         onPressed: () {
                           context.read<UpdateProfileCubit>().updateMethod(
-                              context: context,
-                              nationalityId: nationalityValue ?? "",
-                              gender: genderValue,
-                              fullName: _nameController.text,
-                              email: _emailController.text,
-                              cityId: cityValue ?? "",
-                              countryId: countryValue ?? "",
-                              avatar: base64NewImage,
-                              mobile: phoneNumber ??
-                                  "+966${_phoneController.text}");
+                                context: context,
+                                fullName: _nameController.text,
+                                nationalityName: nationalityName,
+                                countryName: countryName,
+                                cityName: cityName,
+                                nationalityId: nationalityId ?? "1",
+                                email: _emailController.text,
+                                cityId: cityId ?? "1",
+                                countryId: countryId ?? "2",
+                                avatar: base64NewImage,
+                                mobile: phoneNumber ??
+                                    "+966${_phoneController.text}",
+                                gender: genderValue,
+                              );
                         })),
         resizeToAvoidBottomInset: false,
         body: BlocBuilder<ProfileCubit, ProfileState>(
             builder: (context, profileState) {
           if (profileState is ProfileLoading) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
+            return const Center(child: CircularProgressIndicator.adaptive());
           } else if (profileState is ProfileLoaded) {
             return Padding(
               padding: const EdgeInsets.all(16),
@@ -268,18 +268,14 @@ class _UserProfileEditState extends State<UserProfileEdit>
                           style: Constants.subtitleFontBold
                               .copyWith(fontSize: 16))),
                   const SizedBox(height: 8),
-                  TitleTxt(
-                    txt: "Name".tr,
-                  ),
+                  TitleTxt(txt: "Name".tr),
                   InputTextField(
                     keyboardType: TextInputType.text,
                     hintTxt: "Name".tr,
                     imageTxt: "assets/images/SVGs/name_icon.svg",
                     controller: _nameController,
                   ),
-                  TitleTxt(
-                    txt: "email".tr,
-                  ),
+                  TitleTxt(txt: "email".tr),
                   InputTextField(
                     keyboardType: TextInputType.emailAddress,
                     hintTxt: "example@example.com",
@@ -298,12 +294,8 @@ class _UserProfileEditState extends State<UserProfileEdit>
                           textAlign: TextAlign.end,
                           style: Constants.subtitleFontBold
                               .copyWith(fontSize: 16))),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TitleTxt(
-                    txt: "nationality_optional".tr,
-                  ),
+                  const SizedBox(height: 16),
+                  TitleTxt(txt: "nationality_optional".tr),
                   BlocBuilder<CountryCubit, CountryState>(
                       builder: (context, newState) {
                     if (newState is CountryLoaded) {
@@ -313,25 +305,32 @@ class _UserProfileEditState extends State<UserProfileEdit>
                           Padding(
                               padding:
                                   const EdgeInsets.only(top: 10, bottom: 24),
-                              child: CusDropData(
-                                  hintData: "برجاء اختيار الجنسية",
-                                  value: nationalityValue,
+                              child: CustomDropDown<Nationailties>(
+                                  hintData:
+                                      nationalityName ?? 'برجاء اختيار الجنسية',
+                                  value: nationalityId,
                                   items: newState.response!.data!.nationailties!
                                       .map(
-                                        (e) => DropdownMenuItem(
-                                            value: e.id.toString(),
-                                            child: Text(
-                                              e.name!,
-                                              style: const TextStyle(
-                                                  fontFamily: 'Cairo',
-                                                  fontSize: 14),
-                                            )),
-                                      )
-                                      .toList(),
+                                    (e) {
+                                      return DropdownMenuItem(
+                                          value: e.id.toString(),
+                                          child: Text(
+                                            e.name!,
+                                            style: const TextStyle(
+                                                fontFamily: 'Cairo',
+                                                fontSize: 14),
+                                          ));
+                                    },
+                                  ).toList(),
                                   onChanged: (val) {
-                                    setState(() {
-                                      nationalityValue = val;
-                                    });
+                                    newState.response!.data!.nationailties!
+                                        .map((e) {
+                                      if (val.toString() == e.id.toString()) {
+                                        nationalityName = e.name;
+                                        nationalityId = e.id;
+                                      }
+                                    }).toList();
+                                    setState(() {});
                                   },
                                   prefixIcon: SvgPicture.asset(
                                       'assets/images/SVGs/flag.svg',
@@ -339,17 +338,23 @@ class _UserProfileEditState extends State<UserProfileEdit>
                           TitleTxt(txt: "resident_country".tr),
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 24),
-                            child: CusDropData(
-                                hintData: "السعودية",
-                                value: countryValue,
+                            child: CustomDropDown(
+                                hintData: countryName ?? "قم باختيار الدولة",
+                                value: countryId,
                                 onChanged: (val) {
-                                  setState(() {
-                                    countryValue = val;
-                                  });
+                                  print(val);
+                                  countryId = val;
 
+                                  newState.response!.data!.countries!.map((e) {
+                                    if (val.toString() == e.id.toString()) {
+                                      countryName = e.name;
+                                      print(countryName);
+                                    }
+                                  }).toList();
+                                  setState(() {});
                                   context
                                       .read<CityCubit>()
-                                      .getCities(countryValue!.toString());
+                                      .getCities(countryId.toString());
                                 },
                                 items: newState.response!.data!.countries!
                                     .map((e) => DropdownMenuItem(
@@ -367,7 +372,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
                         ],
                       );
                     }
-                    return const Center(child: SizedBox());
+                    return const SizedBox.shrink();
                   }),
                   BlocBuilder<CityCubit, CityState>(
                       builder: (context, cityState) {
@@ -378,18 +383,20 @@ class _UserProfileEditState extends State<UserProfileEdit>
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TitleTxt(
-                            txt: "resident_city".tr,
-                          ),
+                          TitleTxt(txt: "resident_city".tr),
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 24),
-                            child: CusDropData(
-                                hintData: "جدة",
-                                value: cityValue,
+                            child: CustomDropDown(
+                                hintData: cityName ?? "قم باختيار المدينة",
+                                value: cityId,
                                 onChanged: (val) {
-                                  setState(() {
-                                    cityValue = val;
-                                  });
+                                  cityState.response!.data!.map((e) {
+                                    if (val.toString() == e.id.toString()) {
+                                      cityName = e.name;
+                                      cityId = val;
+                                    }
+                                  }).toList();
+                                  setState(() {});
                                 },
                                 items: cityState.response!.data!
                                     .map(

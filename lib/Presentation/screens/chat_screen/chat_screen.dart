@@ -41,7 +41,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  late StreamSubscription<ConnectivityResult> _subscription;
   String? fileSelected;
   int countSec = 0;
 
@@ -77,8 +76,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _textController.clear();
     _focusNode.dispose();
     player.dispose();
-    _subscription.cancel();
-  }
+   }
 
   final record = AudioRecorder();
   File? voiceFile;

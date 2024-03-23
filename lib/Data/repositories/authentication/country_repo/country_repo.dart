@@ -18,13 +18,10 @@ class CountryRepo {
         debugPrint(responseMap.toString());
         final categoryFields =
             CountriesAndNationalitiesModel.fromJson(responseMap);
-        // debugPrint("Data from Api is ${categoryFields.data![0].id}");
 
-        // MyApplication.showToastView(message: responseMap["message"]);
         return categoryFields;
       } else {
-        // debugPrint("request is $phone & $pass");
-        MyApplication.showToastView(message: responseMap["message"]);
+         MyApplication.showToastView(message: responseMap["message"]);
       }
     } on TimeoutException catch (e) {
       MyApplication.showToastView(message: e.toString());

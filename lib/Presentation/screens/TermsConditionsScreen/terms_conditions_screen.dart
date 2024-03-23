@@ -1,10 +1,7 @@
-import 'dart:async';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/widgets/no_internet.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
 import '../../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
@@ -20,61 +17,18 @@ class TermsConditionsScreen extends StatefulWidget {
 }
 
 class _TermsConditionsScreenState extends State<TermsConditionsScreen> {
-  late StreamSubscription<ConnectivityResult> subscription;
-  bool? isConnected;
-
-  final controller = PageController(initialPage: 0);
-
   @override
   void initState() {
     super.initState();
-
-    MyApplication.checkConnection().then((value) {
-      if (!value) {
-        MyApplication.showToastView(message: 'noInternet'.tr);
-      }
-    });
-
-    // todo subscribe to internet change
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (mounted) {
-        setState(() {
-          result == ConnectivityResult.none
-              ? isConnected = false
-              : isConnected = true;
-        });
-      }
-    });
     context.read<PrivacyCubit>().getPrivacy();
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    subscription.cancel();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // todo if not connected display nointernet widget else continue to the rest build code
-    final sizee = MediaQuery.of(context).size;
-    if (isConnected == null) {
-      MyApplication.checkConnection().then((value) {
-        setState(() {
-          isConnected = value;
-        });
-      });
-    } else if (!isConnected!) {
-      MyApplication.showToastView(message: 'noInternet'.tr);
-      return NoInternetWidget(size: sizee);
-    }
-
     return GestureDetector(
       onTap: () {
         MyApplication.dismissKeyboard(context);
-      }, // hide keyboard on tap anywhere
+      },
 
       child: Scaffold(
         resizeToAvoidBottomInset: false,

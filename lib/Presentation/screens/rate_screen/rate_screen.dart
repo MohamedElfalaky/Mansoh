@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:get/get.dart';
@@ -21,9 +19,7 @@ class RateScreen extends StatefulWidget {
 
 class _RateScreenState extends State<RateScreen> {
   final TextEditingController opinionController = TextEditingController();
-  late StreamSubscription<ConnectivityResult> _subscription;
-  bool? isConnected;
-  final _formKey = GlobalKey<FormState>();
+   final _formKey = GlobalKey<FormState>();
   double speedRate = 0.0;
   double qualityRate = 0.0;
   double flexibleRate = 0.0;
@@ -31,76 +27,13 @@ class _RateScreenState extends State<RateScreen> {
   int groupApplicationValue = 1;
 
   @override
-  void initState() {
-    super.initState();
-
-    MyApplication.checkConnection().then((value) {
-      if (value) {
-        //
-      } else {
-        MyApplication.showToastView(message: 'noInternet'.tr);
-      }
-    });
-
-    // todo subscribe to internet change
-    _subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (mounted) {
-        setState(() {
-          result == ConnectivityResult.none
-              ? isConnected = false
-              : isConnected = true;
-        });
-      }
-
-      /// if internet comes back
-      if (result != ConnectivityResult.none) {
-//
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _subscription.cancel();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // print(widget.adviceId);
-    // todo if not connected display nointernet widget else continue to the rest build code
-    final sizee = MediaQuery.of(context).size;
-    if (isConnected == null) {
-      MyApplication.checkConnection().then((value) {
-        setState(() {
-          isConnected = value;
-        });
-      });
-    } else if (!isConnected!) {
-      MyApplication.showToastView(message: 'noInternet'.tr);
-      return NoInternetWidget(size: sizee);
-    }
-
     return GestureDetector(
         onTap: () {
           MyApplication.dismissKeyboard(context);
-        }, // hide keyboard on tap anywhere
-
+        },
         child: Scaffold(
             floatingActionButton: BlocBuilder<ReviewCubit, ReviewState>(
-                //   listener: (context, state) {
-                //     if (state is PostRejectLoaded) {
-                //       Alert.alert(
-                //           context: context,
-                //           action: () {
-                //             MyApplication.navigateTo(context, Home());
-                //           },
-                //           content: "تم ارسال اعتراضك بنجاح",
-                //           titleAction: "الرئيسية");
-                //     }
-                //   },
                 builder: (context, state) => Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     height: 50,
