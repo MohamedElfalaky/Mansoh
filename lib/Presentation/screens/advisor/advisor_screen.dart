@@ -340,7 +340,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                 ),
                 bottomNavigationBar: Container(
                     margin:
-                        const EdgeInsets.only(bottom: 15, left: 16, right: 16),
+                        const EdgeInsets.only(bottom:25, left: 16, right: 16),
                     height: 50,
                     child: CustomElevatedButton(
                       onPressedHandler: () {

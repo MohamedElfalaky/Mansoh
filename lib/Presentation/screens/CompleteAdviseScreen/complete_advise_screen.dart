@@ -56,19 +56,20 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                   MyApplication.navigateToReplace(
                       context,
                       ChatScreen(
+                        description:
+                            state.response?.data?.adviser?.description ?? '',
                         statusClickable: false,
                         openedStatus: state.response?.data?.label?.id == 2,
                         labelToShow: true,
                         adviceId: state.response!.data!.id!,
                         adviserProfileData: state.response!.data!.adviser,
                       ));
-
                 }
               },
               builder: (context, state) => state is PayAdviceLoading
                   ? const CircularProgressIndicator.adaptive()
                   : Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                       height: 50,
                       child: CustomElevatedButton(
                         onPressedHandler: () {
@@ -86,58 +87,50 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(60.0),
             child: AppBar(
-              leading: Column(
-                children: [
-                  const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      const SizedBox(width: 16),
-                      Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.1),
-                              offset: Offset(0, 4),
-                              blurRadius: 8,
-                            ),
-                          ],
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Get.locale!.languageCode == "ar"
-                              ? SvgPicture.asset(
-                                  backArIcon,
-                                  width: 14,
-                                  height: 14,
-                                )
-                              : const Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.black54,
+              leading: Padding(
+               padding: const EdgeInsets.only(top: 10),
+               child: Row(
+                 children: [
+                   const SizedBox(width: 16),
+                   Container(
+                     height: 40,
+                     width: 40,
+                     decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(8),
+                       color: Colors.white,
+                       boxShadow: const [
+                         BoxShadow(
+                           color: Color.fromRGBO(0, 0, 0, 0.1),
+                           offset: Offset(0, 4),
+                           blurRadius: 8,
+                         ),
+                       ],
+                     ),
+                     child: IconButton(
+                       onPressed: () {
+                         Navigator.pop(context);
+                       },
+                       icon: Get.locale!.languageCode == "ar"
+                           ? SvgPicture.asset(
+                               backArIcon,
+                               width: 14,
+                               height: 14,
+                             )
+                           : const Icon(
+                               Icons.arrow_back,
+                               color: Colors.black54,
+                             ),
+                     ),
+                   ),
+                 ],
+               ),
                                 ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
               title: Column(
                 children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Text("Confirm Order".tr),
-                    ],
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text("Confirm Order".tr),
                   ),
                 ],
               ),
@@ -150,82 +143,78 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
             } else if (state is PaymentListLoaded) {
               return SingleChildScrollView(
                 physics: const NeverScrollableScrollPhysics(),
-                child: Column(
-                  children: [
-                    Container(
-                        color: Constants.whiteAppColor,
-                        height: MediaQuery.of(context).size.height,
-                        margin: EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                          bottom: MediaQuery.of(context).viewInsets.bottom,
+                child: Container(
+                    color: Constants.whiteAppColor,
+                    height: MediaQuery.of(context).size.height,
+                    margin: EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BlocBuilder<ShowAdviceCubit, ShowAdviceState>(
+                            builder: (context, showAdviceState) {
+                          if (showAdviceState is ShowAdviceLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          } else if (showAdviceState is ShowAdviceLoaded) {
+                            return CompleteAdvisorCard(
+                              adviser:
+                                  showAdviceState.response!.data!.adviser!,
+                              moneyPut: showAdviceState
+                                  .response!.data!.price
+                                  .toString(),
+                              taxVal:
+                                  showAdviceState.response?.data?.tax ?? "",
+                            );
+                          } else {
+                            return const SizedBox.shrink();
+                          }
+                        }),
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 8, top: 4),
+                          child: Text(
+                            "اختر وسيلة الدفع",
+                            style: Constants.headerNavigationFont,
+                          ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BlocBuilder<ShowAdviceCubit, ShowAdviceState>(
-                                builder: (context, showAdviceState) {
-                              if (showAdviceState is ShowAdviceLoading) {
-                                return const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                );
-                              } else if (showAdviceState is ShowAdviceLoaded) {
-                                return CompleteAdvisorCard(
-                                  adviser:
-                                      showAdviceState.response!.data!.adviser!,
-                                  moneyPut: showAdviceState
-                                      .response!.data!.price
-                                      .toString(),
-                                  taxVal:
-                                      showAdviceState.response?.data?.tax ?? "",
-                                );
-                              } else {
-                                return const SizedBox.shrink();
-                              }
-                            }),
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 8, top: 4),
-                              child: Text(
-                                "اختر وسيلة الدفع",
-                                style: Constants.headerNavigationFont,
-                              ),
-                            ),
-                            BlocBuilder<GetByTokenCubit, GetByTokenState>(
-                                builder: (context, getByTokenState) {
-                              if (getByTokenState is GetByTokenLoading) {
-                                return const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                );
-                              } else if (getByTokenState is GetByTokenLoaded) {
-                                return ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount:
-                                        state.response?.data?.length ?? 0,
-                                    itemBuilder: (context, int index) {
-                                      return InkWell(
-                                        onTap: () {
-                                          MyApplication.navigateTo(context,
-                                              const FatooraScreen(amount: 10));
-                                        },
-                                        child: PaymentCard(
-                                          payMethod: state.response
-                                                  ?.data?[index].name ??
-                                              "",
-                                          walletVal: getByTokenState
-                                                  .response?.data?.wallet ??
-                                              "",
-                                        ),
-                                      );
-                                    });
-                              }
-                              return const SizedBox.shrink();
-                            })
-                          ],
-                        )),
-                  ],
-                ),
+                        BlocBuilder<GetByTokenCubit, GetByTokenState>(
+                            builder: (context, getByTokenState) {
+                          if (getByTokenState is GetByTokenLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          } else if (getByTokenState is GetByTokenLoaded) {
+                            return ListView.builder(
+                                physics:
+                                    const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount:
+                                    state.response?.data?.length ?? 0,
+                                itemBuilder: (context, int index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      MyApplication.navigateTo(context,
+                                          const FatooraScreen(amount: 10));
+                                    },
+                                    child: PaymentCard(
+                                      payMethod: state.response
+                                              ?.data?[index].name ??
+                                          "",
+                                      walletVal: getByTokenState
+                                              .response?.data?.wallet ??
+                                          "",
+                                    ),
+                                  );
+                                });
+                          }
+                          return const SizedBox.shrink();
+                        })
+                      ],
+                    )),
               );
             }
             return const SizedBox.shrink();

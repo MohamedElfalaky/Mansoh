@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:get/get.dart';
-import 'package:nasooh/app/Style/icons.dart';
+import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
+import 'package:nasooh/app/utils/exports.dart';
 import '../../../../Data/cubit/authentication/log_out_cubit/log_out_cubit.dart';
 import '../../../../Data/cubit/authentication/log_out_cubit/log_out_state.dart';
-import '../../../../app/constants.dart';
+import '../../../../app/utils/shared_preference_class.dart';
 import '../../../widgets/shared.dart';
 import '../list_drawer.dart';
 import 'widgets/user_info_card.dart';
@@ -56,6 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   thickness: 1,
                 ),
                 const SizedBox(height: 6),
+                if(sharedPrefs.getToken()!='')
                 BlocBuilder<LogOutCubit, LogOutState>(
                   builder: (context, state) => state is LogOutLoading
                       ? const Center(
@@ -75,7 +75,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             logoutIcon,
                           ),
                         ),
-                ),
+                )
+                else
+                  ListTile(
+                    minLeadingWidth: 0,
+                    onTap: () {
+                     MyApplication.navigateToReplaceAllPrevious(context, const CheckMobScreen()
+                      );
+                    },
+                    title: Text(
+                      "login".tr,
+                      style: Constants.mainTitleFont,
+                    ),
+                    leading: SvgPicture.asset(
+                      logoutIcon,
+                    ),
+                  ),
                 Center(
                   child: Container(
                     margin: const EdgeInsets.only(top: 80, bottom: 10),

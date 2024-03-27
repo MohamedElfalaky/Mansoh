@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
 import 'package:nasooh/app/Style/icons.dart';
+import 'package:nasooh/layout/home.dart';
 import '../../../../Data/cubit/authentication/new_mob/mob_cubit.dart';
 import '../../../../Data/cubit/authentication/new_mob/mob_state.dart';
 import '../../../../app/Style/sizes.dart';
@@ -205,7 +206,9 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                                 child: CustomElevatedButton(
                                   isBold: true,
                                   txt: "login_guest".tr,
-                                  onPressedHandler: () {},
+                                  onPressedHandler: () {
+                                    MyApplication.navigateToReplace(context, const HomeLayout(currentIndex: 0));
+                                  },
                                 ),
                               ),
                             ),

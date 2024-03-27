@@ -10,10 +10,10 @@ class OrdersFiltersCubit extends Cubit<OrdersFiltersState> {
     try {
       emit(OrdersFiltersLoading());
       final ordersList = await ordersStatus.getStatus(id: id);
-       ordersList?.data?.map((e) {
-         debugPrint('ORDERS FILTER ');
-         debugPrint(e.adviser?.fullName);
-         debugPrint(e.adviser?.description);
+      ordersList?.data?.map((e) {
+        debugPrint('ORDERS FILTER ');
+        debugPrint(e.adviser?.fullName);
+        debugPrint(e.description);
       }).toList();
 
       if (ordersList?.data?.isEmpty == true) {

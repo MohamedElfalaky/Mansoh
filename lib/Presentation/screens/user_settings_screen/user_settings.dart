@@ -35,95 +35,92 @@ class _UserSettingsState extends State<UserSettings> {
       onTap: () {
         MyApplication.dismissKeyboard(context);
       },
-      child: SafeArea(
-        child: Scaffold(
-          appBar: customAppBar(context: context, txt: "settings".tr),
-          // floatingActionButton: buildSaveButton(label: "save"),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          resizeToAvoidBottomInset: false,
-          body: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        languageIcon,
-                        height: 20,
-                        width: 20,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text("change Language".tr,
-                          style: Constants.mainTitleFont),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const ChangeLangItem(),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    child: Divider(),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity: const VisualDensity(
-                      horizontal: -4,
-                      vertical: -4,
-                    ),
-                    leading: SvgPicture.asset(
-                      notificationIcon,
+      child: Scaffold(
+        appBar: customAppBar(context: context, txt: "settings".tr),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.centerFloat,
+        resizeToAvoidBottomInset: false,
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      languageIcon,
                       height: 20,
                       width: 20,
                     ),
-                    title: Text("Notification".tr,
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text("change Language".tr,
+                        style: Constants.mainTitleFont),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const ChangeLangItem(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Divider(),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  visualDensity: const VisualDensity(
+                    horizontal: -4,
+                    vertical: -4,
+                  ),
+                  leading: SvgPicture.asset(
+                    notificationIcon,
+                    height: 20,
+                    width: 20,
+                  ),
+                  title: Text("Notification".tr,
+                      style: Constants.mainTitleFont.copyWith(
+                        letterSpacing: 0,
+                        wordSpacing: 0,
+                      )),
+                  trailing: Switch(
+                    activeColor: Constants.primaryAppColor,
+                    value: isNotificationValue!,
+                    onChanged: (value) {
+                      setState(() {
+                        isNotificationValue = value;
+                      });
+                      context.read<IsNotificationCubit>().isNotify();
+                    },
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Divider(),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  visualDensity: const VisualDensity(
+                    horizontal: -4,
+                    vertical: -4,
+                  ),
+                  leading: SvgPicture.asset(deleteUser),
+                  title: InkWell(
+                    onTap: () => _showDeleteDialog(context),
+                    child: Text("Delete Account".tr,
                         style: Constants.mainTitleFont.copyWith(
-                          letterSpacing: 0,
-                          wordSpacing: 0,
-                        )),
-                    trailing: Switch(
-                      activeColor: Constants.primaryAppColor,
-                      value: isNotificationValue!,
-                      onChanged: (value) {
-                        setState(() {
-                          isNotificationValue = value;
-                        });
-                        context.read<IsNotificationCubit>().isNotify();
-                      },
-                    ),
+                            letterSpacing: 0,
+                            wordSpacing: 0,
+                            color: Colors.red)),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    child: Divider(),
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity: const VisualDensity(
-                      horizontal: -4,
-                      vertical: -4,
-                    ),
-                    leading: SvgPicture.asset(deleteUser),
-                    title: InkWell(
-                      onTap: () => _showDeleteDialog(context),
-                      child: Text("Delete Account".tr,
-                          style: Constants.mainTitleFont.copyWith(
-                              letterSpacing: 0,
-                              wordSpacing: 0,
-                              color: Colors.red)),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -52,6 +52,7 @@ class OrderFilterData {
   dynamic price;
   String? date;
   Status? status;
+  String? description;
   AdviserProfileData? adviser;
   Status? label;
 
@@ -59,6 +60,7 @@ class OrderFilterData {
       {this.id,
       this.name,
       this.price,
+      this.description,
       this.date,
       this.status,
       this.adviser,
@@ -68,6 +70,7 @@ class OrderFilterData {
       OrderFilterData(
         id: json["id"] ?? 0,
         name: json["name"] ?? "",
+        description: json["description"] ?? "",
         price: json["price"] ?? 0,
         date: json["date"] ?? "",
         status: json["status"] == null ? null : Status.fromJson(json["status"]),
@@ -79,6 +82,7 @@ class OrderFilterData {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "description": description,
         "name": name,
         "price": price,
         "date": date,
@@ -90,11 +94,7 @@ class OrderFilterData {
 class Status {
   dynamic id;
   String? name;
-
-  Status({
-    this.id,
-    this.name,
-  });
+  Status({this.id, this.name});
 
   factory Status.fromJson(Map<String, dynamic> json) => Status(
         id: json["id"],

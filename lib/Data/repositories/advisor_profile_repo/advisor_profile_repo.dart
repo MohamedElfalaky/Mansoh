@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:nasooh/app/global.dart';
@@ -21,6 +22,8 @@ class AdvisorProfileRepo {
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print("get profile data ${response.body}" );
         final userdata = advisorProfileModelFromJson(responseMap);
+        log("get Orders data ${response.body}" );
+
         return userdata;
       } else {
         MyApplication.showToastView(message: responseMap["message"]);

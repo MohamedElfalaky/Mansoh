@@ -37,6 +37,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
     with TickerProviderStateMixin {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  bool pageLoad = false;
   String? nationalityName;
   String? countryName;
   String? cityName;
@@ -85,15 +86,14 @@ class _UserProfileEditState extends State<UserProfileEdit>
     _emailController.text = profileCubit.profileModel?.data?.email ?? "";
     _phoneController.text =
         profileCubit.profileModel?.data?.mobile?.substring(5, 14) ?? "";
-    setState(() {
-      genderValue = profileCubit.profileModel?.data?.gender ?? "";
-    });
+    genderValue = profileCubit.profileModel?.data?.gender ?? "";
 
     if (profileCubit.profileModel?.data?.nationalityId != null) {
       nationalityId = profileCubit.profileModel!.data!.nationalityId!.id!;
     }
-    if (profileCubit.profileModel?.data?.countryId != null) {
+    if (profileCubit.profileModel?.data?.countryId != null && mounted) {
       countryId = profileCubit.profileModel!.data!.countryId!.id!.toString();
+      context.read<CityCubit>().getCities(countryId.toString());
     }
     if (profileCubit.profileModel?.data?.cityId != null) {
       cityId = profileCubit.profileModel!.data!.cityId!.id!.toString();
@@ -101,12 +101,13 @@ class _UserProfileEditState extends State<UserProfileEdit>
     countryName = sharedPrefs.getUserCountry;
     nationalityName = sharedPrefs.getUserNationality;
     cityName = sharedPrefs.getUserCity;
-    print('zzz');
-    print(cityId);
-    print(countryId);
-    print(countryName);
-    print(nationalityName);
-    print(cityName);
+    // debugPrint('zzz');
+    // print(cityId);
+    // print(countryId);
+    // print(countryName);
+    // print(nationalityName);
+    // print(cityName);
+    pageLoad = true;
     setState(() {});
   }
 
@@ -154,308 +155,331 @@ class _UserProfileEditState extends State<UserProfileEdit>
                               );
                         })),
         resizeToAvoidBottomInset: false,
-        body: BlocBuilder<ProfileCubit, ProfileState>(
-            builder: (context, profileState) {
-          if (profileState is ProfileLoading) {
-            return const Center(child: CircularProgressIndicator.adaptive());
-          } else if (profileState is ProfileLoaded) {
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: SingleChildScrollView(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: SizedBox(
-                      height: 190,
-                      width: 190,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Center(
-                            child: DottedBorder(
-                                color: Constants.outLineColor,
-                                borderType: BorderType.Circle,
-                                radius: const Radius.circular(20),
-                                dashPattern: const [10, 6],
-                                child: Padding(
-                                    padding: const EdgeInsets.all(6),
-                                    child: CircleAvatar(
-                                      radius: width(context) * 0.19,
-                                      backgroundColor: Colors.transparent,
-                                      backgroundImage: sharedPrefs
-                                                      .getUserPhoto() ==
-                                                  "" &&
-                                              regImage == null
-                                          ? const AssetImage(
-                                              'assets/images/PNG/no_profile_photo.png')
-                                          : regImage == null
-                                              ? NetworkImage(
-                                                  sharedPrefs.getUserPhoto())
-                                              : FileImage(
-                                                  File(regImage!.path),
-                                                ) as ImageProvider,
-                                    ))),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: InkWell(
-                              onTap: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(25.0),
+        body: pageLoad
+            ? BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, profileState) {
+                if (profileState is ProfileLoading) {
+                  return const Center(
+                      child: CircularProgressIndicator.adaptive());
+                } else if (profileState is ProfileLoaded) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: SingleChildScrollView(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: SizedBox(
+                            height: 190,
+                            width: 190,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Center(
+                                  child: DottedBorder(
+                                      color: Constants.outLineColor,
+                                      borderType: BorderType.Circle,
+                                      radius: const Radius.circular(20),
+                                      dashPattern: const [10, 6],
+                                      child: Padding(
+                                          padding: const EdgeInsets.all(6),
+                                          child: CircleAvatar(
+                                            radius: width(context) * 0.19,
+                                            backgroundColor: Colors.transparent,
+                                            backgroundImage: sharedPrefs
+                                                            .getUserPhoto() ==
+                                                        "" &&
+                                                    regImage == null
+                                                ? const AssetImage(
+                                                    'assets/images/PNG/no_profile_photo.png')
+                                                : regImage == null
+                                                    ? NetworkImage(sharedPrefs
+                                                        .getUserPhoto())
+                                                    : FileImage(
+                                                        File(regImage!.path),
+                                                      ) as ImageProvider,
+                                          ))),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: InkWell(
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(25.0),
+                                          ),
+                                        ),
+                                        builder: (ctx) {
+                                          return Container(
+                                              padding: const EdgeInsets.all(18),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  RowModalSheet(
+                                                      txt: "كاميرا",
+                                                      imageIcon: cameraIcon,
+                                                      onPressed: () {
+                                                        pickImage(
+                                                            ImageSource.camera,
+                                                            ctx,
+                                                            setState);
+                                                      }),
+                                                  const Divider(),
+                                                  RowModalSheet(
+                                                    txt: "الاستديو",
+                                                    imageIcon: galleryIcon,
+                                                    onPressed: () {
+                                                      pickImage(
+                                                          ImageSource.gallery,
+                                                          ctx,
+                                                          setState);
+                                                    },
+                                                  ),
+                                                  const Divider(),
+                                                  RowModalSheet(
+                                                    txt: "الغاء",
+                                                    imageIcon: closeIcon,
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                  )
+                                                ],
+                                              ));
+                                        },
+                                      );
+                                    },
+                                    child: const CircleAvatar(
+                                      backgroundColor: Color(0XFF444444),
+                                      radius: 20,
+                                      child: Icon(
+                                        Icons.camera_alt_outlined,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                  builder: (ctx) {
-                                    return Container(
-                                        padding: const EdgeInsets.all(18),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            RowModalSheet(
-                                                txt: "كاميرا",
-                                                imageIcon: cameraIcon,
-                                                onPressed: () {
-                                                  pickImage(ImageSource.camera,
-                                                      ctx, setState);
-                                                }),
-                                            const Divider(),
-                                            RowModalSheet(
-                                              txt: "الاستديو",
-                                              imageIcon: galleryIcon,
-                                              onPressed: () {
-                                                pickImage(ImageSource.gallery,
-                                                    ctx, setState);
-                                              },
-                                            ),
-                                            const Divider(),
-                                            RowModalSheet(
-                                              txt: "الغاء",
-                                              imageIcon: closeIcon,
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                            )
-                                          ],
-                                        ));
-                                  },
-                                );
-                              },
-                              child: const CircleAvatar(
-                                backgroundColor: Color(0XFF444444),
-                                radius: 20,
-                                child: Icon(
-                                  Icons.camera_alt_outlined,
-                                  color: Colors.white,
                                 ),
-                              ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 16,
-                      ),
-                      child: Text("Personal Information".tr,
-                          textAlign: TextAlign.end,
-                          style: Constants.subtitleFontBold
-                              .copyWith(fontSize: 16))),
-                  const SizedBox(height: 8),
-                  TitleTxt(txt: "Name".tr),
-                  InputTextField(
-                    keyboardType: TextInputType.text,
-                    hintTxt: "Name".tr,
-                    imageTxt: "assets/images/SVGs/name_icon.svg",
-                    controller: _nameController,
-                  ),
-                  TitleTxt(txt: "email".tr),
-                  InputTextField(
-                    keyboardType: TextInputType.emailAddress,
-                    hintTxt: "example@example.com",
-                    imageTxt: "assets/images/SVGs/email_icon.svg",
-                    controller: _emailController,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: SeparatorWidget(),
-                  ),
-                  Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                      ),
-                      child: Text("Additional Information".tr,
-                          textAlign: TextAlign.end,
-                          style: Constants.subtitleFontBold
-                              .copyWith(fontSize: 16))),
-                  const SizedBox(height: 16),
-                  TitleTxt(txt: "nationality_optional".tr),
-                  BlocBuilder<CountryCubit, CountryState>(
-                      builder: (context, newState) {
-                    if (newState is CountryLoaded) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 24),
-                              child: CustomDropDown<Nationailties>(
-                                  hintData:
-                                      nationalityName ?? 'برجاء اختيار الجنسية',
-                                  value: nationalityId,
-                                  items: newState.response!.data!.nationailties!
-                                      .map(
-                                    (e) {
-                                      return DropdownMenuItem(
-                                          value: e.id.toString(),
-                                          child: Text(
-                                            e.name!,
-                                            style: const TextStyle(
-                                                fontFamily: 'Cairo',
-                                                fontSize: 14),
-                                          ));
-                                    },
-                                  ).toList(),
-                                  onChanged: (val) {
-                                    newState.response!.data!.nationailties!
-                                        .map((e) {
-                                      if (val.toString() == e.id.toString()) {
-                                        nationalityName = e.name;
-                                        nationalityId = e.id;
-                                      }
-                                    }).toList();
-                                    setState(() {});
-                                  },
-                                  prefixIcon: SvgPicture.asset(
-                                      'assets/images/SVGs/flag.svg',
-                                      height: 24))),
-                          TitleTxt(txt: "resident_country".tr),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 24),
-                            child: CustomDropDown(
-                                hintData: countryName ?? "قم باختيار الدولة",
-                                value: countryId,
-                                onChanged: (val) {
-                                  print(val);
-                                  countryId = val;
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                            ),
+                            child: Text("Personal Information".tr,
+                                textAlign: TextAlign.end,
+                                style: Constants.subtitleFontBold
+                                    .copyWith(fontSize: 16))),
+                        const SizedBox(height: 8),
+                        TitleTxt(txt: "Name".tr),
+                        InputTextField(
+                          keyboardType: TextInputType.text,
+                          hintTxt: "Name".tr,
+                          imageTxt: "assets/images/SVGs/name_icon.svg",
+                          controller: _nameController,
+                        ),
+                        TitleTxt(txt: "email".tr),
+                        InputTextField(
+                          keyboardType: TextInputType.emailAddress,
+                          hintTxt: "example@example.com",
+                          imageTxt: "assets/images/SVGs/email_icon.svg",
+                          controller: _emailController,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: SeparatorWidget(),
+                        ),
+                        Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                            ),
+                            child: Text("Additional Information".tr,
+                                textAlign: TextAlign.end,
+                                style: Constants.subtitleFontBold
+                                    .copyWith(fontSize: 16))),
+                        const SizedBox(height: 16),
+                        TitleTxt(txt: "nationality_optional".tr),
+                        BlocBuilder<CountryCubit, CountryState>(
+                            builder: (context, newState) {
+                          if (newState is CountryLoaded) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 24),
+                                    child: CustomDropDown<Nationailties>(
+                                        hintData: nationalityName ??
+                                            'برجاء اختيار الجنسية',
+                                        value: nationalityId,
+                                        items: newState
+                                            .response!.data!.nationailties!
+                                            .map(
+                                          (e) {
+                                            return DropdownMenuItem(
+                                                value: e.id.toString(),
+                                                child: Text(
+                                                  e.name!,
+                                                  style: const TextStyle(
+                                                      fontFamily: 'Cairo',
+                                                      fontSize: 14),
+                                                ));
+                                          },
+                                        ).toList(),
+                                        onChanged: (val) {
+                                          newState
+                                              .response!.data!.nationailties!
+                                              .map((e) {
+                                            if (val.toString() ==
+                                                e.id.toString()) {
+                                              nationalityName = e.name;
+                                              nationalityId = e.id;
+                                            }
+                                          }).toList();
+                                          setState(() {});
+                                        },
+                                        prefixIcon: SvgPicture.asset(
+                                            'assets/images/SVGs/flag.svg',
+                                            height: 24))),
+                                TitleTxt(txt: "resident_country".tr),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 24),
+                                  child: CustomDropDown(
+                                      hintData:
+                                          countryName ?? "قم باختيار الدولة",
+                                      value: countryId,
+                                      onChanged: (val) {
+                                        print(val);
+                                        countryId = val;
 
-                                  newState.response!.data!.countries!.map((e) {
-                                    if (val.toString() == e.id.toString()) {
-                                      countryName = e.name;
-                                      print(countryName);
-                                    }
-                                  }).toList();
-                                  setState(() {});
-                                  context
-                                      .read<CityCubit>()
-                                      .getCities(countryId.toString());
-                                },
-                                items: newState.response!.data!.countries!
-                                    .map((e) => DropdownMenuItem(
-                                        value: e.id.toString(),
-                                        child: Text(e.name!,
-                                            style: const TextStyle(
-                                                fontFamily: 'Cairo',
-                                                fontSize: 14))))
-                                    .toList(),
-                                prefixIcon: SvgPicture.asset(
-                                  "assets/images/SVGs/country.svg",
-                                  height: 24,
-                                )),
-                          )
-                        ],
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  }),
-                  BlocBuilder<CityCubit, CityState>(
-                      builder: (context, cityState) {
-                    if (cityState is CityLoading) {
-                      return const Center(
-                          child: CircularProgressIndicator.adaptive());
-                    } else if (cityState is CityLoaded) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TitleTxt(txt: "resident_city".tr),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 24),
-                            child: CustomDropDown(
-                                hintData: cityName ?? "قم باختيار المدينة",
-                                value: cityId,
-                                onChanged: (val) {
-                                  cityState.response!.data!.map((e) {
-                                    if (val.toString() == e.id.toString()) {
-                                      cityName = e.name;
-                                      cityId = val;
-                                    }
-                                  }).toList();
-                                  setState(() {});
-                                },
-                                items: cityState.response!.data!
-                                    .map(
-                                      (e) => DropdownMenuItem(
-                                          value: e.id.toString(),
-                                          child: Text(e.name!,
-                                              style: const TextStyle(
-                                                  fontFamily: 'Cairo',
-                                                  fontSize: 14))),
-                                    )
-                                    .toList(),
-                                prefixIcon: SvgPicture.asset(
-                                  'assets/images/SVGs/city1.svg',
-                                  height: 24,
-                                )),
-                          ),
-                        ],
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  }),
-                  TitleTxt(txt: "gender".tr),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text("female".tr,
-                          style: Constants.secondaryTitleRegularFont),
-                      Radio(
-                          value: "0",
-                          groupValue: genderValue,
-                          onChanged: (s) {
-                            setState(() {
-                              genderValue = s;
-                            });
-                          }),
-                      const SizedBox(
-                        width: 40,
-                      ),
-                      Text(
-                        "male".tr,
-                        style: Constants.secondaryTitleRegularFont,
-                      ),
-                      Radio(
-                          value: "1",
-                          groupValue: genderValue,
-                          onChanged: (s) {
-                            setState(() {
-                              genderValue = s;
-                            });
-                          }),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              )),
-            );
-          }
-          return const SizedBox.shrink();
-        }),
+                                        newState.response!.data!.countries!
+                                            .map((e) {
+                                          if (val.toString() ==
+                                              e.id.toString()) {
+                                            countryName = e.name;
+                                            cityId = null;
+                                            cityName = null;
+                                            print(countryName);
+                                          }
+                                        }).toList();
+                                        setState(() {});
+                                        context
+                                            .read<CityCubit>()
+                                            .getCities(countryId.toString());
+                                      },
+                                      items: newState.response!.data!.countries!
+                                          .map((e) => DropdownMenuItem(
+                                              value: e.id.toString(),
+                                              child: Text(e.name!,
+                                                  style: const TextStyle(
+                                                      fontFamily: 'Cairo',
+                                                      fontSize: 14))))
+                                          .toList(),
+                                      prefixIcon: SvgPicture.asset(
+                                        "assets/images/SVGs/country.svg",
+                                        height: 24,
+                                      )),
+                                )
+                              ],
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        }),
+                        BlocBuilder<CityCubit, CityState>(
+                            builder: (context, cityState) {
+                          if (cityState is CityLoading) {
+                            return const Center(
+                                child: CircularProgressIndicator.adaptive());
+                          } else if (cityState is CityLoaded) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TitleTxt(txt: "resident_city".tr),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 24),
+                                  child: CustomDropDown(
+                                      hintData:
+                                          cityName == '' || cityName == null
+                                              ? "قم باختيار المدينة"
+                                              : cityName!,
+                                      value: cityId,
+                                      onChanged: (val) {
+                                        cityState.response!.data!.map((e) {
+                                          if (val.toString() ==
+                                              e.id.toString()) {
+                                            cityName = e.name;
+                                            cityId = val;
+                                          }
+                                        }).toList();
+                                        setState(() {});
+                                      },
+                                      items: cityState.response!.data!
+                                          .map(
+                                            (e) => DropdownMenuItem(
+                                                value: e.id.toString(),
+                                                child: Text(e.name!,
+                                                    style: const TextStyle(
+                                                        fontFamily: 'Cairo',
+                                                        fontSize: 14))),
+                                          )
+                                          .toList(),
+                                      prefixIcon: SvgPicture.asset(
+                                        'assets/images/SVGs/city1.svg',
+                                        height: 24,
+                                      )),
+                                ),
+                              ],
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        }),
+                        TitleTxt(txt: "gender".tr),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text("female".tr,
+                                style: Constants.secondaryTitleRegularFont),
+                            Radio(
+                                value: "0",
+                                groupValue: genderValue,
+                                onChanged: (s) {
+                                  setState(() {
+                                    genderValue = s;
+                                  });
+                                }),
+                            const SizedBox(
+                              width: 40,
+                            ),
+                            Text(
+                              "male".tr,
+                              style: Constants.secondaryTitleRegularFont,
+                            ),
+                            Radio(
+                                value: "1",
+                                groupValue: genderValue,
+                                onChanged: (s) {
+                                  setState(() {
+                                    genderValue = s;
+                                  });
+                                }),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    )),
+                  );
+                }
+                return const SizedBox.shrink();
+              })
+            : const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
       ),
     );
   }

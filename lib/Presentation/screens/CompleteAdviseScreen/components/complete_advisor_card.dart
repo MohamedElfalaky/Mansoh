@@ -50,60 +50,59 @@ class CompleteAdvisorCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: 8,
+                width: 8
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      adviser.fullName ?? "",
-                      style: Constants.secondaryTitleFont,
-                    ),
-                    Text(
-                      adviser.description ?? "لا يوجد وصف لهذا الناصح",
-                      style: Constants.subtitleFont,
-                    ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      height: 26,
-                      width: width(context) * 0.59,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, int index) {
-                          if (index < 3) {
-                            return Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 2, horizontal: 4),
-                              margin: const EdgeInsets.only(left: 8),
-                              height: 24,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2),
-                                color: const Color(0XFFEEEEEE),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    adviser.fullName ?? "",
+                    style: Constants.secondaryTitleFont,
+                  ),
+                  Text(
+                    adviser.description ?? "لا يوجد وصف لهذا الناصح",
+                    style: Constants.subtitleFont,
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    height: 26,
+                    width: width(context) * 0.55,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, int index) {
+                        if (index < 3) {
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 8),
+                            margin: const EdgeInsets.only(left: 8,),
+                            height: 24,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2),
+                              color: const Color(0XFFEEEEEE),
+                            ),
+                            child: Text(
+                              adviser.category?[index].name ?? "",
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontFamily: Constants.mainFont,
+                                color: Color(0XFF444444),
                               ),
-                              child: Text(
-                                adviser.category?[index].name ?? "",
-                                style: const TextStyle(
-                                  fontSize: 10,
-                                  fontFamily: Constants.mainFont,
-                                  color: Color(0XFF444444),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            );
-                          } else if (index == 3) {
-                            // Display a fourth item with the count of remaining items
-                            int remainingCount =
-                                (adviser.category?.length ?? 0) - 3;
-                            return Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 2, horizontal: 4),
-                              margin: const EdgeInsets.only(left: 8),
-                              height: 24,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(2),
-                                color: const Color(0XFFEEEEEE),
-                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        } else if (index == 3) {
+                          int remainingCount =
+                              (adviser.category?.length ?? 0) - 3;
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                                 horizontal: 8),
+                            margin: const EdgeInsets.only(left: 8),
+                            height: 24,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2),
+                              color: const Color(0XFFEEEEEE),
+                            ),
+                            child: Center(
                               child: Text(
                                 '+ $remainingCount',
                                 style: const TextStyle(
@@ -113,20 +112,21 @@ class CompleteAdvisorCard extends StatelessWidget {
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                            );
-                          } else {
-                            // You can return an empty container for indexes greater than 3
-                            return Container();
-                          }
-                        },
-                        itemCount: min(
-                            4,
-                            adviser.category?.length ??
-                                0), // Ensure only 4 items are displayed
-                      ),
-                    )
-                  ],
-                ),
+                            ),
+                          );
+                        } else {
+                          // You can return an empty container for indexes greater than 3
+                          return Container();
+                        }
+                      },
+                      itemCount: min(
+                          4,
+                          adviser.category?.length ??
+                              0), // Ensure only 4 items are displayed
+                    ),
+                  )
+
+                ],
               ),
               const Spacer(),
               Row(
@@ -146,9 +146,7 @@ class CompleteAdvisorCard extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(
-            height: 24,
-          ),
+          const SizedBox(height: 24),
 
           Padding(
             padding: const EdgeInsets.only(bottom: 12),

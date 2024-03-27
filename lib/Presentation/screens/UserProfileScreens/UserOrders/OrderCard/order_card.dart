@@ -7,13 +7,13 @@ import '../../../../../app/constants.dart';
 import '../../UserProfileEdit/widgets/shared.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key, required this.orderFilterData});
+  const OrderCard({super.key, required this.orderFilterData,required this.description});
 
   final OrderFilterData orderFilterData;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
-    // print('order card ${orderFilterData.adviser?.fullName}');
     return Stack(
       children: [
         Card(
@@ -91,7 +91,7 @@ class OrderCard extends StatelessWidget {
                   title: Text(orderFilterData.adviser?.fullName ?? "",
                       style: Constants.secondaryTitleFont),
                   subtitle: Text(
-                    orderFilterData.adviser?.info ?? "لا يوجد وصف لهذا الناصح",
+                    description,
                     style: Constants.subtitleRegularFont,
                   ),
                   contentPadding: EdgeInsets.zero,

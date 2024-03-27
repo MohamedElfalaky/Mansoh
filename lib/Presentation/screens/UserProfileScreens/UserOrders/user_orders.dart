@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/orders_cubit/orders_status_cubit/orders_status_cubit.dart';
 import 'package:nasooh/Data/cubit/orders_cubit/orders_status_cubit/orders_status_state.dart';
 import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
+import 'package:nasooh/app/utils/shared_preference_class.dart';
 import '../../../../../app/utils/my_application.dart';
 import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_cubit.dart';
 import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_state.dart';
@@ -82,16 +83,23 @@ class _OrdersScreenState extends State<OrdersScreen> {
         },
         child: Scaffold(
             backgroundColor: Colors.white,
+            drawerScrimColor: Colors.white,
             appBar: customABarNoIcon(
                 txt: "my_orders".tr, back: false, context: context),
-            body: BlocBuilder<OrdersStatusCubit, OrdersStatusState>(
+            body:
+            sharedPrefs.getToken()==''?const Center(child: Text('برجاء تسجيل الدخول اولا',style: TextStyle(
+              fontFamily: 'Cairo',
+              fontWeight: FontWeight.bold,
+
+            ),),):
+            BlocBuilder<OrdersStatusCubit, OrdersStatusState>(
                 builder: (context, homeState) {
               if (homeState is OrdersStatusLoading) {
                 return const Center(
                   child: CircularProgressIndicator.adaptive(),
                 );
               } else if (homeState is OrdersStatusLoaded) {
-                var ordersList = homeState.response!.data;
+                var ordersList = homeState.response?.data;
                 return Column(
                   children: [
                     Container(
@@ -137,7 +145,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 child: ListView.builder(
                                     controller: _controller,
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: ordersList!.length,
+                                    itemCount: ordersList?.length,
                                     itemBuilder: (context, index) {
                                       return Padding(
                                         padding: EdgeInsets.symmetric(
@@ -159,7 +167,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                                   ? _animateToIndex(0)
                                                   : null;
                                             });
-                                            if (ordersList[index].id == 0) {
+                                            if (ordersList?[index].id == 0) {
                                               context
                                                   .read<OrdersFiltersCubit>()
                                                   .getOrdersFilters(id: "");
@@ -167,13 +175,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                               context
                                                   .read<OrdersFiltersCubit>()
                                                   .getOrdersFilters(
-                                                      id: ordersList[index]
+                                                      id: ordersList![index]
                                                           .id
                                                           .toString());
                                             }
                                           },
                                           child: Text(
-                                            ordersList[index].name!,
+                                            ordersList?[index].name??"",
                                             style: Constants.subtitleRegularFont
                                                 .copyWith(
                                               fontWeight: current == index
@@ -261,9 +269,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
       } else if (ordersFilters is OrdersFiltersLoaded) {
         var filtersList = ordersFilters.response?.data;
 
-        return Expanded(
+        return Flexible(
+
           child: ListView.builder(
               shrinkWrap: true,
+              physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               itemCount: filtersList?.length ?? 0,
               itemBuilder: (context, index) {
@@ -277,6 +287,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                           MyApplication.navigateTo(
                               context,
                               ChatScreen(
+                                description: filtersList[index].description??'لا يوجد وصف لهذا الناصح',
                                 statusClickable:
                                     filtersList[index].label!.id == 3,
                                 labelToShow:
@@ -287,7 +298,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 adviserProfileData: filtersList[index].adviser,
                               ));
                         },
-                  child: OrderCard(orderFilterData: filtersList[index]),
+                  child: OrderCard(orderFilterData: filtersList[index],description:ordersFilters.response?.data?[index].description??'لا يوجد وصف لهذا الناصح' ),
                 );
               }),
         );

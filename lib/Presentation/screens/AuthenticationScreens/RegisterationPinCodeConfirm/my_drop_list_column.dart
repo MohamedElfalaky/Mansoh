@@ -54,9 +54,13 @@ class _CustomDropDownState<T> extends State<CustomDropDown<T>> {
                     child: Container(
                       width: 30,
                       decoration: const BoxDecoration(
-                          border: Border(
-                              left: BorderSide(
-                                  width: 1, color: Color(0xFFBDBDBD)))),
+                        border: Border(
+                          left: BorderSide(
+                            width: 1,
+                            color: Color(0xFFBDBDBD),
+                          ),
+                        ),
+                      ),
                       margin: const EdgeInsetsDirectional.only(end: 8),
                       padding: const EdgeInsetsDirectional.only(end: 8),
                       child: widget.prefixIcon,
@@ -66,15 +70,15 @@ class _CustomDropDownState<T> extends State<CustomDropDown<T>> {
                   hintStyle: const TextStyle(
                     fontFamily: Constants.mainFont,
                     fontSize: 14,
-                    color: Constants.fontHintColor,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
                   )),
               icon: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
                 child: Icon(Icons.keyboard_arrow_down_rounded,
-                    color: Color(0xFFBDBDBD)),
+                    color: Colors.black),
               ),
               isExpanded: true,
-              // value: widget.value,
               items: widget.items,
               onChanged: widget.onChanged,
             ),

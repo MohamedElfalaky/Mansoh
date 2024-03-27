@@ -18,6 +18,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
       {super.key,
       required this.adviserProfileData,
       required this.isClickable,
+        this.description,
       this.labelToShow,
       required this.adviceId});
 
@@ -25,6 +26,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
   final int adviceId;
   final bool? labelToShow;
   final bool isClickable;
+  final String ?description;
 
   @override
   Widget build(BuildContext context) {
@@ -78,88 +80,11 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                       style: Constants.secondaryTitleFont,
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: width(context) * 0.55,
 
-                                    child: Text(
-                                      adviserProfileData.info ??
-                                          "لا يوجد وصف لهذا الناصح",
-                                      style: Constants.subtitleFont,
-                                    ),
-                                  ),
                                   const SizedBox(
                                     height: 8,
                                   ),
-                                  // SizedBox(
-                                  //   height: 26,
-                                  //   width: width(context) * 0.5,
-                                  //   child: ListView.builder(
-                                  //     scrollDirection: Axis.horizontal,
-                                  //     itemBuilder: (context, int index) {
-                                  //       if (index < 3) {
-                                  //         // Display the first three items from adviser.category
-                                  //         return Container(
-                                  //           padding: const EdgeInsets.symmetric(
-                                  //               vertical: 2, horizontal: 4),
-                                  //           margin:
-                                  //               const EdgeInsets.only(left: 8),
-                                  //           height: 24,
-                                  //           decoration: BoxDecoration(
-                                  //             borderRadius:
-                                  //                 BorderRadius.circular(2),
-                                  //             color: const Color(0XFFEEEEEE),
-                                  //           ),
-                                  //           child: Text(
-                                  //             adviserProfileData
-                                  //                     .category?[index].name ??
-                                  //                 "",
-                                  //             style: const TextStyle(
-                                  //               fontSize: 10,
-                                  //               fontFamily: Constants.mainFont,
-                                  //               color: Color(0XFF444444),
-                                  //             ),
-                                  //             textAlign: TextAlign.center,
-                                  //           ),
-                                  //         );
-                                  //       } else if (index == 3) {
-                                  //         // Display a fourth item with the count of remaining items
-                                  //         int remainingCount =
-                                  //             (adviserProfileData
-                                  //                         .category?.length ??
-                                  //                     0) -
-                                  //                 3;
-                                  //         return Container(
-                                  //           padding: const EdgeInsets.symmetric(
-                                  //               vertical: 2, horizontal: 4),
-                                  //           margin:
-                                  //               const EdgeInsets.only(left: 8),
-                                  //           height: 24,
-                                  //           decoration: BoxDecoration(
-                                  //             borderRadius:
-                                  //                 BorderRadius.circular(2),
-                                  //             color: const Color(0XFFEEEEEE),
-                                  //           ),
-                                  //           child: Text(
-                                  //             '+ $remainingCount',
-                                  //             style: const TextStyle(
-                                  //               fontSize: 10,
-                                  //               fontFamily: Constants.mainFont,
-                                  //               color: Color(0XFF444444),
-                                  //             ),
-                                  //             textAlign: TextAlign.center,
-                                  //           ),
-                                  //         );
-                                  //       } else {
-                                  //         // You can return an empty container for indexes greater than 3
-                                  //         return Container();
-                                  //       }
-                                  //     },
-                                  //     itemCount: min(
-                                  //         4,
-                                  //         adviserProfileData.category?.length ??
-                                  //             0), // Ensure only 4 items are displayed
-                                  //   ),
-                                  // ),
+
                                   Row(
                                     children: [
                                       adviserProfileData.category!.isNotEmpty
@@ -449,10 +374,9 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                         textAlign: TextAlign.center,
                                       ),
                                     );
-                                  } else {
-                                    // You can return an empty container for indexes greater than 3
-                                    return Container();
                                   }
+                                    return const SizedBox.shrink();
+
                                 },
                                 itemCount: adviserProfileData.category
                                     ?.length, // Ensure only 4 items are displayed
@@ -472,11 +396,8 @@ class OutlinedAdvisorCard extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(right: 50),
-                      child: Text(
-                        adviserProfileData.info != "" &&
-                            adviserProfileData.info != null
-                            ? adviserProfileData.info!
-                            : "لا يوجد وصف لهذا الناصح",
+                      child: Text(description
+                          ?? "لا يوجد وصف لهذا الناصح",
                         style: Constants.subtitleFont,
                       ),
                     ),

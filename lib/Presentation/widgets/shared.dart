@@ -178,8 +178,10 @@ customABarNoIcon({
     preferredSize: const Size.fromHeight(60.0),
     child: AppBar(
       title: Padding(
-        padding: const EdgeInsets.only(right: 10, left: 10),
-        child: Text(txt.tr),
+        padding: const EdgeInsets.only(right: 10, left: 10,top: 10),
+        child: Align(
+            alignment: Alignment.centerRight,
+            child: Text(txt.tr)),
       ),
       automaticallyImplyLeading: back,
     ),

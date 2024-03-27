@@ -74,296 +74,294 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
         onTap: () {
           MyApplication.dismissKeyboard(context);
         },
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: Constants.whiteAppColor,
-            resizeToAvoidBottomInset: false,
-            body: Padding(
-              padding: const EdgeInsets.all(16),
-              child: SingleChildScrollView(
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
-                  child: Form(
-                      key: _formKey,
-                      child: BlocBuilder<RegisterCubit, RegisterState>(
-                          builder: (context, state) => Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text("create_new_account".tr,
-                                          textAlign: TextAlign.right,
-                                          style:
-                                              Constants.headerNavigationFont),
-                                      const SizedBox(
-                                        width: 16,
-                                      ),
-                                      const GoBack(),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  Center(
-                                    child: SizedBox(
-                                      height: 190,
-                                      width: 190,
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          Center(
-                                            child: DottedBorder(
-                                              color: Constants.outLineColor,
-                                              borderType: BorderType.Circle,
-                                              radius: const Radius.circular(20),
-                                              dashPattern: const [10, 6],
-                                              child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(6),
-                                                  child: CircleAvatar(
-                                                    radius:
-                                                        width(context) * 0.19,
-                                                    backgroundImage: regImage ==
-                                                            null
-                                                        ? const AssetImage(
-                                                            'assets/images/PNG/no_profile_photo.png')
-                                                        : FileImage(
-                                                            File(
-                                                                regImage!.path),
-                                                          ) as ImageProvider,
-                                                  )),
-                                            ),
+        child: Scaffold(
+          backgroundColor: Constants.whiteAppColor,
+          resizeToAvoidBottomInset: false,
+          body: Padding(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                child: Form(
+                    key: _formKey,
+                    child: BlocBuilder<RegisterCubit, RegisterState>(
+                        builder: (context, state) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text("create_new_account".tr,
+                                        textAlign: TextAlign.right,
+                                        style:
+                                            Constants.headerNavigationFont),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    const GoBack(),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Center(
+                                  child: SizedBox(
+                                    height: 190,
+                                    width: 190,
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Center(
+                                          child: DottedBorder(
+                                            color: Constants.outLineColor,
+                                            borderType: BorderType.Circle,
+                                            radius: const Radius.circular(20),
+                                            dashPattern: const [10, 6],
+                                            child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(6),
+                                                child: CircleAvatar(
+                                                  radius:
+                                                      width(context) * 0.19,
+                                                  backgroundImage: regImage ==
+                                                          null
+                                                      ? const AssetImage(
+                                                          'assets/images/PNG/no_profile_photo.png')
+                                                      : FileImage(
+                                                          File(
+                                                              regImage!.path),
+                                                        ) as ImageProvider,
+                                                )),
                                           ),
-                                          Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: InkWell(
-                                              onTap: () {
-                                                showModalBottomSheet(
-                                                  context: context,
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                    // <-- SEE HERE
-                                                    borderRadius:
-                                                        BorderRadius.vertical(
-                                                      top:
-                                                          Radius.circular(25.0),
-                                                    ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: InkWell(
+                                            onTap: () {
+                                              showModalBottomSheet(
+                                                context: context,
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  // <-- SEE HERE
+                                                  borderRadius:
+                                                      BorderRadius.vertical(
+                                                    top:
+                                                        Radius.circular(25.0),
                                                   ),
-                                                  builder: (ctx) {
-                                                    return Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(18),
-                                                        // height: 100,
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            RowModalSheet(
-                                                                txt: "كاميرا",
-                                                                imageIcon:
-                                                                    cameraIcon,
-                                                                onPressed: () {
-                                                                  pickImage(
-                                                                      ImageSource
-                                                                          .camera,
-                                                                      ctx,
-                                                                      setState);
-                                                                  // inputImageName =
-                                                                  //     RegistrationController
-                                                                  //         .regImage!.path;
-                                                                  // inputImagePhoto =
-                                                                  //     RegistrationController
-                                                                  //         .regImage;
-                                                                  // print(
-                                                                  //     "Image PAth is $inputImageName");
-                                                                }),
-                                                            const Divider(),
-                                                            RowModalSheet(
-                                                              txt: "الاستديو",
+                                                ),
+                                                builder: (ctx) {
+                                                  return Container(
+                                                      padding:
+                                                          const EdgeInsets
+                                                              .all(18),
+                                                      // height: 100,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          RowModalSheet(
+                                                              txt: "كاميرا",
                                                               imageIcon:
-                                                                  galleryIcon,
+                                                                  cameraIcon,
                                                               onPressed: () {
                                                                 pickImage(
                                                                     ImageSource
-                                                                        .gallery,
+                                                                        .camera,
                                                                     ctx,
                                                                     setState);
-                                                              },
-                                                            ),
-                                                            const Divider(),
-                                                            RowModalSheet(
-                                                              txt: "الغاء",
-                                                              imageIcon:
-                                                                  closeIcon,
-                                                              onPressed: () {
-                                                                Navigator.pop(
-                                                                    context);
-                                                              },
-                                                            )
-                                                          ],
-                                                        ));
-                                                  },
-                                                );
-                                              },
-                                              child: const CircleAvatar(
-                                                backgroundColor:
-                                                    Color(0XFF444444),
-                                                radius: 20,
-                                                child: Icon(
-                                                  Icons.camera_alt_outlined,
-                                                  color: Colors.white,
-                                                ),
+                                                                // inputImageName =
+                                                                //     RegistrationController
+                                                                //         .regImage!.path;
+                                                                // inputImagePhoto =
+                                                                //     RegistrationController
+                                                                //         .regImage;
+                                                                // print(
+                                                                //     "Image PAth is $inputImageName");
+                                                              }),
+                                                          const Divider(),
+                                                          RowModalSheet(
+                                                            txt: "الاستديو",
+                                                            imageIcon:
+                                                                galleryIcon,
+                                                            onPressed: () {
+                                                              pickImage(
+                                                                  ImageSource
+                                                                      .gallery,
+                                                                  ctx,
+                                                                  setState);
+                                                            },
+                                                          ),
+                                                          const Divider(),
+                                                          RowModalSheet(
+                                                            txt: "الغاء",
+                                                            imageIcon:
+                                                                closeIcon,
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          )
+                                                        ],
+                                                      ));
+                                                },
+                                              );
+                                            },
+                                            child: const CircleAvatar(
+                                              backgroundColor:
+                                                  Color(0XFF444444),
+                                              radius: 20,
+                                              child: Icon(
+                                                Icons.camera_alt_outlined,
+                                                color: Colors.white,
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 16,
-                                      ),
-                                      child: Text("Personal Information".tr,
-                                          textAlign: TextAlign.end,
-                                          style: Constants.subtitleFontBold
-                                              .copyWith(fontSize: 16))),
-                                  TitleTxt(
-                                    txt: "Name".tr,
-                                  ),
-                                  InputTextField(
-                                    keyboardType: TextInputType.text,
-                                    hintTxt: "Name".tr,
-                                    imageTxt:
-                                        "assets/images/SVGs/name_icon.svg",
-                                    controller: _nameController,
-                                    validator: (val) {
-                                      if (val!.isEmpty) {
-                                        return "name Required".tr;
-                                      } else if (val.length > 33 ||
-                                          val.length < 2) {
-                                        return "name length".tr;
-                                      }
-                                      return null;
-                                    },
-                                    onChanged: (val) {},
-                                  ),
-                                  TitleTxt(
-                                    txt: "email".tr,
-                                  ),
-                                  InputTextField(
-                                    validator: (val) {
-                                      if (val!.isEmpty ||
-                                          !RegExp(Validations.validationEmail)
-                                              .hasMatch(val)) {
-                                        return "email_required".tr;
-                                      }
-                                      return null;
-                                    },
-                                    keyboardType: TextInputType.emailAddress,
-                                    hintTxt: "example@example.com",
-                                    imageTxt:
-                                        "assets/images/SVGs/email_icon.svg",
-                                    controller: _emailController,
-                                    onChanged: (val) {
-                                      // inputBirthday = _nameController.text;
-                                      // print(_emailController.toString());
-                                    },
-                                  ),
-                                  Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 16,
-                                      ),
-                                      child: Text("Additional Information".tr,
-                                          textAlign: TextAlign.end,
-                                          style: Constants.subtitleFontBold
-                                              .copyWith(fontSize: 16))),
-                                  const NationalityAndCountryWidget(),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  Text("gender".tr,
-                                      textAlign: TextAlign.right,
+                                ),
+                                Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 16,
+                                    ),
+                                    child: Text("Personal Information".tr,
+                                        textAlign: TextAlign.end,
+                                        style: Constants.subtitleFontBold
+                                            .copyWith(fontSize: 16))),
+                                TitleTxt(
+                                  txt: "Name".tr,
+                                ),
+                                InputTextField(
+                                  keyboardType: TextInputType.text,
+                                  hintTxt: "Name".tr,
+                                  imageTxt:
+                                      "assets/images/SVGs/name_icon.svg",
+                                  controller: _nameController,
+                                  validator: (val) {
+                                    if (val!.isEmpty) {
+                                      return "name Required".tr;
+                                    } else if (val.length > 33 ||
+                                        val.length < 2) {
+                                      return "name length".tr;
+                                    }
+                                    return null;
+                                  },
+                                  onChanged: (val) {},
+                                ),
+                                TitleTxt(
+                                  txt: "email".tr,
+                                ),
+                                InputTextField(
+                                  validator: (val) {
+                                    if (val!.isEmpty ||
+                                        !RegExp(Validations.validationEmail)
+                                            .hasMatch(val)) {
+                                      return "email_required".tr;
+                                    }
+                                    return null;
+                                  },
+                                  keyboardType: TextInputType.emailAddress,
+                                  hintTxt: "example@example.com",
+                                  imageTxt:
+                                      "assets/images/SVGs/email_icon.svg",
+                                  controller: _emailController,
+                                  onChanged: (val) {
+                                    // inputBirthday = _nameController.text;
+                                    // print(_emailController.toString());
+                                  },
+                                ),
+                                Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 16,
+                                    ),
+                                    child: Text("Additional Information".tr,
+                                        textAlign: TextAlign.end,
+                                        style: Constants.subtitleFontBold
+                                            .copyWith(fontSize: 16))),
+                                const NationalityAndCountryWidget(),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Text("gender".tr,
+                                    textAlign: TextAlign.right,
+                                    style:
+                                        Constants.secondaryTitleRegularFont),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text("female".tr,
+                                        style: Constants
+                                            .secondaryTitleRegularFont),
+                                    Radio(
+                                        value: 0,
+                                        groupValue: inputGender,
+                                        onChanged: (s) {
+                                          setState(() {
+                                            inputGender = s;
+                                          });
+                                        }),
+                                    const SizedBox(
+                                      width: 48,
+                                    ),
+                                    Text(
+                                      "male".tr,
                                       style:
-                                          Constants.secondaryTitleRegularFont),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text("female".tr,
-                                          style: Constants
-                                              .secondaryTitleRegularFont),
-                                      Radio(
-                                          value: 0,
-                                          groupValue: inputGender,
-                                          onChanged: (s) {
-                                            setState(() {
-                                              inputGender = s;
-                                            });
-                                          }),
-                                      const SizedBox(
-                                        width: 48,
-                                      ),
-                                      Text(
-                                        "male".tr,
-                                        style:
-                                            Constants.secondaryTitleRegularFont,
-                                      ),
-                                      Radio(
-                                          value: 1,
-                                          groupValue: inputGender,
-                                          onChanged: (s) {
-                                            setState(() {
-                                              inputGender = s;
-                                            });
-                                          }),
-                                    ],
-                                  ),
-                                  state is RegisterLoading
-                                      ? const CustomLoadingButton()
-                                      : Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              vertical: 25),
-                                          width: double.infinity,
-                                          height: 48,
-                                          child: CustomElevatedButton(
-                                            onPressedHandler: () {
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                context
-                                                    .read<RegisterCubit>()
-                                                    .registerMethod(
-                                                      context: context,
-                                                      mobile: sendPhone,
-                                                      avatar: base64Image ?? "",
-                                                      countryId:
-                                                          inputCountry ?? "",
-                                                      cityId: inputCity ?? "",
-                                                      email:
-                                                          _emailController.text,
-                                                      fullName:
-                                                          _nameController.text,
-                                                      gender: inputGender,
-                                                      nationalityId:
-                                                          inputNationality ??
-                                                              "",
-                                                    );
-                                              }
-                                            },
-                                            txt: "register".tr,
-                                            isBold: true,
-                                          ),
+                                          Constants.secondaryTitleRegularFont,
+                                    ),
+                                    Radio(
+                                        value: 1,
+                                        groupValue: inputGender,
+                                        onChanged: (s) {
+                                          setState(() {
+                                            inputGender = s;
+                                          });
+                                        }),
+                                  ],
+                                ),
+                                state is RegisterLoading
+                                    ? const CustomLoadingButton()
+                                    : Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 25),
+                                        width: double.infinity,
+                                        height: 48,
+                                        child: CustomElevatedButton(
+                                          onPressedHandler: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              context
+                                                  .read<RegisterCubit>()
+                                                  .registerMethod(
+                                                    context: context,
+                                                    mobile: sendPhone,
+                                                    avatar: base64Image ?? "",
+                                                    countryId:
+                                                        inputCountry ?? "",
+                                                    cityId: inputCity ?? "",
+                                                    email:
+                                                        _emailController.text,
+                                                    fullName:
+                                                        _nameController.text,
+                                                    gender: inputGender,
+                                                    nationalityId:
+                                                        inputNationality ??
+                                                            "",
+                                                  );
+                                            }
+                                          },
+                                          txt: "register".tr,
+                                          isBold: true,
                                         ),
-                                ],
-                              )))),
-            ),
+                                      ),
+                              ],
+                            )))),
           ),
         ),
       ),

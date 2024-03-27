@@ -26,72 +26,50 @@ class _UserNotificationsState extends State<UserNotifications> {
       onTap: () {
         MyApplication.dismissKeyboard(context);
       },
-      child: SafeArea(
-        child: Scaffold(
-            appBar: const PreferredSize(
-                preferredSize: Size(double.infinity, 118),
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 16),
-                  child: Back(header: "notifications"),
-                )),
-            resizeToAvoidBottomInset: false,
-            body: BlocBuilder<NotificationCubit, NotificationState>(
-                builder: (context, state) {
-              if (state is NotificationLoading) {
-                return const Center(
-                    child: CircularProgressIndicator.adaptive());
-              } else if (state is NotificationLoaded) {
-                // print("state.response!.transaction.toString()  is ${state.response.toString()}");
-                return Padding(
-                  padding:
-                      const EdgeInsets.only(right: 16, left: 16, bottom: 16),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom,
-                    ),
-                    child: SingleChildScrollView(
-                        keyboardDismissBehavior:
-                            ScrollViewKeyboardDismissBehavior.onDrag,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) =>
-                                  OneNotificationItem(
-                                date: state.response?[index].date ?? "",
-                                description:
-                                    state.response?[index].description ?? "",
-                                id: state.response?[index].id.toString() ?? "",
-                              ),
-                              itemCount: state.response?.length ?? 0,
-                            )
-                          ],
-                        )),
-                  ),
-                );
-              } else if (state is NotificationError) {
-                return const Center(child: Text('error'));
-              } else {
-                return const Center(child: Text('....'));
-              }
-            })),
-      ),
+      child: Scaffold(
+          appBar: const PreferredSize(
+              preferredSize: Size(double.infinity, 118),
+              child: Padding(
+                padding:
+                    EdgeInsets.only(right: 16, left: 16, top: 70, bottom: 16),
+                child: Back(header: "notifications"),
+              )),
+          body: BlocBuilder<NotificationCubit, NotificationState>(
+              builder: (context, state) {
+            if (state is NotificationLoading) {
+              return const Center(child: CircularProgressIndicator.adaptive());
+            } else if (state is NotificationLoaded) {
+              return ListView.builder(
+                padding: const EdgeInsets.only(right: 16, left: 16, bottom: 16),
+                shrinkWrap: true,
+                itemBuilder: (context, index) => OneNotificationItem(
+                  date: state.response?[index].date ?? "",
+                  description: state.response?[index].description,
+                  id: state.response?[index].id.toString() ?? "",
+                ),
+                itemCount: state.response?.length ?? 0,
+              );
+            } else if (state is NotificationError) {
+              return const Center(child: Text('Error occurred'));
+            } else {
+              return const Center(
+                child: CircularProgressIndicator.adaptive(),
+              );
+            }
+          })),
     );
   }
 }
 
 class OneNotificationItem extends StatelessWidget {
-  const OneNotificationItem(
+  OneNotificationItem(
       {super.key,
       required this.id,
       required this.description,
       required this.date});
 
   final String id;
-  final String description;
+  String? description;
   final String date;
 
   @override
@@ -106,27 +84,19 @@ class OneNotificationItem extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.red[100],
-                    child: const Icon(
-                      Icons.notifications_active,
-                      color: Colors.red,
-                    ),
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.red[100],
+                  child: const Icon(
+                    Icons.notifications_active,
+                    color: Colors.red,
                   ),
                 ),
-                const SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      description,
-                      style: Constants.secondaryTitleFont,
-                    ),
                     Text(
                       date,
                       style: Constants.subtitleRegularFontHint,
@@ -143,54 +113,22 @@ class OneNotificationItem extends StatelessWidget {
                         )
                       ],
                     ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        const Text(
+                          'الوصف : ',
+                          style: Constants.mainTitleFont,
+                        ),
+                        Text(
+                          '  ${description == null || description == '' ? "لا يوجد وصف" : description}',
+                          style: Constants.mainTitleRegularFont
+                              .copyWith(fontSize: 12),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Row(children: [
-              Text(
-                "تم رفض طلبك من ",
-                style: Constants.subtitleRegularFont,
-              ),
-              Text(
-                "محمد عبد الله",
-                style: Constants.secondaryTitleFont,
-              ),
-              Text(
-                " بسبب ",
-                style: Constants.subtitleRegularFont,
-              ),
-            ]),
-            Row(
-              children: [
-                Text(
-                  "رفضه للمبلغ المعروض عليه",
-                  style: Constants.subtitleRegularFont.copyWith(
-                    height: 0.1,
-                  ),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    visualDensity: VisualDensity.compact,
-                    padding:
-                        MaterialStateProperty.all(const EdgeInsets.symmetric(
-                      horizontal: 5,
-                      vertical: 0,
-                    )),
-                    backgroundColor: MaterialStateProperty.all(Colors.white),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    "ابحث عن مستشار آخر",
-                    style: Constants.subtitleRegularFont.copyWith(
-                      color: Colors.blue,
-                      height: 0.1,
-                    ),
-                  ),
-                )
               ],
             ),
           ],

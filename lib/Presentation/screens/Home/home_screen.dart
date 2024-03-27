@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Constants.whiteAppColor,
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height,
-                  margin: const EdgeInsets.only(left: 16, right: 16, top: 35),
+                  margin: const EdgeInsets.only(left: 16, right: 16, top: 50),
                   child: Column(
                     children: [
                       Row(

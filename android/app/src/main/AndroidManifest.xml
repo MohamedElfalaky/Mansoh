@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:label="nasooh"
+        android:label="نصوح"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

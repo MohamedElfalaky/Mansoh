@@ -40,13 +40,13 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
   final _formKey = GlobalKey<FormState>();
   File? pickedFile;
 
-
   @override
   void initState() {
     super.initState();
 
-    context.read<SendAdviseCubit>().emit(  SendAdviseInitial());
+    context.read<SendAdviseCubit>().emit(SendAdviseInitial());
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

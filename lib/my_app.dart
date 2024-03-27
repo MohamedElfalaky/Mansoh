@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: providers,
       child: GetMaterialApp(
+
         translations: Messages(),
         locale: sharedPrefs.getLanguage() == ""
             ? const Locale('ar')
