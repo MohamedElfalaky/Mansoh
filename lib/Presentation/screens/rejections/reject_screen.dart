@@ -2,10 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
+import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
+
 import '../../../Data/cubit/rejections_cubit/reject_cubit/post_reject_cubit.dart';
 import '../../../Data/cubit/rejections_cubit/reject_cubit/post_reject_state.dart';
 import '../../../Data/cubit/rejections_cubit/rejection_list_cubit/rejection_list_cubit.dart';

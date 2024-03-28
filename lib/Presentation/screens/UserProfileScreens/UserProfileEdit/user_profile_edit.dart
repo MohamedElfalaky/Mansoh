@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nasooh/Data/cubit/profile/profile_cubit/profile_cubit.dart';
 import 'package:nasooh/app/utils/shared_preference_class.dart';
+
 import '../../../../Data/cubit/authentication/city_cubit/city_cubit.dart';
 import '../../../../Data/cubit/authentication/city_cubit/city_state.dart';
 import '../../../../Data/cubit/authentication/country_cubit/country_cubit.dart';
@@ -43,7 +45,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
   String? cityName;
   String? cityId;
   String? countryId;
-  String? nationalityId;
+  var nationalityId;
   String? genderValue;
   String? phoneNumber;
   static final ImagePicker _picker = ImagePicker();
@@ -127,7 +129,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
         appBar: const PreferredSize(
           preferredSize: Size(double.infinity, 100),
           child: Padding(
-            padding: EdgeInsets.only(top: 40, right: 20),
+            padding: EdgeInsets.only(top: 60, right: 20),
             child: Back(header: "Update Profile"),
           ),
         ),

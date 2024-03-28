@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nasooh/Data/repositories/settings/change_notification_repo.dart';
+
 import 'is_notification_state.dart';
 
 class IsNotificationCubit extends Cubit<IsNotificationState> {

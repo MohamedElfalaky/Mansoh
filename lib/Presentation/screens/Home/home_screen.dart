@@ -8,6 +8,7 @@ import 'package:nasooh/Presentation/screens/Home/Components/advisor_card.dart';
 import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
+
 import '../../../Data/cubit/authentication/category_parent_cubit/category_parent_cubit.dart';
 import '../../../Data/cubit/authentication/category_parent_cubit/category_parent_state.dart';
 import '../../../Data/cubit/home/advisor_list_cubit.dart';
@@ -97,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 16,bottom: 8),
+                        padding: const EdgeInsets.only(top: 16, bottom: 8),
                         child: TextField(
                           controller: searchController,
                           onSubmitted: (val) {
@@ -110,7 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: Constants.setTextInputDecoration(
                             hintColor: const Color(0xff5C5E6B),
                             prefixIcon: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                               child: SvgPicture.asset(searchIcon),
                             ),
                             isSuffix: true,
@@ -140,7 +142,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-
                       BlocBuilder<CategoryParentCubit, CategoryParentState>(
                           builder: (context, categoryState) {
                         if (categoryState is CategoryParentLoading) {
@@ -162,58 +163,60 @@ class _HomeScreenState extends State<HomeScreen> {
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
                                         children: catList
-                                            .map(
-                                              (e) => InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    selectedCategoryId = e.id!;
+                                            .map((e) => InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      selectedCategoryId =
+                                                          e.id!;
 
-                                                    for (var element
-                                                        in catList) {
-                                                      element.selected = false;
-                                                    }
-                                                    e.selected = true;
-                                                    if (e.id == 0) {
-                                                      advisorListCubit
-                                                          .getAdvisorList();
-                                                    } else {
-                                                      advisorListCubit.getAdvisorList(
-                                                          categoryValue:
-                                                              '$selectedCategoryId',
-                                                          searchTxt:
-                                                              searchController
-                                                                  .text,
-                                                          rateVal:
-                                                              widget.rateVal);
-                                                    }
-                                                  });
-                                                },
-                                                child: Container(
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                            left: 16),
-                                                    child: Text(
-                                                      e.name ?? '',
-                                                      style: e.selected == true
-                                                          ? const TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontFamily:
-                                                                  Constants
-                                                                      .mainFont,
-                                                              fontSize: 16)
-                                                          : const TextStyle(
-                                                              fontFamily:
-                                                                  Constants
-                                                                      .mainFont),
-                                                    )),
-                                              ))
+                                                      for (var element
+                                                          in catList) {
+                                                        element.selected =
+                                                            false;
+                                                      }
+                                                      e.selected = true;
+                                                      if (e.id == 0) {
+                                                        advisorListCubit
+                                                            .getAdvisorList();
+                                                      } else {
+                                                        advisorListCubit.getAdvisorList(
+                                                            categoryValue:
+                                                                '$selectedCategoryId',
+                                                            searchTxt:
+                                                                searchController
+                                                                    .text,
+                                                            rateVal:
+                                                                widget.rateVal);
+                                                      }
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              left: 16),
+                                                      child: Text(
+                                                        e.name ?? '',
+                                                        style: e.selected ==
+                                                                true
+                                                            ? const TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily:
+                                                                    Constants
+                                                                        .mainFont,
+                                                                fontSize: 16)
+                                                            : const TextStyle(
+                                                                fontFamily:
+                                                                    Constants
+                                                                        .mainFont),
+                                                      )),
+                                                ))
                                             .toList()),
                                   ),
-                                  const SizedBox(height: 5),
+                                  // const SizedBox(height: 2),
                                   SizedBox(
-                                    height: selectedCategoryId==0?0:40,
+                                    height: selectedCategoryId == 0 ? 0 : 40,
                                     child: ListView(
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
@@ -221,46 +224,48 @@ class _HomeScreenState extends State<HomeScreen> {
                                           if (e.id == selectedCategoryId) {
                                             return Row(
                                                 children: e.children!
-                                                    .map((e) => Container(
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal:
-                                                                      4),
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  vertical: 3),
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          15),
-                                                              border: Border.all(
-                                                                  width: 1.5,
-                                                                  color: selectedSubCategory ==
-                                                                          e.id
-                                                                      ? Colors
-                                                                          .blueAccent
-                                                                      : Colors
-                                                                          .black38)),
-                                                          child: InkWell(
-                                                            onTap: () {
-                                                              debugPrint(
-                                                                  'sub category ${e.id}');
-                                                              debugPrint(
-                                                                  'sub category ${e.name}');
-                                                              selectedSubCategory =
-                                                                  e.id;
-                                                              setState(() {});
+                                                    .map((e) => InkWell(
+                                                          onTap: () {
+                                                            debugPrint(
+                                                                'sub category ${e.id}');
+                                                            debugPrint(
+                                                                'sub category ${e.name}');
+                                                            selectedSubCategory =
+                                                                e.id;
+                                                            setState(() {});
 
-                                                              context
-                                                                  .read<
-                                                                      AdvisorListCubit>()
-                                                                  .getAdvisorList(
-                                                                      categoryValue:
-                                                                          '$selectedSubCategory');
-                                                            },
+                                                            context
+                                                                .read<
+                                                                    AdvisorListCubit>()
+                                                                .getAdvisorList(
+                                                                    categoryValue:
+                                                                        '$selectedSubCategory');
+                                                          },
+                                                          child: Container(
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        4),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical: 4,
+                                                                    horizontal:
+                                                                        4),
+                                                            decoration: BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15),
+                                                                border: Border.all(
+                                                                    width: 1.5,
+                                                                    color: selectedSubCategory ==
+                                                                            e.id
+                                                                        ? Colors
+                                                                            .blueAccent
+                                                                        : Colors
+                                                                            .black38)),
                                                             child: Padding(
                                                               padding:
                                                                   const EdgeInsets
@@ -328,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         } else if (advisorState is AdvisorListLoaded) {
                           return Flexible(
                             child: ListView.builder(
-                              padding: EdgeInsets.zero,
+                              padding: const EdgeInsets.only(top: 10),
                               itemCount:
                                   advisorState.adListResponse?.data?.length ??
                                       0,

@@ -1,8 +1,7 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
+import 'package:nasooh/Presentation/widgets/shared.dart';
 
 import '../../../Data/cubit/review_cubit/review_cubit.dart';
 import '../../../Data/cubit/review_cubit/review_state.dart';

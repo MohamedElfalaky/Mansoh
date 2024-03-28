@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../repositories/settings/privacy_policy_repo.dart';
 import 'privacy_state.dart';
 

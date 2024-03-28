@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
 import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/layout/home.dart';
+
 import '../../../../Data/cubit/authentication/new_mob/mob_cubit.dart';
 import '../../../../Data/cubit/authentication/new_mob/mob_state.dart';
 import '../../../../app/Style/sizes.dart';
@@ -197,22 +198,22 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                           SizedBox(
                             height: height(context) * 0.2,
                           ),
-                          FadeTransition(
-                            opacity: _fadeController,
-                            child: Center(
-                              child: SizedBox(
-                                width: width(context) * 0.36,
-                                height: 48,
-                                child: CustomElevatedButton(
-                                  isBold: true,
-                                  txt: "login_guest".tr,
-                                  onPressedHandler: () {
-                                    MyApplication.navigateToReplace(context, const HomeLayout(currentIndex: 0));
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
+                          // FadeTransition(
+                          //   opacity: _fadeController,
+                          //   child: Center(
+                          //     child: SizedBox(
+                          //       width: width(context) * 0.36,
+                          //       height: 48,
+                          //       child: CustomElevatedButton(
+                          //         isBold: true,
+                          //         txt: "login_guest".tr,
+                          //         onPressedHandler: () {
+                          //           MyApplication.navigateToReplace(context, const HomeLayout(currentIndex: 0));
+                          //         },
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     )),

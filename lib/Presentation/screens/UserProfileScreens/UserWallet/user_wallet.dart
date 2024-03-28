@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/wallet_cubit/wallet_cubit.dart';
 import 'package:nasooh/Presentation/screens/UserProfileScreens/UserWallet/coupons_screen.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
+
 import '../../../../Data/cubit/wallet_cubit/wallet_state.dart';
 import '../../../../app/constants.dart';
 import '../../../../app/utils/my_application.dart';

@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:nasooh/Data/models/profile_models/profile_model.dart';
 import 'package:nasooh/app/keys.dart';
+
 import '../../../app/utils/my_application.dart';
 import '../../../app/utils/shared_preference_class.dart';
-import 'package:http/http.dart' as http;
 
 class GetProfileRepo {
   Future<ProfileModel?> getProfile() async {

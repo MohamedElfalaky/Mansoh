@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/RegisterationInfoScreen/registeration_info_screen.dart';
+
 import '../../../../Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import '../../../../app/utils/my_application.dart';
 import '../../../repositories/authentication/check_code_repo.dart';

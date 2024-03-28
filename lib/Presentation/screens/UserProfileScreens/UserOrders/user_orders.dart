@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -6,6 +5,7 @@ import 'package:nasooh/Data/cubit/orders_cubit/orders_status_cubit/orders_status
 import 'package:nasooh/Data/cubit/orders_cubit/orders_status_cubit/orders_status_state.dart';
 import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
 import 'package:nasooh/app/utils/shared_preference_class.dart';
+
 import '../../../../../app/utils/my_application.dart';
 import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_cubit.dart';
 import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_state.dart';
@@ -23,18 +23,9 @@ class OrdersScreen extends StatefulWidget {
 
 class _OrdersScreenState extends State<OrdersScreen> {
 
-  final ScrollController _controller = ScrollController();
-
   int current = 0;
-  bool isScrolling = false;
+  // bool isScrolling = false;
 
-  void _animateToIndex(int index) {
-    _controller.animateTo(
-      index * MediaQuery.of(context).size.width,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
 
   double changePositionedOfLine() {
     switch (current) {
@@ -55,20 +46,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
     }
   }
 
-  double changeContainerWidth() {
-    switch (isScrolling) {
-      case true:
-        return 0;
-      case false:
-        return 50;
-      default:
-        return 0;
-    }
-  }
+
 
   @override
   void initState() {
-
     context.read<OrdersStatusCubit>().getOrdersStatus();
     context.read<OrdersFiltersCubit>().getOrdersFilters(id: "");
     super.initState();
@@ -76,7 +57,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return GestureDetector(
         onTap: () {
           MyApplication.dismissKeyboard(context);
@@ -86,158 +66,99 @@ class _OrdersScreenState extends State<OrdersScreen> {
             drawerScrimColor: Colors.white,
             appBar: customABarNoIcon(
                 txt: "my_orders".tr, back: false, context: context),
-            body:
-            sharedPrefs.getToken()==''?const Center(child: Text('برجاء تسجيل الدخول اولا',style: TextStyle(
-              fontFamily: 'Cairo',
-              fontWeight: FontWeight.bold,
-
-            ),),):
-            BlocBuilder<OrdersStatusCubit, OrdersStatusState>(
-                builder: (context, homeState) {
-              if (homeState is OrdersStatusLoading) {
-                return const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                );
-              } else if (homeState is OrdersStatusLoaded) {
-                var ordersList = homeState.response?.data;
-                return Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(
-                                0, 10), // changes position of shadow
-                          ),
-                        ],
+            body: sharedPrefs.getToken() == ''
+                ? const Center(
+                    child: Text(
+                      'برجاء تسجيل الدخول اولا',
+                      style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.bold,
                       ),
-                      height: 40,
-                      child: Stack(
+                    ),
+                  )
+                : BlocBuilder<OrdersStatusCubit, OrdersStatusState>(
+                    builder: (context, homeState) {
+                    if (homeState is OrdersStatusLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    } else if (homeState is OrdersStatusLoaded) {
+                      var ordersList = homeState.response?.data;
+                      return Column(
                         children: [
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            child: SizedBox(
-                              width: size.width,
-                              height: size.height * 0.04,
-                              child: NotificationListener<ScrollNotification>(
-                                onNotification: (scrollNotification) {
-                                  if (scrollNotification
-                                      is ScrollEndNotification) {
-                                    setState(() {
-                                      isScrolling = false;
-                                    });
-                                  } else if (scrollNotification
-                                      is ScrollUpdateNotification) {
-                                    setState(() {
-                                      isScrolling = true;
-                                    });
-                                  }
-                                  return true;
-                                },
-                                child: ListView.builder(
-                                    controller: _controller,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: ordersList?.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: index == 0
-                                              ? MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.05
-                                              : MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.02,
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              current = index;
-                                              index <= 4
-                                                  ? _animateToIndex(0)
-                                                  : null;
-                                            });
-                                            if (ordersList?[index].id == 0) {
-                                              context
-                                                  .read<OrdersFiltersCubit>()
-                                                  .getOrdersFilters(id: "");
-                                            } else {
-                                              context
-                                                  .read<OrdersFiltersCubit>()
-                                                  .getOrdersFilters(
-                                                      id: ordersList![index]
-                                                          .id
-                                                          .toString());
-                                            }
-                                          },
-                                          child: Text(
-                                            ordersList?[index].name??"",
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            height: 50,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: ordersList?.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        current = index;
+                                      });
+                                      context
+                                          .read<OrdersFiltersCubit>()
+                                          .getOrdersFilters(
+                                              id: ordersList?[index].id == 0
+                                                  ? ""
+                                                  : '${ordersList![index].id}');
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 14),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            ordersList?[index].name ?? "",
                                             style: Constants.subtitleRegularFont
                                                 .copyWith(
                                               fontWeight: current == index
                                                   ? FontWeight.bold
                                                   : FontWeight.normal,
                                               fontSize:
-                                                  current == index ? 14 : 12,
+                                                  current == index ? 15 : 14,
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    }),
-                              ),
-                            ),
+                                          if (current == index)
+                                            Container(
+                                              width: ordersList![index]
+                                                      .name!
+                                                      .length
+                                                      .toDouble() *
+                                                  8,
+                                              margin: const EdgeInsets.only(top: 6),
+                                              height: 2,
+                                              color: Colors.black,
+                                            )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }),
                           ),
-                          AnimatedPositioned(
-                            curve: Curves.fastLinearToSlowEaseIn,
-                            bottom: 10,
-                            left: changePositionedOfLine(),
-                            duration: const Duration(milliseconds: 500),
-                            child: AnimatedContainer(
-                              margin: const EdgeInsets.symmetric(horizontal: 5),
-                              width: changeContainerWidth(),
-                              alignment: Alignment.center,
-                              height: 2,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              duration: const Duration(milliseconds: 1000),
-                              curve: Curves.fastLinearToSlowEaseIn,
-                            ),
-                          )
+                          buildOrdersFilterBlocBuilder()
                         ],
-                      ),
-                    ),
-                    buildOrdersFilterBlocBuilder()
-                  ],
-                );
-              } else if (homeState is OrdersStatusEmpty) {
-                return const Expanded(
-                    child: Padding(
-                  padding: EdgeInsets.only(bottom: 150),
-                  child: Center(
-                      child: Text(
-                    'لا يوجد ناصحين بهذا القسم',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                      fontFamily: Constants.mainFont,
-                    ),
-                  )),
-                ));
-              }
-              return const SizedBox.shrink();
-            })));
+                      );
+                    } else if (homeState is OrdersStatusEmpty) {
+                      return const Expanded(
+                          child: Padding(
+                        padding: EdgeInsets.only(bottom: 150),
+                        child: Center(
+                            child: Text(
+                          'لا يوجد ناصحين بهذا القسم',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            fontFamily: Constants.mainFont,
+                          ),
+                        )),
+                      ));
+                    }
+                    return const SizedBox.shrink();
+                  })));
   }
 
   BlocBuilder<OrdersFiltersCubit, OrdersFiltersState>
@@ -270,7 +191,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
         var filtersList = ordersFilters.response?.data;
 
         return Flexible(
-
           child: ListView.builder(
               shrinkWrap: true,
               physics: const AlwaysScrollableScrollPhysics(),
@@ -281,13 +201,16 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   onTap: filtersList![index].label!.id == 1
                       ? () {
                           MyApplication.navigateTo(
-                              context, CompleteAdviseScreen(adviceId: filtersList[index].id!));
+                              context,
+                              CompleteAdviseScreen(
+                                  adviceId: filtersList[index].id!));
                         }
                       : () {
                           MyApplication.navigateTo(
                               context,
                               ChatScreen(
-                                description: filtersList[index].description??'لا يوجد وصف لهذا الناصح',
+                                description: filtersList[index].description ??
+                                    'لا يوجد وصف لهذا الناصح',
                                 statusClickable:
                                     filtersList[index].label!.id == 3,
                                 labelToShow:
@@ -298,7 +221,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 adviserProfileData: filtersList[index].adviser,
                               ));
                         },
-                  child: OrderCard(orderFilterData: filtersList[index],description:ordersFilters.response?.data?[index].description??'لا يوجد وصف لهذا الناصح' ),
+                  child: OrderCard(
+                      orderFilterData: filtersList[index],
+                      description:
+                          ordersFilters.response?.data?[index].description ??
+                              'لا يوجد وصف لهذا الناصح'),
                 );
               }),
         );

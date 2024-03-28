@@ -37,7 +37,7 @@ class SeparatorWidget extends StatelessWidget {
 
 Widget buildSaveButton({required String label, void Function()? onPressed}) =>
     Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
       child: FloatingActionButton.extended(
         backgroundColor: Constants.primaryAppColor,
         onPressed: onPressed ?? () {},

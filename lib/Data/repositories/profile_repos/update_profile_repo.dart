@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:nasooh/app/keys.dart';
+
 import '../../../app/utils/my_application.dart';
 import '../../../app/utils/shared_preference_class.dart';
-import 'package:http/http.dart' as http;
-
 import '../../models/profile_models/update_profile_model.dart';
 
 class UpdateProfile {

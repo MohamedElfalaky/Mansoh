@@ -55,18 +55,7 @@ class UserInfoCard extends StatelessWidget {
             color: Colors.black54,
             width: 60,
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 50, right: 22),
-          //   child: CircleAvatar(
-          //     radius: 8,
-          //     backgroundColor: Colors.black87,
-          //     child: SvgPicture.asset(
-          //       "assets/images/SVGs/pen.svg",
-          //       color: Colors.white,
-          //       width: 8,
-          //     ),
-          //   ),
-          // )
+
         ],
       ),
       title: Text(
@@ -77,26 +66,24 @@ class UserInfoCard extends StatelessWidget {
         "(مستخدم)",
         style: Constants.subtitleFont1,
       ),
-      trailing: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: InkWell(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const UserProfileEdit(),
-                ),
-              );
-            },
-            child: CircleAvatar(
-              radius: 16,
-              backgroundColor: Constants.primaryAppColor,
-              child: SvgPicture.asset(
-                "assets/images/SVGs/pen.svg",
-                color: Colors.white,
-                width: 12,
-              ),
+      trailing: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const UserProfileEdit(),
             ),
-          )),
+          );
+        },
+        child: CircleAvatar(
+          radius: 20,
+          backgroundColor: Constants.primaryAppColor,
+          child: SvgPicture.asset(
+            "assets/images/SVGs/pen.svg",
+            color: Colors.white,
+            width: 19,
+          ),
+        ),
+      ),
     );
   }
 }

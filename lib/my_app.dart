@@ -6,10 +6,11 @@ import 'package:nasooh/Presentation/screens/Home/home.dart';
 import 'package:nasooh/app/Style/theme.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
+
 import 'Presentation/screens/welcome_screen/welcome.dart';
 import 'app/keys.dart';
-import 'app/utils/bloc_providers.dart';
 import 'app/utils/Language/get_language.dart';
+import 'app/utils/bloc_providers.dart';
 import 'app/utils/shared_preference_class.dart';
 
 class MyApp extends StatelessWidget {

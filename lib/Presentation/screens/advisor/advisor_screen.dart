@@ -7,6 +7,7 @@ import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
 import 'package:readmore/readmore.dart';
+
 import '../../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_state.dart';
 import '../ConfirmAdviseScreen/confirm_advise_screen.dart';
@@ -44,25 +45,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                 appBar: customAppBar(
                     txt: "الصفحة الشخصية",
                     context: context,
-                    endIcon: true,
-                    actions: [
-                      const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.share_outlined,
-                                size: 22,
-                                color: Colors.black,
-                              ),
-                              SizedBox(width: 25)
-                            ],
-                          ),
-                        ],
-                      )
-                    ]),
+                  ),
                 backgroundColor: Constants.whiteAppColor,
                 body: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -124,7 +107,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
+                            horizontal: 10,
                           ),
                           margin:
                           const EdgeInsets.symmetric(horizontal: 4),
@@ -138,7 +121,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                 style: const TextStyle(
                                     fontFamily: Constants.mainFont,
                                     color: Constants.whiteAppColor,
-                                    fontSize: 10),
+                                    fontSize: 11),
                               )),
                         ),
                         itemCount: allData.category?.length ?? 0,
@@ -340,7 +323,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                 ),
                 bottomNavigationBar: Container(
                     margin:
-                        const EdgeInsets.only(bottom:25, left: 16, right: 16),
+                        const EdgeInsets.only(bottom:40, left: 20, right: 20),
                     height: 50,
                     child: CustomElevatedButton(
                       onPressedHandler: () {

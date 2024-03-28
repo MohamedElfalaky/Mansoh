@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
+
 import '../../../../app/utils/my_application.dart';
 import '../../../Data/cubit/authentication/delete_account_cubit/delete_account_cubit.dart';
 import '../../../Data/cubit/authentication/delete_account_cubit/delete_account_state.dart';

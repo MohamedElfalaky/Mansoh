@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../repositories/authentication/get_by_token_repo.dart';
 import 'get_by_token_state.dart';
 
