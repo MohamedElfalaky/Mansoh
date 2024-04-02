@@ -46,108 +46,103 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        MyApplication.dismissKeyboard(context);
-      },
-      child: Stack(
-        children: [
-          Center(
-            child: Image.asset(
-              onBoardingPNGbk,
+    return Stack(
+      children: [
+        Center(
+          child: Image.asset(
+            onBoardingPNGbk,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Scaffold(
+          backgroundColor: const Color.fromARGB(0, 168, 46, 46),
+          resizeToAvoidBottomInset: false,
+          body: Form(
+            key: _formKey,
+            child: Container(
               height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Scaffold(
-            backgroundColor: const Color.fromARGB(0, 168, 46, 46),
-            resizeToAvoidBottomInset: false,
-            body: Form(
-              key: _formKey,
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.only(
-                  top: 16,
-                  right: 16,
-                  left: 16,
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-                child: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    child: BlocBuilder<LoginCubit, LoginState>(
-                      builder: (context, state) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SlideTransition(
-                            position: Tween<Offset>(
-                                    begin: const Offset(0, -3),
-                                    end: const Offset(0, 0.1))
-                                .animate(_animationController),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 24, top: 44),
-                              child: Center(
-                                child: SvgPicture.asset(
-                                  "assets/images/SVGs/soNew.svg",
-                                  width: 148,
-                                  height: 148,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: height(context) * 0.04),
-                          Center(
-                              child: SizedBox(
-                                  height: 150, child: Image.asset(welcomePNG))),
-                          SizedBox(height: height(context) * 0.06),
-                          SizedBox(
-                              width: double.infinity,
-                              child: Text("تبغى نصيحة ممتازة من شخص فاهم",
-                                  textAlign: TextAlign.center,
-                                  style: Constants.subtitleFontBold
-                                      .copyWith(fontSize: 18))),
-                          SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                  " بمجاله بسعر أنت تحدده ويرد عليك بسرعة؟",
-                                  textAlign: TextAlign.center,
-                                  style: Constants.subtitleFontBold
-                                      .copyWith(fontSize: 18))),
-                          SizedBox(height: height(context) * 0.015),
-                          SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                  "تطبيق نصوح يساعدك في الحصول على إجابة وافية لكل سؤال",
-                                  textAlign: TextAlign.center,
-                                  style: Constants.subtitleFont.copyWith(
-                                      fontSize: 15,
-                                      color: Colors.grey.shade600))),
-                          SizedBox(height: height(context) * 0.12),
-                          FadeTransition(
-                            opacity: _fadeController,
-                            child: SizedBox(
-                              width: double.infinity,
-                              height: 48,
-                              child: CustomElevatedButton(
-                                isBold: true,
-                                txt: "ابدأ الان",
-                                onPressedHandler: () {
-                                  MyApplication.navigateToReplace(
-                                      context, const CheckMobScreen());
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
+              padding: EdgeInsets.only(
+                top: 16,
+                right: 16,
+                left: 16,
+                bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
+              child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  child: BlocBuilder<LoginCubit, LoginState>(
+                    builder: (context, state) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SlideTransition(
+                          position: Tween<Offset>(
+                                  begin: const Offset(0, -3),
+                                  end: const Offset(0, 0.1))
+                              .animate(_animationController),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 24, top: 44),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                "assets/images/SVGs/soNew.svg",
+                                width: 148,
+                                height: 148,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: height(context) * 0.04),
+                        Center(
+                            child: SizedBox(
+                                height: 150, child: Image.asset(welcomePNG))),
+                        SizedBox(height: height(context) * 0.06),
+                        SizedBox(
+                            width: double.infinity,
+                            child: Text("تبغى نصيحة ممتازة من شخص فاهم",
+                                textAlign: TextAlign.center,
+                                style: Constants.subtitleFontBold
+                                    .copyWith(fontSize: 18))),
+                        SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                                " بمجاله بسعر أنت تحدده ويرد عليك بسرعة؟",
+                                textAlign: TextAlign.center,
+                                style: Constants.subtitleFontBold
+                                    .copyWith(fontSize: 18))),
+                        SizedBox(height: height(context) * 0.015),
+                        SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                                "تطبيق نصوح يساعدك في الحصول على إجابة وافية لكل سؤال",
+                                textAlign: TextAlign.center,
+                                style: Constants.subtitleFont.copyWith(
+                                    fontSize: 15,
+                                    color: Colors.grey.shade600))),
+                        SizedBox(height: height(context) * 0.12),
+                        FadeTransition(
+                          opacity: _fadeController,
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 48,
+                            child: CustomElevatedButton(
+                              isBold: true,
+                              txt: "ابدأ الان",
+                              onPressedHandler: () {
+                                MyApplication.navigateToReplace(
+                                    context, const CheckMobScreen());
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

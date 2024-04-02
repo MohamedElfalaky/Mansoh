@@ -27,254 +27,250 @@ class _RateScreenState extends State<RateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          MyApplication.dismissKeyboard(context);
-        },
-        child: Scaffold(
-            floatingActionButton: BlocBuilder<ReviewCubit, ReviewState>(
-                builder: (context, state) => Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    height: 50,
-                    child: state is ReviewLoading
-                        ? const Center(
-                            child: CircularProgressIndicator.adaptive())
-                        : CustomElevatedButton(
-                            txt: "ارسال التقييم",
-                            isBold: true,
-                            onPressedHandler: () {
-                              if (kDebugMode) {
-                                print(speedRate);
-                                print(widget.adviceId);
-                                print(groupAdviserValue);
-                                print(groupApplicationValue);
-                                print(flexibleRate.toString());
-                                print(opinionController.text);
-                                print(qualityRate.toString());
-                              }
+    return Scaffold(
+        floatingActionButton: BlocBuilder<ReviewCubit, ReviewState>(
+            builder: (context, state) => Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                height: 50,
+                child: state is ReviewLoading
+                    ? const Center(
+                        child: CircularProgressIndicator.adaptive())
+                    : CustomElevatedButton(
+                        txt: "ارسال التقييم",
+                        isBold: true,
+                        onPressedHandler: () {
+                          if (kDebugMode) {
+                            print(speedRate);
+                            print(widget.adviceId);
+                            print(groupAdviserValue);
+                            print(groupApplicationValue);
+                            print(flexibleRate.toString());
+                            print(opinionController.text);
+                            print(qualityRate.toString());
+                          }
 
-                              context.read<ReviewCubit>().reviewMethod(
-                                    adviceId: widget.adviceId,
-                                    speed: speedRate.toString(),
-                                    context: context,
-                                    adviser: groupAdviserValue,
-                                    app: groupApplicationValue,
-                                    flexibility: flexibleRate.toString(),
-                                    other: opinionController.text,
-                                    quality: qualityRate.toString(),
-                                  );
-                              // }
-                            },
-                          ))),
-            // ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-            resizeToAvoidBottomInset: false,
-            backgroundColor: Constants.whiteAppColor,
-            appBar: customAppBar(
-              context: context,
-              txt: "تقييم الناصح",
-            ),
-            body: Container(
-                color: Constants.whiteAppColor,
-                height: MediaQuery.of(context).size.height,
-                margin: EdgeInsets.only(
-                    left: 16,
-                    right: 16,
-                    bottom: MediaQuery.of(context).viewInsets.bottom,
-                    top: 15),
-                child: SingleChildScrollView(
-                    child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _itemContain(
-                              Column(
+                          context.read<ReviewCubit>().reviewMethod(
+                                adviceId: widget.adviceId,
+                                speed: speedRate.toString(),
+                                context: context,
+                                adviser: groupAdviserValue,
+                                app: groupApplicationValue,
+                                flexibility: flexibleRate.toString(),
+                                other: opinionController.text,
+                                quality: qualityRate.toString(),
+                              );
+                          // }
+                        },
+                      ))),
+        // ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.centerFloat,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Constants.whiteAppColor,
+        appBar: customAppBar(
+          context: context,
+          txt: "تقييم الناصح",
+        ),
+        body: Container(
+            color: Constants.whiteAppColor,
+            height: MediaQuery.of(context).size.height,
+            margin: EdgeInsets.only(
+                left: 16,
+                right: 16,
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+                top: 15),
+            child: SingleChildScrollView(
+                child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _itemContain(
+                          Column(
+                            children: [
+                              Row(
                                 children: [
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(topRated),
-                                      const SizedBox(
-                                        width: 7,
-                                      ),
-                                      const Text(
-                                        "تقييم الناصح",
-                                        style: Constants.headerNavigationFont,
-                                      ),
-                                    ],
+                                  SvgPicture.asset(topRated),
+                                  const SizedBox(
+                                    width: 7,
                                   ),
-
-                                  _itemRate(
-                                    txt: "سرعة التجاوب".tr,
-                                    rateVal: speedRate,
-                                    onRatingUpdate: (rating) {
-                                      setState(() {
-                                        speedRate = rating;
-                                      });
-                                    },
+                                  const Text(
+                                    "تقييم الناصح",
+                                    style: Constants.headerNavigationFont,
                                   ),
-                                  _itemRate(
-                                    txt: "جودة النصيحة".tr,
-                                    rateVal: qualityRate,
-                                    onRatingUpdate: (rating) {
-                                      setState(() {
-                                        qualityRate = rating;
-                                      });
-                                    },
-                                  ),
-                                  _itemRate(
-                                    txt: "مرونة وتعامل الناصح".tr,
-                                    rateVal: flexibleRate,
-                                    onRatingUpdate: (rating) {
-                                      setState(() {
-                                        flexibleRate = rating;
-                                      });
-                                    },
-                                  ),
-
-                                  // _itemRate(
-                                  //     txt: "سرعة التجاوب".tr,
-                                  //     rateVal: speedRate),
-                                  // _itemRate(
-                                  //     txt: "جودة النصيحة".tr,
-                                  //     rateVal: qualityRate),
-                                  // _itemRate(
-                                  //     txt: "مرونة وتعامل الناصح".tr,
-                                  //     rateVal: flexibleRate),
                                 ],
                               ),
-                            ),
-                            _itemContain(
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+
+                              _itemRate(
+                                txt: "سرعة التجاوب".tr,
+                                rateVal: speedRate,
+                                onRatingUpdate: (rating) {
+                                  setState(() {
+                                    speedRate = rating;
+                                  });
+                                },
+                              ),
+                              _itemRate(
+                                txt: "جودة النصيحة".tr,
+                                rateVal: qualityRate,
+                                onRatingUpdate: (rating) {
+                                  setState(() {
+                                    qualityRate = rating;
+                                  });
+                                },
+                              ),
+                              _itemRate(
+                                txt: "مرونة وتعامل الناصح".tr,
+                                rateVal: flexibleRate,
+                                onRatingUpdate: (rating) {
+                                  setState(() {
+                                    flexibleRate = rating;
+                                  });
+                                },
+                              ),
+
+                              // _itemRate(
+                              //     txt: "سرعة التجاوب".tr,
+                              //     rateVal: speedRate),
+                              // _itemRate(
+                              //     txt: "جودة النصيحة".tr,
+                              //     rateVal: qualityRate),
+                              // _itemRate(
+                              //     txt: "مرونة وتعامل الناصح".tr,
+                              //     rateVal: flexibleRate),
+                            ],
+                          ),
+                        ),
+                        _itemContain(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "هل ستتعامل مع هذا الناصح مرة أخرى؟",
+                                style: Constants.secondaryTitleRegularFont,
+                              ),
+                              Row(
                                 children: [
-                                  const Text(
-                                    "هل ستتعامل مع هذا الناصح مرة أخرى؟",
-                                    style: Constants.secondaryTitleRegularFont,
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        activeColor:
+                                            Constants.primaryAppColor,
+                                        value: 1,
+                                        onChanged: (val) {
+                                          groupAdviserValue = 1;
+                                          setState(() {});
+                                        },
+                                        groupValue: groupAdviserValue,
+                                      ),
+                                      const Text("نعم",
+                                          style: Constants
+                                              .secondaryTitleRegularFont),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 35,
                                   ),
                                   Row(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            activeColor:
-                                                Constants.primaryAppColor,
-                                            value: 1,
-                                            onChanged: (val) {
-                                              groupAdviserValue = 1;
-                                              setState(() {});
-                                            },
-                                            groupValue: groupAdviserValue,
-                                          ),
-                                          const Text("نعم",
-                                              style: Constants
-                                                  .secondaryTitleRegularFont),
-                                        ],
+                                      Radio(
+                                        activeColor:
+                                            Constants.primaryAppColor,
+                                        value: 0,
+                                        onChanged: (val) {
+                                          groupAdviserValue = 0;
+                                          setState(() {});
+                                        },
+                                        groupValue: groupAdviserValue,
                                       ),
-                                      const SizedBox(
-                                        width: 35,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            activeColor:
-                                                Constants.primaryAppColor,
-                                            value: 0,
-                                            onChanged: (val) {
-                                              groupAdviserValue = 0;
-                                              setState(() {});
-                                            },
-                                            groupValue: groupAdviserValue,
-                                          ),
-                                          const Text("لا",
-                                              style: Constants
-                                                  .secondaryTitleRegularFont),
-                                        ],
-                                      )
+                                      const Text("لا",
+                                          style: Constants
+                                              .secondaryTitleRegularFont),
                                     ],
                                   )
                                 ],
+                              )
+                            ],
+                          ),
+                        ),
+                        _itemContain(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "هل ستتعامل مع تطبيق نصوح مرة أخرى؟",
+                                style: Constants.secondaryTitleRegularFont,
                               ),
-                            ),
-                            _itemContain(
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
                                 children: [
-                                  const Text(
-                                    "هل ستتعامل مع تطبيق نصوح مرة أخرى؟",
-                                    style: Constants.secondaryTitleRegularFont,
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        activeColor:
+                                            Constants.primaryAppColor,
+                                        value: 1,
+                                        onChanged: (val) {
+                                          groupApplicationValue = 1;
+                                          setState(() {});
+                                          // print(groupApplicationValue);
+                                        },
+                                        groupValue: groupApplicationValue,
+                                      ),
+                                      const Text("نعم",
+                                          style: Constants
+                                              .secondaryTitleRegularFont),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 35,
                                   ),
                                   Row(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            activeColor:
-                                                Constants.primaryAppColor,
-                                            value: 1,
-                                            onChanged: (val) {
-                                              groupApplicationValue = 1;
-                                              setState(() {});
-                                              // print(groupApplicationValue);
-                                            },
-                                            groupValue: groupApplicationValue,
-                                          ),
-                                          const Text("نعم",
-                                              style: Constants
-                                                  .secondaryTitleRegularFont),
-                                        ],
+                                      Radio(
+                                        activeColor:
+                                            Constants.primaryAppColor,
+                                        value: 0,
+                                        onChanged: (val) {
+                                          groupApplicationValue = 0;
+                                          setState(() {});
+                                          // print(groupApplicationValue);
+                                        },
+                                        groupValue: groupApplicationValue,
                                       ),
-                                      const SizedBox(
-                                        width: 35,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Radio(
-                                            activeColor:
-                                                Constants.primaryAppColor,
-                                            value: 0,
-                                            onChanged: (val) {
-                                              groupApplicationValue = 0;
-                                              setState(() {});
-                                              // print(groupApplicationValue);
-                                            },
-                                            groupValue: groupApplicationValue,
-                                          ),
-                                          const Text("لا",
-                                              style: Constants
-                                                  .secondaryTitleRegularFont),
-                                        ],
-                                      )
+                                      const Text("لا",
+                                          style: Constants
+                                              .secondaryTitleRegularFont),
                                     ],
                                   )
                                 ],
-                              ),
+                              )
+                            ],
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20.0),
+                          child: Text("أخبر الآخرين عن رأيك (اختياري)",
+                              style: Constants.secondaryTitleRegularFont),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: TextFormField(
+                            controller: opinionController,
+                            // maxLength: 700,
+                            maxLines: 5,
+                            decoration: Constants.setTextInputDecoration(
+                              isParagraphTextField: true,
+                              fillColor: const Color(0XFFF5F4F5),
+                              hintText: "اكتب ما تريد ....".tr,
+                              // isSuffix: false
                             ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20.0),
-                              child: Text("أخبر الآخرين عن رأيك (اختياري)",
-                                  style: Constants.secondaryTitleRegularFont),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: TextFormField(
-                                controller: opinionController,
-                                // maxLength: 700,
-                                maxLines: 5,
-                                decoration: Constants.setTextInputDecoration(
-                                  isParagraphTextField: true,
-                                  fillColor: const Color(0XFFF5F4F5),
-                                  hintText: "اكتب ما تريد ....".tr,
-                                  // isSuffix: false
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 80,
-                            ),
-                          ],
-                        ))))));
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 80,
+                        ),
+                      ],
+                    )))));
   }
 
   Widget _itemRate(

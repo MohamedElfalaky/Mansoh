@@ -41,186 +41,182 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          MyApplication.dismissKeyboard(context);
-        },
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Directionality(
-            textDirection: TextDirection.rtl,
-            child: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: Column(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Directionality(
+        textDirection: TextDirection.rtl,
+        child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 50,
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: GoBack(),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
-                        child: GoBack(),
-                      ),
-                      Text("enter_pin".tr,
-                          textAlign: TextAlign.right,
-                          style: Constants.headerNavigationFont),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Form(
-                    key: _formKey,
-                    child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      padding: EdgeInsets.only(
-                        top: 16,
-                        right: 16,
-                        left: 16,
-                        bottom: MediaQuery.of(context).viewInsets.bottom,
-                      ),
-                      child: BlocBuilder<CheckCodeCubit, CheckCodeState>(
-                          builder: (context, state) => Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: height(context) * 0.035,
-                                  ),
-                                  // Lottie.asset("assets/images/Jsons/4.json", height: 160),
-                                  Text(
-                                    "pin_from_phone".tr,
-                                    style: const TextStyle(
-                                        fontFamily: Constants.mainFont,
-                                        fontSize: 24),
-                                  ),
-                                  Text(
-                                    "pin_sent".tr,
-                                    style: Constants.subtitleFont1,
-                                  ),
-                                  Text(
-                                    phoneNumber,
-                                    style: Constants.secondaryTitleRegularFont,
-                                  ),
-                                  Directionality(
-                                    textDirection: TextDirection.ltr,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: MyApplication.hightClc(
-                                              context, 30),
-                                          bottom: MyApplication.hightClc(
-                                              context, 32)),
-                                      child: Pinput(
-                                        errorTextStyle: Constants.subtitleFont
-                                            .copyWith(color: Colors.red),
-                                        pinputAutovalidateMode:
-                                            PinputAutovalidateMode.onSubmit,
-                                        showCursor: true,
-                                        controller: _pinController,
-                                        focusNode: myFocusNode,
-                                        defaultPinTheme:
-                                            Constants.defaultPinTheme,
-                                        focusedPinTheme:
-                                            Constants.focusedPinTheme,
-                                        errorPinTheme: Constants.errorPinTheme,
-                                        autofocus: true,
-                                        // errorBuilder: (errorText, pin) {},
-                                        validator: (value) {
-                                          if (value!.isEmpty ||
-                                              value.length != 4 ||
-                                              !RegExp(r'^[0-9]+$')
-                                                  .hasMatch(value)) {
-                                            return "يرجى ادخال رمز تحقق صحيح";
-                                          }
-                                          return null;
-                                        },
-                                        onCompleted: (pin) {
-                                          // print(pin);
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: height(context) * 0.03,
-                                  ),
-                                  // Column(
-                                  //          children: [
-                                  state is CheckCodeLoading
-                                      ? const CustomLoadingButton()
-                                      : SizedBox(
-                                          width: double.infinity,
-                                          height: 48,
-                                          child: CustomElevatedButton(
-                                            isBold: true,
-                                            txt: "login".tr,
-                                            onPressedHandler: () {
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                context
-                                                    .read<CheckCodeCubit>()
-                                                    .checkCodeMethod(
-                                                      context: context,
-                                                      code: _pinController.text,
-                                                      mobile: sendPhone,
-                                                    );
-                                              }
-                                            },
-                                          )),
-
-
-                                  SizedBox(
-                                    height: height(context) * 0.06
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "will_be_resent".tr,
-                                        style: Constants.subtitleRegularFont,
-                                      ),
-                                      CountdownTimer(
-                                        controller: timerController,
-                                        widgetBuilder: (_, time) {
-                                          if (time == null) {
-                                            return Text(
-                                              '00:00',
-                                              style: Constants
-                                                  .subtitleRegularFont
-                                                  .copyWith(
-                                                      color: Constants
-                                                          .primaryAppColor),
-                                            );
-                                          }
-                                          return Text(
-                                            '${time.min ?? "00"}:${time.sec}',
-                                            style: Constants.subtitleRegularFont
-                                                .copyWith(
-                                                    color: Constants
-                                                        .primaryAppColor),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        top: height(context) * 0.12),
-                                    child: Text("didnt_receive".tr,
-                                        style: Constants.subtitleFont1),
-                                  ),
-                                  Text(
-                                    "resend_code".tr,
-                                    style: Constants.mainTitleFont,
-                                  ),
-                                ],
-                              )),
-                    ),
-                  ),
+                  Text("enter_pin".tr,
+                      textAlign: TextAlign.right,
+                      style: Constants.headerNavigationFont),
                 ],
               ),
-            ),
+              const SizedBox(
+                height: 16,
+              ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(
+                    top: 16,
+                    right: 16,
+                    left: 16,
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: BlocBuilder<CheckCodeCubit, CheckCodeState>(
+                      builder: (context, state) => Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: height(context) * 0.035,
+                              ),
+                              // Lottie.asset("assets/images/Jsons/4.json", height: 160),
+                              Text(
+                                "pin_from_phone".tr,
+                                style: const TextStyle(
+                                    fontFamily: Constants.mainFont,
+                                    fontSize: 24),
+                              ),
+                              Text(
+                                "pin_sent".tr,
+                                style: Constants.subtitleFont1,
+                              ),
+                              Text(
+                                phoneNumber,
+                                style: Constants.secondaryTitleRegularFont,
+                              ),
+                              Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      top: MyApplication.hightClc(
+                                          context, 30),
+                                      bottom: MyApplication.hightClc(
+                                          context, 32)),
+                                  child: Pinput(
+                                    errorTextStyle: Constants.subtitleFont
+                                        .copyWith(color: Colors.red),
+                                    pinputAutovalidateMode:
+                                        PinputAutovalidateMode.onSubmit,
+                                    showCursor: true,
+                                    controller: _pinController,
+                                    focusNode: myFocusNode,
+                                    defaultPinTheme:
+                                        Constants.defaultPinTheme,
+                                    focusedPinTheme:
+                                        Constants.focusedPinTheme,
+                                    errorPinTheme: Constants.errorPinTheme,
+                                    autofocus: true,
+                                    // errorBuilder: (errorText, pin) {},
+                                    validator: (value) {
+                                      if (value!.isEmpty ||
+                                          value.length != 4 ||
+                                          !RegExp(r'^[0-9]+$')
+                                              .hasMatch(value)) {
+                                        return "يرجى ادخال رمز تحقق صحيح";
+                                      }
+                                      return null;
+                                    },
+                                    onCompleted: (pin) {
+                                      // print(pin);
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: height(context) * 0.03,
+                              ),
+                              // Column(
+                              //          children: [
+                              state is CheckCodeLoading
+                                  ? const CustomLoadingButton()
+                                  : SizedBox(
+                                      width: double.infinity,
+                                      height: 48,
+                                      child: CustomElevatedButton(
+                                        isBold: true,
+                                        txt: "login".tr,
+                                        onPressedHandler: () {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            context
+                                                .read<CheckCodeCubit>()
+                                                .checkCodeMethod(
+                                                  context: context,
+                                                  code: _pinController.text,
+                                                  mobile: sendPhone,
+                                                );
+                                          }
+                                        },
+                                      )),
+
+
+                              SizedBox(
+                                height: height(context) * 0.06
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "will_be_resent".tr,
+                                    style: Constants.subtitleRegularFont,
+                                  ),
+                                  CountdownTimer(
+                                    controller: timerController,
+                                    widgetBuilder: (_, time) {
+                                      if (time == null) {
+                                        return Text(
+                                          '00:00',
+                                          style: Constants
+                                              .subtitleRegularFont
+                                              .copyWith(
+                                                  color: Constants
+                                                      .primaryAppColor),
+                                        );
+                                      }
+                                      return Text(
+                                        '${time.min ?? "00"}:${time.sec}',
+                                        style: Constants.subtitleRegularFont
+                                            .copyWith(
+                                                color: Constants
+                                                    .primaryAppColor),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: height(context) * 0.12),
+                                child: Text("didnt_receive".tr,
+                                    style: Constants.subtitleFont1),
+                              ),
+                              Text(
+                                "resend_code".tr,
+                                style: Constants.mainTitleFont,
+                              ),
+                            ],
+                          )),
+                ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

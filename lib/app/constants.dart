@@ -97,6 +97,7 @@ class Constants {
       bool? isParagraphTextField}) {
     return isParagraphTextField == true
         ? InputDecoration(
+      counterText: '',
             errorStyle: const TextStyle(fontFamily: Constants.mainFont),
             labelStyle:   const TextStyle(fontFamily: Constants.mainFont),
             helperStyle: const TextStyle(fontFamily: Constants.mainFont),
@@ -121,6 +122,7 @@ class Constants {
               color:hintColor?? const Color(0xFF5C5E6B),
             ))
         : InputDecoration(
+      counterText: '',
             fillColor: fillColor,
             filled: isFilled,
             enabledBorder: outlineInputBorder(),

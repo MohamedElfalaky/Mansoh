@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../app/constants.dart';
-import '../../../../../app/utils/my_application.dart';
 import '../../../../Data/cubit/notification_cubit/notification_cubit.dart';
 import '../../../../Data/cubit/notification_cubit/notification_state.dart';
 import '../../../widgets/shared.dart';
@@ -23,54 +22,49 @@ class _UserNotificationsState extends State<UserNotifications> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        MyApplication.dismissKeyboard(context);
-      },
-      child: Scaffold(
-          appBar: const PreferredSize(
-              preferredSize: Size(double.infinity, 118),
-              child: Padding(
-                padding:
-                    EdgeInsets.only(right: 16, left: 16, top: 70, bottom: 16),
-                child: Back(header: "notifications"),
-              )),
-          body: BlocBuilder<NotificationCubit, NotificationState>(
-              builder: (context, state) {
-            if (state is NotificationLoading) {
-              return const Center(child: CircularProgressIndicator.adaptive());
-            } else if (state is NotificationLoaded) {
-              return ListView.builder(
-                padding: const EdgeInsets.only(right: 16, left: 16, bottom: 16),
-                shrinkWrap: true,
-                itemBuilder: (context, index) => OneNotificationItem(
-                  date: state.response?[index].date ?? "",
-                  description: state.response?[index].description,
-                  id: state.response?[index].id.toString() ?? "",
-                ),
-                itemCount: state.response?.length ?? 0,
-              );
-            } else if (state is NotificationError) {
-              return const Center(child: Text('Error occurred'));
-            } else {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(),
-              );
-            }
-          })),
-    );
+    return Scaffold(
+        appBar: const PreferredSize(
+            preferredSize: Size(double.infinity, 118),
+            child: Padding(
+              padding:
+                  EdgeInsets.only(right: 16, left: 16, top: 70, bottom: 16),
+              child: Back(header: "notifications"),
+            )),
+        body: BlocBuilder<NotificationCubit, NotificationState>(
+            builder: (context, state) {
+          if (state is NotificationLoading) {
+            return const Center(child: CircularProgressIndicator.adaptive());
+          } else if (state is NotificationLoaded) {
+            return ListView.builder(
+              padding: const EdgeInsets.only(right: 16, left: 16, bottom: 16),
+              shrinkWrap: true,
+              itemBuilder: (context, index) => OneNotificationItem(
+                date: state.response?[index].date ?? "",
+                description: state.response?[index].description,
+                id: state.response?[index].id.toString() ?? "",
+              ),
+              itemCount: state.response?.length ?? 0,
+            );
+          } else if (state is NotificationError) {
+            return const Center(child: Text('Error occurred'));
+          } else {
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
+          }
+        }));
   }
 }
 
 class OneNotificationItem extends StatelessWidget {
-  OneNotificationItem(
+  const OneNotificationItem(
       {super.key,
       required this.id,
       required this.description,
       required this.date});
 
   final String id;
-  String? description;
+final  String? description;
   final String date;
 
   @override

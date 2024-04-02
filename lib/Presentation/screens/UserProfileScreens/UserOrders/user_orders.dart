@@ -57,108 +57,104 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          MyApplication.dismissKeyboard(context);
-        },
-        child: Scaffold(
-            backgroundColor: Colors.white,
-            drawerScrimColor: Colors.white,
-            appBar: customABarNoIcon(
-                txt: "my_orders".tr, back: false, context: context),
-            body: sharedPrefs.getToken() == ''
-                ? const Center(
-                    child: Text(
-                      'برجاء تسجيل الدخول اولا',
-                      style: TextStyle(
-                        fontFamily: 'Cairo',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                : BlocBuilder<OrdersStatusCubit, OrdersStatusState>(
-                    builder: (context, homeState) {
-                    if (homeState is OrdersStatusLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      );
-                    } else if (homeState is OrdersStatusLoaded) {
-                      var ordersList = homeState.response?.data;
-                      return Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            height: 50,
-                            child: ListView.builder(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: ordersList?.length,
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        current = index;
-                                      });
-                                      context
-                                          .read<OrdersFiltersCubit>()
-                                          .getOrdersFilters(
-                                              id: ordersList?[index].id == 0
-                                                  ? ""
-                                                  : '${ordersList![index].id}');
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 14),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            ordersList?[index].name ?? "",
-                                            style: Constants.subtitleRegularFont
-                                                .copyWith(
-                                              fontWeight: current == index
-                                                  ? FontWeight.bold
-                                                  : FontWeight.normal,
-                                              fontSize:
-                                                  current == index ? 15 : 14,
-                                            ),
-                                          ),
-                                          if (current == index)
-                                            Container(
-                                              width: ordersList![index]
-                                                      .name!
-                                                      .length
-                                                      .toDouble() *
-                                                  8,
-                                              margin: const EdgeInsets.only(top: 6),
-                                              height: 2,
-                                              color: Colors.black,
-                                            )
-                                        ],
+    return Scaffold(
+        backgroundColor: Colors.white,
+        drawerScrimColor: Colors.white,
+        appBar: customABarNoIcon(
+            txt: "my_orders".tr, back: false, context: context),
+        body: sharedPrefs.getToken() == ''
+            ? const Center(
+                child: Text(
+                  'برجاء تسجيل الدخول اولا',
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            : BlocBuilder<OrdersStatusCubit, OrdersStatusState>(
+                builder: (context, homeState) {
+                if (homeState is OrdersStatusLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  );
+                } else if (homeState is OrdersStatusLoaded) {
+                  var ordersList = homeState.response?.data;
+                  return Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        height: 50,
+                        child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: ordersList?.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    current = index;
+                                  });
+                                  context
+                                      .read<OrdersFiltersCubit>()
+                                      .getOrdersFilters(
+                                          id: ordersList?[index].id == 0
+                                              ? ""
+                                              : '${ordersList![index].id}');
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 14),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        ordersList?[index].name ?? "",
+                                        style: Constants.subtitleRegularFont
+                                            .copyWith(
+                                          fontWeight: current == index
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                          fontSize:
+                                              current == index ? 15 : 14,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }),
-                          ),
-                          buildOrdersFilterBlocBuilder()
-                        ],
-                      );
-                    } else if (homeState is OrdersStatusEmpty) {
-                      return const Expanded(
-                          child: Padding(
-                        padding: EdgeInsets.only(bottom: 150),
-                        child: Center(
-                            child: Text(
-                          'لا يوجد ناصحين بهذا القسم',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            fontFamily: Constants.mainFont,
-                          ),
-                        )),
-                      ));
-                    }
-                    return const SizedBox.shrink();
-                  })));
+                                      if (current == index)
+                                        Container(
+                                          width: ordersList![index]
+                                                  .name!
+                                                  .length
+                                                  .toDouble() *
+                                              8,
+                                          margin: const EdgeInsets.only(top: 6),
+                                          height: 2,
+                                          color: Colors.black,
+                                        )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                      buildOrdersFilterBlocBuilder()
+                    ],
+                  );
+                } else if (homeState is OrdersStatusEmpty) {
+                  return const Expanded(
+                      child: Padding(
+                    padding: EdgeInsets.only(bottom: 150),
+                    child: Center(
+                        child: Text(
+                      'لا يوجد ناصحين بهذا القسم',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                        fontFamily: Constants.mainFont,
+                      ),
+                    )),
+                  ));
+                }
+                return const SizedBox.shrink();
+              }));
   }
 
   BlocBuilder<OrdersFiltersCubit, OrdersFiltersState>

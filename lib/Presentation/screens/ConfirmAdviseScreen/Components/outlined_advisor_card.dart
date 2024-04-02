@@ -299,8 +299,10 @@ class OutlinedAdvisorCard extends StatelessWidget {
                     top: 10, bottom: 6, right: 10, left: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Row(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CircleAvatar(
@@ -322,69 +324,76 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                 style: Constants.secondaryTitleFont,
                               ),
                             ),
-
-                            SizedBox(
-                              height: 26,
-                              width: width(context) * 0.59,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, int index) {
-                                  if (index < 3) {
-                                    return Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 2, horizontal: 4),
-                                      margin: const EdgeInsets.only(left: 8),
-                                      height: 24,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(2),
-                                        color: const Color(0XFFEEEEEE),
-                                      ),
-                                      child: Text(
-                                        adviserProfileData
-                                                .category?[index].name ??
-                                            "",
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          fontFamily: Constants.mainFont,
-                                          color: Color(0XFF444444),
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    );
-                                  } else if (index == 3) {
-                                    int remainingCount =
-                                        (adviserProfileData.category?.length ??
-                                                0) -
-                                            3;
-                                    return Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 2, horizontal: 4),
-                                      margin: const EdgeInsets.only(left: 8),
-                                      height: 24,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(2),
-                                        color: const Color(0XFFEEEEEE),
-                                      ),
-                                      child: Text(
-                                        '+ $remainingCount',
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          fontFamily: Constants.mainFont,
-                                          color: Color(0XFF444444),
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    );
-                                  }
-                                    return const SizedBox.shrink();
-
-                                },
-                                itemCount: adviserProfileData.category
-                                    ?.length, // Ensure only 4 items are displayed
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5,bottom: 10),
+                              child: Text(description
+                                  ?? "لا يوجد وصف لهذا الناصح",
+                                style: Constants.subtitleFont,
                               ),
-                            )
+                            ),
                           ],
                         ),
+
+                        // SizedBox(
+                        //   height: 26,
+                        //   width: width(context) * 0.59,
+                        //   child: ListView.builder(
+                        //     scrollDirection: Axis.horizontal,
+                        //     itemBuilder: (context, int index) {
+                        //       if (index < 3) {
+                        //         return Container(
+                        //           padding: const EdgeInsets.symmetric(
+                        //               vertical: 2, horizontal: 4),
+                        //           margin: const EdgeInsets.only(left: 8),
+                        //           height: 24,
+                        //           decoration: BoxDecoration(
+                        //             borderRadius: BorderRadius.circular(2),
+                        //             color: const Color(0XFFEEEEEE),
+                        //           ),
+                        //           child: Text(
+                        //             adviserProfileData
+                        //                     .category?[index].name ??
+                        //                 "",
+                        //             style: const TextStyle(
+                        //               fontSize: 10,
+                        //               fontFamily: Constants.mainFont,
+                        //               color: Color(0XFF444444),
+                        //             ),
+                        //             textAlign: TextAlign.center,
+                        //           ),
+                        //         );
+                        //       } else if (index == 3) {
+                        //         int remainingCount =
+                        //             (adviserProfileData.category?.length ??
+                        //                     0) -
+                        //                 3;
+                        //         return Container(
+                        //           padding: const EdgeInsets.symmetric(
+                        //               vertical: 2, horizontal: 4),
+                        //           margin: const EdgeInsets.only(left: 8),
+                        //           height: 24,
+                        //           decoration: BoxDecoration(
+                        //             borderRadius: BorderRadius.circular(2),
+                        //             color: const Color(0XFFEEEEEE),
+                        //           ),
+                        //           child: Text(
+                        //             '+ $remainingCount',
+                        //             style: const TextStyle(
+                        //               fontSize: 10,
+                        //               fontFamily: Constants.mainFont,
+                        //               color: Color(0XFF444444),
+                        //             ),
+                        //             textAlign: TextAlign.center,
+                        //           ),
+                        //         );
+                        //       }
+                        //         return const SizedBox.shrink();
+                        //
+                        //     },
+                        //     itemCount: adviserProfileData.category
+                        //         ?.length, // Ensure only 4 items are displayed
+                        //   ),
+                        // )
                         const Spacer(),
                         Text(
                           adviserProfileData.rate ?? "",
@@ -395,13 +404,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
 
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 50),
-                      child: Text(description
-                          ?? "لا يوجد وصف لهذا الناصح",
-                        style: Constants.subtitleFont,
-                      ),
-                    ),
+
                   ],
 
                 ),

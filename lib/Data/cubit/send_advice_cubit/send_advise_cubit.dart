@@ -10,6 +10,9 @@ class SendAdviseCubit extends Cubit<SendAdviseState> {
   SendAdviseCubit() : super(SendAdviseInitial());
   SendAdvise sendAdvise = SendAdvise();
 
+  void emitInitial(){
+    emit(SendAdviseInitial());
+  }
   sendAdviseMethod({
     String? name,
     String? description,

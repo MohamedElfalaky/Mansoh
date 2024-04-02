@@ -3,16 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../constants.dart';
 
 class MyApplication {
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
   static double hightClc(BuildContext context, int myHeight) {
     return MediaQuery.of(context).size.height * myHeight / 812;
   }
-
-
 
   static void navigateToReplace(BuildContext context, Widget page) async {
     Navigator.of(context)
@@ -30,17 +25,15 @@ class MyApplication {
         (Route<dynamic> route) => false);
   }
 
-  static showToastView({
-    required String message,
-  }) {
-    return Fluttertoast.showToast(
+  static showToastView({required String message, Color? color}) {
+    Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.SNACKBAR,
-        timeInSecForIosWeb: 3,
-        backgroundColor: Constants.primaryAppColor,
-        textColor: Constants.whiteAppColor,
-        fontSize: 16.0);
+        gravity: ToastGravity.TOP,
+        timeInSecForIosWeb: 1,
+        backgroundColor: color ?? Colors.lightBlue,
+        textColor: Colors.white,
+        fontSize: 16);
   }
 
   static void dismissKeyboard(BuildContext context) {

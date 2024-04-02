@@ -84,8 +84,8 @@ Map<String, String> getArabicLanguage() {
     "Advice Details": "تفاصيل الطلب",
     "Enter Advice details": "يجب ادخال تفاصيل الطلب",
     "Advice details should be more than 5 character":
-        "Advice details should be more than 5 character",
-    "Upload Advice Files": "رفع الملفات الخاصة بالطلب",
+        "يجب ألا تقل النصيحة عن خمس أحرف",
+    "Upload Advice Files": "رفع الملف الخاص بالطلب",
     "advice reject":
         "يحق للناصح رفض الطلب في حال كان المبلغ لا يتناسب مع قيمة النصيحة حسب تقديره",
     "Explain":

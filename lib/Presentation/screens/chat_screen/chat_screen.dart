@@ -67,7 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void initState() {
     super.initState();
     sendChatCubit = context.read<SendChatCubit>();
-    sendChatCubit.emit(SendChatInitial());
+    sendChatCubit.emitInitial();
 
     context
         .read<ShowAdviceCubit>()
@@ -168,104 +168,98 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return GestureDetector(
-      onTap: () {
-        MyApplication.dismissKeyboard(context);
+    return BlocListener<SendChatCubit, SendChatState>(
+      listener: (context, state) {
+        if (state is SendChatLoaded) {
+          context
+              .read<ShowAdviceCubit>()
+              .getAdviceFunction(adviceId: widget.adviceId);
+          _textController.clear();
+        }
       },
-      child:
-          BlocListener<SendChatCubit, SendChatState>(
-            listener: (context, state) {
-              if (state is SendChatLoaded) {
-                context
-                    .read<ShowAdviceCubit>()
-                    .getAdviceFunction(adviceId: widget.adviceId);
-                _textController.clear();
-              }
-            },
-            child: Scaffold(
-                appBar: customChatAppBar(context),
-                body: Column(
+      child: Scaffold(
+          appBar: customChatAppBar(context),
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 18),
+                child: OutlinedAdvisorCard(
+                  description: widget.description,
+                  labelToShow: widget.labelToShow,
+                  adviceId: widget.adviceId,
+                  adviserProfileData: widget.adviserProfileData!,
+                  isClickable: widget.statusClickable,
+                ),
+              ),
+              showMessagesWidget(),
+              widget.openedStatus == true
+                  ? Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12, horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16, top: 18),
-                      child: OutlinedAdvisorCard(
-                        description: widget.description,
-                        labelToShow: widget.labelToShow,
-                        adviceId: widget.adviceId,
-                        adviserProfileData: widget.adviserProfileData!,
-                        isClickable: widget.statusClickable,
-                      ),
-                    ),
-                    showMessagesWidget(),
-                    widget.openedStatus == true
-                        ? Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    if (voiceSelected != null)
+                      Row(
                         children: [
-                          if (voiceSelected != null)
-                            Row(
-                              children: [
-                                VoiceShaped(
-                                    showClose: voiceFile != null,
-                                    onPressed: () => setState(() {
-                                      voiceFile = null;
-                                      voiceSelected = null;
-                                    })),
-                              ],
-                            ),
-                          if (pickedFile != null)
-                            Row(
-                              children: [
-                                CustomRoundedWidget(
-                                  color: Colors.grey.shade300,
-                                  child: Row(
-                                    children: [
-                                      // const Spacer(),
-                                      Flexible(
-                                        // width: 200,
-                                        child: Text(
-                                          pickedFile!.path.replaceRange(
-                                              0,
-                                              (pickedFile!.path.length) ~/
-                                                  2.4,
-                                              ""),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      SvgPicture.asset(
-                                        filePdf,
-                                        width: 20,
-                                        height: 20,
-                                      ),
-                                      CloseIcon(
-                                        onPressed: () {
-                                          setState(() {
-                                            pickedFile = null;
-                                          });
-                                        },
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          // : closeFileIconWidget(),
-                          const SizedBox(width: 20),
-                          writeMessage()
+                          VoiceShaped(
+                              showClose: voiceFile != null,
+                              onPressed: () => setState(() {
+                                voiceFile = null;
+                                voiceSelected = null;
+                              })),
                         ],
                       ),
-                    )
-                        : const CanNotSpeak()
+                    if (pickedFile != null)
+                      Row(
+                        children: [
+                          CustomRoundedWidget(
+                            color: Colors.grey.shade300,
+                            child: Row(
+                              children: [
+                                // const Spacer(),
+                                Flexible(
+                                  // width: 200,
+                                  child: Text(
+                                    pickedFile!.path.replaceRange(
+                                        0,
+                                        (pickedFile!.path.length) ~/
+                                            2.4,
+                                        ""),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                SvgPicture.asset(
+                                  filePdf,
+                                  width: 20,
+                                  height: 20,
+                                ),
+                                CloseIcon(
+                                  onPressed: () {
+                                    setState(() {
+                                      pickedFile = null;
+                                    });
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    // : closeFileIconWidget(),
+                    const SizedBox(width: 20),
+                    writeMessage()
                   ],
-                )),
+                ),
+              )
+                  : const CanNotSpeak()
+            ],
+          )),
 
 
-      ),
-    );
+          );
   }
 
   closeFileIconWidget() {
@@ -642,7 +636,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           });
                         }
                           else if (_textController.text.isNotEmpty && _textController.text!='') {
-                          print(_textController.text);
                           String text = _textController.text;
                           _textController.clear();
                           setState(() {});

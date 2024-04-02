@@ -4,6 +4,7 @@ import '../../Presentation/widgets/shared.dart';
 import '../constants.dart';
 
 ThemeData themeData = ThemeData(
+
   splashColor: Colors.transparent,
     shadowColor: Colors.transparent,
     highlightColor: Colors.transparent,
@@ -19,6 +20,7 @@ ThemeData themeData = ThemeData(
     dividerColor: Colors.transparent,
     fontFamily: 'Cairo',
 
+
     dividerTheme: const DividerThemeData(color: Colors.transparent),
     primaryColor: const Color(0xFF0085A5),
     appBarTheme: const AppBarTheme().copyWith(
@@ -33,6 +35,7 @@ ThemeData themeData = ThemeData(
         .copyWith(background: Colors.white).copyWith(background: Colors.white));
 
 OutlineInputBorder buildOutlineInputBorder() {
+
   return OutlineInputBorder(
     borderSide: const BorderSide(color: Constants.primaryAppColor, width: 1.8),
     borderRadius: BorderRadius.circular(10),

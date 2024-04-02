@@ -13,7 +13,7 @@ Map<String, String> getEnglishLanguage() {
     "resident_city": "resident_city",
     "alsaudia": "saudia arabia",
     "notifications": "Notifications",
-    "promo_codes":"Promo codes",
+    "promo_codes": "Promo codes",
     "confirm_account_pin":
         "please enter your phone number to confirm your account and receive a ",
     "verification_code": "verification code",
@@ -84,7 +84,7 @@ Map<String, String> getEnglishLanguage() {
     "Enter Advice details": "Enter Advice details",
     "Advice details should be more than 5 character":
         "Advice details should be more than 5 character",
-    "Upload Advice Files": "Upload Advice Files",
+    "Upload Advice Files": "Upload Advice File",
     "advice reject":
         "Adviser has the right to reject the order if the price doesn't match device value from his point of view",
     "Explain":
