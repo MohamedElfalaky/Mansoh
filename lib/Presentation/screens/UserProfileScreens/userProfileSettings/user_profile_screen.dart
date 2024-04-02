@@ -1,7 +1,7 @@
-
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import 'package:nasooh/app/utils/exports.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../Data/cubit/authentication/log_out_cubit/log_out_cubit.dart';
 import '../../../../Data/cubit/authentication/log_out_cubit/log_out_state.dart';
@@ -56,33 +56,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   thickness: 1,
                 ),
                 const SizedBox(height: 6),
-                if(sharedPrefs.getToken()!='')
-                BlocBuilder<LogOutCubit, LogOutState>(
-                  builder: (context, state) => state is LogOutLoading
-                      ? const Center(
-                          child: CircularProgressIndicator.adaptive())
-                      : ListTile(
-                          minLeadingWidth: 0,
-                          onTap: () {
-                            context.read<LogOutCubit>().logOut(
-                                  context: context,
-                                );
-                          },
-                          title: Text(
-                            "signout".tr,
-                            style: Constants.mainTitleFont,
+                if (sharedPrefs.getToken() != '')
+                  BlocBuilder<LogOutCubit, LogOutState>(
+                    builder: (context, state) => state is LogOutLoading
+                        ? const Center(
+                            child: CircularProgressIndicator.adaptive())
+                        : ListTile(
+                            minLeadingWidth: 0,
+                            onTap: () {
+                              context.read<LogOutCubit>().logOut(
+                                    context: context,
+                                  );
+                            },
+                            title: Text(
+                              "signout".tr,
+                              style: Constants.mainTitleFont,
+                            ),
+                            leading: SvgPicture.asset(
+                              logoutIcon,
+                            ),
                           ),
-                          leading: SvgPicture.asset(
-                            logoutIcon,
-                          ),
-                        ),
-                )
+                  )
                 else
                   ListTile(
                     minLeadingWidth: 0,
                     onTap: () {
-                     MyApplication.navigateToReplaceAllPrevious(context, const CheckMobScreen()
-                      );
+                      MyApplication.navigateToReplaceAllPrevious(
+                          context, const CheckMobScreen());
                     },
                     title: Text(
                       "login".tr,
@@ -128,20 +128,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    LimitedBox(
-                      maxHeight: 35,
-                      maxWidth: 35,
-                      child: Image.asset(
-                        appStoreIcon,
-                        fit: BoxFit.fill,
-                        width: 35,
-                        height: 35,
-                      ),
+                    Image.asset(
+                      appStoreIcon,
+                      fit: BoxFit.fill,
+                      width: 35,
+                      height: 35,
                     ),
                     const SizedBox(width: 20),
-                    LimitedBox(
-                      maxHeight: 35,
-                      maxWidth: 35,
+                    GestureDetector(
+                      onTap: () {
+                        launchUrl(Uri.parse(
+                            'https://play.google.com/store/apps/details?id=com.lundev.nasooh.NASE7'));
+                      },
                       child: Image.asset(
                         googlePlayIcon,
                         fit: BoxFit.fill,

@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/send_chat_cubit/send_chat_cubit.dart';
 import 'package:nasooh/Data/cubit/send_chat_cubit/send_chat_state.dart';
 import 'package:nasooh/Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
@@ -80,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _textController.clear();
     _focusNode.dispose();
     player.dispose();
-   }
+  }
 
   final record = AudioRecorder();
   File? voiceFile;
@@ -167,7 +169,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocListener<SendChatCubit, SendChatState>(
       listener: (context, state) {
         if (state is SendChatLoaded) {
@@ -194,72 +195,69 @@ class _ChatScreenState extends State<ChatScreen> {
               showMessagesWidget(),
               widget.openedStatus == true
                   ? Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 12, horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (voiceSelected != null)
-                      Row(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          VoiceShaped(
-                              showClose: voiceFile != null,
-                              onPressed: () => setState(() {
-                                voiceFile = null;
-                                voiceSelected = null;
-                              })),
-                        ],
-                      ),
-                    if (pickedFile != null)
-                      Row(
-                        children: [
-                          CustomRoundedWidget(
-                            color: Colors.grey.shade300,
-                            child: Row(
+                          if (voiceSelected != null)
+                            Row(
                               children: [
-                                // const Spacer(),
-                                Flexible(
-                                  // width: 200,
-                                  child: Text(
-                                    pickedFile!.path.replaceRange(
-                                        0,
-                                        (pickedFile!.path.length) ~/
-                                            2.4,
-                                        ""),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                SvgPicture.asset(
-                                  filePdf,
-                                  width: 20,
-                                  height: 20,
-                                ),
-                                CloseIcon(
-                                  onPressed: () {
-                                    setState(() {
-                                      pickedFile = null;
-                                    });
-                                  },
-                                )
+                                VoiceShaped(
+                                    showClose: voiceFile != null,
+                                    onPressed: () => setState(() {
+                                          voiceFile = null;
+                                          voiceSelected = null;
+                                        })),
                               ],
                             ),
-                          ),
+                          if (pickedFile != null)
+                            Row(
+                              children: [
+                                CustomRoundedWidget(
+                                  color: Colors.grey.shade300,
+                                  child: Row(
+                                    children: [
+                                      // const Spacer(),
+                                      Flexible(
+                                        // width: 200,
+                                        child: Text(
+                                          pickedFile!.path.replaceRange(
+                                              0,
+                                              (pickedFile!.path.length) ~/ 2.4,
+                                              ""),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      SvgPicture.asset(
+                                        filePdf,
+                                        width: 20,
+                                        height: 20,
+                                      ),
+                                      CloseIcon(
+                                        onPressed: () {
+                                          setState(() {
+                                            pickedFile = null;
+                                          });
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          // : closeFileIconWidget(),
+                          const SizedBox(width: 20),
+                          writeMessage()
                         ],
                       ),
-                    // : closeFileIconWidget(),
-                    const SizedBox(width: 20),
-                    writeMessage()
-                  ],
-                ),
-              )
+                    )
                   : const CanNotSpeak()
             ],
           )),
-
-
-          );
+    );
   }
 
   closeFileIconWidget() {
@@ -399,97 +397,130 @@ class _ChatScreenState extends State<ChatScreen> {
                                         ""));
                                   }
                                 },
-                                child: Container(
-                                  width: mp3End || m4aEnd ? 280 : 200,
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  padding: const EdgeInsets.all(7),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                          color: Colors.grey.shade400)),
-                                  child: mp3End || m4aEnd
-                                      ? GestureDetector(
-                                          onTap: () {
-                                            player.stop();
-                                            playAudioFromUrl(
-                                                state
-                                                        .response
-                                                        ?.data
-                                                        ?.chat?[index]
-                                                        .document?[0]
-                                                        .file ??
-                                                    "",
-                                                index);
-                                          },
-                                          child: playingIndex == index
-                                              ? Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                      SizedBox(
-                                                        height: 40,
-                                                        width: 210,
-                                                        child: Image.asset(
-                                                            'assets/images/gifnasoh.gif',
-                                                            fit: BoxFit.fill),
-                                                      ),
-                                                      const SizedBox(width: 10),
-                                                      const CircleAvatar(
-                                                          backgroundColor:
-                                                              Constants
-                                                                  .primaryAppColor,
-                                                          child: Icon(
-                                                              Icons.pause,
-                                                              color: Colors
-                                                                  .white)),
-                                                    ])
-                                              : Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 40,
-                                                      width: 210,
-                                                      child: SvgPicture.asset(
-                                                          voiceShape,
-                                                          fit: BoxFit.fill),
-                                                    ),
-                                                    const SizedBox(width: 10),
-                                                    CircleAvatar(
-                                                        backgroundColor:
-                                                            Constants
-                                                                .primaryAppColor,
-                                                        child: SvgPicture.asset(
-                                                            voice)),
-                                                  ],
-                                                ),
-                                        )
-                                      : Row(
-                                          children: [
-                                            photoEnd
-                                                ? SvgPicture.asset(photo)
-                                                : pdfEnd
-                                                    ? SvgPicture.asset(pdf)
-                                                    : mp4End
-                                                        ? SvgPicture.asset(
-                                                            mp4Icon)
-                                                        : const SizedBox(),
-                                            const SizedBox(width: 7),
-                                            Expanded(
-                                              child: Text(
+                                child: FittedBox(
+                                  child: Container(
+                                    // width: mp3End || m4aEnd ? 280 : 250,
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    padding: const EdgeInsets.all(7),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            color: Colors.grey.shade400)),
+                                    child: mp3End || m4aEnd
+                                        ? GestureDetector(
+                                            onTap: () {
+                                              player.stop();
+                                              playAudioFromUrl(
                                                   state
                                                           .response
                                                           ?.data
                                                           ?.chat?[index]
                                                           .document?[0]
-                                                          .file
-                                                          ?.split("/")
-                                                          .last ??
+                                                          .file ??
                                                       "",
-                                                  style:
-                                                      Constants.subtitleFont),
-                                            ),
-                                          ],
-                                        ),
+                                                  index);
+                                            },
+                                            child: playingIndex == index
+                                                ? Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                        SizedBox(
+                                                          height: 40,
+                                                          width: 210,
+                                                          child: Image.asset(
+                                                              'assets/images/gifnasoh.gif',
+                                                              fit: BoxFit.fill),
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 10),
+                                                        const CircleAvatar(
+                                                            backgroundColor:
+                                                                Constants
+                                                                    .primaryAppColor,
+                                                            child: Icon(
+                                                                Icons.pause,
+                                                                color: Colors
+                                                                    .white)),
+                                                      ])
+                                                : Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 40,
+                                                        width: 210,
+                                                        child: SvgPicture.asset(
+                                                            voiceShape,
+                                                            fit: BoxFit.fill),
+                                                      ),
+                                                      const SizedBox(width: 10),
+                                                      CircleAvatar(
+                                                          backgroundColor:
+                                                              Constants
+                                                                  .primaryAppColor,
+                                                          child:
+                                                              SvgPicture.asset(
+                                                                  voice)),
+                                                    ],
+                                                  ),
+                                          )
+                                        : Row(
+                                            children: [
+                                              photoEnd
+                                                  ? ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:
+                                                            '${state.response?.data?.chat?[index].document?[0].file}',
+                                                        width: 50,
+                                                        height: 50,
+                                                        placeholder:
+                                                            (context, string) {
+                                                          return SvgPicture
+                                                              .asset(photo);
+                                                        },
+                                                        errorWidget: (context,
+                                                            string, object) {
+                                                          return Image.asset(
+                                                              Constants
+                                                                  .imagePlaceHolder);
+                                                        },
+                                                      ),
+                                                    )
+                                                  : pdfEnd
+                                                      ? SvgPicture.asset(pdf)
+                                                      : mp4End
+                                                          ? SvgPicture.asset(
+                                                              mp4Icon)
+                                                          : const SizedBox(),
+                                              const SizedBox(width: 7),
+
+                                              Text(
+                                                'click_to_see_full_image'.tr,
+                                                style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              // Expanded(
+                                              //   child: Text(
+                                              //       state
+                                              //               .response
+                                              //               ?.data
+                                              //               ?.chat?[index]
+                                              //               .document?[0]
+                                              //               .file
+                                              //               ?.split("/")
+                                              //               .last ??
+                                              //           "",
+                                              //       style:
+                                              //           Constants.subtitleFont),
+                                              // ),
+                                            ],
+                                          ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -532,7 +563,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ));
   }
 
-    writeMessage() {
+  writeMessage() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Row(
@@ -621,8 +652,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             fileSelected = null;
                             pickedFile = null;
                           });
-                        }
-                        else if (voiceFile != null) {
+                        } else if (voiceFile != null) {
                           countdownTimer?.cancel();
                           countSec = 0;
                           sendChatCubit.sendChatFunction(
@@ -632,10 +662,10 @@ class _ChatScreenState extends State<ChatScreen> {
                               adviceId: widget.adviceId.toString());
                           setState(() {
                             voiceSelected = null;
-                            voiceFile=null;
+                            voiceFile = null;
                           });
-                        }
-                          else if (_textController.text.isNotEmpty && _textController.text!='') {
+                        } else if (_textController.text.isNotEmpty &&
+                            _textController.text != '') {
                           String text = _textController.text;
                           _textController.clear();
                           setState(() {});

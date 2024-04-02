@@ -69,7 +69,7 @@ Map<String, String> getEnglishLanguage() {
     "Home": "Home",
     "My Orders": "My Orders",
     "My Account": "My Account",
-    "share_app": "Share App",
+    "share_app": "Share",
     "change Language": "Change Language",
     "Notification": "Notification",
     "Delete Account": "Delete Account",
@@ -95,6 +95,7 @@ Map<String, String> getEnglishLanguage() {
     "Ask Advice": "Ask Advice",
     "Confirm Order": "Confirm Order",
     "Complete Order": "Complete Order",
-    "delete tile": "Confirm Delete Account?"
+    "delete tile": "Confirm Delete Account?",
+    "click_to_see_full_image":"Click to see full image",
   };
 }

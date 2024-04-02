@@ -69,7 +69,7 @@ Map<String, String> getArabicLanguage() {
     "My Orders": "طلباتي",
     "promo_codes":"كوبونات الخصم",
     "My Account": "ملفي",
-    "share_app": "مشاركة التطبيق",
+    "share_app": "مشاركة",
     "change Language": "تغيير اللغة ",
     "Notification": "الأشعارات",
     "Delete Account": "حذف الحساب ",
@@ -96,6 +96,8 @@ Map<String, String> getArabicLanguage() {
     "Ask Advice": "طلب نصيحة",
     "Confirm Order": "تأكيد الطلب",
     "Complete Order": "إتمام الطلب",
-    "delete tile": "تأكيد حذف الحساب ؟"
+    "delete tile": "تأكيد حذف الحساب ؟",
+    "click_to_see_full_image":"اضغط لرؤية الصورة كاملة",
+
   };
 }
