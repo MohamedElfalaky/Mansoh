@@ -107,23 +107,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: Constants.setTextInputDecoration(
                         hintColor: const Color(0xff5C5E6B),
                         prefixIcon: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: SvgPicture.asset(searchIcon),
                         ),
                         isSuffix: true,
                         suffixIcon: InkWell(
                           onTap: () {
-                            MyApplication.navigateTo(
-                                context,
-                                FilterScreen(
-                                    searchTxt: searchController.text));
+                            MyApplication.navigateTo(context,
+                                FilterScreen(searchTxt: searchController.text));
                           },
                           child: Container(
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
-                                color: Constants.primaryAppColor
-                                    .withOpacity(0.2),
+                                color:
+                                    Constants.primaryAppColor.withOpacity(0.2),
                                 borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(10),
                                   topLeft: Radius.circular(10),
@@ -162,13 +159,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .map((e) => InkWell(
                                               onTap: () {
                                                 setState(() {
-                                                  selectedCategoryId =
-                                                      e.id!;
+                                                  selectedCategoryId = e.id!;
 
-                                                  for (var element
-                                                      in catList) {
-                                                    element.selected =
-                                                        false;
+                                                  for (var element in catList) {
+                                                    element.selected = false;
                                                   }
                                                   e.selected = true;
                                                   if (e.id == 0) {
@@ -187,17 +181,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 });
                                               },
                                               child: Container(
-                                                  margin:
-                                                      const EdgeInsets.only(
-                                                          left: 16),
+                                                  margin: const EdgeInsets.only(
+                                                      left: 16),
                                                   child: Text(
                                                     e.name ?? '',
-                                                    style: e.selected ==
-                                                            true
+                                                    style: e.selected == true
                                                         ? const TextStyle(
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .bold,
+                                                                FontWeight.bold,
                                                             fontFamily:
                                                                 Constants
                                                                     .mainFont,
@@ -238,17 +229,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     '$selectedSubCategory');
                                                       },
                                                       child: Container(
-                                                        margin:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    4),
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 4),
                                                         padding:
                                                             const EdgeInsets
                                                                 .symmetric(
                                                                 vertical: 4,
-                                                                horizontal:
-                                                                    4),
+                                                                horizontal: 4),
                                                         decoration: BoxDecoration(
                                                             borderRadius:
                                                                 BorderRadius
@@ -270,8 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       8.0),
                                                           child: Text(
                                                             e.name!,
-                                                            style:
-                                                                TextStyle(
+                                                            style: TextStyle(
                                                               fontSize: e.id ==
                                                                       selectedSubCategory
                                                                   ? 14
@@ -331,19 +318,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: ListView.builder(
                           padding: const EdgeInsets.only(top: 10),
                           itemCount:
-                              advisorState.adListResponse?.data?.length ??
-                                  0,
+                              advisorState.adListResponse?.data?.length ?? 0,
                           itemBuilder: (context, index) => InkWell(
                               onTap: () {
                                 MyApplication.navigateTo(
                                     context,
                                     AdvisorScreen(
-                                        id: advisorState.adListResponse!
-                                            .data![index].id!));
+                                        id: advisorState
+                                            .adListResponse!.data![index].id!));
                               },
                               child: AdvisorCard(
-                                adviserData: advisorState
-                                    .adListResponse!.data![index],
+                                adviserData:
+                                    advisorState.adListResponse!.data![index],
                               )),
                         ),
                       );

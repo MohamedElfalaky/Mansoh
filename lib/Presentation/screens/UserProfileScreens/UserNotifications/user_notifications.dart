@@ -71,7 +71,7 @@ final  String? description;
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -79,12 +79,12 @@ final  String? description;
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 20,
-                  backgroundColor: Colors.red[100],
-                  child: const Icon(
+                  // backgroundColor: Colors.red[100],
+                  child: Icon(
                     Icons.notifications_active,
-                    color: Colors.red,
+                    color: Colors.white,
                   ),
                 ),
                 const SizedBox(width: 5),

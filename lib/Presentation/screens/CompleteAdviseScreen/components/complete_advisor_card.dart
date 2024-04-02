@@ -51,9 +51,7 @@ class CompleteAdvisorCard extends StatelessWidget {
                       : Constants.imagePlaceHolder,
                 ),
               ),
-              const SizedBox(
-                width: 8
-              ),
+              const SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -66,67 +64,6 @@ class CompleteAdvisorCard extends StatelessWidget {
                     style: Constants.subtitleFont,
                   ),
                   const SizedBox(height: 8),
-                  SizedBox(
-                    height: 26,
-                    width: width(context) * 0.55,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, int index) {
-                        if (index < 3) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 8),
-                            margin: const EdgeInsets.only(left: 8,),
-                            height: 24,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: const Color(0XFFEEEEEE),
-                            ),
-                            child: Text(
-                              adviser.category?[index].name ?? "",
-                              style: const TextStyle(
-                                fontSize: 10,
-                                fontFamily: Constants.mainFont,
-                                color: Color(0XFF444444),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          );
-                        } else if (index == 3) {
-                          int remainingCount =
-                              (adviser.category?.length ?? 0) - 3;
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                                 horizontal: 8),
-                            margin: const EdgeInsets.only(left: 8),
-                            height: 24,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: const Color(0XFFEEEEEE),
-                            ),
-                            child: Center(
-                              child: Text(
-                                '+ $remainingCount',
-                                style: const TextStyle(
-                                  fontSize: 10,
-                                  fontFamily: Constants.mainFont,
-                                  color: Color(0XFF444444),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          );
-                        } else {
-                          // You can return an empty container for indexes greater than 3
-                          return Container();
-                        }
-                      },
-                      itemCount: min(
-                          4,
-                          adviser.category?.length ??
-                              0), // Ensure only 4 items are displayed
-                    ),
-                  )
 
                 ],
               ),
@@ -137,9 +74,7 @@ class CompleteAdvisorCard extends StatelessWidget {
                     adviser.rate ?? "",
                     style: Constants.secondaryTitleFont,
                   ),
-                  const SizedBox(
-                    width: 4,
-                  ),
+                  const SizedBox(width: 4),
                   SvgPicture.asset(
                     rateIcon,
                     height: 20,
@@ -148,10 +83,70 @@ class CompleteAdvisorCard extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 24),
-
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 26,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, int index) {
+                if (index < 3) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 5, horizontal: 8),
+                    margin: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    height: 24,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: const Color(0XFFEEEEEE),
+                    ),
+                    child: Text(
+                      adviser.category?[index].name ?? "",
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontFamily: Constants.mainFont,
+                        color: Color(0XFF444444),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                } else if (index == 3) {
+                  int remainingCount =
+                      (adviser.category?.length ?? 0) - 3;
+                  return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    margin: const EdgeInsets.only(left: 8),
+                    height: 24,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: const Color(0XFFEEEEEE),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '+ $remainingCount',
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontFamily: Constants.mainFont,
+                          color: Color(0XFF444444),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                } else {
+                  // You can return an empty container for indexes greater than 3
+                  return Container();
+                }
+              },
+              itemCount: min(
+                  4,
+                  adviser.category?.length ??
+                      0), // Ensure only 4 items are displayed
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.only(bottom: 12,top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
