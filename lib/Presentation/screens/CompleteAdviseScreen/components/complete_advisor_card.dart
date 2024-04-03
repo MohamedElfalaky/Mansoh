@@ -6,7 +6,6 @@ import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 
 import '../../../../Data/models/advisor_profile_model/advisor_profile.dart';
-import '../../../../app/Style/sizes.dart';
 
 class CompleteAdvisorCard extends StatelessWidget {
   const CompleteAdvisorCard({

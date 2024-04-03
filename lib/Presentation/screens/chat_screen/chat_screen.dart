@@ -636,7 +636,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         if (fileSelected != null) {
                           var fileLength = await pickedFile?.length();
                           debugPrint('file length is $fileLength');
-                          if (fileLength! >= 5000000 == true) {
+                          if (fileLength! >= 5242880 == true) {
                             MyApplication.showToastView(
                                 message: ' 5 MB لا يمكن ان يتعدي الملف');
                             return;

@@ -107,7 +107,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   //   isClickable: false,
                   // ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8, top: 8),
+                    padding: const EdgeInsets.only(bottom: 5),
                     child: Text(
                       "Advice Title".tr,
                       style: Constants.secondaryTitleRegularFont,
@@ -136,7 +136,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
+                    padding: const EdgeInsets.only(bottom: 5,top: 15),
                     child: Text("How Much can you afford for advice".tr,
                         style: Constants.secondaryTitleRegularFont),
                   ),
@@ -207,18 +207,21 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   InkWell(
                     onTap: () async {
                       FilePickerResult? result =
-                          await FilePicker.platform.pickFiles();
-                      // type:
-                      // FileType.custom;
-                      // allowedExtensions:
-                      // ['pdf', 'jpg', 'png', "doc", "docx", "gif"];
+                          await FilePicker.platform.pickFiles(
+                            allowedExtensions: ['jpg','png','jpeg','doc']
+                          );
+
                       if (result != null) {
+                        if(result.files[0].bytes!.length>5242880)
+                          {
+                            MyApplication.showToastView(message: ' 5 MB لا يمكن ان يتعدي الملف');
+                            return ;
+                          }
                         setState(() {
                           pickedFile = File(result.files.single.path!);
                         });
                         List<int> imageBytes =
                             File(pickedFile!.path).readAsBytesSync();
-                        // print(imageBytes);
                         fileSelected = base64.encode(imageBytes);
                       }
                       return;
@@ -288,8 +291,8 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         : Container(
                             padding: const EdgeInsets.all(5),
                             margin: const EdgeInsets.symmetric(vertical: 20),
-                            height: 50,
-                            width: width(context),
+                            // height: 50,
+
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 boxShadow: [
@@ -305,25 +308,23 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                                 ],
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Flexible(
+                                Expanded(
                                   child: Text(
-                                    pickedFile!.path.replaceRange(0,
-                                        (pickedFile!.path.length) ~/ 2.4, ""),
+                                    pickedFile!.path,
                                     style: const TextStyle(
-                                      fontSize: 12,
+                                      fontSize: 11,
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 10),
+
                                 SvgPicture.asset(
                                   fileImage,
                                   width: 25,
                                   height: 25,
                                 ),
+
                                 if (pickedFile != null)
-                                  if (pickedFile != null)
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 4),
@@ -343,10 +344,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                                     ),
                               ],
                             )),
-                  const SizedBox(
-                    width: 20,
-                    height: 80,
-                  ),
+
                 ],
               ),
             ),
