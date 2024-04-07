@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final advisorProfileModel = advisorProfileModelFromJson(jsonString);
 
 import 'dart:convert';
 

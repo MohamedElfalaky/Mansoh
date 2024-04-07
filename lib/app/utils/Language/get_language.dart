@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/app/utils/shared_preference_class.dart';
+import 'package:nasooh/app/utils/shared_preference.dart';
 
-import '../../Style/sizes.dart';
+// import '../../Style/sizes.dart';
 import '../../constants.dart';
+import '../../style/sizes.dart';
 import 'ar.dart';
 import 'en.dart';
 

@@ -10,7 +10,8 @@ import '../../../Data/cubit/authentication/category_cubit/category_cubit.dart';
 import '../../../Data/cubit/authentication/category_cubit/category_state.dart';
 import '../../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../../Data/models/Auth_models/category_model.dart';
-import '../../../app/Style/icons.dart';
+import '../../../app/style/icons.dart';
+// import '../../../app/Style/icons.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key, this.searchTxt});

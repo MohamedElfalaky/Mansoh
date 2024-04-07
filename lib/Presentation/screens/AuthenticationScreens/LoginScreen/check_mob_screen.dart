@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
-import 'package:nasooh/app/Style/icons.dart';
+// import 'package:nasooh/app/Style/icons.dart';
 
 import '../../../../Data/cubit/authentication/new_mob/mob_cubit.dart';
 import '../../../../Data/cubit/authentication/new_mob/mob_state.dart';
-import '../../../../app/Style/sizes.dart';
+// import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
+import '../../../../app/style/icons.dart';
+import '../../../../app/style/sizes.dart';
 import '../../../../app/utils/my_application.dart';
 import '../../../widgets/phone_text_field.dart';
 

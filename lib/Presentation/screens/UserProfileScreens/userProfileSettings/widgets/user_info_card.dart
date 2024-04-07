@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nasooh/app/utils/shared_preference_class.dart';
+import 'package:nasooh/app/utils/shared_preference.dart';
 
 import '../../../../../app/constants.dart';
 import '../../UserProfileEdit/user_profile_edit.dart';

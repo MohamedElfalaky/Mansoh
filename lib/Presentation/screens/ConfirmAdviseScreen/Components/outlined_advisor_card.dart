@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/Presentation/screens/rate_screen/rate_screen.dart';
-import 'package:nasooh/app/Style/icons.dart';
-import 'package:nasooh/app/Style/sizes.dart';
+// import 'package:nasooh/app/Style/icons.dart';
+// import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
 
 import '../../../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_cubit.dart';
 import '../../../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_state.dart';
 import '../../../../Data/models/advisor_profile_model/advisor_profile.dart';
+import '../../../../app/style/icons.dart';
+import '../../../../app/style/sizes.dart';
 import '../../../../app/utils/my_application.dart';
 import '../../../widgets/my_button.dart';
 import '../../rejections/reject_screen.dart';
@@ -19,15 +21,15 @@ class OutlinedAdvisorCard extends StatelessWidget {
       {super.key,
       required this.adviserProfileData,
       required this.isClickable,
-        this.description,
+      this.description,
       this.labelToShow,
       required this.adviceId});
 
- final AdviserProfileData adviserProfileData ;
+  final AdviserProfileData? adviserProfileData;
   final int adviceId;
   final bool? labelToShow;
   final bool isClickable;
-  final String ?description;
+  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +67,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                               CircleAvatar(
                                 radius: 22,
                                 backgroundImage: NetworkImage(
-                                    adviserProfileData.avatar != '' &&
-                                            adviserProfileData.avatar != null
-                                        ? adviserProfileData.avatar!
-                                        : Constants.imagePlaceHolder),
+                                    '${adviserProfileData?.avatar}'),
                               ),
                               const SizedBox(width: 8),
                               Column(
@@ -77,18 +76,18 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                   SizedBox(
                                     width: width(context) * 0.5,
                                     child: Text(
-                                      adviserProfileData.fullName ?? "",
+                                      '${adviserProfileData?.fullName}',
                                       style: Constants.secondaryTitleFont,
                                     ),
                                   ),
-
                                   const SizedBox(
                                     height: 8,
                                   ),
-
                                   Row(
                                     children: [
-                                      adviserProfileData.category!.isNotEmpty
+                                      adviserProfileData
+                                                  ?.category?.isNotEmpty ==
+                                              true
                                           ? Container(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -104,7 +103,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                                       const Color(0XFFEEEEEE)),
                                               child: Text(
                                                 adviserProfileData
-                                                        .category?[0].name ??
+                                                        ?.category?[0].name ??
                                                     "",
                                                 style: const TextStyle(
                                                     fontSize: 10,
@@ -115,7 +114,9 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                               ),
                                             )
                                           : const SizedBox.shrink(),
-                                      adviserProfileData.category!.isNotEmpty
+                                      adviserProfileData
+                                                  ?.category?.isNotEmpty ==
+                                              true
                                           ? Container(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -130,9 +131,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                                   color:
                                                       const Color(0XFFEEEEEE)),
                                               child: Text(
-                                                adviserProfileData
-                                                        .category?[1].name ??
-                                                    "",
+                                                '${adviserProfileData?.category?[1].name}',
                                                 style: const TextStyle(
                                                     fontSize: 10,
                                                     fontFamily:
@@ -142,7 +141,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                               ),
                                             )
                                           : const SizedBox.shrink(),
-                                      adviserProfileData.category!.length > 1
+                                      adviserProfileData!.category!.length > 1
                                           ? Container(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -158,7 +157,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                                       const Color(0XFFEEEEEE)),
                                               child: Text(
                                                 adviserProfileData
-                                                        .category?[2].name ??
+                                                        ?.category?[2].name ??
                                                     "",
                                                 style: const TextStyle(
                                                     fontSize: 10,
@@ -169,8 +168,10 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                               ),
                                             )
                                           : const SizedBox(),
-                                      ///////// remaining tags
-                                      adviserProfileData.category!.length > 2
+                                      adviserProfileData?.category != null &&
+                                              adviserProfileData!
+                                                      .category!.length >
+                                                  2
                                           ? Container(
                                               padding: const EdgeInsets.all(2),
                                               margin: const EdgeInsets.only(
@@ -183,7 +184,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                                                   color:
                                                       const Color(0XFFD9D9D9)),
                                               child: Text(
-                                                "${adviserProfileData.category!.length - 3} + ",
+                                                "${adviserProfileData!.category!.length - 3} + ",
                                                 style: const TextStyle(
                                                     fontSize: 10,
                                                     fontFamily:
@@ -201,7 +202,7 @@ class OutlinedAdvisorCard extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    adviserProfileData.rate ?? "",
+                                    '${adviserProfileData?.rate}',
                                     style: Constants.secondaryTitleFont,
                                   ),
                                   const SizedBox(width: 2),
@@ -307,11 +308,8 @@ class OutlinedAdvisorCard extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 22,
-                          backgroundImage: NetworkImage(
-                              adviserProfileData.avatar != '' &&
-                                      adviserProfileData.avatar != null
-                                  ? adviserProfileData.avatar!
-                                  : Constants.imagePlaceHolder),
+                          backgroundImage:
+                              NetworkImage('${adviserProfileData?.avatar}'),
                         ),
                         const SizedBox(width: 8),
                         Column(
@@ -320,14 +318,15 @@ class OutlinedAdvisorCard extends StatelessWidget {
                             SizedBox(
                               width: width(context) * 0.5,
                               child: Text(
-                                adviserProfileData.fullName ?? "",
+                                "${adviserProfileData?.fullName}",
                                 style: Constants.secondaryTitleFont,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 5,bottom: 10),
-                              child: Text(description
-                                  ?? "لا يوجد وصف لهذا الناصح",
+                              padding:
+                                  const EdgeInsets.only(top: 5, bottom: 10),
+                              child: Text(
+                                description ?? "لا يوجد وصف لهذا الناصح",
                                 style: Constants.subtitleFont,
                               ),
                             ),
@@ -396,17 +395,14 @@ class OutlinedAdvisorCard extends StatelessWidget {
                         // )
                         const Spacer(),
                         Text(
-                          adviserProfileData.rate ?? "",
+                          '${adviserProfileData?.rate}',
                           style: Constants.secondaryTitleFont,
                         ),
                         const SizedBox(width: 5),
-                        SvgPicture.asset(rateIcon,width: 15,height: 15),
-
+                        SvgPicture.asset(rateIcon, width: 15, height: 15),
                       ],
                     ),
-
                   ],
-
                 ),
               ),
             ),

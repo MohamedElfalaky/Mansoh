@@ -4,8 +4,9 @@ import 'package:get/get.dart' hide Trans;
 import 'package:get/get_utils/get_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../app/Style/icons.dart';
+// import '../../../app/Style/icons.dart';
 import '../../../app/constants.dart';
+import '../../../app/style/icons.dart';
 import '../TermsConditionsScreen/terms_conditions_screen.dart';
 import '../user_settings_screen/user_settings.dart';
 import 'UserWallet/user_wallet.dart';

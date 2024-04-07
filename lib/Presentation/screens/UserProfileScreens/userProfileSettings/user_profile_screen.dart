@@ -5,7 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../Data/cubit/authentication/log_out_cubit/log_out_cubit.dart';
 import '../../../../Data/cubit/authentication/log_out_cubit/log_out_state.dart';
-import '../../../../app/utils/shared_preference_class.dart';
+import '../../../../app/style/icons.dart';
+import '../../../../app/utils/shared_preference.dart';
 import '../../../widgets/shared.dart';
 import '../list_drawer.dart';
 import 'widgets/user_info_card.dart';
@@ -121,18 +122,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Text(
                       "إذا كنت مختص أو خبير وأردت التسجيل كناصح  حمل تطبيق الناصحين",
                       style: Constants.subtitleRegularFontHint.copyWith(
-                        color: Colors.grey[700],
+                        color: Colors.black,
                       )),
                 ),
                 const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      appStoreIcon,
-                      fit: BoxFit.fill,
-                      width: 35,
-                      height: 35,
+                    GestureDetector(
+                      onTap: () {
+                        launchUrl(Uri.parse(
+                            'https://apps.apple.com/eg/app/%D9%86%D8%A7%D8%B5%D8%AD/id6475194728'));
+                      },
+                      child: Image.asset(
+                        appStoreIcon,
+                        fit: BoxFit.fill,
+                        width: 35,
+                        height: 35,
+                      ),
                     ),
                     const SizedBox(width: 20),
                     GestureDetector(

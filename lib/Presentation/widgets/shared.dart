@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../app/Style/icons.dart';
+// import '../../app/Style/icons.dart';
 import '../../app/constants.dart';
+import '../../app/style/icons.dart';
 
 getMaterialColor({required int colorHex}) {
   Map<int, Color> color = {
@@ -121,8 +122,7 @@ customAppBar({
           children: [
             const SizedBox(width: 16),
             Container(
-              // margin: EdgeInsets.symmetric(horizontal: 10),
-              height: 40,
+               height: 40,
               width: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),

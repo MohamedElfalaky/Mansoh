@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/orders_cubit/orders_status_cubit/orders_status_cubit.dart';
 import 'package:nasooh/Data/cubit/orders_cubit/orders_status_cubit/orders_status_state.dart';
 import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
-import 'package:nasooh/app/utils/shared_preference_class.dart';
+import 'package:nasooh/app/utils/shared_preference.dart';
 
 import '../../../../../app/utils/my_application.dart';
 import '../../../../Data/cubit/orders_cubit/orders_filters_cubit/orders_filters_cubit.dart';

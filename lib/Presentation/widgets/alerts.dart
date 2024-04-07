@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nasooh/app/constants.dart';
 
-import '../../app/Style/icons.dart';
+import '../../app/style/icons.dart';
 
 class Alert {
   static Future<void> alert(
@@ -17,7 +17,6 @@ class Alert {
           child: Container(
             width: 341,
             height: 350,
-            // Adjust the height as needed, // Adjust the width as needed
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               border: Border.all(

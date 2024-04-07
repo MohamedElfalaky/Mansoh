@@ -4,18 +4,17 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
-import 'package:nasooh/app/Style/sizes.dart';
 
 import '../../../../Data/cubit/authentication/country_cubit/country_cubit.dart';
 import '../../../../Data/cubit/authentication/register_cubit/register_cubit.dart';
 import '../../../../Data/cubit/authentication/register_cubit/register_state.dart';
-import '../../../../app/Style/icons.dart';
 import '../../../../app/constants.dart';
+import '../../../../app/style/icons.dart';
+import '../../../../app/style/sizes.dart';
 import '../../../../app/utils/validations.dart';
 import '../../../widgets/row_modal_sheet.dart';
 import '../../../widgets/shared.dart';
@@ -40,7 +39,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
   String? base64Image;
 
   Future pickImage(ImageSource source, BuildContext context, setState) async {
-    try {
+
       final myImage = await _picker.pickImage(source: source, imageQuality: 60);
       if (myImage == null) return;
 
@@ -48,14 +47,12 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
         regImage = myImage;
       });
       List<int> imageBytes = File(regImage!.path).readAsBytesSync();
-      // print(imageBytes);
       base64Image = base64.encode(imageBytes);
-      // print("inputImagePhoto!.path  is ${regImage!.path}");
       log("base64Image!  is $base64Image");
-    } on PlatformException {
-      // print("platform exeption : $e");
+
+    if (context.mounted) {
+      Navigator.pop(context);
     }
-    if (mounted) Navigator.pop(context);
   }
 
   @override

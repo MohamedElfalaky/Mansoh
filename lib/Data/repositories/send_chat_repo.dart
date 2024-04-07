@@ -8,7 +8,7 @@ import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 
 import '../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 
 class SendChatRepo {
   Future<bool?> sendChat({

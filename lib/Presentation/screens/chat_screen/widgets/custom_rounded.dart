@@ -1,4 +1,4 @@
-import '../../../app/utils/exports.dart';
+import '../../../../app/utils/exports.dart';
 
 class CustomRoundedWidget extends StatelessWidget {
   const CustomRoundedWidget({super.key, required this.child,this.width,this.color});

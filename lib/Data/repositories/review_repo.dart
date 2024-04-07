@@ -8,7 +8,7 @@ import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 
 import '../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 import '../models/rejection_models/post_reject_model.dart';
 
 class ReviewRepo {
@@ -41,7 +41,6 @@ class ReviewRepo {
       // print(mapData);
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        // print(response.body);
         final userdata = postRejectModelFromJson(responseMap);
         MyApplication.showToastView(message: responseMap["message"]);
         return userdata;

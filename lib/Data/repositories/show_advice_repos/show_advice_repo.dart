@@ -8,7 +8,7 @@ import 'package:nasooh/app/keys.dart';
 
 import '../../../../app/utils/my_application.dart';
 import '../../../app/global.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 import '../../models/advice_screen_models/show_advice_model.dart';
 
 class ShowAdviceRepo {

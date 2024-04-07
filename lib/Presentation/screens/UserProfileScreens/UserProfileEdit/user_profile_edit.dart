@@ -9,7 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nasooh/Data/cubit/profile/profile_cubit/profile_cubit.dart';
-import 'package:nasooh/app/utils/shared_preference_class.dart';
+import 'package:nasooh/app/utils/shared_preference.dart';
 
 import '../../../../Data/cubit/authentication/city_cubit/city_cubit.dart';
 import '../../../../Data/cubit/authentication/city_cubit/city_state.dart';
@@ -19,9 +19,11 @@ import '../../../../Data/cubit/profile/profile_cubit/profile_state.dart';
 import '../../../../Data/cubit/profile/update_profile_cubit/update_profile_cubit.dart';
 import '../../../../Data/cubit/profile/update_profile_cubit/update_profile_state.dart';
 import '../../../../Data/models/countries_and_nationalities_model.dart';
-import '../../../../app/Style/icons.dart';
-import '../../../../app/Style/sizes.dart';
+// import '../../../../app/Style/icons.dart';
+// import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
+import '../../../../app/style/icons.dart';
+import '../../../../app/style/sizes.dart';
 import '../../../widgets/row_modal_sheet.dart';
 import '../../../widgets/shared.dart';
 import '../../AuthenticationScreens/RegisterationPinCodeConfirm/my_drop_list_column.dart';
@@ -66,7 +68,7 @@ class _UserProfileEditState extends State<UserProfileEdit>
     base64NewImage = base64.encode(imageBytes);
     log("base64Image!  is $base64NewImage");
 
-    if (mounted) {
+    if (context.mounted) {
       Navigator.pop(context);
     }
   }

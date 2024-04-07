@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:nasooh/app/utils/shared_preference_class.dart';
+import 'package:nasooh/app/utils/shared_preference.dart';
 
 import '../../../app/keys.dart';
 import '../../cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
@@ -62,8 +62,8 @@ class CustomLocalNotification {
       return;
     }
     channel = const AndroidNotificationChannel(
-      'high_importance_channel', // id
-      'High Importance Notifications', // title
+      'high_importance_channel',
+      'High Importance Notifications',
       description: 'This channel is used for important notifications.',
       importance: Importance.high,
       playSound: true,

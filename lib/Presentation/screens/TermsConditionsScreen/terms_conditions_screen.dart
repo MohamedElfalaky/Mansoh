@@ -6,7 +6,8 @@ import 'package:nasooh/app/constants.dart';
 
 import '../../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
 import '../../../Data/cubit/settings_cubits/privacy_cubit/privacy_state.dart';
-import '../../../app/Style/icons.dart';
+// import '../../../app/Style/icons.dart';
+import '../../../app/style/icons.dart';
 import '../../widgets/shared.dart';
 
 class TermsConditionsScreen extends StatefulWidget {

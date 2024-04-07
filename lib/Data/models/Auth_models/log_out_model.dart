@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final logOutModel = logOutModelFromJson(jsonString);
 
 import 'dart:convert';
 

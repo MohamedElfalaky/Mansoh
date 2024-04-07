@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:nasooh/app/keys.dart';
 
 import '../../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 import '../../models/advice_screen_models/payment_list_model.dart';
 
 class PaymentListRepo {

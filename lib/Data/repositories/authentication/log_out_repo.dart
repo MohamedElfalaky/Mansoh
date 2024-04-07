@@ -8,7 +8,7 @@ import 'package:nasooh/app/keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 import '../../models/Auth_models/log_out_model.dart';
 
 class LogOutRepo {

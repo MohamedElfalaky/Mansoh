@@ -5,7 +5,6 @@ import 'package:nasooh/Data/cubit/home/advisor_state.dart';
 import 'package:nasooh/Data/models/category_parent_model.dart';
 import 'package:nasooh/Presentation/screens/Advisor/advisor_screen.dart';
 import 'package:nasooh/Presentation/screens/Home/Components/advisor_card.dart';
-import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
 
@@ -14,6 +13,7 @@ import '../../../Data/cubit/authentication/category_parent_cubit/category_parent
 import '../../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../../Data/cubit/home/home_slider_cubit.dart';
 import '../../../Data/cubit/home/home_state.dart';
+import '../../../app/style/icons.dart';
 import '../FilterScreen/filter_screen.dart';
 import '../UserProfileScreens/UserNotifications/user_notifications.dart';
 

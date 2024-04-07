@@ -35,8 +35,7 @@ class SendAdviseCubit extends Cubit<SendAdviseState> {
           .then((value) {
         if (value != null) {
           emit(SendAdviseLoaded(value));
-          // MyApplication.navigateToReplaceAllPrevious(
-          //     context!, const CompleteAdviseScreen());
+
         } else {
           emit(SendAdviseError());
         }

@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final notificationModel = notificationModelFromJson(jsonString);
 
 import 'dart:convert';
 

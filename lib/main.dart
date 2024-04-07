@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'app/utils/shared_preference_class.dart';
+import 'app/utils/shared_preference.dart';
 import 'my_app.dart';
 
 void main() async {

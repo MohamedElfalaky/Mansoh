@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final homeSlider = homeSliderFromJson(jsonString);
 
 import 'dart:convert';
 

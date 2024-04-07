@@ -9,7 +9,7 @@ import 'package:nasooh/Data/models/coupons_model.dart';
 
 import '../../../../app/keys.dart';
 import '../../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 import '../../models/wallet_models/wallet_model.dart';
 
 class WalletRepo {

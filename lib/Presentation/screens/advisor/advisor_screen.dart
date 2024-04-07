@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
-import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_state.dart';
+import '../../../app/style/icons.dart';
 import '../ConfirmAdviseScreen/confirm_advise_screen.dart';
 
 class AdvisorScreen extends StatefulWidget {
@@ -130,6 +130,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 16),
                         child: ReadMoreText(
+
                           callback: (v){
                             isReadmore=v;
                             setState(() {
@@ -319,7 +320,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
               ),
               bottomNavigationBar: Container(
                   margin:
-                      const EdgeInsets.only(bottom:40, left: 20, right: 20),
+                      const EdgeInsets.only(bottom:20, left: 20, right: 20),
                   height: 50,
                   child: CustomElevatedButton(
                     onPressedHandler: () {

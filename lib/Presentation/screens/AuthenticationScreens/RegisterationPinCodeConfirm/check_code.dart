@@ -7,8 +7,9 @@ import 'package:pinput/pinput.dart';
 
 import '../../../../Data/cubit/authentication/check_code/check_code_cubit.dart';
 import '../../../../Data/cubit/authentication/check_code/check_code_state.dart';
-import '../../../../app/Style/sizes.dart';
+// import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
+import '../../../../app/style/sizes.dart';
 import '../../../../app/utils/my_application.dart';
 import '../../../widgets/my_button.dart';
 import '../../../widgets/shared.dart';

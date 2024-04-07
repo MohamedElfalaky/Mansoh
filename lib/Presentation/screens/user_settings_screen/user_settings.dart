@@ -7,10 +7,11 @@ import 'package:nasooh/Presentation/widgets/shared.dart';
 import '../../../Data/cubit/authentication/delete_account_cubit/delete_account_cubit.dart';
 import '../../../Data/cubit/authentication/delete_account_cubit/delete_account_state.dart';
 import '../../../Data/cubit/settings_cubits/is_notification_cubit/is_notification_cubit.dart';
-import '../../../app/Style/icons.dart';
+// import '../../../app/Style/icons.dart';
 import '../../../app/constants.dart';
+import '../../../app/style/icons.dart';
 import '../../../app/utils/Language/get_language.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 
 class UserSettings extends StatefulWidget {
   const UserSettings({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../app/Style/sizes.dart';
-import '../../../app/constants.dart';
+import '../../../../app/constants.dart';
+import '../../../../app/style/sizes.dart';
 
 class CanNotSpeak extends StatelessWidget {
   const CanNotSpeak({super.key});

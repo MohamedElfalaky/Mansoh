@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../../app/keys.dart';
 import '../../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 import '../../models/rejection_models/list_rejection_model.dart';
 
 class ListRejectionRepo {

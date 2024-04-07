@@ -8,7 +8,7 @@ import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
 
 import '../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference_class.dart';
+import '../../../app/utils/shared_preference.dart';
 import '../models/advice_screen_models/show_advice_model.dart';
 
 class SendAdvise {
@@ -29,7 +29,6 @@ class SendAdvise {
         if (documentsFile != null) 'document[0][file]': documentsFile,
         if (documentsFile != null) 'document[0][type]': type
       };
-      // print(map);
       http.Response response =
           await http.post(Uri.parse('${Keys.baseUrl}/client/advice/store'),
               headers: {

@@ -80,8 +80,7 @@ class Constants {
     color: fontHintColor,
   );
 
-// TextFieldInputs
-  static setTextInputDecoration(
+   static setTextInputDecoration(
       {Widget? prefixIcon,
       Widget? suffixIcon,
       Color? prefixColor,

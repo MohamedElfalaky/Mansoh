@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
-import '../../../app/utils/exports.dart';
+import '../../../../app/style/icons.dart';
+import '../../../../app/utils/exports.dart';
 
 customChatAppBar(BuildContext context) => PreferredSize(
       preferredSize: const Size.fromHeight(60.0),

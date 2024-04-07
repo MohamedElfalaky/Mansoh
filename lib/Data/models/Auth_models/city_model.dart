@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final cityModel = cityModelFromJson(jsonString);
 
 import 'dart:convert';
 

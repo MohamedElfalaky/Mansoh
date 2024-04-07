@@ -11,14 +11,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
-import 'package:nasooh/app/Style/icons.dart';
-import 'package:nasooh/app/Style/sizes.dart';
+// import 'package:nasooh/app/Style/icons.dart';
+// import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
 
 import '../../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
 import '../../../Data/cubit/send_advice_cubit/send_advise_state.dart';
 import '../../../Data/models/advisor_profile_model/advisor_profile.dart';
+import '../../../app/style/icons.dart';
+import '../../../app/style/sizes.dart';
 import '../CompleteAdviseScreen/complete_advise_screen.dart';
 
 class ConfirmAdviseScreen extends StatefulWidget {
@@ -52,7 +54,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: BlocConsumer<SendAdviseCubit, SendAdviseState>(
+      bottomNavigationBar: BlocConsumer<SendAdviseCubit, SendAdviseState>(
           listener: (context, state) {
             if (state is SendAdviseLoaded) {
               MyApplication.navigateToReplace(context,
@@ -60,9 +62,10 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
             }
           },
           builder: (context, state) => state is SendAdviseLoading
-              ? const CircularProgressIndicator.adaptive()
+              ? const Center(child: CircularProgressIndicator.adaptive())
               : Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  margin:
+                      const EdgeInsets.only(bottom: 20, left: 20, right: 20),
                   height: 50,
                   child: CustomElevatedButton(
                     txt: "Confirm Order".tr,
@@ -84,6 +87,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   ))),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       resizeToAvoidBottomInset: false,
+      extendBody: true,
       backgroundColor: Constants.whiteAppColor,
       appBar: customAppBar(context: context, txt: "Ask Advice".tr),
       body: Container(
@@ -115,7 +119,6 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   ),
                   TextFormField(
                     maxLength: 35,
-
                     maxLengthEnforcement: MaxLengthEnforcement.enforced,
                     style: const TextStyle(fontFamily: Constants.mainFont),
                     validator: (value) {
@@ -136,11 +139,12 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5,top: 15),
+                    padding: const EdgeInsets.only(bottom: 5, top: 15),
                     child: Text("How Much can you afford for advice".tr,
                         style: Constants.secondaryTitleRegularFont),
                   ),
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Price Needed".tr;
@@ -206,17 +210,19 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                   ),
                   InkWell(
                     onTap: () async {
-                      FilePickerResult? result =
-                          await FilePicker.platform.pickFiles(
-                            allowedExtensions: ['jpg','png','jpeg','doc']
-                          );
+                      FilePickerResult? result = await FilePicker.platform
+                          .pickFiles(allowMultiple: false
+                              // allowedExtensions: ['jpg','png','jpeg','doc'],
+
+                              );
 
                       if (result != null) {
-                        if(result.files[0].bytes!.length>5242880)
-                          {
-                            MyApplication.showToastView(message: ' 5 MB لا يمكن ان يتعدي الملف');
-                            return ;
-                          }
+                        if (result.files[0].bytes != null &&
+                            result.files[0].bytes!.length > 5242880) {
+                          MyApplication.showToastView(
+                              message: ' 5 MB لا يمكن ان يتعدي الملف');
+                          return;
+                        }
                         setState(() {
                           pickedFile = File(result.files.single.path!);
                         });
@@ -276,8 +282,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             child: Row(
                               children: [
                                 const Spacer(),
-                                Text(
-                                    pickedFile!.path.replaceRange(0, 56, "")),
+                                Text(pickedFile!.path.replaceRange(0, 56, "")),
                                 const SizedBox(
                                   width: 10,
                                 ),
@@ -309,42 +314,39 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: Text(
-                                    pickedFile!.path,
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                    ),
-                                  ),
+                                Flexible(
+                                    child: Text(
+                                  pickedFile!.path,
+                                  style: const TextStyle(fontSize: 10),
+                                )),
+                                Image.file(
+                                  File(pickedFile!.path),
+                                  height: 50,
+                                  width: 50,
                                 ),
-
-                                SvgPicture.asset(
-                                  fileImage,
-                                  width: 25,
-                                  height: 25,
-                                ),
-
                                 if (pickedFile != null)
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4),
-                                      child: CircleAvatar(
-                                        radius: 15,
-                                        backgroundColor: Colors.grey.shade200,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: const Icon(Icons.close),
-                                          onPressed: () {
-                                            setState(() {
-                                              pickedFile = null;
-                                            });
-                                          },
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4),
+                                    child: CircleAvatar(
+                                      radius: 15,
+                                      backgroundColor: Colors.grey.shade200,
+                                      child: IconButton(
+                                        padding: EdgeInsets.zero,
+                                        icon: const Icon(
+                                          Icons.close,
+                                          color: Colors.black,
                                         ),
+                                        onPressed: () {
+                                          setState(() {
+                                            pickedFile = null;
+                                          });
+                                        },
                                       ),
                                     ),
+                                  ),
                               ],
                             )),
-
                 ],
               ),
             ),

@@ -18,7 +18,8 @@ import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cu
 import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_state.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_state.dart';
-import '../../../app/Style/icons.dart';
+// import '../../../app/Style/icons.dart';
+import '../../../app/style/icons.dart';
 
 class CompleteAdviseScreen extends StatefulWidget {
   const CompleteAdviseScreen({
@@ -47,7 +48,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: BlocConsumer<PayAdviceCubit, PayAdviceState>(
+        bottomNavigationBar: BlocConsumer<PayAdviceCubit, PayAdviceState>(
             listener: (context, state) {
               if (state is PayAdviceLoaded) {
                 MyApplication.navigateToReplace(
@@ -58,16 +59,16 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                       statusClickable: false,
                       openedStatus: state.response?.data?.label?.id == 2,
                       labelToShow: true,
-                      adviceId: state.response!.data!.id!,
-                      adviserProfileData: state.response!.data!.adviser,
+                      adviceId: state.response?.data?.id ?? 0,
+                      adviserProfileData: state.response?.data?.adviser,
                     ));
               }
             },
             builder: (context, state) => state is PayAdviceLoading
-                ? const CircularProgressIndicator.adaptive()
+                ? const Center(child: CircularProgressIndicator.adaptive())
                 : Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
+                    margin:
+                        const EdgeInsets.only(bottom: 20, left: 20, right: 20),
                     height: 50,
                     child: CustomElevatedButton(
                       onPressedHandler: () {
@@ -78,8 +79,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                       txt: "Complete Order".tr,
                       isBold: true,
                     ))),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         resizeToAvoidBottomInset: false,
         backgroundColor: Constants.whiteAppColor,
         appBar: AppBar(

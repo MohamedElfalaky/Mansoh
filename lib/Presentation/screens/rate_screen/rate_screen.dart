@@ -5,6 +5,7 @@ import 'package:nasooh/Presentation/widgets/shared.dart';
 
 import '../../../Data/cubit/review_cubit/review_cubit.dart';
 import '../../../Data/cubit/review_cubit/review_state.dart';
+import '../../../app/style/icons.dart';
 import '../../../app/utils/exports.dart';
 
 class RateScreen extends StatefulWidget {
