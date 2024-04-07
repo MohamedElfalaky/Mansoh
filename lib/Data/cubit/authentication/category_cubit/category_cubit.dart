@@ -18,9 +18,7 @@ class CategoryCubit extends Cubit<CategoryState> {
       final mList = await categoryRepo.getData();
       categoryModel = mList;
       emit(CategoryLoaded(mList));
-      // } else {
-      //   emit(CategoryError());
-      // }
+
     } catch (e) {
       emit(CategoryError());
     }

@@ -1,17 +1,13 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-// import 'package:nasooh/app/Style/sizes.dart';
 import 'package:nasooh/app/constants.dart';
-
 import '../../../../Data/models/home_models/advisor_list_model.dart';
 import '../../../../app/style/icons.dart';
 import '../../../../app/style/sizes.dart';
-// import '../../../../app/Style/icons.dart';
 
 class AdvisorCard extends StatelessWidget {
-  const AdvisorCard({super.key, required this.adviserData, n});
+  const AdvisorCard({super.key, required this.adviserData});
 
   final AdviserData adviserData;
 

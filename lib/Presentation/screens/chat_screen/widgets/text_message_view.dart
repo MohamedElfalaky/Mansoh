@@ -8,7 +8,6 @@ import '../../../../app/constants.dart';
 Container textMessageWidget(ShowAdviceLoaded state, int index) {
   return Container(
     constraints: const BoxConstraints(maxWidth: 220),
-    // width: 100,
     margin: const EdgeInsets.symmetric(vertical: 8),
     padding: const EdgeInsets.all(8),
     decoration: BoxDecoration(
@@ -24,4 +23,19 @@ Container textMessageWidget(ShowAdviceLoaded state, int index) {
       style: Constants.subtitleFont,
     ),
   );
+}
+Container buildTextViewWidget(ShowAdviceLoaded state, int index) {
+  return Container(
+      constraints: const BoxConstraints(maxWidth: 220),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+          color: state.response?.data?.chat?[index].adviser == null
+              ? const Color.fromARGB(255, 185, 184, 180).withOpacity(0.2)
+              : Constants.primaryAppColor.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(20)),
+      child: Text(
+        '${state.response?.data?.chat?[index].message}',
+        style: Constants.subtitleFont,
+      ));
 }
