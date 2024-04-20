@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/app/utils/shared_preference.dart';
 
 import '../../../../../app/constants.dart';
+import '../../../../../app/style/theme.dart';
 import '../../UserProfileEdit/user_profile_edit.dart';
 
 class UserInfoCard extends StatelessWidget {
@@ -52,10 +53,9 @@ class UserInfoCard extends StatelessWidget {
           ),
           SvgPicture.asset(
             "assets/images/SVGs/Ellipse.svg",
-            color: Colors.black54,
+            colorFilter: getFilterColor(Colors.black45),
             width: 60,
           ),
-
         ],
       ),
       title: Text(
@@ -79,7 +79,7 @@ class UserInfoCard extends StatelessWidget {
           backgroundColor: Constants.primaryAppColor,
           child: SvgPicture.asset(
             "assets/images/SVGs/pen.svg",
-            color: Colors.white,
+            colorFilter: getFilterColor(Colors.white),
             width: 19,
           ),
         ),

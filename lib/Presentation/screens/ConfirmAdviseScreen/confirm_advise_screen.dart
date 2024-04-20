@@ -62,7 +62,10 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
             }
           },
           builder: (context, state) => state is SendAdviseLoading
-              ? const Center(child: CircularProgressIndicator.adaptive())
+              ? const Padding(
+                  padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+                  child: CustomLoadingButton(height: 50),
+                )
               : Container(
                   margin:
                       const EdgeInsets.only(bottom: 20, left: 20, right: 20),

@@ -77,7 +77,7 @@ class _UserWalletState extends State<UserWallet> {
                     ),
                   ),
                   if(state is GetCouponsLoading)
-                    const Padding(
+                      const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: CustomLoadingButton(),
                     )

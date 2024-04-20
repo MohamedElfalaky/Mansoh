@@ -15,7 +15,6 @@ import '../../../../Data/cubit/authentication/register_cubit/register_state.dart
 import '../../../../app/constants.dart';
 import '../../../../app/style/icons.dart';
 import '../../../../app/style/sizes.dart';
-import '../../../../app/utils/validations.dart';
 import '../../../widgets/row_modal_sheet.dart';
 import '../../../widgets/shared.dart';
 import '../LoginScreen/check_mob_screen.dart';
@@ -39,16 +38,15 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
   String? base64Image;
 
   Future pickImage(ImageSource source, BuildContext context, setState) async {
+    final myImage = await _picker.pickImage(source: source, imageQuality: 60);
+    if (myImage == null) return;
 
-      final myImage = await _picker.pickImage(source: source, imageQuality: 60);
-      if (myImage == null) return;
-
-      setState(() {
-        regImage = myImage;
-      });
-      List<int> imageBytes = File(regImage!.path).readAsBytesSync();
-      base64Image = base64.encode(imageBytes);
-      log("base64Image!  is $base64Image");
+    setState(() {
+      regImage = myImage;
+    });
+    List<int> imageBytes = File(regImage!.path).readAsBytesSync();
+    base64Image = base64.encode(imageBytes);
+    log("base64Image!  is $base64Image");
 
     if (context.mounted) {
       Navigator.pop(context);
@@ -74,8 +72,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: SingleChildScrollView(
-              keyboardDismissBehavior:
-                  ScrollViewKeyboardDismissBehavior.onDrag,
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               child: Form(
                   key: _formKey,
                   child: BlocBuilder<RegisterCubit, RegisterState>(
@@ -90,8 +87,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                 children: [
                                   Text("create_new_account".tr,
                                       textAlign: TextAlign.right,
-                                      style:
-                                          Constants.headerNavigationFont),
+                                      style: Constants.headerNavigationFont),
                                   const SizedBox(
                                     width: 16,
                                   ),
@@ -115,18 +111,15 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                           radius: const Radius.circular(20),
                                           dashPattern: const [10, 6],
                                           child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(6),
+                                              padding: const EdgeInsets.all(6),
                                               child: CircleAvatar(
-                                                radius:
-                                                    width(context) * 0.19,
+                                                radius: width(context) * 0.19,
                                                 backgroundImage: regImage ==
                                                         null
                                                     ? const AssetImage(
                                                         'assets/images/PNG/no_profile_photo.png')
                                                     : FileImage(
-                                                        File(
-                                                            regImage!.path),
+                                                        File(regImage!.path),
                                                       ) as ImageProvider,
                                               )),
                                         ),
@@ -142,15 +135,14 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                 // <-- SEE HERE
                                                 borderRadius:
                                                     BorderRadius.vertical(
-                                                  top:
-                                                      Radius.circular(25.0),
+                                                  top: Radius.circular(25.0),
                                                 ),
                                               ),
                                               builder: (ctx) {
                                                 return Container(
                                                     padding:
-                                                        const EdgeInsets
-                                                            .all(18),
+                                                        const EdgeInsets.all(
+                                                            18),
                                                     // height: 100,
                                                     child: Column(
                                                       crossAxisAlignment:
@@ -194,8 +186,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                         const Divider(),
                                                         RowModalSheet(
                                                           txt: "الغاء",
-                                                          imageIcon:
-                                                              closeIcon,
+                                                          imageIcon: closeIcon,
                                                           onPressed: () {
                                                             Navigator.pop(
                                                                 context);
@@ -207,8 +198,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                             );
                                           },
                                           child: const CircleAvatar(
-                                            backgroundColor:
-                                                Color(0XFF444444),
+                                            backgroundColor: Color(0XFF444444),
                                             radius: 20,
                                             child: Icon(
                                               Icons.camera_alt_outlined,
@@ -235,8 +225,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                               InputTextField(
                                 keyboardType: TextInputType.text,
                                 hintTxt: "Name".tr,
-                                imageTxt:
-                                    "assets/images/SVGs/name_icon.svg",
+                                imageTxt: "assets/images/SVGs/name_icon.svg",
                                 controller: _nameController,
                                 validator: (val) {
                                   if (val!.isEmpty) {
@@ -255,7 +244,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                               InputTextField(
                                 validator: (val) {
                                   if (val!.isEmpty ||
-                                      !RegExp(Validations.validationEmail)
+                                      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                           .hasMatch(val)) {
                                     return "email_required".tr;
                                   }
@@ -263,36 +252,27 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                 },
                                 keyboardType: TextInputType.emailAddress,
                                 hintTxt: "example@example.com",
-                                imageTxt:
-                                    "assets/images/SVGs/email_icon.svg",
+                                imageTxt: "assets/images/SVGs/email_icon.svg",
                                 controller: _emailController,
-                                onChanged: (val) {
-                                  // inputBirthday = _nameController.text;
-                                  // print(_emailController.toString());
-                                },
                               ),
                               Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 16,
-                                  ),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 16),
                                   child: Text("Additional Information".tr,
                                       textAlign: TextAlign.end,
                                       style: Constants.subtitleFontBold
                                           .copyWith(fontSize: 16))),
                               const NationalityAndCountryWidget(),
-                              const SizedBox(
-                                height: 16,
-                              ),
+                              const SizedBox(height: 16),
                               Text("gender".tr,
                                   textAlign: TextAlign.right,
-                                  style:
-                                      Constants.secondaryTitleRegularFont),
+                                  style: Constants.secondaryTitleRegularFont),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text("female".tr,
-                                      style: Constants
-                                          .secondaryTitleRegularFont),
+                                      style:
+                                          Constants.secondaryTitleRegularFont),
                                   Radio(
                                       value: 0,
                                       groupValue: inputGender,
@@ -301,13 +281,10 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                           inputGender = s;
                                         });
                                       }),
-                                  const SizedBox(
-                                    width: 48,
-                                  ),
+                                  const SizedBox(width: 48),
                                   Text(
                                     "male".tr,
-                                    style:
-                                        Constants.secondaryTitleRegularFont,
+                                    style: Constants.secondaryTitleRegularFont,
                                   ),
                                   Radio(
                                       value: 1,
@@ -320,7 +297,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                 ],
                               ),
                               state is RegisterLoading
-                                  ? const CustomLoadingButton()
+                                  ?   const CustomLoadingButton()
                                   : Container(
                                       margin: const EdgeInsets.symmetric(
                                           vertical: 25),
@@ -336,17 +313,14 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                   context: context,
                                                   mobile: sendPhone,
                                                   avatar: base64Image ?? "",
-                                                  countryId:
-                                                      inputCountry ?? "",
+                                                  countryId: inputCountry ?? "",
                                                   cityId: inputCity ?? "",
-                                                  email:
-                                                      _emailController.text,
+                                                  email: _emailController.text,
                                                   fullName:
                                                       _nameController.text,
                                                   gender: inputGender,
                                                   nationalityId:
-                                                      inputNationality ??
-                                                          "",
+                                                      inputNationality ?? "",
                                                 );
                                           }
                                         },

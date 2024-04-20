@@ -104,10 +104,9 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                 textDirection: TextDirection.ltr,
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      top: MyApplication.hightClc(
-                                          context, 30),
-                                      bottom: MyApplication.hightClc(
-                                          context, 32)),
+                                      top: MyApplication.hightClc(context, 30),
+                                      bottom:
+                                          MyApplication.hightClc(context, 32)),
                                   child: Pinput(
                                     errorTextStyle: Constants.subtitleFont
                                         .copyWith(color: Colors.red),
@@ -116,10 +115,8 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                     showCursor: true,
                                     controller: _pinController,
                                     focusNode: myFocusNode,
-                                    defaultPinTheme:
-                                        Constants.defaultPinTheme,
-                                    focusedPinTheme:
-                                        Constants.focusedPinTheme,
+                                    defaultPinTheme: Constants.defaultPinTheme,
+                                    focusedPinTheme: Constants.focusedPinTheme,
                                     errorPinTheme: Constants.errorPinTheme,
                                     autofocus: true,
                                     // errorBuilder: (errorText, pin) {},
@@ -138,11 +135,8 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: height(context) * 0.03,
-                              ),
-                              // Column(
-                              //          children: [
+                              SizedBox(height: height(context) * 0.03),
+
                               state is CheckCodeLoading
                                   ? const CustomLoadingButton()
                                   : SizedBox(
@@ -165,10 +159,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                         },
                                       )),
 
-
-                              SizedBox(
-                                height: height(context) * 0.06
-                              ),
+                              SizedBox(height: height(context) * 0.06),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -182,8 +173,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                       if (time == null) {
                                         return Text(
                                           '00:00',
-                                          style: Constants
-                                              .subtitleRegularFont
+                                          style: Constants.subtitleRegularFont
                                               .copyWith(
                                                   color: Constants
                                                       .primaryAppColor),
@@ -193,8 +183,8 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                                         '${time.min ?? "00"}:${time.sec}',
                                         style: Constants.subtitleRegularFont
                                             .copyWith(
-                                                color: Constants
-                                                    .primaryAppColor),
+                                                color:
+                                                    Constants.primaryAppColor),
                                       );
                                     },
                                   ),

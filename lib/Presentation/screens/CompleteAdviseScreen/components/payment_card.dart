@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/app/constants.dart';
 
-import '../../../../app/style/icons.dart';
 
 class PaymentCard extends StatelessWidget {
   const PaymentCard(
@@ -23,8 +21,8 @@ class PaymentCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SvgPicture.asset(
-            tempPic,
+          Image.asset(
+           payMethod=='visa'? 'assets/images/mada.png':'assets/images/croppedimg.png',
             height: 30,
           ),
           const SizedBox(

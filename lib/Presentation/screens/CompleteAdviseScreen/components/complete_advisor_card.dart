@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-// import 'package:nasooh/app/Style/icons.dart';
 import 'package:nasooh/app/constants.dart';
 
 import '../../../../Data/models/advisor_profile_model/advisor_profile.dart';
@@ -25,7 +24,6 @@ class CompleteAdvisorCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16, top: 4),
       padding: const EdgeInsets.only(top: 16, bottom: 6, right: 16, left: 16),
-      // height: 170,
       width: double.infinity,
       decoration: BoxDecoration(
           color: Constants.whiteAppColor,
@@ -56,7 +54,7 @@ class CompleteAdvisorCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    adviser.fullName ?? "",
+                    '${adviser.fullName}',
                     style: Constants.secondaryTitleFont,
                   ),
                   Text(
@@ -64,7 +62,6 @@ class CompleteAdvisorCard extends StatelessWidget {
                     style: Constants.subtitleFont,
                   ),
                   const SizedBox(height: 8),
-
                 ],
               ),
               const Spacer(),
@@ -83,16 +80,19 @@ class CompleteAdvisorCard extends StatelessWidget {
               )
             ],
           ),
+
+
           const SizedBox(height: 10),
           SizedBox(
             height: 26,
+            width: double.infinity,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, int index) {
-                if (index < 3) {
+                if (index < 5) {
                   return Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 5, horizontal: 8),
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     margin: const EdgeInsets.only(
                       left: 8,
                     ),
@@ -111,9 +111,8 @@ class CompleteAdvisorCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   );
-                } else if (index == 3) {
-                  int remainingCount =
-                      (adviser.category?.length ?? 0) - 3;
+                } else if (index == 5) {
+                  int remainingCount = (adviser.category?.length ?? 0) - 5;
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     margin: const EdgeInsets.only(left: 8),
@@ -134,19 +133,18 @@ class CompleteAdvisorCard extends StatelessWidget {
                       ),
                     ),
                   );
-                } else {
-                  // You can return an empty container for indexes greater than 3
-                  return Container();
                 }
+                return null;
               },
               itemCount: min(
-                  4,
+                  6,
                   adviser.category?.length ??
                       0), // Ensure only 4 items are displayed
             ),
           ),
+
           Padding(
-            padding: const EdgeInsets.only(bottom: 12,top: 10),
+            padding: const EdgeInsets.only(bottom: 12, top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -157,63 +155,15 @@ class CompleteAdvisorCard extends StatelessWidget {
                 RichText(
                     text: TextSpan(children: [
                   TextSpan(text: moneyPut, style: Constants.subtitleFontBold),
-                  const TextSpan(
+                  TextSpan(
                     text: " ريال سعودي",
-                    style: Constants.subtitleRegularFont,
+                    style: Constants.subtitleRegularFont.copyWith(fontSize: 10),
                   ),
                 ]))
               ],
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.only(bottom: 12),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       const Text(
-          //         "مبلغ الضريبة (VAT)",
-          //         style: Constants.subtitleRegularFont,
-          //       ),
-          //       RichText(
-          //           text: TextSpan(children: [
-          //         TextSpan(text: taxVal, style: Constants.subtitleFontBold),
-          //         const TextSpan(
-          //           text: " ريال سعودي",
-          //           style: Constants.subtitleRegularFont,
-          //         ),
-          //       ]))
-          //     ],
-          //   ),
-          // ),
-          // const DottedLine(dashColor: Color(0xFFDADADA), dashLength: 5),
-          // Padding(
-          //   padding: const EdgeInsets.only(bottom: 12, top: 12),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       const Text(
-          //         "الاجمالي",
-          //         style: Constants.subtitleRegularFont,
-          //       ),
-          //       RichText(
-          //           text: TextSpan(
-          //               style: Constants.subtitleRegularFont,
-          //               children: [
-          //             TextSpan(
-          //                 text: '${double.parse(moneyPut)+double.parse(taxVal)}',
-          //                 style: const TextStyle(
-          //                     color: Constants.primaryAppColor,
-          //                     fontWeight: FontWeight.bold)),
-          //             const TextSpan(
-          //               text: " ريال سعودي",
-          //               style: TextStyle(
-          //                 color: Constants.primaryAppColor,
-          //               ),
-          //             ),
-          //           ]))
-          //     ],
-          //   ),
-          // ),
+
         ],
       ),
     );

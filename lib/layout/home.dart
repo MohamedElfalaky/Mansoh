@@ -7,6 +7,7 @@ import 'package:nasooh/app/constants.dart';
 
 import '../../../Data/repositories/notification/fcm.dart';
 import '../Presentation/screens/UserProfileScreens/UserOrders/user_orders.dart';
+import '../app/style/theme.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key, required this.currentIndex});
@@ -73,26 +74,28 @@ class _HomeLayoutState extends State<HomeLayout> {
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   'assets/images/SVGs/home1.svg',
-                  color: currentIndex == 0
+                  colorFilter: getFilterColor(  currentIndex == 0
                       ? Constants.primaryAppColor
-                      : Colors.grey,
+                      : Colors.grey),
                 ),
                 label: "Home".tr,
               ),
               BottomNavigationBarItem(
                   icon: SvgPicture.asset(
                     'assets/images/SVGs/orders1.svg',
-                    color: currentIndex == 1
+
+                    colorFilter: getFilterColor(  currentIndex == 1
                         ? Constants.primaryAppColor
-                        : Colors.grey,
+                        : Colors.grey),
+
                   ),
                   label: "My Orders".tr),
               BottomNavigationBarItem(
                   icon: SvgPicture.asset(
                     'assets/images/SVGs/person1.svg',
-                    color: currentIndex == 2
+                    colorFilter: getFilterColor(  currentIndex == 2
                         ? Constants.primaryAppColor
-                        : Colors.grey,
+                        : Colors.grey),
                   ),
                   label: "My Account".tr),
             ],

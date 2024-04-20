@@ -5,9 +5,7 @@ import 'package:nasooh/Data/cubit/authentication/login_cubit/login_cubit.dart';
 import 'package:nasooh/Data/cubit/authentication/login_cubit/login_state.dart';
 import 'package:nasooh/Presentation/screens/AuthenticationScreens/LoginScreen/check_mob_screen.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
-// import 'package:nasooh/app/Style/icons.dart';
 
-// import '../../../../app/Style/sizes.dart';
 import '../../../../app/constants.dart';
 import '../../../../app/utils/my_application.dart';
 import '../../../app/style/icons.dart';
@@ -29,13 +27,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   void initState() {
     super.initState();
-
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 3000));
+        vsync: this, duration: const Duration(milliseconds: 2000));
     _animationController.forward();
 
     _fadeController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 1000));
     _fadeController.forward();
   }
 

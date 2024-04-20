@@ -58,12 +58,15 @@ class CustomElevatedButton extends StatelessWidget {
 }
 
 class CustomLoadingButton extends StatelessWidget {
-  const CustomLoadingButton({super.key});
+
+    const CustomLoadingButton({super.key,this.height=45});
+
+   final double height;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size.fromHeight(45),
+        fixedSize:   Size.fromHeight(height),
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8))),
         elevation: 0,

@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:nasooh/Presentation/screens/Home/home.dart';
-
+import 'Presentation/screens/Home/home.dart';
 import 'Presentation/screens/welcome_screen/welcome.dart';
 import 'app/keys.dart';
 import 'app/style/theme.dart';
@@ -50,6 +49,7 @@ class MyApp extends StatelessWidget {
                 child: child!,
             );
         },
+          // home: const Fatorah(),
           home: sharedPrefs.getToken() != ""
               ? const HomeLayout(currentIndex: 0)
               : const WelcomeScreen(),

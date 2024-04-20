@@ -166,7 +166,7 @@ class _CheckMobScreenState extends State<CheckMobScreen>
                           height: 24,
                         ),
                         state is MobLoading
-                            ? const CustomLoadingButton()
+                            ?   const CustomLoadingButton()
                             : FadeTransition(
                                 opacity: _fadeController,
                                 child: SizedBox(

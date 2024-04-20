@@ -24,7 +24,6 @@ class OrdersScreen extends StatefulWidget {
 class _OrdersScreenState extends State<OrdersScreen> {
 
   int current = 0;
-  // bool isScrolling = false;
 
 
   double changePositionedOfLine() {

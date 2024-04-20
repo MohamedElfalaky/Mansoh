@@ -14,7 +14,6 @@ import '../../../Data/cubit/home/advisor_list_cubit.dart';
 import '../../../Data/cubit/home/home_slider_cubit.dart';
 import '../../../Data/cubit/home/home_state.dart';
 import '../../../app/style/icons.dart';
-import '../FilterScreen/filter_screen.dart';
 import '../UserProfileScreens/UserNotifications/user_notifications.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -113,8 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         isSuffix: true,
                         suffixIcon: InkWell(
                           onTap: () {
-                            MyApplication.navigateTo(context,
-                                FilterScreen(searchTxt: searchController.text));
+                            // MyApplication.navigateTo(context, FilterScreen(searchTxt: searchController.text));
                           },
                           child: Container(
                             padding: const EdgeInsets.all(8.0),
@@ -292,12 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context, advisorState) {
                     if (advisorState is AdvisorListLoading) {
                       return const Center(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 120),
-                            CircularProgressIndicator.adaptive(),
-                          ],
-                        ),
+                        child: CircularProgressIndicator.adaptive(),
                       );
                     } else if (advisorState is AdvisorListEmpty) {
                       return const Expanded(

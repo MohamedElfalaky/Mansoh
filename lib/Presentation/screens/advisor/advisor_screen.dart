@@ -5,7 +5,7 @@ import 'package:nasooh/Presentation/widgets/my_button.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
-import 'package:readmore/readmore.dart';
+import 'package:rich_readmore/rich_readmore.dart';
 
 import '../../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_state.dart';
@@ -29,7 +29,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
     context.read<AdvisorProfileCubit>().getDataAdvisorProfile(widget.id);
   }
 
-  bool isReadmore=false;
+  bool isReadmore = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +39,9 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
             final allData = state.response!.data!;
             return Scaffold(
               appBar: customAppBar(
-                  txt: "الصفحة الشخصية",
-                  context: context,
-                ),
+                txt: "الصفحة الشخصية",
+                context: context,
+              ),
               backgroundColor: Constants.whiteAppColor,
               body: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -75,7 +75,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 8,bottom: 4),
+                    padding: const EdgeInsets.only(top: 8, bottom: 4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -92,7 +92,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                   ),
                   Center(
                     child: Text(
-                      allData.description??"لا يوجد وصف لهذا الناصح",
+                      allData.description ?? "لا يوجد وصف لهذا الناصح",
                       style: Constants.subtitleFont,
                     ),
                   ),
@@ -105,59 +105,39 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
                         ),
-                        margin:
-                        const EdgeInsets.symmetric(horizontal: 4),
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
                         decoration: BoxDecoration(
                             color: Constants.primaryAppColor,
                             borderRadius: BorderRadius.circular(2)),
                         child: Center(
                             child: Text(
-                              // "محامي عام",
-                              allData.category?[index].name ?? "",
-                              style: const TextStyle(
-                                  fontFamily: Constants.mainFont,
-                                  color: Constants.whiteAppColor,
-                                  fontSize: 11),
-                            )),
+                          // "محامي عام",
+                          allData.category?[index].name ?? "",
+                          style: const TextStyle(
+                              fontFamily: Constants.mainFont,
+                              color: Constants.whiteAppColor,
+                              fontSize: 11),
+                        )),
                       ),
                       itemCount: allData.category?.length ?? 0,
                     ),
                   ),
-                  SizedBox(
-                    height: !isReadmore?200:100,
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 16),
-                        child: ReadMoreText(
-
-                          callback: (v){
-                            isReadmore=v;
-                            setState(() {
-
-                            });
-                          },
-                          allData.info!,
-                          style: Constants.subtitleFont1,
-                          trimLines: 2,
-                          trimMode: TrimMode.Line,
-                          trimCollapsedText: 'المزيد',
-                          trimExpandedText: '\nأقل',
-                          moreStyle: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: Constants.primaryAppColor),
-                          lessStyle: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: Constants.primaryAppColor),
-                        ),
-                      ),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: RichReadMoreText.fromString(
+                          text: allData.info.toString(),
+                          settings: LengthModeSettings(
+                            trimLength: 100,
+                            trimCollapsedText: 'اكثر',
+                            trimExpandedText: ' أقل ',
+                            lessStyle: const TextStyle(color: Colors.blue),
+                            moreStyle: const TextStyle(color: Colors.blue),
+                          )),
                     ),
                   ),
                   Container(
-                    margin:
-                    const EdgeInsets.symmetric(horizontal: 16),
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
                     padding: const EdgeInsets.only(bottom: 20),
                     decoration: const BoxDecoration(
                         border: Border(
@@ -165,14 +145,12 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                                 width: 1, color: Color(0XFFBCBCC4)))),
                     child: IntrinsicHeight(
                       child: Row(
-                        mainAxisAlignment:
-                        MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Column(
                             children: [
                               Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 8),
+                                  padding: const EdgeInsets.only(bottom: 8),
                                   child: SvgPicture.asset(
                                     adviceQ,
                                     height: 20,
@@ -180,8 +158,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                               RichText(
                                 text: TextSpan(children: [
                                   TextSpan(
-                                    text: allData.adviceCount
-                                        .toString(),
+                                    text: allData.adviceCount.toString(),
                                     style: Constants.subtitleFontBold,
                                   ),
                                   const TextSpan(
@@ -200,8 +177,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                           Column(
                             children: [
                               Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 8),
+                                  padding: const EdgeInsets.only(bottom: 8),
                                   child: SvgPicture.asset(
                                     rateIcon,
                                     height: 20,
@@ -225,15 +201,14 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8.0, right: 16, left: 16),
+                    padding:
+                        const EdgeInsets.only(top: 8.0, right: 16, left: 16),
                     child: Card(
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 16, horizontal: 8),
                         child: Column(
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [
@@ -282,29 +257,21 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                             Wrap(
                               children: List.generate(
                                   allData.document?.length ?? 0,
-                                      (index) => Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 15),
+                                  (index) => Padding(
+                                      padding: const EdgeInsets.only(top: 15),
                                       child: Container(
-                                        padding: const EdgeInsets
-                                            .symmetric(
-                                            horizontal: 8,
-                                            vertical: 5),
-                                        margin: const EdgeInsets
-                                            .symmetric(horizontal: 4),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 5),
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 4),
                                         decoration: BoxDecoration(
-                                            color: const Color(
-                                                0XFFEEEEEE),
+                                            color: const Color(0XFFEEEEEE),
                                             borderRadius:
-                                            BorderRadius.circular(
-                                                2)),
+                                                BorderRadius.circular(2)),
                                         child: Text(
-                                          allData.document![index]
-                                              .value ??
-                                              "",
+                                          allData.document![index].value ?? "",
                                           style: const TextStyle(
-                                              fontFamily:
-                                              Constants.mainFont,
+                                              fontFamily: Constants.mainFont,
                                               color: Colors.black,
                                               fontSize: 10),
                                         ),
@@ -320,7 +287,7 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
               ),
               bottomNavigationBar: Container(
                   margin:
-                      const EdgeInsets.only(bottom:20, left: 20, right: 20),
+                      const EdgeInsets.only(bottom: 20, left: 20, right: 20),
                   height: 50,
                   child: CustomElevatedButton(
                     onPressedHandler: () {
@@ -331,13 +298,11 @@ class _AdvisorScreenState extends State<AdvisorScreen> {
                     isBold: true,
                   )),
             );
-          }
-          else if(state is AdvisorProfileLoading) {
+          } else if (state is AdvisorProfileLoading) {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
           return const SizedBox.shrink();
         },
-
       ),
     );
   }

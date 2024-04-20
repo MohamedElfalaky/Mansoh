@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../Presentation/widgets/shared.dart';
 import '../constants.dart';
 
+
+ ColorFilter getFilterColor(Color color) {
+return ColorFilter.mode(color, BlendMode.srcIn);
+}
 ThemeData themeData = ThemeData(
     splashColor: Colors.transparent,
     shadowColor: Colors.transparent,

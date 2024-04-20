@@ -312,27 +312,26 @@ class OutlinedAdvisorCard extends StatelessWidget {
                               NetworkImage('${adviserProfileData?.avatar}'),
                         ),
                         const SizedBox(width: 8),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: width(context) * 0.5,
-                              child: Text(
+                        SizedBox(
+                          width: width(context) * 0.5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
                                 "${adviserProfileData?.fullName}",
                                 style: Constants.secondaryTitleFont,
                               ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5, bottom: 10),
-                              child: Text(
-                                description ?? "لا يوجد وصف لهذا الناصح",
-                                style: Constants.subtitleFont,
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 10),
+                                child: Text(
+                                  description ?? "لا يوجد وصف لهذا الناصح",
+                                  style: Constants.subtitleFont,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-
                         // SizedBox(
                         //   height: 26,
                         //   width: width(context) * 0.59,
@@ -394,10 +393,8 @@ class OutlinedAdvisorCard extends StatelessWidget {
                         //   ),
                         // )
                         const Spacer(),
-                        Text(
-                          '${adviserProfileData?.rate}',
-                          style: Constants.secondaryTitleFont,
-                        ),
+                        Text('${adviserProfileData?.rate}',
+                            style: Constants.secondaryTitleFont),
                         const SizedBox(width: 5),
                         SvgPicture.asset(rateIcon, width: 15, height: 15),
                       ],

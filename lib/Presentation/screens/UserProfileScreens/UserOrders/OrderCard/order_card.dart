@@ -93,6 +93,8 @@ class OrderCard extends StatelessWidget {
                   subtitle: Text(
                     description,
                     style: Constants.subtitleRegularFont,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   contentPadding: EdgeInsets.zero,
                   trailing: FittedBox(

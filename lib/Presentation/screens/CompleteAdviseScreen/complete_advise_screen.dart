@@ -1,31 +1,23 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/complete_advisor_card.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/payment_card.dart';
 import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
+import 'package:nasooh/Presentation/screens/fatorah/apple_pay.dart';
 import 'package:nasooh/Presentation/screens/fatorah/fatorah_screen.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
-import 'package:nasooh/app/constants.dart';
-import 'package:nasooh/app/utils/my_application.dart';
+import 'package:nasooh/app/utils/exports.dart';
 
 import '../../../Data/cubit/authentication/get_by_token_cubit/get_by_token_cubit.dart';
-import '../../../Data/cubit/authentication/get_by_token_cubit/get_by_token_state.dart';
 import '../../../Data/cubit/show_advice_cubit/pay_advice_cubit/pay_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/pay_advice_cubit/pay_advice_state.dart';
 import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_state.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_state.dart';
-// import '../../../app/Style/icons.dart';
 import '../../../app/style/icons.dart';
 
 class CompleteAdviseScreen extends StatefulWidget {
-  const CompleteAdviseScreen({
-    super.key,
-    required this.adviceId,
-  });
+  const CompleteAdviseScreen({super.key, required this.adviceId});
 
   final int adviceId;
 
@@ -144,51 +136,52 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                         child: CircularProgressIndicator.adaptive(),
                       );
                     } else if (showAdviceState is ShowAdviceLoaded) {
-                      return CompleteAdvisorCard(
-                        adviser: showAdviceState.response!.data!.adviser!,
-                        moneyPut:
-                            showAdviceState.response!.data!.price.toString(),
-                        taxVal: showAdviceState.response?.data?.tax ?? "",
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CompleteAdvisorCard(
+                            adviser: showAdviceState.response!.data!.adviser!,
+                            moneyPut: showAdviceState.response!.data!.price
+                                .toString(),
+                            taxVal: showAdviceState.response?.data?.tax ?? "",
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 8, top: 4),
+                            child: Text("اختر وسيلة الدفع",
+                                style: Constants.headerNavigationFont),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              MyApplication.navigateTo(
+                                  context, const Fatorah());
+                            },
+                            child: PaymentCard(
+                              payMethod: 'visa',
+                              walletVal:
+                                  '${showAdviceState.response?.data?.price}',
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              MyApplication.navigateTo(
+                                  context,
+                                  ApplePayWebViewScreen(
+                                    amount: num.parse(
+                                        showAdviceState.response?.data?.price),
+                                    adviceId: widget.adviceId,
+                                  ));
+                            },
+                            child: PaymentCard(
+                              payMethod: 'Apple pay',
+                              walletVal:
+                                  '${showAdviceState.response?.data?.price}',
+                            ),
+                          )
+                        ],
                       );
                     }
                     return const SizedBox.shrink();
                   }),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 8, top: 4),
-                    child: Text(
-                      "اختر وسيلة الدفع",
-                      style: Constants.headerNavigationFont,
-                    ),
-                  ),
-                  BlocBuilder<GetByTokenCubit, GetByTokenState>(
-                      builder: (context, getByTokenState) {
-                    if (getByTokenState is GetByTokenLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator.adaptive(),
-                      );
-                    } else if (getByTokenState is GetByTokenLoaded) {
-                      return ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: state.response?.data?.length ?? 0,
-                          itemBuilder: (context, int index) {
-                            return InkWell(
-                              onTap: () {
-                                MyApplication.navigateTo(
-                                    context, const FatooraScreen(amount: 10));
-                              },
-                              child: PaymentCard(
-                                payMethod:
-                                    state.response?.data?[index].name ?? "",
-                                walletVal:
-                                    getByTokenState.response?.data?.wallet ??
-                                        "",
-                              ),
-                            );
-                          });
-                    }
-                    return const SizedBox.shrink();
-                  })
                 ],
               ),
             );

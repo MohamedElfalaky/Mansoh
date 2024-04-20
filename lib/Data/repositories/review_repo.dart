@@ -41,7 +41,7 @@ class ReviewRepo {
       // print(mapData);
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        final userdata = postRejectModelFromJson(responseMap);
+         final userdata = postRejectModelFromJson(responseMap);
         MyApplication.showToastView(message: responseMap["message"]);
         return userdata;
       } else {
