@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/complete_advisor_card.dart';
 import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/Components/payment_card.dart';
+import 'package:nasooh/Presentation/screens/CompleteAdviseScreen/apple_pay_model.dart';
 import 'package:nasooh/Presentation/screens/chat_screen/chat_screen.dart';
 import 'package:nasooh/Presentation/screens/fatorah/apple_pay.dart';
 import 'package:nasooh/Presentation/screens/fatorah/fatorah_screen.dart';
@@ -14,7 +17,11 @@ import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cu
 import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_state.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_state.dart';
+import '../../../app/keys.dart';
 import '../../../app/style/icons.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../app/utils/shared_preference.dart';
 
 class CompleteAdviseScreen extends StatefulWidget {
   const CompleteAdviseScreen({super.key, required this.adviceId});
@@ -153,7 +160,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                           InkWell(
                             onTap: () {
                               MyApplication.navigateTo(
-                                  context, const Fatorah());
+                                  context,   FatorahScreen(adviceId: showAdviceState.response!.data!.id, amount: num.parse(showAdviceState.response!.data!.price),));
                             },
                             child: PaymentCard(
                               payMethod: 'visa',
@@ -162,14 +169,26 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {
-                              MyApplication.navigateTo(
-                                  context,
-                                  ApplePayWebViewScreen(
-                                    amount: num.parse(
-                                        showAdviceState.response?.data?.price),
-                                    adviceId: widget.adviceId,
-                                  ));
+                            onTap: () async {
+                              http.Response response = await http.get(
+                                  Uri.parse('${Keys.baseUrl}/client/advice/${widget.adviceId}/myfatoorah-apple-pay'),
+                                  headers: {
+                                    'Accept': 'application/json',
+                                    'lang': Get.locale?.languageCode ?? "ar",
+                                    'Authorization': 'Bearer ${sharedPrefs.getToken()}',
+                                  });
+                              Map<String, dynamic> responseMap = json.decode(response.body);
+                              if (response.statusCode == 200 && responseMap["status"] == 1) {
+                                ApplePayModel applePayModel=ApplePayModel.fromJson(responseMap);
+                                debugPrint('${applePayModel.data?.paymentUrl}');
+                                MyApplication.navigateTo(context,
+                                    ApplePayWebViewScreen(
+                                      url: '${applePayModel.data?.paymentUrl}',
+                                      amount: num.parse(showAdviceState.response?.data?.price),
+                                      adviceId: applePayModel.data!.adviceId!,
+                                    ));
+                              }
+
                             },
                             child: PaymentCard(
                               payMethod: 'Apple pay',

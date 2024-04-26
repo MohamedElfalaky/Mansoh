@@ -80,8 +80,6 @@ class CompleteAdvisorCard extends StatelessWidget {
               )
             ],
           ),
-
-
           const SizedBox(height: 10),
           SizedBox(
             height: 26,
@@ -92,10 +90,8 @@ class CompleteAdvisorCard extends StatelessWidget {
                 if (index < 5) {
                   return Container(
                     padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                    margin: const EdgeInsets.only(
-                      left: 8,
-                    ),
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                    margin: const EdgeInsets.only(left: 8),
                     height: 24,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
@@ -142,7 +138,6 @@ class CompleteAdvisorCard extends StatelessWidget {
                       0), // Ensure only 4 items are displayed
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.only(bottom: 12, top: 10),
             child: Row(
@@ -163,7 +158,6 @@ class CompleteAdvisorCard extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
     );

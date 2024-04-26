@@ -11,7 +11,6 @@ const String logoo = "assets/images/SVGs/Logo2.svg";
 const String curve1 = "assets/images/SVGs/Curve1.svg";
 const String curve2 = "assets/images/SVGs/Curve2.svg";
 const String termsConditions = "assets/images/SVGs/termsConditions.svg";
-const String notifcation = "assets/images/SVGs/66744-notification 1.svg";
 const String tempPic = "assets/images/SVGs/illustration.svg";
 const String rateIcon = "assets/images/SVGs/star.svg";
 const String adviceQ = "assets/images/SVGs/comment_icon.svg";

@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        hintText: "ابحث باسم الناصح أو التخصص ....",
+                        hintText: "ابحث باسم الناصح...",
                       ),
                     ),
                   ),

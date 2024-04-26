@@ -69,7 +69,7 @@ Map<String, String> getArabicLanguage() {
     "My Orders": "طلباتي",
     "promo_codes":"كوبونات الخصم",
     "My Account": "ملفي",
-    "share_app": "مشاركة",
+    "share_app": "شارك التطبيق ",
     "change Language": "تغيير اللغة ",
     "Notification": "الأشعارات",
     "Delete Account": "حذف الحساب ",

@@ -69,7 +69,7 @@ Map<String, String> getEnglishLanguage() {
     "Home": "Home",
     "My Orders": "My Orders",
     "My Account": "My Account",
-    "share_app": "Share",
+    "share_app": "Share application",
     "change Language": "Change Language",
     "Notification": "Notification",
     "Delete Account": "Delete Account",

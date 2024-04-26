@@ -16,6 +16,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     String? email,
     String? fullName,
     String? mobile,
+    String? promoCode,
     String? countryId,
     String? cityId,
     dynamic gender,
@@ -28,6 +29,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       register
           .register(
         avatar: avatar,
+        promoCode:promoCode,
         email: email,
         fullName: fullName,
         gender: gender,

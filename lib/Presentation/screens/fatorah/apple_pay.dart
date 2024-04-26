@@ -1,32 +1,25 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:nasooh/layout/home.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:http/http.dart' as http;
-
-import '../../../app/keys.dart';
 import '../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference.dart';
 
 class ApplePayWebViewScreen extends StatefulWidget {
   final num amount;
   final num adviceId;
+  final String url;
 
-  const ApplePayWebViewScreen(
-      {super.key,
-      required this.amount,
-      required this.adviceId,
-       });
+  const ApplePayWebViewScreen({
+    super.key,
+    required this.amount,
+    required this.adviceId,
+    required this.url,
+  });
 
   @override
   State<ApplePayWebViewScreen> createState() => _ApplePayWebViewScreenState();
 }
 
 class _ApplePayWebViewScreenState extends State<ApplePayWebViewScreen> {
-
-  late String url ='https://uat.nasoh.app/Admin/apple-pay-test?advice_id=${widget.adviceId}';
-
   WebViewController? _controller;
 
   initApplePay({required BuildContext context}) {
@@ -36,31 +29,20 @@ class _ApplePayWebViewScreenState extends State<ApplePayWebViewScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onUrlChange: (UrlChange change) async {
-            if (change.url!
-
-                .contains('https://system.okhtboot.com/payment/callback')) {
-              http.Response response = await http.get(
-                  Uri.parse('${Keys.baseUrl}/client/coredata/comment/list'),
-                  headers: {
-                    'Accept': 'application/json',
-                    'lang': Get.locale?.languageCode ?? "ar",
-                    'Authorization': 'Bearer ${sharedPrefs.getToken()}',
-                  });
-              Map<String, dynamic> responseMap = json.decode(response.body);
-              if (response.statusCode == 200 && responseMap["status"] == 1) {
-              } else {
-                // debugPrint("request is $phone & $pass");
-                MyApplication.showToastView(message: responseMap["message"]);
-              }
-            } else if (change.url!
-                .contains('https://system.okhtboot.com/payment/error')) {
-              // Toast.(title: 'لم يتم الدفع');
+            if (change.url!.contains('-success')) {
+              MyApplication.navigateToReplaceAllPrevious(
+                  context, const HomeLayout(currentIndex: 0));
+              MyApplication.showToastView(
+                  message: 'تمت عملية الدفع بنجاح', color: Colors.green);
+            } else if (change.url!.contains('-fail')) {
+              MyApplication.showToastView(
+                  message: 'فشل في عملية الدفع', color: Colors.red);
               Navigator.pop(context);
             }
           },
         ),
       )
-      ..loadRequest(Uri.parse(url));
+      ..loadRequest(Uri.parse(widget.url));
 
     _controller = controller;
     setState(() {});

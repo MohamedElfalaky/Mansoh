@@ -34,24 +34,24 @@ class _UserWalletState extends State<UserWallet> {
       appBar: customAppBar(
           endIcon: true,
           context: context, txt: "My Wallet".tr, actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Constants.primaryAppColor,
-                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  )),
-              onPressed: () {
-                MyApplication.navigateTo(context, const CouponsScreen());
-              },
-              child: const Text(' كوبونات الخصم',style: TextStyle(
-                color: Colors.white,
-                fontFamily: Constants.mainFont,
-                fontSize: 12,
-                fontWeight: FontWeight.w700
-              ),textAlign: TextAlign.center,)),
-        )
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16),
+        //   child: ElevatedButton(
+        //       style: ElevatedButton.styleFrom(
+        //           backgroundColor: Constants.primaryAppColor,
+        //            shape: RoundedRectangleBorder(
+        //             borderRadius: BorderRadius.circular(30),
+        //           )),
+        //       onPressed: () {
+        //         MyApplication.navigateTo(context, const CouponsScreen());
+        //       },
+        //       child: const Text(' كوبونات الخصم',style: TextStyle(
+        //         color: Colors.white,
+        //         fontFamily: Constants.mainFont,
+        //         fontSize: 12,
+        //         fontWeight: FontWeight.w700
+        //       ),textAlign: TextAlign.center,)),
+        // )
       ]),
       resizeToAvoidBottomInset: true,
       extendBody: true,

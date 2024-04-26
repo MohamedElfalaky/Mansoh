@@ -147,6 +147,7 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         style: Constants.secondaryTitleRegularFont),
                   ),
                   TextFormField(
+                    maxLength: 4,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
                       if (value!.isEmpty) {

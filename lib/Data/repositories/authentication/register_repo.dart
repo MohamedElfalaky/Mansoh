@@ -20,6 +20,7 @@ class Register {
       String? mobile,
       String? countryId,
       String? cityId,
+      String? promoCode,
       dynamic gender,
       String? nationalityId,
       String? avatar}) async {
@@ -31,6 +32,7 @@ class Register {
             'email': email,
             'full_name': '$fullName',
             'mobile': '$mobile',
+            'promo_code':promoCode,
             'country_id': '$countryId',
             'city_id': '$cityId',
             'gender': '$gender',

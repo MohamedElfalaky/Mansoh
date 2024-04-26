@@ -34,6 +34,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
 
   static final TextEditingController _nameController = TextEditingController();
   static final TextEditingController _emailController = TextEditingController();
+  static final TextEditingController promoCode = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String? base64Image;
 
@@ -238,9 +239,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                 },
                                 onChanged: (val) {},
                               ),
-                              TitleTxt(
-                                txt: "email".tr,
-                              ),
+                              TitleTxt(txt: "email".tr),
                               InputTextField(
                                 validator: (val) {
                                   if (val!.isEmpty ||
@@ -254,6 +253,16 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                 hintTxt: "example@example.com",
                                 imageTxt: "assets/images/SVGs/email_icon.svg",
                                 controller: _emailController,
+                              ),
+                              const TitleTxt(
+                                txt: "البرومو كود - كود الدعوة",
+                              ),
+                              InputTextField(
+                                keyboardType: TextInputType.emailAddress,
+                                hintTxt: "برجاء إدخال كود الدعوة إن وٌجد",
+                                imageTxt:
+                                    "assets/images/SVGs/advisor_icon.svg",
+                                controller: promoCode,
                               ),
                               Container(
                                   padding:
@@ -297,7 +306,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                 ],
                               ),
                               state is RegisterLoading
-                                  ?   const CustomLoadingButton()
+                                  ? const CustomLoadingButton()
                                   : Container(
                                       margin: const EdgeInsets.symmetric(
                                           vertical: 25),
@@ -312,6 +321,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                 .registerMethod(
                                                   context: context,
                                                   mobile: sendPhone,
+                                                  promoCode: promoCode.text,
                                                   avatar: base64Image ?? "",
                                                   countryId: inputCountry ?? "",
                                                   cityId: inputCity ?? "",
