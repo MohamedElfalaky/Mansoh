@@ -6,7 +6,6 @@ import 'package:nasooh/Presentation/widgets/shared.dart';
 import 'package:nasooh/app/constants.dart';
 import 'package:nasooh/app/utils/my_application.dart';
 import 'package:rich_readmore/rich_readmore.dart';
-
 import '../../../Data/cubit/advisor_profile_cubit/profile_cubit.dart';
 import '../../../Data/cubit/advisor_profile_cubit/profile_state.dart';
 import '../../../app/style/icons.dart';

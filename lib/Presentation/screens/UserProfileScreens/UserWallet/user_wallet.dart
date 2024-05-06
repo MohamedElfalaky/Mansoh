@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/wallet_cubit/wallet_cubit.dart';
-import 'package:nasooh/Presentation/screens/UserProfileScreens/UserWallet/coupons_screen.dart';
 import 'package:nasooh/Presentation/widgets/shared.dart';
 
 import '../../../../Data/cubit/wallet_cubit/wallet_state.dart';
 import '../../../../app/constants.dart';
-import '../../../../app/utils/my_application.dart';
 import '../../../widgets/my_button.dart';
 import 'widgets/wallet_card.dart';
 

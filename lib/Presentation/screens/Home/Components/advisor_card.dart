@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:nasooh/app/utils/exports.dart';
 import '../../../../Data/models/home_models/advisor_list_model.dart';
 import '../../../../app/style/icons.dart';
@@ -84,15 +85,19 @@ class AdvisorCard extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 5),
-                  Text(
-                    adviserData.description != "" &&
-                            adviserData.description != null
-                        ? adviserData.description!
-                        : "لا يوجد وصف لهذا الناصح",
-                    style: Constants.subtitleFont,
-                    textAlign: TextAlign.start,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  SizedBox(
+                    width: width(context) * 0.7,
+
+                    child: Text(
+                      adviserData.description != "" &&
+                              adviserData.description != null
+                          ? adviserData.description!
+                          : "لا يوجد وصف لهذا الناصح",
+                      style: Constants.subtitleFont,
+                      textAlign: TextAlign.start,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   SizedBox(
