@@ -4,5 +4,6 @@ class Keys {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
-  static const baseUrl = 'https://uat.nasoh.app/Admin';
+  static const baseUrl = 'https://test.nasoh.app';
+  // static const baseUrl = 'https://uat.nasoh.app/Admin';
 }

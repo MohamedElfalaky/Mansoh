@@ -10,9 +10,13 @@ class PayAdviceCubit extends Cubit<PayAdviceState> {
   getPay({required int adviceId, required int paymentId}) async {
     try {
       emit(PayAdviceLoading());
-      final mList = await showAdviceRepo.payAdvice(
+      final adviceModel = await showAdviceRepo.payAdvice(
           adviceId: adviceId, paymentId: paymentId);
-      emit(PayAdviceLoaded(mList));
+      if(adviceModel?.data!=null) {
+        emit(PayAdviceLoaded(adviceModel));
+      } else {
+        emit(PayAdviceError());
+      }
     } catch (e) {
       emit(PayAdviceError());
     }

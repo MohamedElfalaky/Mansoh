@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/app/constants.dart';
+import 'package:nasooh/app/style/sizes.dart';
 
 import '../../../../Data/models/advisor_profile_model/advisor_profile.dart';
 import '../../../../app/style/icons.dart';
@@ -53,13 +54,20 @@ class CompleteAdvisorCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${adviser.fullName}',
-                    style: Constants.secondaryTitleFont,
+                  SizedBox(
+                    width: width(context)*0.5,
+                    child: Text(
+                      '${adviser.fullName}',
+                      style: Constants.secondaryTitleFont,
+                    ),
                   ),
-                  Text(
-                    adviser.description ?? "لا يوجد وصف لهذا الناصح",
-                    style: Constants.subtitleFont,
+                  SizedBox(
+
+                    width: width(context)*0.5,
+                    child: Text(
+                      adviser.description ?? "لا يوجد وصف لهذا الناصح",
+                      style: Constants.subtitleFont,
+                    ),
                   ),
                   const SizedBox(height: 8),
                 ],
