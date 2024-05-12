@@ -29,9 +29,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   void initState() {
     super.initState();
-
     currentIndex = widget.currentIndex;
-    FirebaseCustomNotification.setUpFirebase();
   }
 
   @override

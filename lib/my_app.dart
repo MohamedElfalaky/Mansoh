@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'Data/repositories/notification/fcm.dart';
 import 'Presentation/screens/Home/home.dart';
 import 'Presentation/screens/welcome_screen/welcome.dart';
 import 'app/keys.dart';
@@ -10,9 +11,20 @@ import 'app/utils/bloc_providers.dart';
 import 'app/utils/exports.dart';
 import 'app/utils/shared_preference.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+
+    super.initState();
+    FirebaseCustomNotification.setUpFirebase();
+  }
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

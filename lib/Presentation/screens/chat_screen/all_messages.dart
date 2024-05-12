@@ -56,7 +56,7 @@ class _ShowMessagesWidgetState extends State<ShowMessagesWidget> {
                 reverse: true,
                 itemCount: state.response?.data?.chat?.length,
                 itemBuilder: (context, index) {
-                  final message = state.response?.data?.chat?[index].document?[0].file;
+                  final message =state.response?.data?.chat?.isNotEmpty??false ? "": state.response?.data?.chat?[index].document?[0].file;
 
                   bool isNotEmptyList =
                       state.response?.data?.chat?[index].document?.isNotEmpty ?? false;
