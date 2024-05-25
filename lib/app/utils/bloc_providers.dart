@@ -27,6 +27,7 @@ import '../../Data/cubit/rejections_cubit/reject_cubit/post_reject_cubit.dart';
 import '../../Data/cubit/rejections_cubit/rejection_list_cubit/rejection_list_cubit.dart';
 import '../../Data/cubit/review_cubit/review_cubit.dart';
 import '../../Data/cubit/send_advice_cubit/send_advise_cubit.dart';
+import '../../Data/cubit/settings_cubits/about_cubit/about_cubit.dart';
 import '../../Data/cubit/settings_cubits/is_notification_cubit/is_notification_cubit.dart';
 import '../../Data/cubit/settings_cubits/privacy_cubit/privacy_cubit.dart';
 import '../../Data/cubit/show_advice_cubit/done_advice_cubit/done_advice_cubit.dart';
@@ -41,6 +42,7 @@ List<BlocProvider> providers = [
   BlocProvider<CheckCodeCubit>(create: (context) => CheckCodeCubit()),
   BlocProvider<CountryCubit>(create: (context) => CountryCubit()),
   BlocProvider<CityCubit>(create: (context) => CityCubit()),
+  BlocProvider<AboutCubit>(create: (context) => AboutCubit()),
   BlocProvider<RegisterCubit>(create: (context) => RegisterCubit()),
   BlocProvider<ProfileCubit>(
       create: (context) => ProfileCubit()..getDataProfile()),

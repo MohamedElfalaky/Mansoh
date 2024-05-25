@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:get/get_utils/get_utils.dart';
+import 'package:nasooh/Presentation/screens/about_us/about_us_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // import '../../../app/Style/icons.dart';
@@ -82,7 +83,9 @@ List<DrawerModel> getDrawer(BuildContext context) => [
           svg: SvgPicture.asset(
             knowAboutIcon,
           ),
-          onTap: () {})
+          onTap: () {
+            Get.to(() => const AboutUsScreen());
+          })
     ];
 
 class DrawerModel {
