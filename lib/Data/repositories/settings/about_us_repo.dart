@@ -8,7 +8,6 @@ import 'package:nasooh/app/keys.dart';
 import '../../../app/utils/my_application.dart';
 import '../../../app/utils/shared_preference.dart';
 import '../../models/settings_models/about_us_model.dart';
-import '../../models/settings_models/privacy_policy_model.dart';
 
 class AboutUsRepo {
   Future<AboutUsModel?> getAbout() async {

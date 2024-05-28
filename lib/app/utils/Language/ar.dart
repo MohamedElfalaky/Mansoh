@@ -95,7 +95,7 @@ Map<String, String> getArabicLanguage() {
     "recharge_wallet": "اشحن محفظتك",
     "Ask Advice": "طلب نصيحة",
     "Confirm Order": "تأكيد الطلب",
-    "Complete Order": "إتمام الطلب",
+    "Complete Order": "الدفع بالمحفظة",
     "delete tile": "تأكيد حذف الحساب ؟",
     "click_to_see_full_image":"اضغط لرؤية الصورة كاملة",
 

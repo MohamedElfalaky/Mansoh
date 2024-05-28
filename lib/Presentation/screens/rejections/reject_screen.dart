@@ -114,7 +114,7 @@ class _RejectScreenState extends State<RejectScreen> {
                           const Padding(
                             padding: EdgeInsets.only(bottom: 8, top: 4),
                             child: Text(
-                              "حدد سبب رفض النصيحة",
+                              "حدد سبب الاعتراض",
                               style: Constants.headerNavigationFont,
                             ),
                           ),

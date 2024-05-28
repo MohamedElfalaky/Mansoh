@@ -17,6 +17,8 @@ import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cu
 import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_state.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_state.dart';
+import '../../../Data/cubit/wallet_cubit/wallet_cubit.dart';
+import '../../../Data/cubit/wallet_cubit/wallet_state.dart';
 import '../../../app/keys.dart';
 import '../../../app/style/icons.dart';
 import 'package:http/http.dart' as http;
@@ -42,6 +44,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
         .getAdviceFunction(adviceId: widget.adviceId);
     context.read<PaymentListCubit>().getPay();
     context.read<GetByTokenCubit>().getDataGetByToken();
+    context.read<WalletCubit>().getDataWallet();
   }
 
   @override
@@ -157,6 +160,27 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                             child: Text("اختر وسيلة الدفع",
                                 style: Constants.headerNavigationFont),
                           ),
+                          BlocBuilder<WalletCubit, WalletState>(
+                              builder: (context, walletState) {
+                                if (walletState is WalletLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator.adaptive(),
+                                  );
+                                } else if (walletState is WalletLoaded) {
+                                  return InkWell(
+                                    onTap: () {
+                                    },
+                                    child: PaymentCard(
+                                      payMethod:  "my_wallet".tr,
+                                      walletVal:
+                                      '${walletState.response?.balance?.toString()}',
+                                        pngMa7faza: true
+
+                                    ),
+                                  );
+                                }
+                                return const SizedBox.shrink();
+                              }),
                           InkWell(
                             onTap: () {
                               MyApplication.navigateTo(
@@ -195,7 +219,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                               walletVal:
                                   '${showAdviceState.response?.data?.price}',
                             ),
-                          )
+                          ),
                         ],
                       );
                     }
