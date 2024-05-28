@@ -97,5 +97,6 @@ Map<String, String> getEnglishLanguage() {
     "Complete Order": "Complete Order",
     "delete tile": "Confirm Delete Account?",
     "click_to_see_full_image":"Click to see full image",
+    'click_to_see_file':'Click to see file'
   };
 }

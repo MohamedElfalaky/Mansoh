@@ -98,6 +98,7 @@ Map<String, String> getArabicLanguage() {
     "Complete Order": "الدفع بالمحفظة",
     "delete tile": "تأكيد حذف الحساب ؟",
     "click_to_see_full_image":"اضغط لرؤية الصورة كاملة",
+    'click_to_see_file':'اضغط لرؤية الملف'
 
   };
 }
