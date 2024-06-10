@@ -98,7 +98,9 @@ Map<String, String> getArabicLanguage() {
     "Complete Order": "الدفع بالمحفظة",
     "delete tile": "تأكيد حذف الحساب ؟",
     "click_to_see_full_image":"اضغط لرؤية الصورة كاملة",
-    'click_to_see_file':'اضغط لرؤية الملف'
+    'click_to_see_file':'اضغط لرؤية الملف',
+    "Search by adviser name...":"ابحث باسم الناصح...",
+    "if you are specialist and want to register as adviser download advisers app":"إذا كنت مختص أو خبير وأردت التسجيل كناصح  حمل تطبيق الناصحين"
 
   };
 }

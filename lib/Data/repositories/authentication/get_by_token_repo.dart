@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:nasooh/app/keys.dart';
 
+import '../../../app/global.dart';
 import '../../../app/utils/my_application.dart';
 import '../../../app/utils/shared_preference.dart';
 import '../../models/Auth_models/get_by_token_model.dart';
@@ -18,7 +19,7 @@ class GetByTokenRepo {
         Uri.parse('${Keys.baseUrl}/client/auth/get_user'),
         headers: {
           'Accept': 'application/json',
-          'lang': Get.locale?.languageCode ?? "ar",
+          'lang': selectedLang,
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

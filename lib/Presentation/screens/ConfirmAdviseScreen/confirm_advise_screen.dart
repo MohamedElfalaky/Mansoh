@@ -4,8 +4,10 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -76,6 +78,12 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                     onPressedHandler: () {
                       debugPrint(" ${pickedFile?.path.split(".").last}");
                       log(fileSelected.toString());
+                      if (pickedFile?.lengthSync() != null &&
+                          pickedFile!.lengthSync() > 5242880) {
+                        MyApplication.showToastView(
+                            message: ' 5 MB لا يمكن ان يتعدي الملف');
+                        return;
+                      }
                       if (_formKey.currentState!.validate()) {
                         context.read<SendAdviseCubit>().sendAdviseMethod(
                             context: context,
@@ -221,12 +229,12 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                               );
 
                       if (result != null) {
-                        if (result.files[0].bytes != null &&
-                            result.files[0].bytes!.length > 5242880) {
-                          MyApplication.showToastView(
-                              message: ' 5 MB لا يمكن ان يتعدي الملف');
-                          return;
-                        }
+                        // if (result.files[0].bytes != null &&
+                        //     result.files[0].bytes!.length > 5242880) {
+                        //   MyApplication.showToastView(
+                        //       message: ' 5 MB لا يمكن ان يتعدي الملف');
+                        //   return;
+                        // }
                         setState(() {
                           pickedFile = File(result.files.single.path!);
                         });
@@ -286,7 +294,9 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                             child: Row(
                               children: [
                                 const Spacer(),
-                                Text(pickedFile!.path.replaceRange(0, 56, "")),
+                                Flexible(
+                                    flex: 3,
+                                    child: Text(pickedFile!.path.replaceRange(0, 56, ""))),
                                 const SizedBox(
                                   width: 10,
                                 ),
@@ -295,6 +305,27 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                                   width: 20,
                                   height: 20,
                                 ),
+                                if (pickedFile != null)
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4),
+                                    child: CircleAvatar(
+                                      radius: 15,
+                                      backgroundColor: Colors.grey.shade200,
+                                      child: IconButton(
+                                        padding: EdgeInsets.zero,
+                                        icon: const Icon(
+                                          Icons.close,
+                                          color: Colors.black,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            pickedFile = null;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
                               ],
                             ))
                         : Container(

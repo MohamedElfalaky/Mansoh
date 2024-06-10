@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nasooh/Data/cubit/home/advisor_state.dart';
 import 'package:nasooh/Data/models/category_parent_model.dart';
 import 'package:nasooh/Presentation/screens/Advisor/advisor_screen.dart';
@@ -110,26 +111,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: SvgPicture.asset(searchIcon),
                         ),
                         isSuffix: true,
-                        suffixIcon: InkWell(
-                          onTap: () {
-                            // MyApplication.navigateTo(context, FilterScreen(searchTxt: searchController.text));
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                                color:
-                                    Constants.primaryAppColor.withOpacity(0.2),
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(10),
-                                  topLeft: Radius.circular(10),
-                                )),
-                            child: SvgPicture.asset(
-                              filterIcon,
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        hintText: "ابحث باسم الناصح...",
+                        // suffixIcon: InkWell(
+                        //   onTap: () {
+                        //     // MyApplication.navigateTo(context, FilterScreen(searchTxt: searchController.text));
+                        //   },
+                        //   child: Container(
+                        //     padding: const EdgeInsets.all(8.0),
+                        //     decoration: BoxDecoration(
+                        //         color:
+                        //             Constants.primaryAppColor.withOpacity(0.2),
+                        //         borderRadius: const BorderRadius.only(
+                        //           bottomLeft: Radius.circular(10),
+                        //           topLeft: Radius.circular(10),
+                        //         )),
+                        //     child: SvgPicture.asset(
+                        //       filterIcon,
+                        //       fit: BoxFit.fill,
+                        //     ),
+                        //   ),
+                        // ),
+                        hintText:"Search by adviser name...".tr,
                       ),
                     ),
                   ),

@@ -5,7 +5,7 @@ import 'post_reject_state.dart';
 
 class PostRejectCubit extends Cubit<PostRejectState> {
   PostRejectCubit() : super(PostRejectInitial());
-  PostRejectRepo doneAdviceRepo = PostRejectRepo();
+  PostRejectRepo rejectRepoRepo = PostRejectRepo();
 
   postRejectMethod({
     String? commentId,
@@ -14,7 +14,7 @@ class PostRejectCubit extends Cubit<PostRejectState> {
   }) async {
     try {
       emit(PostRejectLoading());
-      final mList = await doneAdviceRepo.reject(
+      final mList = await rejectRepoRepo.reject(
           commentId: commentId, commentOther: commentOther, adviceId: adviceId);
       emit(PostRejectLoaded(mList));
     } catch (e) {

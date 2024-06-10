@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:nasooh/app/keys.dart';
 
 import '../../../../app/utils/my_application.dart';
+import '../../../app/global.dart';
 import '../../../app/utils/shared_preference.dart';
 import '../../models/orders_models/orders_filter_model.dart';
 
@@ -20,7 +21,7 @@ class OrdersFiltersRepo {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'lang': "ar",
+          'lang': selectedLang,
           'Authorization': 'Bearer ${sharedPrefs.getToken()}',
         },
       );

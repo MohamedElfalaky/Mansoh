@@ -7,6 +7,44 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:526947997667:android:6faa2b8c7f697b03d9b2d6",
+        "android_client_info": {
+          "package_name": "com.lun.nasooh.NASE7"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsz6PN51RKAyP6ILW2P5lAbJj_L47NSTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526947997667:android:0bb964598b400179d9b2d6",
+        "android_client_info": {
+          "package_name": "com.lun.nasooh.nasooh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsz6PN51RKAyP6ILW2P5lAbJj_L47NSTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:526947997667:android:e46993709ece93afd9b2d6",
         "android_client_info": {
           "package_name": "com.lundev.nasooh.NASE7"

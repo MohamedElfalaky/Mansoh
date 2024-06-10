@@ -76,7 +76,7 @@ class _RejectScreenState extends State<RejectScreen> {
                               adviceId: widget.adviceId.toString(),
                               // adviceId: 1,
                               commentId: idSelected,
-                              commentOther: "",
+                              commentOther: rejectController.text,
                             );
                       }
                     },

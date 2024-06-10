@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -119,10 +121,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                       ),
                                       if (current == index)
                                         Container(
-                                          width: ordersList![index]
-                                                  .name!
-                                                  .length
-                                                  .toDouble() *
+                                          width: ordersList?[index].name?.length
+                                                  .toDouble()??0 *
                                               8,
                                           margin: const EdgeInsets.only(top: 6),
                                           height: 2,
@@ -201,6 +201,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                   adviceId: filtersList[index].id!));
                         }
                       : () {
+                    log(filtersList[index].label?.name.toString() ?? "" , name: "LabelName");
+                    log(filtersList[index].label?.id.toString() ?? "" , name: "LabelName");
                           MyApplication.navigateTo(
                               context,
                               ChatScreen(
@@ -211,7 +213,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                 labelToShow:
                                     filtersList[index].label!.id == 1 ||
                                         filtersList[index].label!.id == 2,
-                                openedStatus: filtersList[index].label!.id == 2,
+                                openedStatus: filtersList[index].label!.id == 2 || filtersList[index].label!.id == 3,
                                 adviceId: filtersList[index].id!,
                                 adviserProfileData: filtersList[index].adviser,
                               ));

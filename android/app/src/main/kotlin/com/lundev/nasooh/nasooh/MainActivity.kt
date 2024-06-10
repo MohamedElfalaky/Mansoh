@@ -1,4 +1,4 @@
-package com.lundev.nasooh.nasooh
+package com.lun.nasooh.nasooh
 
 import io.flutter.embedding.android.FlutterActivity
 

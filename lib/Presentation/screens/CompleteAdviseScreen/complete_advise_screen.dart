@@ -59,7 +59,8 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                       description:
                           state.response?.data?.adviser?.description ?? '',
                       statusClickable: false,
-                      openedStatus: state.response?.data?.label?.id == 2,
+                      openedStatus: state.response?.data?.label?.id == 2 ||
+                          state.response?.data?.label?.id == 3,
                       labelToShow: true,
                       adviceId: state.response?.data?.id ?? 0,
                       adviserProfileData: state.response?.data?.adviser,
@@ -162,29 +163,32 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                           ),
                           BlocBuilder<WalletCubit, WalletState>(
                               builder: (context, walletState) {
-                                if (walletState is WalletLoading) {
-                                  return const Center(
-                                    child: CircularProgressIndicator.adaptive(),
-                                  );
-                                } else if (walletState is WalletLoaded) {
-                                  return InkWell(
-                                    onTap: () {
-                                    },
-                                    child: PaymentCard(
-                                      payMethod:  "my_wallet".tr,
-                                      walletVal:
-                                      '${walletState.response?.balance?.toString()}',
-                                        pngMa7faza: true
-
-                                    ),
-                                  );
-                                }
-                                return const SizedBox.shrink();
-                              }),
+                            if (walletState is WalletLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              );
+                            } else if (walletState is WalletLoaded) {
+                              return InkWell(
+                                onTap: () {},
+                                child: PaymentCard(
+                                    payMethod: "my_wallet".tr,
+                                    walletVal:
+                                        '${walletState.response?.balance?.toString()}',
+                                    pngMa7faza: true),
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          }),
                           InkWell(
                             onTap: () {
                               MyApplication.navigateTo(
-                                  context,   FatorahScreen(adviceId: showAdviceState.response!.data!.id, amount: num.parse(showAdviceState.response!.data!.price),));
+                                  context,
+                                  FatorahScreen(
+                                    adviceId:
+                                        showAdviceState.response!.data!.id,
+                                    amount: num.parse(
+                                        showAdviceState.response!.data!.price),
+                                  ));
                             },
                             child: PaymentCard(
                               payMethod: 'visa',
@@ -195,24 +199,30 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                           InkWell(
                             onTap: () async {
                               http.Response response = await http.get(
-                                  Uri.parse('${Keys.baseUrl}/client/advice/${widget.adviceId}/myfatoorah-apple-pay'),
+                                  Uri.parse(
+                                      '${Keys.baseUrl}/client/advice/${widget.adviceId}/myfatoorah-apple-pay'),
                                   headers: {
                                     'Accept': 'application/json',
                                     'lang': Get.locale?.languageCode ?? "ar",
-                                    'Authorization': 'Bearer ${sharedPrefs.getToken()}',
+                                    'Authorization':
+                                        'Bearer ${sharedPrefs.getToken()}',
                                   });
-                              Map<String, dynamic> responseMap = json.decode(response.body);
-                              if (response.statusCode == 200 && responseMap["status"] == 1) {
-                                ApplePayModel applePayModel=ApplePayModel.fromJson(responseMap);
+                              Map<String, dynamic> responseMap =
+                                  json.decode(response.body);
+                              if (response.statusCode == 200 &&
+                                  responseMap["status"] == 1) {
+                                ApplePayModel applePayModel =
+                                    ApplePayModel.fromJson(responseMap);
                                 debugPrint('${applePayModel.data?.paymentUrl}');
-                                MyApplication.navigateTo(context,
+                                MyApplication.navigateTo(
+                                    context,
                                     ApplePayWebViewScreen(
                                       url: '${applePayModel.data?.paymentUrl}',
-                                      amount: num.parse(showAdviceState.response?.data?.price),
+                                      amount: num.parse(showAdviceState
+                                          .response?.data?.price),
                                       adviceId: applePayModel.data!.adviceId!,
                                     ));
                               }
-
                             },
                             child: PaymentCard(
                               payMethod: 'Apple pay',

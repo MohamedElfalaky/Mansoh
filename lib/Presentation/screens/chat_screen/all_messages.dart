@@ -66,7 +66,7 @@ class _ShowMessagesWidgetState extends State<ShowMessagesWidget> {
                         chatItem?.adviser == null
                             ? AlignmentDirectional.centerStart
                             : AlignmentDirectional.centerEnd,
-                        child: chatItem?.mediaType == "1"
+                        child: chatItem?.mediaType == "1" && isNotEmptyList
                             ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

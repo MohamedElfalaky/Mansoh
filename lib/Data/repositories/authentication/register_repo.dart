@@ -2,12 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:nasooh/app/global.dart';
 import 'package:nasooh/app/keys.dart';
-
 import '../../../app/utils/my_application.dart';
 import '../../../app/utils/shared_preference.dart';
 import '../../models/Auth_models/register_model.dart';
@@ -20,6 +18,7 @@ class Register {
       String? mobile,
       String? countryId,
       String? cityId,
+      String? knowUsId,
       String? promoCode,
       dynamic gender,
       String? nationalityId,
@@ -32,9 +31,10 @@ class Register {
             'email': email,
             'full_name': '$fullName',
             'mobile': '$mobile',
-            'promo_code':promoCode,
+            'promo_code': promoCode,
             'country_id': '$countryId',
             'city_id': '$cityId',
+            if (knowUsId != null || knowUsId != "") 'know_us_id': '$knowUsId',
             'gender': '$gender',
             'nationality_id': '$nationalityId',
             'avatar[0][type]': 'png',
