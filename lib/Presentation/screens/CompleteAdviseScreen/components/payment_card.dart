@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:nasooh/app/constants.dart';
-
+import '../../../../app/style/icons.dart';
 
 class PaymentCard extends StatelessWidget {
   const PaymentCard(
-      {super.key, required this.payMethod, required this.walletVal});
+      {super.key,
+      required this.payMethod,
+      required this.walletVal,
+      this.pngMa7faza});
 
   final String payMethod;
   final String walletVal;
+  final bool? pngMa7faza;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +21,22 @@ class PaymentCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F4F5),
+        color:
+            pngMa7faza == true ? Constants.primaryAppColor : Color(0xFFF5F4F5),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
-          Image.asset(
-           payMethod=='visa'? 'assets/images/mada.png':'assets/images/croppedimg.png',
-            height: 30,
-          ),
+          pngMa7faza == true
+              ? SvgPicture.asset(
+                  walletIcData,
+                )
+              : Image.asset(
+                  payMethod == 'visa'
+                      ? 'assets/images/mada.png'
+                      : 'assets/images/croppedimg.png',
+                  height: 30,
+                ),
           const SizedBox(
             width: 8,
           ),

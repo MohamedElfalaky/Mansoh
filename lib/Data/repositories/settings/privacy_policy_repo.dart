@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:nasooh/app/keys.dart';
 
+import '../../../app/global.dart';
 import '../../../app/utils/my_application.dart';
 import '../../../app/utils/shared_preference.dart';
 import '../../models/settings_models/privacy_policy_model.dart';
@@ -17,8 +18,7 @@ class PolicyRepo {
         Uri.parse('${Keys.baseUrl}/client/setting/page/policy'),
         headers: {
           'Accept': 'application/json',
-          // 'lang': selectedLang!,
-          'lang': "ar",
+          'lang': selectedLang,
           "Authorization": "Bearer ${sharedPrefs.getToken()}"
         },
       );

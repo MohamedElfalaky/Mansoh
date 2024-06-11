@@ -17,6 +17,8 @@ import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_cu
 import '../../../Data/cubit/show_advice_cubit/payment_list_cubit/payment_list_state.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_cubit.dart';
 import '../../../Data/cubit/show_advice_cubit/show_advice_cubit/show_advice_state.dart';
+import '../../../Data/cubit/wallet_cubit/wallet_cubit.dart';
+import '../../../Data/cubit/wallet_cubit/wallet_state.dart';
 import '../../../app/keys.dart';
 import '../../../app/style/icons.dart';
 import 'package:http/http.dart' as http;
@@ -42,6 +44,7 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
         .getAdviceFunction(adviceId: widget.adviceId);
     context.read<PaymentListCubit>().getPay();
     context.read<GetByTokenCubit>().getDataGetByToken();
+    context.read<WalletCubit>().getDataWallet();
   }
 
   @override
@@ -56,7 +59,8 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                       description:
                           state.response?.data?.adviser?.description ?? '',
                       statusClickable: false,
-                      openedStatus: state.response?.data?.label?.id == 2,
+                      openedStatus: state.response?.data?.label?.id == 2 ||
+                          state.response?.data?.label?.id == 3,
                       labelToShow: true,
                       adviceId: state.response?.data?.id ?? 0,
                       adviserProfileData: state.response?.data?.adviser,
@@ -157,10 +161,34 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                             child: Text("اختر وسيلة الدفع",
                                 style: Constants.headerNavigationFont),
                           ),
+                          BlocBuilder<WalletCubit, WalletState>(
+                              builder: (context, walletState) {
+                            if (walletState is WalletLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator.adaptive(),
+                              );
+                            } else if (walletState is WalletLoaded) {
+                              return InkWell(
+                                onTap: () {},
+                                child: PaymentCard(
+                                    payMethod: "my_wallet".tr,
+                                    walletVal:
+                                        '${walletState.response?.balance?.toString()}',
+                                    pngMa7faza: true),
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          }),
                           InkWell(
                             onTap: () {
                               MyApplication.navigateTo(
-                                  context,   FatorahScreen(adviceId: showAdviceState.response!.data!.id, amount: num.parse(showAdviceState.response!.data!.price),));
+                                  context,
+                                  FatorahScreen(
+                                    adviceId:
+                                        showAdviceState.response!.data!.id,
+                                    amount: num.parse(
+                                        showAdviceState.response!.data!.price),
+                                  ));
                             },
                             child: PaymentCard(
                               payMethod: 'visa',
@@ -171,31 +199,37 @@ class _CompleteAdviseScreenState extends State<CompleteAdviseScreen> {
                           InkWell(
                             onTap: () async {
                               http.Response response = await http.get(
-                                  Uri.parse('${Keys.baseUrl}/client/advice/${widget.adviceId}/myfatoorah-apple-pay'),
+                                  Uri.parse(
+                                      '${Keys.baseUrl}/client/advice/${widget.adviceId}/myfatoorah-apple-pay'),
                                   headers: {
                                     'Accept': 'application/json',
                                     'lang': Get.locale?.languageCode ?? "ar",
-                                    'Authorization': 'Bearer ${sharedPrefs.getToken()}',
+                                    'Authorization':
+                                        'Bearer ${sharedPrefs.getToken()}',
                                   });
-                              Map<String, dynamic> responseMap = json.decode(response.body);
-                              if (response.statusCode == 200 && responseMap["status"] == 1) {
-                                ApplePayModel applePayModel=ApplePayModel.fromJson(responseMap);
+                              Map<String, dynamic> responseMap =
+                                  json.decode(response.body);
+                              if (response.statusCode == 200 &&
+                                  responseMap["status"] == 1) {
+                                ApplePayModel applePayModel =
+                                    ApplePayModel.fromJson(responseMap);
                                 debugPrint('${applePayModel.data?.paymentUrl}');
-                                MyApplication.navigateTo(context,
+                                MyApplication.navigateTo(
+                                    context,
                                     ApplePayWebViewScreen(
                                       url: '${applePayModel.data?.paymentUrl}',
-                                      amount: num.parse(showAdviceState.response?.data?.price),
+                                      amount: num.parse(showAdviceState
+                                          .response?.data?.price),
                                       adviceId: applePayModel.data!.adviceId!,
                                     ));
                               }
-
                             },
                             child: PaymentCard(
                               payMethod: 'Apple pay',
                               walletVal:
                                   '${showAdviceState.response?.data?.price}',
                             ),
-                          )
+                          ),
                         ],
                       );
                     }

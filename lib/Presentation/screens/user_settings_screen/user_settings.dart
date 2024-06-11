@@ -45,27 +45,27 @@ class _UserSettingsState extends State<UserSettings> {
           ),
           child: Column(
             children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    languageIcon,
-                    height: 20,
-                    width: 20,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text("change Language".tr,
-                      style: Constants.mainTitleFont),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const ChangeLangItem(),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // Row(
+              //   children: [
+              //     SvgPicture.asset(
+              //       languageIcon,
+              //       height: 20,
+              //       width: 20,
+              //     ),
+              //     const SizedBox(
+              //       width: 10,
+              //     ),
+              //     Text("change Language".tr,
+              //         style: Constants.mainTitleFont),
+              //   ],
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // const ChangeLangItem(),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.0),
                 child: Divider(),

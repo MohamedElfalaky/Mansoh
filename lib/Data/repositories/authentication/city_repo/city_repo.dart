@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:nasooh/app/keys.dart';
 
+import '../../../../app/global.dart';
 import '../../../../app/utils/my_application.dart';
 import '../../../models/Auth_models/city_model.dart';
 
@@ -14,6 +15,7 @@ class CityRepo {
     try {
       http.Response response = await http.get(
         Uri.parse('${Keys.baseUrl}/client/coredata/city/list?country_id=$id'),
+        headers: headers,
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {

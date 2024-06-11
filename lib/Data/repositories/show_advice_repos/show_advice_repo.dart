@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -25,7 +26,7 @@ class ShowAdviceRepo {
 
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
-        debugPrint("responseMap.toString() is ${responseMap.toString()}");
+        log("${responseMap.toString()}" , name: "responseMap.toString() ");
         final adviceShowResult = showAdviceModelFromJson(responseMap);
         return adviceShowResult;
       }

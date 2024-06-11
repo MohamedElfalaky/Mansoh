@@ -76,7 +76,7 @@ class _RejectScreenState extends State<RejectScreen> {
                               adviceId: widget.adviceId.toString(),
                               // adviceId: 1,
                               commentId: idSelected,
-                              commentOther: "",
+                              commentOther: rejectController.text,
                             );
                       }
                     },
@@ -114,7 +114,7 @@ class _RejectScreenState extends State<RejectScreen> {
                           const Padding(
                             padding: EdgeInsets.only(bottom: 8, top: 4),
                             child: Text(
-                              "حدد سبب رفض النصيحة",
+                              "حدد سبب الاعتراض",
                               style: Constants.headerNavigationFont,
                             ),
                           ),

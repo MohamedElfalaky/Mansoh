@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -23,6 +24,10 @@ class GetUserByMobile {
             'mobile': '$mobile',
             'device': sharedPrefs.fCMToken,
           });
+      log({
+        'mobile': '$mobile',
+        'device': sharedPrefs.fCMToken,
+      }.toString() , name: "GetDataLogin");
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {
         // print(response.body);

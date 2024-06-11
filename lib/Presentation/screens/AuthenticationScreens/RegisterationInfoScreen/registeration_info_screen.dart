@@ -5,11 +5,15 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nasooh/Presentation/widgets/my_button.dart';
 
 import '../../../../Data/cubit/authentication/country_cubit/country_cubit.dart';
+import '../../../../Data/cubit/authentication/country_cubit/country_state.dart';
+import '../../../../Data/cubit/authentication/options_cubit/options_cubit.dart';
+import '../../../../Data/cubit/authentication/options_cubit/options_state.dart';
 import '../../../../Data/cubit/authentication/register_cubit/register_cubit.dart';
 import '../../../../Data/cubit/authentication/register_cubit/register_state.dart';
 import '../../../../app/constants.dart';
@@ -54,12 +58,16 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
     }
   }
 
+  String? knowUsId;
+
+
   @override
   void initState() {
     regImage = null;
     _nameController.text = "";
     _emailController.text = "";
     context.read<CountryCubit>().getCountries();
+    context.read<OptionsCubit>().getOptions();
     super.initState();
   }
 
@@ -264,6 +272,43 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                     "assets/images/SVGs/advisor_icon.svg",
                                 controller: promoCode,
                               ),
+
+                              BlocBuilder<OptionsCubit, OptionsState>(builder: (context, state) {
+                                if (state is OptionsLoading) {
+                                  return const SizedBox(
+                                      width: double.infinity,
+                                      child: Center(child: CircularProgressIndicator.adaptive()));
+                                } else if (state is OptionsLoaded) {
+                                  // print('nationality loaded');
+                                  return Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      TitleTxt(
+                                        txt: "كيف عرفت التطبيق".tr,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10, bottom: 24),
+                                        child: CustomDropDown(
+                                            hintData: "كيف عرفتنا",
+                                            value: knowUsId,
+                                            onChanged: (val) {
+                                              knowUsId = val;
+                                            },
+                                            items: state.response!.data!
+                                                .map((e) => DropdownMenuItem(
+                                                value: e.id.toString(), child: Text(e.name!)))
+                                                .toList(),
+                                            prefixIcon: SvgPicture.asset(
+                                              "assets/images/SVGs/country.svg",
+                                              height: 24,
+                                            )),
+                                      )
+                                    ],
+                                  );
+                                }
+                                return const Center(child: SizedBox.shrink());
+                              }),
+
                               Container(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 16),
@@ -321,6 +366,7 @@ class _RegistrationInfoScreenState extends State<RegistrationInfoScreen> {
                                                 .registerMethod(
                                                   context: context,
                                                   mobile: sendPhone,
+                                                  knowUsId:knowUsId ?? "",
                                                   promoCode: promoCode.text,
                                                   avatar: base64Image ?? "",
                                                   countryId: inputCountry ?? "",

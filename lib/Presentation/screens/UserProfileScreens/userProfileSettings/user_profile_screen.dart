@@ -120,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Center(
                   child: Text(
-                      "إذا كنت مختص أو خبير وأردت التسجيل كناصح  حمل تطبيق الناصحين",
+                      "if you are specialist and want to register as adviser download advisers app".tr,
                       style: Constants.subtitleRegularFontHint.copyWith(
                         color: Colors.black,
                       )),

@@ -30,7 +30,7 @@ Row imageMessageViewWidget(String image) {
           : const SizedBox.shrink(),
       const SizedBox(width: 7),
       Text(
-        'click_to_see_full_image'.tr,
+        image.isPDF? 'click_to_see_file'.tr :    'click_to_see_full_image'.tr,
         style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
       ),
     ],

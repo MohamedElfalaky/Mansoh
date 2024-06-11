@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:nasooh/Data/models/Auth_models/category_model.dart';
 
+import '../../../../app/global.dart';
 import '../../../../app/keys.dart';
 import '../../../../app/utils/my_application.dart';
 
@@ -14,7 +15,7 @@ class CategoryRepo {
     try {
       http.Response response = await http.get(
         Uri.parse('${Keys.baseUrl}/client/coredata/category/list'),
-        // headers: GlobalVars().headers,
+        headers: headers,
       );
       Map<String, dynamic> responseMap = json.decode(response.body);
       if (response.statusCode == 200 && responseMap["status"] == 1) {

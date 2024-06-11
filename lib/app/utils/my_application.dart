@@ -24,11 +24,11 @@ class MyApplication {
         (Route<dynamic> route) => false);
   }
 
-  static showToastView({required String message, Color? color}) {
+  static showToastView({required String message, Color? color }) {
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.TOP,
+        gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
         backgroundColor: color ?? Colors.lightBlue,
         textColor: Colors.white,
