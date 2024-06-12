@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +69,9 @@ class OutlinedAdvisorCard extends StatelessWidget {
                               CircleAvatar(
                                 radius: 22,
                                 backgroundImage: NetworkImage(
-                                    '${adviserProfileData?.avatar}'),
+                                    '${adviserProfileData?.avatar== ""
+                                        ? Constants.imagePlaceHolder
+                                        : adviserProfileData?.avatar}'),
                               ),
                               const SizedBox(width: 8),
                               Column(
@@ -309,7 +313,9 @@ class OutlinedAdvisorCard extends StatelessWidget {
                         CircleAvatar(
                           radius: 22,
                           backgroundImage:
-                              NetworkImage('${adviserProfileData?.avatar}'),
+                              NetworkImage('${adviserProfileData?.avatar== ""
+                                  ? Constants.imagePlaceHolder
+                                  : adviserProfileData?.avatar}'),
                         ),
                         const SizedBox(width: 8),
                         SizedBox(

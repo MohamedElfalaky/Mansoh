@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,15 +12,15 @@ class SendAdviseCubit extends Cubit<SendAdviseState> {
   SendAdviseCubit() : super(SendAdviseInitial());
   SendAdvise sendAdvise = SendAdvise();
 
-  void emitInitial(){
+  void emitInitial() {
     emit(SendAdviseInitial());
   }
+
   sendAdviseMethod({
     String? name,
     String? description,
     String? price,
-    String? documentsFile,
-    String? type,
+    File? file,
     dynamic adviserId,
     BuildContext? context,
   }) {
@@ -31,12 +32,11 @@ class SendAdviseCubit extends Cubit<SendAdviseState> {
               price: price,
               name: name,
               adviserId: adviserId,
-              type: type,
-              documentsFile: documentsFile)
-          .then((ShowAdviceModel ?value) {
+              type: file != null ? _getFileType(file.path) : null,
+              file: file)
+          .then((ShowAdviceModel? value) {
         if (value != null) {
           emit(SendAdviseLoaded(value));
-
         } else {
           emit(SendAdviseError());
         }
@@ -46,5 +46,13 @@ class SendAdviseCubit extends Cubit<SendAdviseState> {
       log(st.toString());
       emit(SendAdviseError());
     }
+  }
+
+  String? _getFileType(String filePath) {
+    var extension = filePath.split(".").last;
+    if (["jpg", "jpeg", "png"].contains(extension)) return "image";
+    if (["mp3", "m4a"].contains(extension)) return "audio";
+    if (extension == "mp4") return "video";
+    return null;
   }
 }

@@ -41,7 +41,6 @@ const String filterIcon = "assets/images/SVGs/filter_icon.svg";
 const String recycleIcon = "assets/images/SVGs/recycle.svg";
 const String categoriesIcon = "assets/images/SVGs/categories_icon.svg";
 const String topRated = "assets/images/SVGs/top-rated 1.svg";
-const String pdf = "assets/images/SVGs/pdf.svg";
 const String photo = "assets/images/SVGs/photo.svg";
 const String mp4Icon = "assets/images/SVGs/mp4_icon.svg";
 const String voice = "assets/images/SVGs/voice.svg";

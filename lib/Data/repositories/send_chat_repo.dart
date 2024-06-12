@@ -1,59 +1,66 @@
 import 'dart:async';
-import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
-
+import 'package:dio/dio.dart' as Dio;
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-import 'package:nasooh/app/global.dart';
-import 'package:nasooh/app/keys.dart';
-
 import '../../../app/utils/my_application.dart';
-import '../../../app/utils/shared_preference.dart';
+import '../../app/utils/dio.dart';
 
 class SendChatRepo {
   Future<bool?> sendChat({
     String? msg,
     String? adviceId,
-    String? file,
-    String? type,
+    String? typee,
+    File? file,
   }) async {
+    String fileName = file?.path.split('/').last ?? "";
+    FormData formData = FormData.fromMap({
+      if (file != null)
+        "chat_document[0][file]": await MultipartFile.fromFile(file.path,
+          filename:  fileName,
+        ),
+      if (msg != "" && msg != null) 'message': msg,
+      'advice_id': '$adviceId',
+      if (typee  != null || file !=null)   'chat_document[0][type]': typee,
+    });
+
+    log({
+      if (file != null)
+        "chat_document[0][file]": await MultipartFile.fromFile(file.path,
+          filename:  fileName,
+        ),
+      if (msg != "" && msg != null) 'message': msg,
+      'advice_id': '$adviceId',
+      if (typee  != null || file !=null)   'chat_document[0][type]': typee,
+    }.toString() , name: "SendChatRepo");
+
     try {
-      Map<String, dynamic> map = {
-        'message': msg,
-        'advice_id': '$adviceId',
-        if (file != null) 'document[0][type]': type,
-        if (file != null) 'document[0][file]': file,
-      };
-
-      http.Response response =
-          await http.post(Uri.parse('${Keys.baseUrl}/client/chat/store'),
-              headers: {
-                'Accept': 'application/json',
-                'lang': selectedLang,
-                "Authorization": "Bearer ${sharedPrefs.getToken()}"
-              },
-              body: map);
-
-       debugPrint('send chat repo ${response.body}');
-      Map<String, dynamic> responseMap = json.decode(response.body);
-      if (response.statusCode == 200 && responseMap["status"] == 1) {
-        debugPrint(response.body.toString());
+      Dio.Response response = await dio().post(
+        '/client/chat/store',
+        data: formData,
+      );
+      if (response.statusCode == 200 && response.data["status"] == 1) {
+        debugPrint(response.data.toString());
         return true;
       } else {
         MyApplication.showToastView(
-            message: responseMap["message"].values.toString());
+            message: response.data["message"].values.toString());
       }
-    } on TimeoutException catch (e) {
+    } on TimeoutException catch (e, st) {
+      log(st.toString(), name: "First");
       MyApplication.showToastView(message: e.toString());
       if (kDebugMode) {
         print(e);
       }
-    } on SocketException catch (e) {
+    } on SocketException catch (e, st) {
+      log(st.toString(), name: "Second");
       MyApplication.showToastView(message: e.toString());
       if (kDebugMode) {
         print(e);
       }
-    } on Error catch (e) {
+    } on Error catch (e, st) {
+      log(st.toString(), name: "Third");
       if (kDebugMode) {
         print(e);
         MyApplication.showToastView(message: e.toString());

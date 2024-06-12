@@ -42,7 +42,6 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  String? fileSelected;
   final _formKey = GlobalKey<FormState>();
   File? pickedFile;
 
@@ -76,8 +75,8 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                     txt: "Confirm Order".tr,
                     isBold: true,
                     onPressedHandler: () {
-                      debugPrint(" ${pickedFile?.path.split(".").last}");
-                      log(fileSelected.toString());
+                      // debugPrint(" ${pickedFile?.path.split(".").last}");
+                      // log(fileSelected.toString());
                       if (pickedFile?.lengthSync() != null &&
                           pickedFile!.lengthSync() > 5242880) {
                         MyApplication.showToastView(
@@ -88,11 +87,10 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         context.read<SendAdviseCubit>().sendAdviseMethod(
                             context: context,
                             adviserId: widget.adviserProfileData.id,
-                            type: pickedFile?.path.split(".").last,
                             name: requestTitle.text,
                             description: descriptionController.text,
                             price: priceController.text,
-                            documentsFile: fileSelected);
+                            file: pickedFile);
                       }
                     },
                   ))),
@@ -238,9 +236,9 @@ class _ConfirmAdviseScreenState extends State<ConfirmAdviseScreen> {
                         setState(() {
                           pickedFile = File(result.files.single.path!);
                         });
-                        List<int> imageBytes =
-                            File(pickedFile!.path).readAsBytesSync();
-                        fileSelected = base64.encode(imageBytes);
+                        // List<int> imageBytes =
+                        //     File(pickedFile!.path).readAsBytesSync();
+                        // fileSelected = base64.encode(imageBytes);
                       }
                       return;
                     },
