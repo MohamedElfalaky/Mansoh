@@ -19,7 +19,7 @@ import Flutter
 import Firebase
 import FirebaseMessaging
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
     _ application: UIApplication,
